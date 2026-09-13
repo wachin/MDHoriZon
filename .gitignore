@@ -1,0 +1,110 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Vite
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Local OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+
+# Local test/cache data
+.cache/
+.tmp/
+temp/
+.tmp-*
+
+# Playwright / browser test artifacts
+playwright-report/
+test-results/
+blob-report/
+
+# Capacitor / Android generated and local files
+android/.gradle/
+android/local.properties
+android/.idea/
+android/captures/
+android/build/
+android/app/build/
+android/app/release/
+android/release.jks
+android/*.jks
+android/*.keystore
+
+# Android Studio / Gradle
+.gradle/
+**/.gradle/
+**/build/
+!android/gradle/wrapper/gradle-wrapper.jar
+
+# iOS / Xcode generated files
+ios/App/Pods/
+ios/App/build/
+ios/App/DerivedData/
+ios/DerivedData/
+ios/Pods/
+ios/.build/
+ios/*.xcworkspace/xcuserdata/
+ios/**/*.xcodeproj/xcuserdata/
+ios/**/*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/**/*.xcuserstate
+ios/**/*.mobileprovision
+ios/**/*.p12
+ios/**/*.cer
+
+# CocoaPods
+Pods/
+
+# macOS signing / provisioning
+*.p12
+*.mobileprovision
+
+# Keystores and certificates
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.crt
+
+# Secrets / credentials
+keystore.b64
+credentials.json
+service-account*.json
+
+# Local Capacitor files
+.capacitor/
+
+# Generated native resources
+android/app/src/main/assets/public/
+
+# Optional local content generated during development
+.local-content/
+offline-data/
