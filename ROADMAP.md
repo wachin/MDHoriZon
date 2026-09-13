@@ -1,14 +1,14 @@
 # ROADMAP.md
 
-Repositorio para el desarrollo de un motor de renderizado Markdown con publicación web (GitHub Pages) y empaquetado móvil (Android/iOS) mediante Capacitor.
+Repository for the development of a Markdown rendering engine with web publishing (GitHub Pages) and mobile packaging (Android/iOS) via Capacitor.
 
 ---
 
-## 🎯 Visión del proyecto
+## 🎯 Project Vision
 
-Construir un sistema de renderizado de Markdown que replique la experiencia de lectura de asistentes como DeepSeek Chat: tablas con scroll horizontal táctil, bloques de código con resaltado y botón de copia, fórmulas matemáticas (KaTeX), diagramas Mermaid, y tipografía cuidada. El mismo núcleo de renderizado debe funcionar en navegador web y dentro de una app nativa Android/iOS sin duplicar lógica.
+Build a Markdown rendering system that replicates the reading experience of assistants like DeepSeek Chat: tables with horizontal touch scrolling, code blocks with syntax highlighting and a copy button, mathematical formulas (KaTeX), Mermaid diagrams, and polished typography. The same rendering core must work in a web browser and within a native Android/iOS app without duplicating logic.
 
-**Arquitectura objetivo:**
+**Target Architecture:**
 
 ```
 Markdown (.md)
@@ -20,40 +20,40 @@ Markdown (.md)
 
 ---
 
-## 📦 Stack tecnológico
+## 📦 Tech Stack
 
-| Capa | Tecnología | Versión de referencia |
+| Layer | Technology | Reference Version |
 |---|---|---|
 | UI | React + TypeScript | React 19 |
-| Build | Vite | Última estable |
+| Build | Vite | Latest stable |
 | Markdown | `react-markdown` | 10.1.0 |
-| GFM (tablas, tachado, tasklists) | `remark-gfm` | 4.0.1 |
-| Matemáticas | `remark-math` + `rehype-katex` + `katex` | 6.0.0 / 7.0.1 |
-| Resaltado de código | `rehype-highlight` + `highlight.js` | 7.0.2 |
-| Diagramas | `mermaid` (lazy load) | Última estable |
-| Móvil | Capacitor | 7 (requiere JDK 21) |
+| GFM (tables, strikethrough, tasklists) | `remark-gfm` | 4.0.1 |
+| Math | `remark-math` + `rehype-katex` + `katex` | 6.0.0 / 7.0.1 |
+| Code Highlighting | `rehype-highlight` + `highlight.js` | 7.0.2 |
+| Diagrams | `mermaid` (lazy load) | Latest stable |
+| Mobile | Capacitor | 7 (requires JDK 21) |
 | CI/CD | GitHub Actions | — |
-| Deploy web | GitHub Pages | — |
+| Web Deploy | GitHub Pages | — |
 
-**Notas sobre versiones:** `react-markdown` ha alcanzado la versión 10.1.0 en 2026. `remark-gfm` se mantiene en 4.0.1. `rehype-katex` está en 7.0.1. `rehype-highlight` en 7.0.2. Capacitor 7 exige JDK 21 para compilar Android.
+**Version Notes:** `react-markdown` has reached version 10.1.0 in 2026. `remark-gfm` remains at 4.0.1. `rehype-katex` is at 7.0.1. `rehype-highlight` at 7.0.2. Capacitor 7 requires JDK 21 to compile Android.
 
 ---
 
-## 🗺️ Fases del desarrollo
+## 🗺️ Development Phases
 
-### Fase 0 — Fundación del repositorio
+### Phase 0 — Repository Foundation
 
-- [ ] Crear repositorio en GitHub
-- [ ] Inicializar proyecto con Vite + React + TypeScript
+- [ ] Create repository on GitHub
+- [ ] Initialize project with Vite + React + TypeScript
   ```bash
   npm create vite@latest . -- --template react-ts
   ```
-- [ ] Configurar ESLint + Prettier
-- [ ] Configurar `vite.config.ts` con `base` correcto para GitHub Pages
-  - Para repositorio de proyecto (`usuario.github.io/mi-repo/`): `base: '/mi-repo/'`
-  - Para repositorio raíz (`usuario.github.io`): `base: '/'`
-- [ ] Añadir `.nojekyll` en la carpeta `public/` para evitar procesamiento Jekyll
-- [ ] Crear estructura de carpetas inicial:
+- [ ] Configure ESLint + Prettier
+- [ ] Configure `vite.config.ts` with correct `base` for GitHub Pages
+  - For project repository (`username.github.io/my-repo/`): `base: '/my-repo/'`
+  - For root repository (`username.github.io`): `base: '/'`
+- [ ] Add `.nojekyll` in the `public/` folder to prevent Jekyll processing
+- [ ] Create initial folder structure:
   ```
   src/
   ├── components/
@@ -68,16 +68,16 @@ Markdown (.md)
 
 ---
 
-### Fase 1 — Motor de renderizado core
+### Phase 1 — Core Rendering Engine
 
-**Objetivo:** Un componente `MarkdownRenderer` que transforme cualquier Markdown (incluyendo GFM, matemáticas, código y Mermaid) en HTML fiel y legible.
+**Goal:** A `MarkdownRenderer` component that transforms any Markdown (including GFM, math, code, and Mermaid) into faithful and readable HTML.
 
-- [ ] Instalar dependencias base:
+- [ ] Install base dependencies:
   ```bash
   npm install react-markdown remark-gfm remark-math rehype-katex rehype-highlight katex
   npm install -D @types/react @types/react-dom
   ```
-- [ ] Implementar `MarkdownRenderer.tsx` con el pipeline de plugins:
+- [ ] Implement `MarkdownRenderer.tsx` with the plugin pipeline:
   ```tsx
   import ReactMarkdown from 'react-markdown';
   import remarkGfm from 'remark-gfm';
@@ -102,7 +102,7 @@ Markdown (.md)
     </ReactMarkdown>
   );
   ```
-- [ ] Implementar `TableWrapper` con CSS de scroll horizontal táctil:
+- [ ] Implement `TableWrapper` with horizontal touch scroll CSS:
   ```css
   .table-wrapper {
     overflow-x: auto;
@@ -120,48 +120,48 @@ Markdown (.md)
     white-space: nowrap;
   }
   ```
-- [ ] Implementar `CodeBlock` con:
-  - Detección de lenguaje
-  - Botón de copia al portapapeles
-  - Header con nombre del lenguaje
-  - Scroll horizontal para líneas largas (`pre { overflow-x: auto }`)
-- [ ] Pruebas de renderizado con el documento `Paquetes esenciales de Linux para que funcione Freebuff AppImage.md`:
-  - [ ] Encabezados, enlaces, tablas
-  - [ ] Bloques de código Bash
-  - [ ] Notas (`>`) y tablas de varias columnas
-- [ ] Pruebas con casos extremos:
-  - [ ] Fórmulas inline: `$E = mc^2$`
-  - [ ] Fórmulas display: `$$ \int_0^\infty e^{-x} dx = 1 $$`
-  - [ ] Diagrama Mermaid: ` ```mermaid graph TD ... ``` `
-  - [ ] Tabla con 8+ columnas (verificar scroll horizontal)
+- [ ] Implement `CodeBlock` with:
+  - Language detection
+  - Copy to clipboard button
+  - Header with language name
+  - Horizontal scroll for long lines (`pre { overflow-x: auto }`)
+- [ ] Rendering tests with the document `Paquetes esenciales de Linux para que funcione Freebuff AppImage.md`:
+  - [ ] Headers, links, tables
+  - [ ] Bash code blocks
+  - [ ] Notes (`>`) and multi-column tables
+- [ ] Tests with edge cases:
+  - [ ] Inline formulas: `$E = mc^2$`
+  - [ ] Display formulas: `$$ \int_0^\infty e^{-x} dx = 1 $$`
+  - [ ] Mermaid diagram: ` ```mermaid graph TD ... ``` `
+  - [ ] Table with 8+ columns (verify horizontal scroll)
 
 ---
 
-### Fase 2 — Experiencia de lectura y pulido visual
+### Phase 2 — Reading Experience and Visual Polish
 
-- [ ] Sistema de temas (claro/oscuro) mediante variables CSS:
+- [ ] Light/dark theme system using CSS variables:
   - `--font-body`, `--font-mono`, `--border-color`, `--bg-code`
-- [ ] Tipografía cuidada: tamaños de encabezado, line-height, márgenes verticales
-- [ ] Lazy loading de Mermaid para reducir bundle inicial:
+- [ ] Polished typography: heading sizes, line-height, vertical margins
+- [ ] Mermaid lazy loading to reduce initial bundle:
   ```tsx
   const MermaidDiagram = React.lazy(() => import('./MermaidDiagram'));
   ```
-  Mermaid pesa aproximadamente 2.8 MB y debe cargarse solo cuando aparece un diagrama.
-- [ ] Lazy loading de KaTeX (opcional, si el bundle lo justifica)
-- [ ] Añadir tabla de contenidos (TOC) generada desde los encabezados
-- [ ] Añadir enlaces ancla en encabezados
-- [ ] Optimizar carga de fuentes KaTeX
-- [ ] Pruebas en navegadores móviles reales (scroll táctil en tablas)
+  Mermaid weighs approximately 2.8 MB and should only load when a diagram appears.
+- [ ] KaTeX lazy loading (optional, if bundle size justifies it)
+- [ ] Add table of contents (TOC) generated from headers
+- [ ] Add anchor links on headers
+- [ ] Optimize KaTeX font loading
+- [ ] Tests on real mobile browsers (touch scroll on tables)
 
 ---
 
-### Fase 3 — Publicación web en GitHub Pages
+### Phase 3 — Web Publishing on GitHub Pages
 
-- [ ] Configurar workflow de GitHub Actions para despliegue automático:
+- [ ] Configure GitHub Actions workflow for automatic deployment:
 
   **`.github/workflows/deploy-pages.yml`**
   ```yaml
-  name: Deploy a GitHub Pages
+  name: Deploy to GitHub Pages
   on:
     push:
       branches: [main]
@@ -197,59 +197,59 @@ Markdown (.md)
         - id: deployment
           uses: actions/deploy-pages@v4
   ```
-- [ ] Verificar despliegue en `https://usuario.github.io/repo/`
-- [ ] Probar en móvil: abrir la URL, verificar scroll en tablas y código
-- [ ] Añadir metadatos SEO básicos (`title`, `description`, `og:image`)
+- [ ] Verify deployment at `https://username.github.io/repo/`
+- [ ] Test on mobile: open the URL, verify scroll on tables and code
+- [ ] Add basic SEO metadata (`title`, `description`, `og:image`)
 
 ---
 
-### Fase 4 — Empaquetado móvil con Capacitor
+### Phase 4 — Mobile Packaging with Capacitor
 
-- [ ] Instalar Capacitor:
+- [ ] Install Capacitor:
   ```bash
   npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
-  npx cap init "Mi Blog" "com.miblog.app" --web-dir=dist
+  npx cap init "My Blog" "com.myblog.app" --web-dir=dist
   ```
-- [ ] Añadir plataforma Android:
+- [ ] Add Android platform:
   ```bash
   npm run build
   npx cap add android
   npx cap sync android
   ```
-- [ ] Añadir plataforma iOS (si hay acceso a macOS):
+- [ ] Add iOS platform (if macOS access is available):
   ```bash
   npx cap add ios
   npx cap sync ios
   ```
-- [ ] Configurar `capacitor.config.ts`:
+- [ ] Configure `capacitor.config.ts`:
   - `webDir: 'dist'`
   - `server.androidScheme: 'https'`
   - `android.allowMixedContent: false`
-- [ ] Ajustes específicos de Android:
-  - Safe areas (`env(safe-area-inset-*)` en CSS)
-  - Status bar (instalar `@capacitor/status-bar` si es necesario)
-  - Back button (manejar navegación)
-- [ ] Verificar que tablas, código, KaTeX y Mermaid se rendericen correctamente en el WebView
-- [ ] Probar scroll táctil en tablas dentro de la app
+- [ ] Android-specific adjustments:
+  - Safe areas (`env(safe-area-inset-*)` in CSS)
+  - Status bar (install `@capacitor/status-bar` if needed)
+  - Back button (handle navigation)
+- [ ] Verify that tables, code, KaTeX, and Mermaid render correctly in the WebView
+- [ ] Test touch scroll on tables within the app
 
 ---
 
-### Fase 5 — CI/CD para Android (APK firmado)
+### Phase 5 — CI/CD for Android (Signed APK)
 
-- [ ] Generar keystore local:
+- [ ] Generate local keystore:
   ```bash
-  keytool -genkey -v -keystore release.jks -alias mi-alias -keyalg RSA -keysize 2048 -validity 10000
+  keytool -genkey -v -keystore release.jks -alias my-alias -keyalg RSA -keysize 2048 -validity 10000
   ```
-- [ ] Codificar keystore en base64 y guardar como secreto de GitHub:
+- [ ] Encode keystore in base64 and save as GitHub secret:
   ```bash
   base64 release.jks > keystore.b64
   ```
-- [ ] Configurar secretos en GitHub:
-  - `KEYSTORE` (base64 del `.jks`)
+- [ ] Configure secrets in GitHub:
+  - `KEYSTORE` (base64 of `.jks`)
   - `KEYSTORE_PASS`
   - `KEYSTORE_ALIAS`
   - `KEYSTORE_ALIAS_PASS`
-- [ ] Crear workflow de build Android:
+- [ ] Create Android build workflow:
 
   **`.github/workflows/android-build.yml`**
   ```yaml
@@ -271,7 +271,7 @@ Markdown (.md)
         - uses: actions/setup-java@v4
           with:
             distribution: temurin
-            java-version: '21'   # Capacitor 7 requiere JDK 21
+            java-version: '21'   # Capacitor 7 requires JDK 21
         - name: Install dependencies
           run: npm ci
         - name: Build web
@@ -296,45 +296,45 @@ Markdown (.md)
             name: app-release
             path: android/app/build/outputs/apk/release/app-release.apk
   ```
-- [ ] Probar build local antes de subir a CI:
+- [ ] Test local build before pushing to CI:
   ```bash
   cd android && ./gradlew assembleDebug
   ```
-- [ ] Verificar que el APK se genere y se pueda instalar en un dispositivo real
+- [ ] Verify that the APK is generated and can be installed on a real device
 
 ---
 
-### Fase 6 — iOS (opcional, requiere macOS)
+### Phase 6 — iOS (Optional, Requires macOS)
 
-- [ ] Añadir plataforma iOS:
+- [ ] Add iOS platform:
   ```bash
   npx cap add ios
   npx cap sync ios
   ```
-- [ ] Configurar firma en Xcode (requiere cuenta de desarrollador Apple)
-- [ ] Workflow de GitHub Actions para iOS (requiere runner macOS):
+- [ ] Configure signing in Xcode (requires Apple Developer account)
+- [ ] GitHub Actions workflow for iOS (requires macOS runner):
   ```yaml
   runs-on: macos-latest
   ```
-- [ ] Generar IPA y distribuir vía TestFlight o Ad Hoc
+- [ ] Generate IPA and distribute via TestFlight or Ad Hoc
 
 ---
 
-### Fase 7 — Contenido y escalabilidad
+### Phase 7 — Content and Scalability
 
-- [ ] Sistema de carga de contenido:
-  - [ ] Opción A: archivos `.md` en `src/docs/guides/` importados como strings
-  - [ ] Opción B: fetch de archivos `.md` desde carpeta `docs/guides/`
-  - [ ] Opción C: CMS headless (Sanity, Contentful) o GitHub como CMS
-- [ ] Índice de artículos y navegación
-- [ ] Búsqueda (opcional, con `fuse.js` o similar)
-- [ ] PWA: service worker para funcionamiento offline
-- [ ] Optimización de bundle: code splitting por artículo
-- [ ] Añadir soporte para frontmatter (título, fecha, tags) mediante `gray-matter`
+- [ ] Content loading system:
+  - [ ] Option A: `.md` files in `src/docs/guides/` imported as strings
+  - [ ] Option B: fetch `.md` files from `docs/guides/` folder
+  - [ ] Option C: headless CMS (Sanity, Contentful) or GitHub as CMS
+- [ ] Article index and navigation
+- [ ] Search (optional, with `fuse.js` or similar)
+- [ ] PWA: service worker for offline functionality
+- [ ] Bundle optimization: code splitting per article
+- [ ] Add frontmatter support (title, date, tags) via `gray-matter`
 
 ---
 
-## 📁 Estructura del repositorio (objetivo final)
+## 📁 Repository Structure (Final Goal)
 
 ```
 /
@@ -357,68 +357,68 @@ Markdown (.md)
 │   └── main.tsx
 ├── public/
 │   └── .nojekyll
-├── android/          # generado por Capacitor
-├── ios/              # generado por Capacitor
+├── android/          # generated by Capacitor
+├── ios/              # generated by Capacitor
 ├── capacitor.config.ts
 ├── vite.config.ts
 ├── package.json
-└── ROADMAP.md        # este archivo
+└── ROADMAP.md        # this file
 ```
 
 ---
 
-## 🧪 Pruebas de renderizado (checklist de validación)
+## 🧪 Rendering Tests (Validation Checklist)
 
-Usar el documento `Paquetes esenciales de Linux para que funcione Freebuff AppImage.md` como caso de prueba principal. Verificar:
+Use the document `Paquetes esenciales de Linux para que funcione Freebuff AppImage.md` as the main test case. Verify:
 
-- [ ] Encabezados `#`, `##`, `###` con jerarquía visual clara
-- [ ] Texto en negrita, cursiva, código inline
-- [ ] Enlaces que abren correctamente
-- [ ] Bloques de código Bash con resaltado de sintaxis
-- [ ] Botón de copia en bloques de código
-- [ ] Tabla de 2 columnas (Git y GitHub)
-- [ ] Tabla de 3 columnas (resumen)
-- [ ] Notas con `>` (blockquotes)
-- [ ] Listas ordenadas y no ordenadas
-- [ ] Scroll horizontal en tablas (probar en móvil)
-- [ ] Fórmulas KaTeX (añadir al documento de prueba)
-- [ ] Diagrama Mermaid (añadir al documento de prueba)
+- [ ] Headers `#`, `##`, `###` with clear visual hierarchy
+- [ ] Bold, italic, inline code text
+- [ ] Links that open correctly
+- [ ] Bash code blocks with syntax highlighting
+- [ ] Copy button on code blocks
+- [ ] 2-column table (Git and GitHub)
+- [ ] 3-column table (summary)
+- [ ] Notes with `>` (blockquotes)
+- [ ] Ordered and unordered lists
+- [ ] Horizontal scroll on tables (test on mobile)
+- [ ] KaTeX formulas (add to test document)
+- [ ] Mermaid diagram (add to test document)
 
 ---
 
-## 📚 Referencias y proyectos de estudio
+## 📚 References and Study Projects
 
-| Proyecto | Tecnología | Qué estudiar |
+| Project | Technology | What to Study |
 | --- | --- | --- |
-| **MarkText for Android** | Vue + Vite + Capacitor + Muya | Renderizado web en WebView, integración con Capacitor |
-| **Noteriv** | React + React Native | Arquitectura de código compartido web/móvil |
-| **react-markdown** | React + unified | Pipeline de plugins, componentes custom |
-| **@ootc/markdown** | React + Mermaid + KaTeX | Lazy loading de dependencias pesadas |
+| **MarkText for Android** | Vue + Vite + Capacitor + Muya | WebView rendering, Capacitor integration |
+| **Noteriv** | React + React Native | Shared web/mobile code architecture |
+| **react-markdown** | React + unified | Plugin pipeline, custom components |
+| **@ootc/markdown** | React + Mermaid + KaTeX | Lazy loading of heavy dependencies |
 
 ---
 
-## 🔗 Enlaces útiles
+## 🔗 Useful Links
 
-- [react-markdown en GitHub](https://github.com/remarkjs/react-markdown)
+- [react-markdown on GitHub](https://github.com/remarkjs/react-markdown)
 - [remark-gfm](https://github.com/remarkjs/remark-gfm)
 - [rehype-katex](https://github.com/remarkjs/remark-math/tree/main/packages/rehype-katex)
 - [rehype-highlight](https://github.com/rehypejs/rehype-highlight)
 - [Capacitor documentation](https://capacitorjs.com/docs)
-- [GitHub Actions para Pages](https://vite.dev/guide/static-deploy.html#github-pages)
-- [Capacitor Android build desde CI](https://stackoverflow.com/questions/79418936)
+- [GitHub Actions for Pages](https://vite.dev/guide/static-deploy.html#github-pages)
+- [Capacitor Android build from CI](https://stackoverflow.com/questions/79418936)
 
 ---
 
-## ✅ Hitos
+## ✅ Milestones
 
-| Hito | Descripción | Estado |
+| Milestone | Description | Status |
 |---|---|---|
-| **M1** | Renderizado web funcional con GFM, KaTeX, highlight y Mermaid | ⬜ |
-| **M2** | Deploy automático en GitHub Pages | ⬜ |
-| **M3** | APK de Android firmado generado por GitHub Actions | ⬜ |
-| **M4** | App iOS (requiere macOS) | ⬜ |
-| **M5** | Contenido cargado dinámicamente desde archivos `.md` | ⬜ |
+| **M1** | Functional web rendering with GFM, KaTeX, highlight, and Mermaid | ⬜ |
+| **M2** | Automatic deployment on GitHub Pages | ⬜ |
+| **M3** | Signed Android APK generated by GitHub Actions | ⬜ |
+| **M4** | iOS app (requires macOS) | ⬜ |
+| **M5** | Content dynamically loaded from `.md` files | ⬜ |
 
 ---
 
-*Última actualización: Septiembre 2026*
+*Last updated: September 2026*
