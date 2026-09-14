@@ -212,7 +212,7 @@ Create the minimum project structure without prematurely implementing applicatio
 
 ### Tasks
 
-- [ ] Confirm the GitHub repository is `wachin/MDHoriZon`.
+- [*] Confirm the GitHub repository is `wachin/MDHoriZon`.
 - [ ] Initialize Vite + React + TypeScript.
 - [ ] Configure ESLint.
 - [ ] Configure Prettier.
