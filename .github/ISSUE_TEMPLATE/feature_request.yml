@@ -1,0 +1,59 @@
+name: Feature or roadmap proposal
+description: Propose a change, or volunteer to pick up a roadmap task.
+title: 'feat: '
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `ROADMAP.md` is the authoritative plan. If your proposal matches an existing task, say which one — that
+        makes it much easier to review.
+
+        **Phases 21 and 22 (the future Live Markdown Editor) are `FUTURE — DO NOT IMPLEMENT YET`** and are not open
+        for implementation. They may start only after Phases 0–20 are complete and stable.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can you not do today, and who does it affect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What you would change, and what the result would look like.
+    validations:
+      required: true
+
+  - type: input
+    id: roadmap
+    attributes:
+      label: Roadmap phase or milestone
+      description: If this maps to an existing task, name it. Otherwise say "not in the roadmap".
+      placeholder: e.g. "Phase 8 — Images and Relative Assets" or "not in the roadmap"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Including "do nothing" or "use an existing dependency instead".
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and pull requests.
+          required: true
+        - label: I am not proposing to start Phase 21/22 (the future Markdown editor).
+          required: true
+        - label: If this needs a new dependency, I explained why the platform or existing stack cannot do it.
+          required: false

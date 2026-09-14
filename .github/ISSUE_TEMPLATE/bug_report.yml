@@ -1,0 +1,75 @@
+name: Bug report
+description: Something renders incorrectly, crashes, or behaves unexpectedly.
+title: 'bug: '
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The fastest path to a fix is a **minimal reproduction**: if you can, add it as a new
+        case in `tests/fixtures/Golden-Test-Document.md` and mention that in this issue.
+
+        Do **not** report security vulnerabilities here — use the private channel in `SECURITY.md`.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal Markdown that reproduces it
+      description: The smallest snippet that shows the problem. Remove anything unrelated.
+      render: markdown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Where does it happen?
+      multiple: true
+      options:
+        - Desktop browser
+        - Mobile browser
+        - Android WebView
+        - iOS WebView
+        - Build, lint or tooling
+        - Offline mode
+        - Not rendering-related
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      description: A commit hash, or the date you tested `main`.
+      placeholder: e.g. 2874660, or "main as of 2026-09-14"
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Console output, screenshots or recordings
+      description: Anything that helps reproduce or understand the problem.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and pull requests.
+          required: true
+        - label: I read the relevant part of ROADMAP.md and this is not a documented, intentional behavior.
+          required: false
+        - label: This is not a security vulnerability (those go to SECURITY.md, never a public issue).
+          required: true

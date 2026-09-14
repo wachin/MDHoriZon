@@ -1,0 +1,13 @@
+# Issue template chooser.
+# Discussions are not enabled on this repository, so questions arrive as issues.
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/wachin/MDHoriZon/security/advisories/new
+    about: Report privately. Never open a public issue containing a working exploit.
+  - name: How to contribute
+    url: https://github.com/wachin/MDHoriZon/blob/main/CONTRIBUTING.md
+    about: Setup, what to work on, branch and commit conventions, review expectations.
+  - name: What is planned
+    url: https://github.com/wachin/MDHoriZon/blob/main/ROADMAP.md
+    about: The authoritative plan. Check this before proposing work.
