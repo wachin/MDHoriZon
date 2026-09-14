@@ -846,7 +846,7 @@ The hidden sentence.
 - [ ] Duplicate headings receive deterministic, distinct anchors.
 - [ ] Inline formatting renders correctly.
 - [ ] Unicode, bidirectional text and emoji render correctly.
-- [ ] Links work, including autolinks, reference-style links and titled links.
+- [ ] Links work, including autolinks, reference-style links, titled links and relative links to another document.
 - [ ] Hard and soft line breaks behave as specified.
 - [ ] Images work or fail gracefully, including the deliberately missing one.
 - [ ] Decorative images expose empty alternative text and are not announced.
