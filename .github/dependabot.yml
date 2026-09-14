@@ -1,0 +1,48 @@
+# Dependency updates.
+#
+# The roadmap's dependency policy says not to upgrade blindly and to review breaking changes
+# before adopting them. This configuration reflects that:
+#
+#   * minor and patch updates arrive grouped (one reviewable pull request per ecosystem and
+#     dependency type, instead of a dozen overlapping ones);
+#   * major updates are ignored on purpose — they must be picked up deliberately, by reading
+#     the migration guide and updating the code in the same change.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+    groups:
+      dev-minor-and-patch:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      prod-minor-and-patch:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - version-update:semver-major
+
+  # Keeps the Actions used by the workflows current. These are pinned to major tags, so a new
+  # major is exactly the kind of change that needs a deliberate look.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: chore
+    groups:
+      actions:
+        patterns:
+          - '*'
