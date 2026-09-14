@@ -8,6 +8,8 @@ coverage/
 
 # Vite
 .vite/
+dist-ssr/
+*.local
 
 # TypeScript
 *.tsbuildinfo
