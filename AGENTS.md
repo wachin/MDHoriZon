@@ -27,7 +27,8 @@ Phase 1 Markdown pipeline has not started.
 
 ## 3. Commands
 
-Requires Node.js `^20.19.0 || ^22.13.0 || >=24`.
+Requires Node.js `^20.19.0 || ^22.13.0 || >=24` (declared in `package.json#engines`, pinned by `.nvmrc`; run
+`nvm use` first).
 
 | Command                | Purpose                                             |
 | ---------------------- | --------------------------------------------------- |
@@ -112,10 +113,13 @@ tests/fixtures/               Golden Test Document (rendering contract) — Pret
 tests/assets/                 assets referenced by the fixtures (see its README.md)
 tests/articles/               relative-link targets used by the fixtures
 public/                       static files copied verbatim into dist/, including .nojekyll
-.github/workflows/            deploy-pages.yml exists (GitHub Pages); pull-request CI is still planned
-docs/architecture/            planned architecture decision notes
+.github/workflows/            deploy-pages.yml (GitHub Pages); pull-request CI is still planned
+.github/ISSUE_TEMPLATE/       issue forms; .github/pull_request_template.md is the PR checklist
+docs/architecture/            decision records (why, not what) — see its README for the template
 ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)
 README.md                     purpose, quick start, contribution guide, bootstrap history
+CONTRIBUTING.md               short entry point for new contributors
+SECURITY.md                   private vulnerability reporting
 AGENTS.md                     this file
 ```
 
@@ -148,8 +152,8 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: `.nvmrc`/`engines` matching the Node floor, the pull-request CI workflow,
-`docs/architecture/` notes on the core/UI separation, and the Phase 1 Markdown rendering core.
+Checklist items still open include: the test runner and test layout (Phase 3), the pull-request CI workflow, the
+first decision record in `docs/architecture/`, and the Phase 1 Markdown rendering core.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous

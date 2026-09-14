@@ -5,7 +5,11 @@
 
 [![License: GPL v3](https://img.shields.io/badge/license-GPL--3.0-blue)](LICENSE)
 [![Status: Phase 0 · foundation](https://img.shields.io/badge/status-phase%200%20%C2%B7%20foundation-blue)](#project-status)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](CONTRIBUTING.md)
+[![Deploy to GitHub Pages](https://github.com/wachin/MDHoriZon/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/wachin/MDHoriZon/actions/workflows/deploy-pages.yml)
+
+**Live (starter screen only):** <https://wachin.github.io/MDHoriZon/> — the repository is published, but the reader
+itself does not exist yet. See [Project status](#project-status).
 
 MDHoriZon is **not** a blog CMS and **not** yet another Markdown editor. It begins as a Markdown **reader**:
 one rendering core, reused unchanged across the desktop browser, the mobile browser, an Android application and an
@@ -85,7 +89,8 @@ cd MDHoriZon
 # 2. Keep the original repository as a remote so you can sync
 git remote add upstream https://github.com/wachin/MDHoriZon.git
 
-# 3. Install exactly what the lockfile pins
+# 3. Use the documented Node version, then install exactly what the lockfile pins
+nvm use   # reads .nvmrc; the required range is in package.json "engines"
 npm ci
 
 # 4. Start the development server (prints a local URL, usually http://localhost:5173/)
@@ -426,8 +431,13 @@ Current state:
 ```text
 MDHoriZon/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/              # bug report and feature/roadmap proposal forms
+│   ├── pull_request_template.md     # the checklist reviewers expect
 │   └── workflows/
 │       └── deploy-pages.yml         # builds and publishes dist/ to GitHub Pages
+├── docs/
+│   └── architecture/                # decision records: why the project is built this way
+│       └── README.md                # template, when a record is required, open decisions
 ├── public/                          # static assets served as-is
 │   ├── .nojekyll                    # tells GitHub Pages not to run Jekyll
 │   ├── favicon.svg
@@ -448,6 +458,11 @@ MDHoriZon/
 │   │   └── wide.png
 │   └── fixtures/
 │       └── Golden-Test-Document.md  # the rendering specification / regression fixture
+├── .editorconfig
+├── .gitattributes                   # LF everywhere; binary assets never converted
+├── .nvmrc                           # Node version used by `nvm use`
+├── .prettierrc.json
+├── .prettierignore
 ├── eslint.config.js
 ├── index.html
 ├── package.json
@@ -456,9 +471,9 @@ MDHoriZon/
 ├── tsconfig.app.json
 ├── tsconfig.node.json
 ├── vite.config.ts                   # React plugin + VITE_BASE-aware GitHub Pages base path
-├── .prettierrc.json
-├── .prettierignore
 ├── AGENTS.md                        # rules for human and AI contributors
+├── CONTRIBUTING.md                  # entry point for new contributors
+├── SECURITY.md                      # private vulnerability reporting
 ├── ROADMAP.md                       # the authoritative design document
 ├── LICENSE                          # GPL-3.0
 └── README.md
@@ -637,8 +652,9 @@ section before opening a pull request; it is short, and it exists so your work c
 ### Ways to help
 
 - **Implement roadmap tasks.** Pick an unchecked item from [`ROADMAP.md`](ROADMAP.md) and say so in the issue/PR.
-- **Finish the foundation.** Add `.nvmrc` and the `engines` field, and the pull-request CI workflow
-  (`format:check`, `lint`, `typecheck`, `build`).
+- **Own an open decision.** The test runner, the sanitization policy and the content model are all waiting for
+  someone to propose an option (see [`docs/architecture/`](docs/architecture/README.md)).
+- **Add the pull-request CI workflow** and the test runner, so contributions are checked automatically.
 - **Extend the fixture.** Add cases to the Golden Test Document that expose rendering regressions.
 - **Report bugs with a fixture.** The best bug report is a new section in the fixture plus the observed vs
   expected rendering.
@@ -659,7 +675,8 @@ git clone https://github.com/<your-user>/MDHoriZon.git
 cd MDHoriZon
 git remote add upstream https://github.com/wachin/MDHoriZon.git
 
-# 3. Install exactly what the lockfile pins.
+# 3. Use the documented Node version and install exactly what the lockfile pins.
+nvm use
 npm ci
 
 # 4. Branch from an up-to-date main.
@@ -758,10 +775,10 @@ Copy this into your PR description:
 
 ### Good first contributions
 
-1. Add `.nvmrc` and an `engines` field matching the Node floor above.
-2. Extract the agent rules in [`AGENTS.md`](AGENTS.md) into a `CONTRIBUTING.md`, if you think the split helps.
-3. Write the first `docs/architecture/` note explaining the core/UI separation.
-4. Add the pull-request CI workflow: `format:check`, `lint`, `typecheck`, `build` and the test suite.
+1. Add the pull-request CI workflow: `format:check`, `lint`, `typecheck`, `build` and the test suite.
+2. Choose the **test runner and test layout** (Phase 3) — the blocking decision for the golden rule.
+3. Write the first **decision record** in [`docs/architecture/`](docs/architecture/README.md).
+4. Add a `.github/dependabot.yml` if you want grouped, reviewed dependency updates.
 5. Extend the **Golden Test Document** with the edge cases you personally tripped over.
 6. Start Phase 1: the reusable `MarkdownRenderer` and its centralized plugin configuration.
 
@@ -773,10 +790,12 @@ Copy this into your PR description:
 | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | [`ROADMAP.md`](ROADMAP.md)                                                         | **Authoritative** design document: vision, phases 0–22, milestones, validation matrix, repository rules, future editor design. |
 | [`README.md`](README.md)                                                           | This file: purpose, quick start, contribution guide, bootstrap history.                                                        |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                               | The short version for new contributors: setup, what to work on, branch/commit conventions, review expectations.                |
+| [`AGENTS.md`](AGENTS.md)                                                           | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
+| [`SECURITY.md`](SECURITY.md)                                                       | How to report a vulnerability privately, and what is in and out of scope.                                                      |
+| [`docs/architecture/`](docs/architecture/README.md)                                | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
 | [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md) | Rendering specification and regression fixture.                                                                                |
 | [`tests/assets/README.md`](tests/assets/README.md)                                 | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
-| [`AGENTS.md`](AGENTS.md)                                                           | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
-| `docs/architecture/`                                                               | Architecture decision notes — **planned**.                                                                                     |
 
 If this README and the roadmap ever disagree, **the roadmap wins**; please open an issue so this file can be
 corrected.
