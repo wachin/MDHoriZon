@@ -1,0 +1,23 @@
+# https://editorconfig.org
+# Prettier decides formatting; this file only keeps editors from fighting it before
+# Prettier runs (indentation, final newline, line endings).
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+# Markdown uses two trailing spaces as a hard line break, and the golden fixture relies
+# on that. Never trim trailing whitespace in Markdown.
+trim_trailing_whitespace = false
+
+[*.{png,jpg,jpeg,gif,webp,avif,ico,icns}]
+insert_final_newline = false
+
+[Makefile]
+indent_style = tab

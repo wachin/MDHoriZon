@@ -1,0 +1,28 @@
+# Normalize line endings for every text file, so Windows, macOS and Linux contributors
+# commit the same bytes. `eol=lf` forces LF in the working tree as well, which matches
+# Prettier's `endOfLine: lf` default and avoids CRLF churn in diffs.
+#
+# Note: nothing here may strip or rewrite file contents. The golden fixture depends on
+# exact whitespace (two trailing spaces are a hard line break), and `text=auto` only
+# normalizes line endings.
+* text=auto eol=lf
+
+# Binary assets must never be converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.icns binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.jks binary
+*.keystore binary
+*.p12 binary
+
+# Generated lockfile: keep it LF and reviewable, but never merged by hand.
+package-lock.json text eol=lf
