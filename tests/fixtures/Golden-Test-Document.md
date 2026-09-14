@@ -43,7 +43,7 @@ Here is `inline code`, an escaped character \*that should not become italic\*, a
 
 Remote image example:
 
-![MDHoriZon placeholder image](https://via.placeholder.com/640x240.png?text=MDHoriZon)
+![MDHoriZon placeholder image](https://placehold.co/640x240/0b3d91/ffffff/png?text=MDHoriZon)
 
 Relative image example:
 
@@ -55,7 +55,7 @@ Missing image example:
 
 Image used as a link:
 
-[![Linked image](https://via.placeholder.com/320x120.png?text=Link)](https://github.com/)
+[![Linked image](https://placehold.co/320x120/1e88e5/ffffff/png?text=Link)](https://github.com/)
 
 ---
 
