@@ -10,6 +10,8 @@ Markdown document**, which means it points here: `tests/assets/`.
 | File                 | Tracked in git          | Purpose                                                                                         |
 | -------------------- | ----------------------- | ----------------------------------------------------------------------------------------------- |
 | `example.png`        | ✅ yes                  | Relative-image regression case (`![Relative image](../assets/example.png)`). Must always exist. |
+| `wide.png`           | ✅ yes                  | Very wide image case (1200×120): must keep its aspect ratio without stretching the layout.      |
+| `tall.png`           | ✅ yes                  | Very tall image case (240×900): must not make the page unusable without scrolling.              |
 | `does-not-exist.png` | ❌ **must never exist** | Missing-image regression case. See below.                                                       |
 
 ### Why `does-not-exist.png` must NOT be created
@@ -55,6 +57,24 @@ With GIMP instead:
 Any editor that can save a PNG (Krita, Inkscape, Pinta, Photoshop, or an online placeholder generator) is fine.
 If you replace the file, keep the same filename and a similar aspect ratio, and re-check it visually with
 `npm run dev` once the renderer exists.
+
+## How `wide.png` and `tall.png` were generated
+
+Same gradient, in the two extreme aspect ratios the fixture needs:
+
+```bash
+magick -size 1200x120 gradient:'#0b3d91-#2196f3' -gravity center \
+  -font DejaVu-Sans -fill '#ffffff' -pointsize 34 \
+  -annotate +0+0 'MDHoriZon - wide fixture 1200x120' \
+  -depth 8 -strip tests/assets/wide.png
+
+magick -size 240x900 gradient:'#0b3d91-#2196f3' -gravity center \
+  -font DejaVu-Sans -fill '#ffffff' -pointsize 24 \
+  -annotate +0+0 'tall 240x900' \
+  -depth 8 -strip tests/assets/tall.png
+```
+
+The exact pixels do not matter; the aspect ratios do. Keep them extreme enough that a layout bug is visible.
 
 ## Remote images in the fixture
 

