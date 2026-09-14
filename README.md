@@ -453,9 +453,10 @@ MDHoriZon/
 │       ├── ci.yml                   # format, lint, types, tests, build on every pull request
 │       └── deploy-pages.yml         # builds and publishes dist/ to GitHub Pages
 ├── docs/
-│   └── architecture/                # decision records: why the project is built this way
-│       ├── 0001-test-runner-and-test-layout.md
-│       └── README.md                # template, when a record is required, open decisions
+│   ├── architecture/                # decision records: why the project is built this way
+│   │   ├── 0001-test-runner-and-test-layout.md
+│   │   └── README.md                # template, when a record is required, open decisions
+│   └── continuing-development.md    # prompt for handing the project to an AI agent
 ├── public/                          # static assets served as-is
 │   ├── .nojekyll                    # tells GitHub Pages not to run Jekyll
 │   ├── favicon.svg
@@ -819,6 +820,7 @@ Copy this into your PR description:
 | [`SECURITY.md`](SECURITY.md)                                                                                     | How to report a vulnerability privately, and what is in and out of scope.                                                      |
 | [`docs/architecture/`](docs/architecture/README.md)                                                              | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
 | [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md) | Why Vitest, and where each kind of test lives.                                                                                 |
+| [`docs/continuing-development.md`](docs/continuing-development.md)                                               | Ready-to-paste prompt for handing the project to an AI agent, and why it is written that way.                                  |
 | [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                               | Rendering specification and regression fixture.                                                                                |
 | [`tests/assets/README.md`](tests/assets/README.md)                                                               | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
 

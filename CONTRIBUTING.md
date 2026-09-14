@@ -129,6 +129,16 @@ problem — ideally as a new case in the Golden Test Document.
 **Security vulnerabilities must never be reported in a public issue.** Use
 [`SECURITY.md`](SECURITY.md) instead.
 
+## Using an AI agent
+
+If you write code with an AI agent, point it at [`AGENTS.md`](AGENTS.md), and start from the ready-to-paste prompt in
+[`docs/continuing-development.md`](docs/continuing-development.md). The prompt exists because a vague "continue the
+development" makes an agent invent scope — usually the editor in Phases 21–22, which must not start yet, or raw HTML
+"working" in a project whose product is sanitization.
+
+Whatever the agent writes is **your** responsibility as the contributor: run the checks yourself, and be explicit in
+the pull request about the platforms you could not test.
+
 ## Code of conduct
 
 Be respectful and specific. This project follows the

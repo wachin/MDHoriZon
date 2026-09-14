@@ -123,6 +123,7 @@ public/                       static files copied verbatim into dist/, including
 .github/ISSUE_TEMPLATE/       issue forms; .github/pull_request_template.md is the PR checklist
 .github/dependabot.yml        grouped minor/patch updates; majors are reviewed by hand
 docs/architecture/            decision records (why, not what) — see its README for the template
+docs/continuing-development.md  ready-to-paste prompt for an agent starting work here
 tests/*.test.ts               fixture and cross-cutting guards (node environment)
 src/**/*.test.ts(x)           unit and component tests, colocated with the code (jsdom)
 ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)
