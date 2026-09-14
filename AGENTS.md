@@ -13,8 +13,8 @@ MDHoriZon is a **Markdown reading and publishing engine**: one rendering core, r
 browser, mobile browsers, Android WebView and iOS WebView, with an optional, user-controlled offline content
 library. It is not a CMS, and it is not (yet) an editor.
 
-Current state: **Phase 0 — Repository Foundation**. The app renders the Vite starter screen; no Markdown pipeline
-exists yet.
+Current state: **Phase 0 (foundation) is complete**; the app still renders the Vite starter screen because the
+Phase 1 Markdown pipeline has not started.
 
 ## 2. Source of truth and phase discipline
 
@@ -110,7 +110,7 @@ src/                          application code; the Markdown core will live in s
 tests/fixtures/               Golden Test Document (rendering contract) — Prettier-excluded
 tests/assets/                 assets referenced by the fixture (see its README.md)
 public/                       static files copied verbatim into dist/, including .nojekyll
-.github/workflows/            planned CI (lint, build, Pages deploy, Android/iOS builds)
+.github/workflows/            deploy-pages.yml exists (GitHub Pages); pull-request CI is still planned
 docs/architecture/            planned architecture decision notes
 ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)
 README.md                     purpose, quick start, contribution guide, bootstrap history
@@ -146,8 +146,8 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open in Phase 0/1 include: `.nvmrc`/`engines` matching the Node floor, `docs/architecture/`
-notes on the core/UI separation, GitHub Actions workflows for lint/build, and the Phase 1 Markdown rendering core.
+Checklist items still open include: `.nvmrc`/`engines` matching the Node floor, the pull-request CI workflow,
+`docs/architecture/` notes on the core/UI separation, and the Phase 1 Markdown rendering core.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous

@@ -124,8 +124,9 @@ git push -u origin feat/short-description
 | `npm run format`       | Formats the repository with Prettier.                                                  |
 | `npm run format:check` | Verifies formatting without writing (used in review).                                  |
 
-**Before opening a pull request, `npm run lint`, `npm run build` and `npm run format:check` must all pass.** CI
-will enforce this once the GitHub Actions workflows from the roadmap are added.
+**Before opening a pull request, `npm run lint`, `npm run build` and `npm run format:check` must all pass.** A
+dedicated pull-request CI workflow is still pending (see [Good first contributions](#good-first-contributions));
+the Pages workflow below already runs `npm ci` and `npm run build` on every push to `main`.
 
 Prettier deliberately **ignores `ROADMAP.md` and `tests/fixtures/`** (see [`.prettierignore`](.prettierignore)):
 the specification and the golden fixture are hand-maintained, byte-stable documents, and reformatting them would
@@ -161,6 +162,9 @@ the renderer and the reading experience are solid.
 - ESLint 10 (flat config) with `typescript-eslint`, React Hooks and React Fast Refresh rules.
 - **Prettier** configured, with the specification documents excluded so they stay byte-stable.
 - **GitHub Pages base path** (`/MDHoriZon/` in production, `VITE_BASE`-overridable) and `public/.nojekyll`.
+- **Automated Pages deployment**: [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) builds
+  and publishes `dist/` on every push to `main`, passing the base path reported by GitHub Pages through `VITE_BASE`
+  so forks deploy correctly without editing the config.
 - HMR development server and a verified production build.
 - Lockfile generated (`package-lock.json`, verified with `npm ci`); dependency and secrets hygiene in `.gitignore`.
 - [`AGENTS.md`](AGENTS.md): the rules human and AI contributors must follow.
@@ -325,7 +329,10 @@ Milestones (see [`ROADMAP.md`](ROADMAP.md) for the full breakdown):
 | **M11**   | iOS application                                         |
 | **M12**   | Search, performance, accessibility, release hardening   |
 
-All milestones are currently open.
+**M0 is complete.** All other milestones are open. **M7 is partially wired up early**: the repository setting is
+set to _GitHub Actions_ and [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) publishes
+the current starter screen on every push to `main`, but the phase's own verification tasks (relative links, images,
+KaTeX, Mermaid, mobile rendering, metadata) remain open.
 
 ---
 
@@ -418,6 +425,9 @@ Current state:
 
 ```text
 MDHoriZon/
+├── .github/
+│   └── workflows/
+│       └── deploy-pages.yml         # builds and publishes dist/ to GitHub Pages
 ├── public/                          # static assets served as-is
 │   ├── .nojekyll                    # tells GitHub Pages not to run Jekyll
 │   ├── favicon.svg
@@ -431,7 +441,9 @@ MDHoriZon/
 ├── tests/
 │   ├── assets/                      # assets referenced by the fixture (see its README)
 │   │   ├── README.md
-│   │   └── example.png
+│   │   ├── example.png
+│   │   ├── tall.png
+│   │   └── wide.png
 │   └── fixtures/
 │       └── Golden-Test-Document.md  # the rendering specification / regression fixture
 ├── eslint.config.js
@@ -441,7 +453,7 @@ MDHoriZon/
 ├── tsconfig.json                    # project references
 ├── tsconfig.app.json
 ├── tsconfig.node.json
-├── vite.config.ts                   # React plugin + GitHub Pages base path
+├── vite.config.ts                   # React plugin + VITE_BASE-aware GitHub Pages base path
 ├── .prettierrc.json
 ├── .prettierignore
 ├── AGENTS.md                        # rules for human and AI contributors
@@ -616,8 +628,8 @@ section before opening a pull request; it is short, and it exists so your work c
 ### Ways to help
 
 - **Implement roadmap tasks.** Pick an unchecked item from [`ROADMAP.md`](ROADMAP.md) and say so in the issue/PR.
-- **Finish the foundation.** Prettier configuration, `vite.config.ts` base path for GitHub Pages,
-  `public/.nojekyll`, `AGENTS.md`, and a `.nvmrc` are all small, self-contained Phase 0 tasks.
+- **Finish the foundation.** Add `.nvmrc` and the `engines` field, and the pull-request CI workflow
+  (`format:check`, `lint`, `typecheck`, `build`).
 - **Extend the fixture.** Add cases to the Golden Test Document that expose rendering regressions.
 - **Report bugs with a fixture.** The best bug report is a new section in the fixture plus the observed vs
   expected rendering.
@@ -740,7 +752,7 @@ Copy this into your PR description:
 1. Add `.nvmrc` and an `engines` field matching the Node floor above.
 2. Extract the agent rules in [`AGENTS.md`](AGENTS.md) into a `CONTRIBUTING.md`, if you think the split helps.
 3. Write the first `docs/architecture/` note explaining the core/UI separation.
-4. Add GitHub Actions workflows for `format:check`, `lint` and `build`.
+4. Add the pull-request CI workflow: `format:check`, `lint`, `typecheck`, `build` and the test suite.
 5. Extend the **Golden Test Document** with the edge cases you personally tripped over.
 6. Start Phase 1: the reusable `MarkdownRenderer` and its centralized plugin configuration.
 
