@@ -590,11 +590,14 @@ rm -rf .vite-scaffold
 Then these deliberate adjustments were applied:
 
 1. `package.json` → `"name": "mdhorizon"` (the temporary directory name leaked into the package name).
-2. `package.json` → added a `typecheck` script (`tsc -b`).
-3. `tsconfig.app.json` / `tsconfig.node.json` → added `"strict": true` explicitly, as required by Phase 0.
-4. `.gitignore` → merged `dist-ssr/` and `*.local` from the Vite template into the existing, far more complete
+2. `index.html` → `<title>MDHoriZon</title>`. The same temporary name is baked into the page title at scaffold
+   time, so it must be fixed in **both** places; the leftover was only spotted once the site was published and the
+   browser tab read `vite-scaffold`.
+3. `package.json` → added a `typecheck` script (`tsc -b`).
+4. `tsconfig.app.json` / `tsconfig.node.json` → added `"strict": true` explicitly, as required by Phase 0.
+5. `.gitignore` → merged `dist-ssr/` and `*.local` from the Vite template into the existing, far more complete
    ignore file (which already covered `node_modules/`, `dist/`, Android/iOS build output, keystores and secrets).
-5. Phase 0 was then closed on top of the scaffold: **Prettier** (`.prettierrc.json` + `.prettierignore`, with
+6. Phase 0 was then closed on top of the scaffold: **Prettier** (`.prettierrc.json` + `.prettierignore`, with
    `ROADMAP.md` and `tests/fixtures/` excluded so the specification and the golden fixture stay byte-stable), the
    **GitHub Pages base path** in `vite.config.ts` (`/MDHoriZon/`, overridable with `VITE_BASE` so Capacitor builds
    are not blocked later), **`public/.nojekyll`**, and **`AGENTS.md`**.
