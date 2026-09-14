@@ -188,6 +188,8 @@ It should require agents to follow these principles:
 - Prefer small, reversible commits.
 - Run lint, tests, and build before declaring a phase complete.
 - Never commit secrets, signing keys, API keys, or local machine configuration.
+- Write documentation, code comments and commit messages in English, so international contributors can review the
+  project. Translated documents are welcome as additional files (for example `README.es.md`), never as replacements.
 
 Recommended commit style:
 
@@ -212,18 +214,18 @@ Create the minimum project structure without prematurely implementing applicatio
 
 ### Tasks
 
-- [*] Confirm the GitHub repository is `wachin/MDHoriZon`.
-- [ ] Initialize Vite + React + TypeScript.
-- [ ] Configure ESLint.
-- [ ] Configure Prettier.
-- [ ] Configure TypeScript with strict checking.
-- [ ] Configure `vite.config.ts` for GitHub Pages.
-- [ ] Determine the repository base path dynamically or configure it explicitly for the final repository name.
-- [ ] Add `public/.nojekyll` if required by the deployment strategy.
-- [ ] Add `AGENTS.md`.
-- [ ] Add the project `.gitignore`.
-- [ ] Add the Golden Test Document.
-- [ ] Commit the initial foundation.
+- [x] Confirm the GitHub repository is `wachin/MDHoriZon`.
+- [x] Initialize Vite + React + TypeScript.
+- [x] Configure ESLint.
+- [x] Configure Prettier.
+- [x] Configure TypeScript with strict checking.
+- [x] Configure `vite.config.ts` for GitHub Pages.
+- [x] Determine the repository base path dynamically or configure it explicitly for the final repository name.
+- [x] Add `public/.nojekyll` if required by the deployment strategy.
+- [x] Add `AGENTS.md`.
+- [x] Add the project `.gitignore`.
+- [x] Add the Golden Test Document.
+- [x] Commit the initial foundation.
 
 Recommended command:
 
@@ -371,17 +373,25 @@ Create:
 
 ```text
 tests/
+├── assets/
 └── fixtures/
-    └── Golden Test Document.md
+    └── Golden-Test-Document.md
 ```
 
 This document must contain representative examples of every supported Markdown feature.
 
 ### Tasks
 
-- [ ] Add the Golden Test Document.
+- [x] Add the Golden Test Document.
 - [ ] Render it in the application.
 - [ ] Use it as the baseline for every renderer change.
+- [ ] Decide the test tooling and test layout. No test runner is named anywhere in this roadmap yet, and the target
+      structure shows both `src/tests/` and a top-level `tests/`, which is ambiguous. Candidates worth evaluating:
+      Vitest with Testing Library for unit/component tests, Playwright for end-to-end and WebView checks. Record the
+      decision in `docs/architecture/`.
+- [ ] Declare the supported Node.js baseline (`^20.19.0 || ^22.13.0 || >=24`) in `package.json#engines` and
+      `.nvmrc`, and use the same version in CI.
+- [ ] Add a CI workflow that runs `format:check`, `lint`, `typecheck`, `build` and the test suite on pull requests.
 - [ ] Add parser/component tests for important edge cases.
 - [ ] Add regression tests whenever a rendering bug is discovered.
 - [ ] Test the same fixture in desktop web, mobile web, and Capacitor WebView.
@@ -861,6 +871,21 @@ The PWA offline mechanism and mobile offline library may share concepts, but the
 - [ ] Add Open Graph metadata.
 - [ ] Add appropriate favicon/app icons later.
 
+### Bootstrap status
+
+The deployment plumbing was wired up early, while the project is still in Phase 0, so that enabling Pages does not
+leave the repository in a half-configured state:
+
+- Repository setting: **Settings → Pages → Source = GitHub Actions**. With that source, Pages publishes nothing
+  until a workflow uploads an artifact; without a workflow the site simply returns 404.
+- `.github/workflows/deploy-pages.yml` installs with `npm ci`, runs `npm run build`, uploads `dist/` and deploys the
+  resulting artifact.
+- The build receives the base path reported by `actions/configure-pages` through `VITE_BASE`, so a fork or a renamed
+  repository deploys correctly without editing `vite.config.ts`.
+
+The remaining tasks below stay open for the phase itself: publishing the starter screen is not the same as
+publishing a working reader, and the phase is not complete until they pass.
+
 Recommended deployment principle:
 
 ```text
@@ -1133,8 +1158,9 @@ MDHoriZon/
 │   └── main.tsx
 │
 ├── tests/
+│   ├── assets/                           # assets referenced by the fixtures
 │   └── fixtures/
-│       └── Golden Test Document.md
+│       └── Golden-Test-Document.md
 │
 ├── docs/
 │   └── architecture/
@@ -1145,6 +1171,8 @@ MDHoriZon/
 ├── vite.config.ts
 ├── tsconfig.json
 ├── eslint.config.js
+├── .prettierrc.json
+├── .prettierignore
 ├── package.json
 ├── package-lock.json
 ├── AGENTS.md
@@ -1248,7 +1276,7 @@ During research, record useful discoveries in `docs/architecture/` instead of pu
 
 | Milestone | Description | Status |
 |---|---|---|
-| **M0** | Repository foundation, linting, formatting, agent rules | ⬜ |
+| **M0** | Repository foundation, linting, formatting, agent rules | ✅ |
 | **M1** | Core Markdown/GFM renderer | ⬜ |
 | **M2** | Security boundary and sanitization | ⬜ |
 | **M3** | Golden Test Suite | ⬜ |
@@ -1261,6 +1289,8 @@ During research, record useful discoveries in `docs/architecture/` instead of pu
 | **M10** | Android CI/CD and signed builds | ⬜ |
 | **M11** | iOS application | ⬜ |
 | **M12** | Search, performance, accessibility, release hardening | ⬜ |
+
+`✅` complete · `🟡` in progress · `⬜` not started
 
 ---
 
