@@ -13,6 +13,7 @@
 - [ ] `npm run format:check` passes
 - [ ] `npm run lint` passes
 - [ ] `npm run typecheck` passes
+- [ ] `npm test` passes
 - [ ] `npm run build` passes
 - [ ] Checked manually in the desktop browser
 - [ ] Added or updated a fixture/test (required for any new Markdown feature)

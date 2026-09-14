@@ -385,13 +385,13 @@ This document must contain representative examples of every supported Markdown f
 - [x] Add the Golden Test Document.
 - [ ] Render it in the application.
 - [ ] Use it as the baseline for every renderer change.
-- [ ] Decide the test tooling and test layout. No test runner is named anywhere in this roadmap yet, and the target
-      structure shows both `src/tests/` and a top-level `tests/`, which is ambiguous. Candidates worth evaluating:
-      Vitest with Testing Library for unit/component tests, Playwright for end-to-end and WebView checks. Record the
-      decision in `docs/architecture/`.
+- [x] Decide the test tooling and test layout. **Vitest**, with jsdom, Testing Library and jest-dom matchers, for
+      unit/component tests colocated with the code (`src/**/*.test.ts(x)`), plus fixture and cross-cutting tests
+      under `tests/` that run in Node. Recorded in `docs/architecture/0001-test-runner-and-test-layout.md`; the
+      ambiguous `src/tests/` directory below is dropped.
 - [x] Declare the supported Node.js baseline (`^20.19.0 || ^22.13.0 || >=24`) in `package.json#engines` and
       `.nvmrc`.
-- [ ] Add a CI workflow that runs `format:check`, `lint`, `typecheck`, `build` and the test suite on pull requests,
+- [x] Add a CI workflow that runs `format:check`, `lint`, `typecheck`, `build` and the test suite on pull requests,
       using the declared Node.js version.
 - [ ] Add parser/component tests for important edge cases.
 - [ ] Add regression tests whenever a rendering bug is discovered.
@@ -1113,8 +1113,10 @@ MDHoriZon/
 │   │   ├── bug_report.yml
 │   │   ├── config.yml
 │   │   └── feature_request.yml
+│   ├── dependabot.yml
 │   ├── pull_request_template.md
 │   └── workflows/
+│       ├── ci.yml
 │       ├── deploy-pages.yml
 │       ├── android-build.yml
 │       └── ios-build.yml                 # optional
@@ -1159,16 +1161,17 @@ MDHoriZon/
 │   │   ├── themes.css
 │   │   └── app.css
 │   │
-│   ├── tests/
-│   ├── App.tsx
+│   ├── App.tsx                           # unit/component tests are colocated: App.test.tsx
 │   └── main.tsx
 │
 ├── tests/
 │   ├── articles/                         # relative-link targets used by the fixtures
 │   │   └── example.md
 │   ├── assets/                           # assets referenced by the fixtures
-│   └── fixtures/
-│       └── Golden-Test-Document.md
+│   ├── fixtures/
+│   │   └── Golden-Test-Document.md
+│   ├── setup.ts                          # jest-dom matchers; Testing Library cleanup
+│   └── *.test.ts                         # fixture and cross-cutting guards (node environment)
 │
 ├── docs/
 │   └── architecture/                     # decision records (why, not what)
@@ -1179,6 +1182,9 @@ MDHoriZon/
 ├── capacitor.config.ts
 ├── vite.config.ts
 ├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── tsconfig.test.json                    # type-checks tests with node + vite/client types
 ├── eslint.config.js
 ├── .editorconfig
 ├── .gitattributes                        # LF everywhere; binary assets never converted
@@ -1188,6 +1194,7 @@ MDHoriZon/
 ├── package.json
 ├── package-lock.json
 ├── AGENTS.md                             # rules for human and AI contributors
+├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md                       # entry point for new contributors
 ├── SECURITY.md                           # private vulnerability reporting
 ├── .gitignore

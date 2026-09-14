@@ -53,6 +53,7 @@ Run these, and make sure they pass:
 npm run format:check
 npm run lint
 npm run typecheck
+npm test
 npm run build
 ```
 
@@ -101,9 +102,24 @@ deliberate, and the reader must be solid before anything is built on top of it.
 
 ## Tests
 
-There is **no test runner configured yet** — choosing one is an open task in the roadmap
-([Phase 3](ROADMAP.md)). Until then, verification means the commands above plus the Golden Test Document. If you
-want to take that task, say so in an issue first, because the decision affects the whole project.
+**Vitest** runs the suite. The reasoning and the layout are recorded in
+[`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md).
+
+```bash
+npm test          # run once
+npm run test:watch
+```
+
+- **Unit and component tests live next to the code they cover**: `src/**/*.test.ts(x)`. They run in jsdom.
+- **Cross-cutting and fixture checks live in `tests/**/*.test.ts`** and opt out of the DOM with
+  `// @vitest-environment node`.
+
+Every new Markdown feature needs a test. The fixture invariants in
+[`tests/fixtures.test.ts`](tests/fixtures.test.ts) protect rules that are easy to break by accident — for example
+that `tests/assets/does-not-exist.png` stays missing.
+
+If you need tooling the project does not have yet (end-to-end browser testing, for instance), propose it in an issue
+first: the decision affects everyone.
 
 ## Reporting bugs and proposing features
 

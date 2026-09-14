@@ -37,6 +37,8 @@ Requires Node.js `^20.19.0 || ^22.13.0 || >=24` (declared in `package.json#engin
 | `npm run build`        | `tsc -b` + production build into `dist/`.           |
 | `npm run typecheck`    | Type-check only.                                    |
 | `npm run lint`         | ESLint.                                             |
+| `npm test`             | Test suite once (Vitest).                           |
+| `npm run test:watch`   | Test suite in watch mode.                           |
 | `npm run format`       | Prettier write.                                     |
 | `npm run format:check` | Prettier check (must pass in a PR).                 |
 | `npm run preview`      | Serve the production build locally.                 |
@@ -50,7 +52,8 @@ In a sandbox where npm cannot write to `~/.npm/_cacache` (error `EROFS`), redire
 2. `npm run typecheck` (or `npm run build`) passes.
 3. `npm run build` succeeds.
 4. `npm run format:check` passes.
-5. **The golden rule** is satisfied:
+5. `npm test` passes — and every new Markdown feature has a test, not only a fixture entry.
+6. **The golden rule** is satisfied:
 
    > No Markdown feature is considered complete until it works in the desktop browser, mobile browser, Android
    > WebView, and has a reproducible automated or fixture-based test.
@@ -69,6 +72,9 @@ Never report work as complete based only on "it looked right in the browser".
 - **Preserve Android and iOS WebView compatibility.** Assume an older engine, touch input, and no Node APIs at
   runtime.
 - **Test both the online and the offline path** whenever content loading changes.
+- **Respect the test layout** ([ADR 0001](docs/architecture/0001-test-runner-and-test-layout.md)): unit and component
+  tests are colocated with the code as `src/**/*.test.ts(x)`; fixture and cross-cutting tests live in `tests/` and
+  run with `// @vitest-environment node`. Never weaken or delete a fixture guard to make a change pass.
 - **Do not add a dependency** without a clear reason and an evaluation of its bundle impact. The platform and the
   existing stack come first.
 - **Do not create directories** drawn from the roadmap's target tree merely for appearance. Create them when the
@@ -113,12 +119,16 @@ tests/fixtures/               Golden Test Document (rendering contract) — Pret
 tests/assets/                 assets referenced by the fixtures (see its README.md)
 tests/articles/               relative-link targets used by the fixtures
 public/                       static files copied verbatim into dist/, including .nojekyll
-.github/workflows/            deploy-pages.yml (GitHub Pages); pull-request CI is still planned
+.github/workflows/            ci.yml (PR verification) and deploy-pages.yml (GitHub Pages)
 .github/ISSUE_TEMPLATE/       issue forms; .github/pull_request_template.md is the PR checklist
+.github/dependabot.yml        grouped minor/patch updates; majors are reviewed by hand
 docs/architecture/            decision records (why, not what) — see its README for the template
+tests/*.test.ts               fixture and cross-cutting guards (node environment)
+src/**/*.test.ts(x)           unit and component tests, colocated with the code (jsdom)
 ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)
 README.md                     purpose, quick start, contribution guide, bootstrap history
 CONTRIBUTING.md               short entry point for new contributors
+CODE_OF_CONDUCT.md            Contributor Covenant 2.1
 SECURITY.md                   private vulnerability reporting
 AGENTS.md                     this file
 ```
@@ -152,8 +162,8 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: the test runner and test layout (Phase 3), the pull-request CI workflow, the
-first decision record in `docs/architecture/`, and the Phase 1 Markdown rendering core.
+Checklist items still open include: the sanitization policy (Phase 2), the content model (Phase 9), end-to-end and
+WebView testing (Phase 20), and the Phase 1 Markdown rendering core.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous

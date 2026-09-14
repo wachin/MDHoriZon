@@ -126,12 +126,18 @@ git push -u origin feat/short-description
 | `npm run preview`      | Serves the built `dist/` locally, to verify the production output.                     |
 | `npm run lint`         | Runs ESLint over the repository.                                                       |
 | `npm run typecheck`    | Runs `tsc -b` only, without emitting a build.                                          |
+| `npm test`             | Runs the test suite once (Vitest).                                                     |
+| `npm run test:watch`   | Runs the test suite in watch mode.                                                     |
 | `npm run format`       | Formats the repository with Prettier.                                                  |
 | `npm run format:check` | Verifies formatting without writing (used in review).                                  |
 
-**Before opening a pull request, `npm run lint`, `npm run build` and `npm run format:check` must all pass.** A
-dedicated pull-request CI workflow is still pending (see [Good first contributions](#good-first-contributions));
-the Pages workflow below already runs `npm ci` and `npm run build` on every push to `main`.
+**Before opening a pull request, `npm run format:check`, `npm run lint`, `npm run typecheck`, `npm test` and
+`npm run build` must all pass.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs exactly that on every
+pull request, so a broken change is caught before review.
+
+Tests are split by purpose: unit and component tests live next to the code they cover (`src/**/*.test.ts(x)`) and
+cross-cutting or fixture checks live in `tests/**/*.test.ts`. The reasoning is recorded in
+[`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md).
 
 Prettier deliberately **ignores `ROADMAP.md` and `tests/fixtures/`** (see [`.prettierignore`](.prettierignore)):
 the specification and the golden fixture are hand-maintained, byte-stable documents, and reformatting them would
@@ -166,6 +172,11 @@ the renderer and the reading experience are solid.
 - **TypeScript strict mode** across application and tooling configs, with project references.
 - ESLint 10 (flat config) with `typescript-eslint`, React Hooks and React Fast Refresh rules.
 - **Prettier** configured, with the specification documents excluded so they stay byte-stable.
+- **Vitest** test suite with jsdom and Testing Library, including guards for the fixture invariants and for the
+  GitHub Pages base path.
+- **CI on every pull request**: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs formatting, lint,
+  types, tests and the production build.
+- **Grouped Dependabot updates** for npm and GitHub Actions, with major upgrades left for deliberate review.
 - **GitHub Pages base path** (`/MDHoriZon/` in production, `VITE_BASE`-overridable) and `public/.nojekyll`.
 - **Automated Pages deployment**: [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) builds
   and publishes `dist/` on every push to `main`, passing the base path reported by GitHub Pages through `VITE_BASE`
@@ -339,6 +350,10 @@ set to _GitHub Actions_ and [`.github/workflows/deploy-pages.yml`](.github/workf
 the current starter screen on every push to `main`, but the phase's own verification tasks (relative links, images,
 KaTeX, Mermaid, mobile rendering, metadata) remain open.
 
+**M3 (golden test suite) is partially started**: the test runner and the test layout are decided, and the fixture
+invariants are covered by automated tests — but the renderer tests the milestone is really about cannot exist before
+Phase 1.
+
 ---
 
 ## The road ahead: from reader to Live Markdown Editor
@@ -432,23 +447,26 @@ Current state:
 MDHoriZon/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/              # bug report and feature/roadmap proposal forms
+│   ├── dependabot.yml               # grouped minor/patch updates; majors reviewed by hand
 │   ├── pull_request_template.md     # the checklist reviewers expect
 │   └── workflows/
+│       ├── ci.yml                   # format, lint, types, tests, build on every pull request
 │       └── deploy-pages.yml         # builds and publishes dist/ to GitHub Pages
 ├── docs/
 │   └── architecture/                # decision records: why the project is built this way
+│       ├── 0001-test-runner-and-test-layout.md
 │       └── README.md                # template, when a record is required, open decisions
 ├── public/                          # static assets served as-is
 │   ├── .nojekyll                    # tells GitHub Pages not to run Jekyll
 │   ├── favicon.svg
 │   └── icons.svg
 ├── src/                             # application code; the Markdown core will live in src/core/
-│   ├── App.tsx
+│   ├── App.tsx                      # component tests live next to the code as *.test.tsx
 │   ├── App.css
 │   ├── index.css
 │   ├── main.tsx
 │   └── assets/
-├── tests/
+├── tests/                           # cross-cutting tests and fixtures
 │   ├── articles/                    # relative-link targets used by the fixtures
 │   │   └── example.md
 │   ├── assets/                      # assets referenced by the fixture (see its README)
@@ -456,8 +474,11 @@ MDHoriZon/
 │   │   ├── example.png
 │   │   ├── tall.png
 │   │   └── wide.png
-│   └── fixtures/
-│       └── Golden-Test-Document.md  # the rendering specification / regression fixture
+│   ├── fixtures/
+│   │   └── Golden-Test-Document.md  # the rendering specification / regression fixture
+│   ├── fixtures.test.ts             # guards the fixture invariants
+│   ├── setup.ts                     # jest-dom matchers and Testing Library cleanup
+│   └── vite-config.test.ts          # guards the GitHub Pages base path
 ├── .editorconfig
 ├── .gitattributes                   # LF everywhere; binary assets never converted
 ├── .nvmrc                           # Node version used by `nvm use`
@@ -470,8 +491,10 @@ MDHoriZon/
 ├── tsconfig.json                    # project references
 ├── tsconfig.app.json
 ├── tsconfig.node.json
-├── vite.config.ts                   # React plugin + VITE_BASE-aware GitHub Pages base path
+├── tsconfig.test.json               # type-checks the tests with node + vite/client types
+├── vite.config.ts                   # React plugin, VITE_BASE-aware base path, Vitest config
 ├── AGENTS.md                        # rules for human and AI contributors
+├── CODE_OF_CONDUCT.md               # Contributor Covenant 2.1
 ├── CONTRIBUTING.md                  # entry point for new contributors
 ├── SECURITY.md                      # private vulnerability reporting
 ├── ROADMAP.md                       # the authoritative design document
@@ -652,9 +675,10 @@ section before opening a pull request; it is short, and it exists so your work c
 ### Ways to help
 
 - **Implement roadmap tasks.** Pick an unchecked item from [`ROADMAP.md`](ROADMAP.md) and say so in the issue/PR.
-- **Own an open decision.** The test runner, the sanitization policy and the content model are all waiting for
-  someone to propose an option (see [`docs/architecture/`](docs/architecture/README.md)).
-- **Add the pull-request CI workflow** and the test runner, so contributions are checked automatically.
+- **Own an open decision.** The sanitization policy, the content model and the offline storage strategy are waiting
+  for someone to propose an option (see [`docs/architecture/`](docs/architecture/README.md)).
+- **Write end-to-end tests.** Unit and component coverage exists now, but nothing drives a real browser or a WebView
+  yet (Phase 20).
 - **Extend the fixture.** Add cases to the Golden Test Document that expose rendering regressions.
 - **Report bugs with a fixture.** The best bug report is a new section in the fixture plus the observed vs
   expected rendering.
@@ -775,27 +799,28 @@ Copy this into your PR description:
 
 ### Good first contributions
 
-1. Add the pull-request CI workflow: `format:check`, `lint`, `typecheck`, `build` and the test suite.
-2. Choose the **test runner and test layout** (Phase 3) — the blocking decision for the golden rule.
-3. Write the first **decision record** in [`docs/architecture/`](docs/architecture/README.md).
-4. Add a `.github/dependabot.yml` if you want grouped, reviewed dependency updates.
-5. Extend the **Golden Test Document** with the edge cases you personally tripped over.
-6. Start Phase 1: the reusable `MarkdownRenderer` and its centralized plugin configuration.
+1. Extend the **Golden Test Document** with the edge cases you personally tripped over.
+2. Add **renderer tests** for the first Phase 1 component, next to the component itself.
+3. Propose the **sanitization policy** as a decision record before Phase 2 starts.
+4. Add end-to-end browser coverage (Playwright) once there is a reader worth driving.
+5. Start Phase 1: the reusable `MarkdownRenderer` and its centralized plugin configuration.
 
 ---
 
 ## Documentation map
 
-| File                                                                               | Contents                                                                                                                       |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [`ROADMAP.md`](ROADMAP.md)                                                         | **Authoritative** design document: vision, phases 0–22, milestones, validation matrix, repository rules, future editor design. |
-| [`README.md`](README.md)                                                           | This file: purpose, quick start, contribution guide, bootstrap history.                                                        |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                               | The short version for new contributors: setup, what to work on, branch/commit conventions, review expectations.                |
-| [`AGENTS.md`](AGENTS.md)                                                           | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
-| [`SECURITY.md`](SECURITY.md)                                                       | How to report a vulnerability privately, and what is in and out of scope.                                                      |
-| [`docs/architecture/`](docs/architecture/README.md)                                | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
-| [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md) | Rendering specification and regression fixture.                                                                                |
-| [`tests/assets/README.md`](tests/assets/README.md)                                 | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
+| File                                                                                                             | Contents                                                                                                                       |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`ROADMAP.md`](ROADMAP.md)                                                                                       | **Authoritative** design document: vision, phases 0–22, milestones, validation matrix, repository rules, future editor design. |
+| [`README.md`](README.md)                                                                                         | This file: purpose, quick start, contribution guide, bootstrap history.                                                        |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                                                             | The short version for new contributors: setup, what to work on, branch/commit conventions, review expectations.                |
+| [`AGENTS.md`](AGENTS.md)                                                                                         | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)                                                                       | Contributor Covenant 2.1, and how to report unacceptable behavior privately.                                                   |
+| [`SECURITY.md`](SECURITY.md)                                                                                     | How to report a vulnerability privately, and what is in and out of scope.                                                      |
+| [`docs/architecture/`](docs/architecture/README.md)                                                              | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
+| [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md) | Why Vitest, and where each kind of test lives.                                                                                 |
+| [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                               | Rendering specification and regression fixture.                                                                                |
+| [`tests/assets/README.md`](tests/assets/README.md)                                                               | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
 
 If this README and the roadmap ever disagree, **the roadmap wins**; please open an issue so this file can be
 corrected.
@@ -809,8 +834,8 @@ corrected.
   CI will eventually scan for them.
 - Untrusted Markdown must never be able to execute script, attach event handlers, or trigger `javascript:` URLs.
 - If you find a vulnerability, **do not open a public issue containing a working exploit**. Use GitHub's private
-  vulnerability reporting (Security → Advisories → _Report a vulnerability_) on the repository, and include a
-  minimal reproducing Markdown snippet.
+  vulnerability reporting (Security → Advisories → _Report a vulnerability_) on the repository — see
+  [`SECURITY.md`](SECURITY.md) — and include a minimal reproducing Markdown snippet.
 
 ---
 
