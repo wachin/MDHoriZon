@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 // GitHub Pages serves this project from https://wachin.github.io/MDHoriZon/, so production
 // assets must be requested relative to that base path. It stays overridable through the
@@ -19,10 +19,22 @@ function normalizeBase(value: string | undefined): string | undefined {
   return `${trimmed.replace(/\/+$/, '')}/`
 }
 
-// https://vite.dev/config/
+// `vitest/config` re-exports Vite's `defineConfig` with the `test` block typed, so the test
+// runner and the build share one configuration file instead of two that can drift apart.
+// https://vite.dev/config/ and https://vitest.dev/config/
 export default defineConfig(({ mode }) => ({
   base:
     normalizeBase(process.env.VITE_BASE) ??
     (mode === 'production' ? githubPagesBase : '/'),
   plugins: [react()],
+  test: {
+    // jsdom matches the browsers the renderer targets and is what React component tests
+    // need. Node-only tests opt out per file with `// @vitest-environment node`.
+    environment: 'jsdom',
+    include: ['tests/**/*.test.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
+    setupFiles: ['tests/setup.ts'],
+    restoreMocks: true,
+    // A run that finds no tests is a broken run, not a passing one.
+    passWithNoTests: false,
+  },
 }))
