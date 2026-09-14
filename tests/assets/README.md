@@ -1,9 +1,10 @@
 # Test assets
 
-Assets referenced by [`tests/fixtures/Golden-Test-Document.md`](../fixtures/Golden-Test-Document.md).
+Assets referenced by [`tests/fixtures/Golden-Test-Document.md`](../fixtures/Golden-Test-Document.md) and
+[`tests/articles/example.md`](../articles/example.md).
 
-The fixture lives in `tests/fixtures/`, so every `../assets/...` path inside it resolves **relative to the
-Markdown document**, which means it points here: `tests/assets/`.
+Both documents live in sibling directories of this one, so every `../assets/...` path inside them resolves
+**relative to the Markdown document that references it**, which means it points here: `tests/assets/`.
 
 ## Inventory
 

@@ -1158,6 +1158,8 @@ MDHoriZon/
 │   └── main.tsx
 │
 ├── tests/
+│   ├── articles/                         # relative-link targets used by the fixtures
+│   │   └── example.md
 │   ├── assets/                           # assets referenced by the fixtures
 │   └── fixtures/
 │       └── Golden-Test-Document.md

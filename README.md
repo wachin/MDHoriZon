@@ -439,6 +439,8 @@ MDHoriZon/
 │   ├── main.tsx
 │   └── assets/
 ├── tests/
+│   ├── articles/                    # relative-link targets used by the fixtures
+│   │   └── example.md
 │   ├── assets/                      # assets referenced by the fixture (see its README)
 │   │   ├── README.md
 │   │   ├── example.png
@@ -525,10 +527,14 @@ cannot change underneath a test run.
 
 ### Other fixture paths
 
-`tests/fixtures/Golden-Test-Document.md` also references `../articles/example.md` as a **relative link** example
-(which resolves to `tests/articles/example.md`). That target does not exist yet; unlike the image section, there is
-no adjacent "missing link" case, so the file is expected to be created when relative-link resolution lands in
-Phase 8/10. Do not create it blindly — confirm it against that phase's tests.
+`tests/fixtures/Golden-Test-Document.md` also references `../articles/example.md` as a **relative link** example,
+which resolves to [`tests/articles/example.md`](tests/articles/example.md). That file exists and is deliberately
+small: it is the target of the cross-directory relative link, it references the shared asset folder from a different
+directory, and it links back to the fixture so the round trip can be verified — including after the content has been
+downloaded for offline reading.
+
+It is **not** a second rendering fixture. Rendering regressions belong in the Golden Test Document; this file only
+proves that one document can link to another one and to shared assets. Keep both of its relative paths working.
 
 ---
 

@@ -83,6 +83,7 @@ Never report work as complete based only on "it looked right in the browser".
 | `tests/fixtures/Golden-Test-Document.md` | The rendering contract. **Never simplify it** because a feature is unimplemented — add sections and let unsupported ones become explicit targets. Excluded from Prettier on purpose. |
 | `tests/assets/does-not-exist.png`        | **Must never exist.** It is a deliberate negative test for graceful image failure.                                                                                                   |
 | `tests/assets/example.png`               | Keep the filename and the relative path used by the fixture.                                                                                                                         |
+| `tests/articles/example.md`              | The target of the cross-directory relative link. Keep it short and keep both of its relative paths working.                                                                          |
 | `package-lock.json`                      | Generated. Never hand-edit it; change dependencies through npm.                                                                                                                      |
 | `.gitignore`                             | Hand-curated (Capacitor, Android/iOS, keystores, secrets). Never overwrite it with a template default.                                                                               |
 | `.prettierignore`                        | Keeps the spec documents byte-stable. Do not remove `ROADMAP.md` or `tests/fixtures/` from it.                                                                                       |
@@ -108,7 +109,8 @@ Never report work as complete based only on "it looked right in the browser".
 ```text
 src/                          application code; the Markdown core will live in src/core/
 tests/fixtures/               Golden Test Document (rendering contract) — Prettier-excluded
-tests/assets/                 assets referenced by the fixture (see its README.md)
+tests/assets/                 assets referenced by the fixtures (see its README.md)
+tests/articles/               relative-link targets used by the fixtures
 public/                       static files copied verbatim into dist/, including .nojekyll
 .github/workflows/            deploy-pages.yml exists (GitHub Pages); pull-request CI is still planned
 docs/architecture/            planned architecture decision notes
