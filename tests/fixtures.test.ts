@@ -143,6 +143,14 @@ describe('golden fixture', () => {
       false,
     )
   })
+
+  it('keeps the CJK emphasis case that pins a CommonMark limitation', () => {
+    // Pinned on purpose: the expected output changes if a parser extension is adopted, and that
+    // change must be deliberate rather than accidental. See docs/references.md.
+    expect(fixture).toContain('CJK emphasis and the CommonMark flanking rules')
+    expect(fixture).toContain('**「重要」**中文')
+    expect(fixture).toContain('中文**强调**。')
+  })
 })
 
 describe.each(documents)('relative paths in %s', (document) => {

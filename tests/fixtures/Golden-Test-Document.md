@@ -466,6 +466,27 @@ Emoji: 😀 🚀 🧪 🇦🇷 👩‍💻 — the last one is a zero-width-join
 
 Mathematical and typographic symbols: ∀x ∈ ℝ, ∑ ± × ÷ ≤ ≥ ≠ ∞ → ⇒ ⌘ € £ ¥ © ® ™ …
 
+## CJK emphasis and the CommonMark flanking rules
+
+CommonMark decides whether `**` may open or close by *flanking* rules. One of them is: a closing `**` that is
+preceded by a punctuation character may only close if it is followed by whitespace or punctuation. Chinese,
+Japanese and Korean prose is written without spaces, so a construction that is completely normal in those
+languages — bold around a quoted phrase, immediately followed by more text — fails that test and the asterisks are
+rendered literally:
+
+- **「重要」**中文 — the closing `**` is preceded by punctuation (`」`) and followed by a letter (`中`), so
+  CommonMark refuses to close it. The expected rendering today is **literal asterisks**, not bold.
+- **（注）**の続き — the same shape with Japanese brackets and kana.
+- 中文**强调**。 — this one must **become bold**: the closing `**` is preceded by a letter, so it is right-flanking.
+
+An implementation can fix the first two with a parser extension — one that allows `**` to close after Unicode
+punctuation when the next character is CJK. Whether MDHoriZon adopts one is a Phase 1 decision; the survey of prior
+art is in [`docs/references.md`](../../docs/references.md). That class of fix applies to asterisks only, so
+underscore emphasis (`__…__`) keeps the CommonMark behavior.
+
+This section is pinned on purpose: if the extension is adopted, the expected output of the first two lines changes
+and this section must be updated deliberately, with the decision recorded.
+
 ---
 
 # 11. Mathematics
@@ -846,6 +867,7 @@ The hidden sentence.
 - [ ] Duplicate headings receive deterministic, distinct anchors.
 - [ ] Inline formatting renders correctly.
 - [ ] Unicode, bidirectional text and emoji render correctly.
+- [ ] CJK strong emphasis behaves as this document specifies, including the punctuation-adjacent cases.
 - [ ] Links work, including autolinks, reference-style links, titled links and relative links to another document.
 - [ ] Hard and soft line breaks behave as specified.
 - [ ] Images work or fail gracefully, including the deliberately missing one.
