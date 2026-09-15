@@ -456,6 +456,7 @@ MDHoriZon/
 │   ├── architecture/                # decision records: why the project is built this way
 │   │   ├── 0001-test-runner-and-test-layout.md
 │   │   ├── 0002-reference-material-lives-outside-the-repo.md
+│   │   ├── 0003-sanitization-policy.md
 │   │   └── README.md                # template, when a record is required, open decisions
 │   ├── continuing-development.md    # prompt for handing the project to an AI agent
 │   └── references.md                # curated sources, pinned revisions and findings
@@ -823,6 +824,7 @@ Copy this into your PR description:
 | [`docs/architecture/`](docs/architecture/README.md)                                                                                          | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
 | [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md)                             | Why Vitest, and where each kind of test lives.                                                                                 |
 | [`docs/architecture/0002-reference-material-lives-outside-the-repo.md`](docs/architecture/0002-reference-material-lives-outside-the-repo.md) | Why third-party projects are not vendored here, and how to keep a local reference copy.                                        |
+| [`docs/architecture/0003-sanitization-policy.md`](docs/architecture/0003-sanitization-policy.md)                                             | The layered sanitization policy: no raw HTML, an unconditional sanitization stage, and an explicit URL policy.                 |
 | [`docs/continuing-development.md`](docs/continuing-development.md)                                                                           | Ready-to-paste prompt for handing the project to an AI agent, and why it is written that way.                                  |
 | [`docs/references.md`](docs/references.md)                                                                                                   | What to read in each study project, the pinned revision, what was verified and what is still unread.                           |
 | [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                                                           | Rendering specification and regression fixture.                                                                                |

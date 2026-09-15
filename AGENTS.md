@@ -65,6 +65,9 @@ Never report work as complete based only on "it looked right in the browser".
 - **One Markdown implementation.** Never duplicate rendering logic and never create a separate renderer for web
   and mobile.
 - **The sanitizer is a mandatory stage**, not an optional plugin. Never bypass it, for performance or convenience.
+  The layered policy — raw HTML from the document never reaches the DOM, an unconditional sanitization stage for
+  plugin-generated markup, and an explicit URL policy — is [ADR 0003](docs/architecture/0003-sanitization-policy.md).
+  Never introduce `dangerouslySetInnerHTML`, widen the sanitize schema, or add a plugin without a markup review.
 - **Keep plugin configuration centralized** (planned: `src/core/markdown/plugins.ts`), not spread across components.
 - **The rendering core must stay independent from page-level UI** and testable without React page components.
 - Keep components small and reusable; specialised components (`CodeBlock`, `TableWrapper`, `ResponsiveImage`,
@@ -167,8 +170,9 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: the sanitization policy (Phase 2), the content model (Phase 9), end-to-end and
-WebView testing (Phase 20), and the Phase 1 Markdown rendering core.
+Checklist items still open include: the sanitization element/attribute/URL lists (Phase 2 — its shape is
+[ADR 0003](docs/architecture/0003-sanitization-policy.md)), the content model (Phase 9), end-to-end and WebView
+testing (Phase 20), and the Phase 1 Markdown rendering core.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous

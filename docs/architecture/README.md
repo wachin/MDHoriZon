@@ -53,18 +53,19 @@ What becomes easier, what becomes harder, and what is now committed. Note anythi
 These are already recorded as tasks in [`ROADMAP.md`](../../ROADMAP.md) and are waiting for the first contributor who
 wants to own them:
 
-| Decision                                                                                     | Where    |
-| -------------------------------------------------------------------------------------------- | -------- |
-| Test runner and test layout (the roadmap shows both `src/tests/` and a top-level `tests/`)   | Phase 3  |
-| Sanitization policy: allowlist, and `rehype-sanitize` versus an equivalent controlled policy | Phase 2  |
-| Frontmatter parser and the supported metadata model                                          | Phase 9  |
-| Content loading sources and their precedence                                                 | Phase 10 |
-| Offline storage mechanism and integrity strategy                                             | Phase 11 |
-| Mermaid lazy-loading strategy and its bundle budget                                          | Phase 6  |
+| Decision                                                                                              | Where    |
+| ----------------------------------------------------------------------------------------------------- | -------- |
+| Test runner and test layout — **decided**, see 0001                                                   | Phase 3  |
+| Sanitization policy — **shape decided**, see 0003; the element, attribute and URL-scheme lists remain | Phase 2  |
+| Frontmatter parser and the supported metadata model                                                   | Phase 9  |
+| Content loading sources and their precedence                                                          | Phase 10 |
+| Offline storage mechanism and integrity strategy                                                      | Phase 11 |
+| Mermaid lazy-loading strategy, its bundle budget, and how its SVG output is contained                 | Phase 6  |
 
 ## Existing records
 
-| Record                                                    | Decision                                                                                                                      |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [0001](0001-test-runner-and-test-layout.md)               | Vitest, and where each kind of test lives (colocated unit/component tests vs `tests/` for fixtures)                           |
-| [0002](0002-reference-material-lives-outside-the-repo.md) | Third-party projects are not vendored into this repository; references are pinned in [`docs/references.md`](../references.md) |
+| Record                                                    | Decision                                                                                                                                                                                          |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [0001](0001-test-runner-and-test-layout.md)               | Vitest, and where each kind of test lives (colocated unit/component tests vs `tests/` for fixtures)                                                                                               |
+| [0002](0002-reference-material-lives-outside-the-repo.md) | Third-party projects are not vendored into this repository; references are pinned in [`docs/references.md`](../references.md)                                                                     |
+| [0003](0003-sanitization-policy.md)                       | The sanitization policy is layered and none of its layers is optional: no raw HTML from the document, an unconditional sanitization stage for plugin-generated markup, and an explicit URL policy |

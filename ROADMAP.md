@@ -328,9 +328,14 @@ Possible policy:
 2. If raw HTML is eventually allowed, sanitize it through an explicit allowlist.
 3. Never assume Markdown is trusted merely because it is stored in a Git repository.
 
+The **shape** of this boundary is decided in [`docs/architecture/0003-sanitization-policy.md`](docs/architecture/0003-sanitization-policy.md):
+raw HTML from the document never reaches the DOM, a sanitization stage runs unconditionally to contain what the
+plugins generate (KaTeX HTML, Mermaid SVG, highlighted markup), and the URL policy is enforced on both sides. The
+element, attribute and URL-scheme lists below are the deliverables that fill it in.
+
 ### Tasks
 
-- [ ] Evaluate `rehype-sanitize`.
+- [x] Evaluate `rehype-sanitize` — recorded in [`docs/architecture/0003-sanitization-policy.md`](docs/architecture/0003-sanitization-policy.md).
 - [ ] Define allowed HTML elements.
 - [ ] Define allowed attributes.
 - [ ] Define allowed URL schemes.
