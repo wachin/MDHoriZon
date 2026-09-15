@@ -455,8 +455,10 @@ MDHoriZon/
 ├── docs/
 │   ├── architecture/                # decision records: why the project is built this way
 │   │   ├── 0001-test-runner-and-test-layout.md
+│   │   ├── 0002-reference-material-lives-outside-the-repo.md
 │   │   └── README.md                # template, when a record is required, open decisions
-│   └── continuing-development.md    # prompt for handing the project to an AI agent
+│   ├── continuing-development.md    # prompt for handing the project to an AI agent
+│   └── references.md                # curated sources, pinned revisions and findings
 ├── public/                          # static assets served as-is
 │   ├── .nojekyll                    # tells GitHub Pages not to run Jekyll
 │   ├── favicon.svg
@@ -810,19 +812,21 @@ Copy this into your PR description:
 
 ## Documentation map
 
-| File                                                                                                             | Contents                                                                                                                       |
-| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [`ROADMAP.md`](ROADMAP.md)                                                                                       | **Authoritative** design document: vision, phases 0–22, milestones, validation matrix, repository rules, future editor design. |
-| [`README.md`](README.md)                                                                                         | This file: purpose, quick start, contribution guide, bootstrap history.                                                        |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                                                             | The short version for new contributors: setup, what to work on, branch/commit conventions, review expectations.                |
-| [`AGENTS.md`](AGENTS.md)                                                                                         | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
-| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)                                                                       | Contributor Covenant 2.1, and how to report unacceptable behavior privately.                                                   |
-| [`SECURITY.md`](SECURITY.md)                                                                                     | How to report a vulnerability privately, and what is in and out of scope.                                                      |
-| [`docs/architecture/`](docs/architecture/README.md)                                                              | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
-| [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md) | Why Vitest, and where each kind of test lives.                                                                                 |
-| [`docs/continuing-development.md`](docs/continuing-development.md)                                               | Ready-to-paste prompt for handing the project to an AI agent, and why it is written that way.                                  |
-| [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                               | Rendering specification and regression fixture.                                                                                |
-| [`tests/assets/README.md`](tests/assets/README.md)                                                               | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
+| File                                                                                                                                         | Contents                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`ROADMAP.md`](ROADMAP.md)                                                                                                                   | **Authoritative** design document: vision, phases 0–22, milestones, validation matrix, repository rules, future editor design. |
+| [`README.md`](README.md)                                                                                                                     | This file: purpose, quick start, contribution guide, bootstrap history.                                                        |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                                                                                         | The short version for new contributors: setup, what to work on, branch/commit conventions, review expectations.                |
+| [`AGENTS.md`](AGENTS.md)                                                                                                                     | Rules for AI agents and human contributors: commands, architecture invariants, forbidden operations, commit style.             |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)                                                                                                   | Contributor Covenant 2.1, and how to report unacceptable behavior privately.                                                   |
+| [`SECURITY.md`](SECURITY.md)                                                                                                                 | How to report a vulnerability privately, and what is in and out of scope.                                                      |
+| [`docs/architecture/`](docs/architecture/README.md)                                                                                          | Decision records: _why_ the project is built this way, plus the list of open decisions.                                        |
+| [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md)                             | Why Vitest, and where each kind of test lives.                                                                                 |
+| [`docs/architecture/0002-reference-material-lives-outside-the-repo.md`](docs/architecture/0002-reference-material-lives-outside-the-repo.md) | Why third-party projects are not vendored here, and how to keep a local reference copy.                                        |
+| [`docs/continuing-development.md`](docs/continuing-development.md)                                                                           | Ready-to-paste prompt for handing the project to an AI agent, and why it is written that way.                                  |
+| [`docs/references.md`](docs/references.md)                                                                                                   | What to read in each study project, the pinned revision, what was verified and what is still unread.                           |
+| [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                                                           | Rendering specification and regression fixture.                                                                                |
+| [`tests/assets/README.md`](tests/assets/README.md)                                                                                           | Fixture asset inventory and how to regenerate `example.png`.                                                                   |
 
 If this README and the roadmap ever disagree, **the roadmap wins**; please open an issue so this file can be
 corrected.

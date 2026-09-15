@@ -109,6 +109,9 @@ Never report work as complete based only on "it looked right in the browser".
 - **Never rewrite published history** (`git push --force` on `main`, rebasing pushed commits, amending pushed
   commits).
 - **Never modify unrelated files** in the same change. Prefer separate, small, reversible commits.
+- **Never vendor a third-party project into this repository** — no submodules, no copied trees. Record the reference
+  and its pinned revision in [`docs/references.md`](docs/references.md) and keep the checkout outside the tracked
+  tree ([ADR 0002](docs/architecture/0002-reference-material-lives-outside-the-repo.md)).
 - Never "fix" a failing check by disabling the rule, skipping the test, or weakening the sanitizer.
 
 ## 8. Repository map
@@ -124,6 +127,7 @@ public/                       static files copied verbatim into dist/, including
 .github/dependabot.yml        grouped minor/patch updates; majors are reviewed by hand
 docs/architecture/            decision records (why, not what) — see its README for the template
 docs/continuing-development.md  ready-to-paste prompt for an agent starting work here
+docs/references.md            curated third-party sources, pinned revisions and what was found
 tests/*.test.ts               fixture and cross-cutting guards (node environment)
 src/**/*.test.ts(x)           unit and component tests, colocated with the code (jsdom)
 ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)

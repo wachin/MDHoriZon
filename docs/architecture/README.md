@@ -64,4 +64,7 @@ wants to own them:
 
 ## Existing records
 
-None yet. This is the first file in the directory, and it is deliberately not a decision record itself.
+| Record                                                    | Decision                                                                                                                      |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [0001](0001-test-runner-and-test-layout.md)               | Vitest, and where each kind of test lives (colocated unit/component tests vs `tests/` for fixtures)                           |
+| [0002](0002-reference-material-lives-outside-the-repo.md) | Third-party projects are not vendored into this repository; references are pinned in [`docs/references.md`](../references.md) |
