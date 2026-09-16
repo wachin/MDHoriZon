@@ -1,0 +1,86 @@
+/*
+ * Minimal, readable defaults for rendered Markdown.
+ *
+ * This is deliberately not the reading experience: responsive typography, themes and the full
+ * light/dark work are Phase 7. What is here is what the Phase 1 components need to behave (tables
+ * that scroll, images that fit, code that does not stretch the viewport) plus readable basics.
+ */
+
+.markdown-body {
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+}
+
+.markdown-body > *:first-child {
+  margin-block-start: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  line-height: 1.25;
+  margin-block: 1.6em 0.6em;
+}
+
+/* The anchor is decoration: it appears on hover or keyboard focus, never in the way. */
+.markdown-heading-anchor {
+  margin-inline-start: 0.4em;
+  color: inherit;
+  opacity: 0;
+  text-decoration: none;
+}
+
+.markdown-body :is(h1, h2, h3, h4, h5, h6):hover .markdown-heading-anchor,
+.markdown-heading-anchor:focus-visible {
+  opacity: 0.5;
+}
+
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background-color: rgb(0 0 0 / 5%);
+}
+
+.markdown-body :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  background-color: rgb(0 0 0 / 6%);
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.markdown-table-scroll:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+}
+
+.markdown-body :is(th, td) {
+  border: 1px solid rgb(0 0 0 / 15%);
+  padding: 0.35rem 0.6rem;
+}
+
+.markdown-body blockquote {
+  margin-inline: 0;
+  padding-inline-start: 1rem;
+  border-inline-start: 0.25rem solid rgb(0 0 0 / 15%);
+  color: inherit;
+  opacity: 0.9;
+}

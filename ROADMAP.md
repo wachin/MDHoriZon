@@ -276,26 +276,26 @@ Markdown
 
 ### Tasks
 
-- [ ] Install the minimum Markdown dependencies.
-- [ ] Implement a reusable `MarkdownRenderer`.
-- [ ] Keep plugin configuration centralized.
-- [ ] Implement GFM support.
-- [ ] Implement headings.
-- [ ] Implement paragraphs.
-- [ ] Implement emphasis and strong text.
-- [ ] Implement links.
-- [ ] Implement ordered and unordered lists.
-- [ ] Implement task lists.
-- [ ] Implement blockquotes.
-- [ ] Implement horizontal rules.
-- [ ] Implement inline code.
-- [ ] Implement fenced code blocks.
-- [ ] Implement tables.
-- [ ] Implement images.
+- [x] Install the minimum Markdown dependencies.
+- [x] Implement a reusable `MarkdownRenderer`.
+- [x] Keep plugin configuration centralized.
+- [x] Implement GFM support.
+- [x] Implement headings.
+- [x] Implement paragraphs.
+- [x] Implement emphasis and strong text.
+- [x] Implement links.
+- [x] Implement ordered and unordered lists.
+- [x] Implement task lists.
+- [x] Implement blockquotes.
+- [x] Implement horizontal rules.
+- [x] Implement inline code.
+- [x] Implement fenced code blocks.
+- [x] Implement tables.
+- [x] Implement images.
 - [ ] Implement relative links.
 - [ ] Implement relative images.
-- [ ] Implement heading anchors.
-- [ ] Add deterministic heading IDs.
+- [x] Implement heading anchors.
+- [x] Add deterministic heading IDs.
 
 ### Component separation
 

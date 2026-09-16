@@ -22,5 +22,15 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // `react-markdown` passes the source `node` to every custom component, and the idiomatic way
+      // to keep it off the DOM is to drop it with a rest pattern: `({ node, ...props })`. That
+      // leaves an intentionally unused binding. TypeScript's `noUnusedLocals` already catches real
+      // unused variables, so relaxing this one option does not lose coverage.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true, argsIgnorePattern: '^_' },
+      ],
+    },
   },
 ])
