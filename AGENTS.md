@@ -14,8 +14,12 @@ browser, mobile browsers, Android WebView and iOS WebView, with an optional, use
 library. It is not a CMS, and it is not an editor — that ambition was withdrawn
 ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)).
 
-Current state: **Phase 0 (foundation) is complete**; the app still renders the Vite starter screen because the
-Phase 1 Markdown pipeline has not started.
+Current state: **Phases 0–5 are complete** — foundation, the Markdown rendering core, the security boundary, the
+golden test suite, code blocks and tables, and mathematics with KaTeX. The app renders
+`tests/fixtures/Golden-Test-Document.md` through the real pipeline as a Phase 1 preview screen. Phase 6 (Mermaid)
+is next; several earlier phases carry open checkboxes that belong to later work — relative assets (Phase 8), the
+offline path (Phases 10–12) and real-browser/WebView verification (Phase 20). Check `ROADMAP.md` for the current
+list rather than trusting this paragraph.
 
 ## 2. Source of truth and phase discipline
 
@@ -173,8 +177,9 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 ## 11. Useful first tasks
 
 Checklist items still open include: the sanitization element/attribute/URL lists (Phase 2 — its shape is
-[ADR 0003](docs/architecture/0003-sanitization-policy.md)), the content model (Phase 9), end-to-end and WebView
-testing (Phase 20), and the Phase 1 Markdown rendering core.
+[ADR 0003](docs/architecture/0003-sanitization-policy.md)), the SVGs Mermaid emits and their containment (Phase 6,
+where the Phase 2 checkbox is still deliberately open), the content model (Phase 9), end-to-end and WebView
+testing (Phase 20), and the bundle budget (Phase 18).
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous

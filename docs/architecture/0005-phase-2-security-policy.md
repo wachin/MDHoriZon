@@ -103,7 +103,46 @@ Asserted in `MarkdownRenderer.security.test.tsx`: a fence containing `<script>` 
 
 - Adding a plugin that needs new markup now has a mechanical consequence: a failing test that demands a deliberate
   change to one file, instead of a silent widening.
-- Three phases inherit explicit obligations from this record: Phase 5 (KaTeX HTML output), Phase 6 (SVG containment,
+- Three phases inherit explicit obligations from this record: Phase 5 (KaTeX — see the amendment at the end
+  of this file, which revises the output-mode decision), Phase 6 (SVG containment,
   and the reason its Phase 2 checkbox is still open) and Phase 14 (external navigation in the WebViews).
 - The privacy cost of remote images is documented, so the future "images on request" option is a decision someone
   can pick up rather than a discovery.
+
+---
+
+## Amendment — Phase 5 revisited the KaTeX decision
+
+Phase 5 made two of this record's predictions false. They are recorded here rather than edited into the text
+above, because the reasoning that turned out to be wrong is the useful part for the next reader.
+
+**What was predicted.** The "allow `math` now, to prepare for KaTeX" alternative was rejected on the grounds that
+KaTeX can emit HTML only, so Phase 5 could keep the allowlist smaller by choosing `output: 'html'`.
+
+**What was measured.** `output: 'html'` is neither schema-neutral nor SVG-free, and it is worse for readers:
+
+| Claim                                  | Measurement                                                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| HTML output needs no new attributes    | false — it needs `class` on `span` (66 distinct classes across a 42-formula battery) and inline `style` (17 layout properties)        |
+| HTML output avoids SVG                 | false — radicals, `\overline`, wide accents and stretchy delimiters are drawn with `svg`/`path`, and `\cancel` with `line`            |
+| HTML output is equivalent for a reader | false — it marks its only layer `aria-hidden="true"` and ships no MathML sibling, so the formula is invisible to assistive technology |
+
+**What changed.** The pipeline uses KaTeX's default `htmlAndMathml`, and the schema allows the MathML presentation
+vocabulary plus three SVG elements, each derived from that measurement rather than from an assumption about it. The
+dangerous corners of MathML stay out — `annotation-xml`, `maction`, and every `href`/`xlink:*` — asserted by
+`sanitize-schema.test.ts`, and `trust: false` stops a formula from introducing a link in the first place.
+
+**What did not change.** The Phase 2 invariant holds, asserted in a stronger form. Raw HTML still never reaches the
+tree, so none of the widened markup is reachable from a document: the golden test asserts that every `svg` and
+MathML element in the rendering belongs to a formula, not to the document.
+
+**A rule that Phase 5 had to supply itself.** The GFM maths specification requires the closing `$` of inline maths
+not to be preceded by whitespace; `micromark-extension-math@3.1.0` implements the opening half only, so
+`the item costs $5 and the other costs $10` parsed as a formula. `src/core/markdown/remark-inline-math-rule.ts`
+restores the missing half, and the reference is recorded in `docs/references.md`.
+
+**Cost, recorded for Phase 18.** +273 kB of JavaScript (185 kB → 266 kB gzipped), 34.6 kB of CSS, and 59 font
+files. KaTeX is not tree-shakeable, so the only structural lever is loading it on demand.
+
+**Carried forward.** The SVG allowance is an input to Phase 6: Mermaid needs far more of it than three elements,
+and containing that — size, no `foreignObject`, no scripts, no links — remains Phase 6's decision.
