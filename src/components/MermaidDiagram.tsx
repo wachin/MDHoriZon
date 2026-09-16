@@ -53,8 +53,7 @@ export function MermaidDiagram({ code }: MermaidDiagramProps) {
    * outcome yet — which is what loading means.
    */
   const key = `${scheme}\u0000${code}`
-  const state: DiagramState =
-    outcome?.key === key ? outcome.status : 'loading'
+  const state: DiagramState = outcome?.key === key ? outcome.status : 'loading'
 
   useEffect(() => {
     let cancelled = false
