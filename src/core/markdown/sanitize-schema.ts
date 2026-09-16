@@ -16,18 +16,36 @@
  *
  * Elements the renderer relies on today, for reference (the test asserts them):
  * paragraphs, headings, lists, tables, code, quotes, emphasis, links, images, rules, line breaks,
- * task-list inputs, and the footnote elements remark-gfm emits.
+ * task-list inputs, the footnote elements remark-gfm emits, and the mathematics vocabulary below.
  *
- * ## Two deliberate gaps, and who fills them
+ * ## Widening, and why it is not reachable from a document
  *
- * - **`math` is not allowed.** Phase 5 must configure KaTeX with `output: 'html'`, which skips the
- *   MathML half of its output; otherwise the MathML elements would have to be allowed here on
- *   purpose. Choosing the first option keeps the allowlist smaller.
- * - **`svg` is not allowed.** Mermaid output (Phase 6) simply cannot be expressed today, so
- *   containing it is a Phase 6 decision, not something to widen in advance.
+ * Phases 4 and 5 each needed elements and attributes the base schema does not allow, because our own
+ * plugins generate markup the base schema was never asked about:
  *
- * Both are exactly the "adding a plugin is a security-relevant change" rule: the assertion in the
- * test suite fails the moment the element list changes, and that is the point.
+ * - `span` gains a class pattern and a bounded inline `style` (syntax highlighting, then KaTeX).
+ * - The MathML element tree, `svg`, `path` and `line` are allowed (KaTeX).
+ *
+ * None of this is reachable from Markdown. Layer 1 keeps raw HTML out of the tree entirely
+ * (`skipHtml`), so a document cannot create a `span`, an `svg` or an `math` element at all — verified
+ * by `MarkdownRenderer.security.test.tsx`. What this schema bounds is therefore **plugin output**,
+ * and each widening below is derived from a measurement of that output rather than from an assumption
+ * about it.
+ *
+ * ## The Phase 5 correction
+ *
+ * Phase 2 predicted that KaTeX could be kept out of the schema by rendering with `output: 'html'`.
+ * That was wrong in both halves, and the measurement is in `docs/architecture/0005-phase-2-security-policy.md`:
+ *
+ * - HTML output still needs `class` and inline `style` on `span`, so it is not schema-neutral.
+ * - HTML output *still* emits `svg`/`path` for stretchy radicals and delimiters, so it does not even
+ *   avoid SVG.
+ * - HTML output marks its only layer `aria-hidden="true"` and ships no MathML sibling, which would
+ *   make every formula invisible to assistive technology.
+ *
+ * The pipeline therefore uses KaTeX's default `htmlAndMathml`: the HTML layer still does the visual
+ * painting (on every engine, including old WebViews, because `katex.css` hides the MathML layer), and
+ * the MathML layer is what screen readers read.
  *
  * ## The three overrides
  *
@@ -71,10 +89,218 @@ function withoutAlign(entries: AttributeValue[] | undefined): AttributeValue[] {
   )
 }
 
+/**
+ * The classes a `span` may carry: highlight.js tokens (Phase 4) and KaTeX's layout vocabulary.
+ *
+ * Measured, not guessed: a battery of 42 formulas rendered through KaTeX emits 66 distinct classes
+ * covering `mord`/`mop`/`mbin`/`mrel`/… (atom types), `vlist`/`vlist-t2`/`pstrut` (vertical lists),
+ * `sqrt`/`hide-tail`/`frac-line`/`overline-line`/`accent-body` (glyph assembly), `size1`–`size4` and
+ * `reset-size6` (script sizes), `mtight`, `col-align-c`, `delimsizing`, `boxpad`/`fbox`,
+ * `vertical-separator`, `katex-*` and the `math*`/`m*` families.
+ *
+ * A `class` cannot execute anything, and the stylesheets are ours, so the risk here is not injection:
+ * it is the opposite. Without this pattern the sanitizer *strips* the classes, and both the code and
+ * the formulas render uncoloured or laid out wrong while the tests still see spans — which is exactly
+ * the silent failure `sanitize-schema.test.ts` exists to catch. The pattern stays shaped (it is not
+ * "any class") so a future dependency cannot start emitting arbitrary class names unnoticed.
+ */
+const CODE_OR_MATH_CLASS =
+  /^(?:hljs-[\w-]+|katex[\w-]*|(?:accent|arraycolsep|base|boxpad|brace|col-align|delim|fbox|frac-line|hide-tail|large-op|ldots|m(?:ath[\w-]*|bin|close|enclose|error|frac|inner|op|open|ord|over|padded|phantom|punct|rel|oot|size[0-9]*|space|sqrt|style|sub|subsup|supsub|sup|table|td|text|tight|tr|under|underover)|nulldelimiter|op-limits|op-symbol|overline-line|pstrut|reset-size|size[1-9]|small-op|sqrt|strut|svg-align|text|vertical|vlist)[\w-]*)$/
+
+/**
+ * The inline style properties KaTeX needs, and only those.
+ *
+ * KaTeX positions fraction bars, radicals, accents and script sizes with inline styles, including
+ * `position` for the `hide-tail` overlay — so dropping `style` does not degrade gracefully, it breaks
+ * the layout. The list is the union of what a 42-formula battery actually emitted:
+ * `border-bottom-width`, `border-right-style`, `border-right-width`, `border-style`, `border-width`,
+ * `color` (`\color{red}`), `height`, `left`, `margin`, `margin-left`, `margin-right`, `min-width`,
+ * `padding-left`, `position`, `top`, `vertical-align`, `width`.
+ *
+ * Each declaration's value is `[^;:]+`, which cannot contain `;` or `:`, so a value cannot close its
+ * declaration and open another one. A property outside the list — `background-image`, say — fails the
+ * match and the whole attribute is dropped, which the tests assert.
+ */
+const MATH_STYLE_PROPERTIES = [
+  'border-bottom-width',
+  'border-right-style',
+  'border-right-width',
+  'border-style',
+  'border-width',
+  'color',
+  'height',
+  'left',
+  'margin',
+  'margin-left',
+  'margin-right',
+  'min-width',
+  'padding-left',
+  'position',
+  'top',
+  'vertical-align',
+  'width',
+]
+
+const MATH_DECLARATION = `(?:${MATH_STYLE_PROPERTIES.join('|')}):[^;:]+`
+
+/**
+ * One or more allowed declarations, with KaTeX's trailing semicolon tolerated.
+ *
+ * Whitespace is tolerated after a `;` and around the trailing `;` because the same declaration string
+ * reaches this pattern in two shapes: KaTeX emits `height:1em;vertical-align:-0.2em;` and React
+ * re-serializes the surviving declarations as `height: 1em; vertical-align: -0.2em;`. Both are the
+ * same bounded CSS; only whitespace differs.
+ */
+const MATH_STYLE_ATTRIBUTE: AttributeValue = [
+  'style',
+  new RegExp(
+    `^(?:${MATH_DECLARATION})(?:;\\s*${MATH_DECLARATION})*\\s*;?\\s*$`,
+  ),
+]
+
+/**
+ * The MathML elements KaTeX emits for the same battery, listed explicitly.
+ *
+ * `maction` (which can run something on click) and `annotation-xml` (which can carry foreign markup)
+ * are deliberately **not** here, and neither is any `href`/`xlink:*` attribute: `trust: false` on the
+ * plugin already stops `\href` inside a formula, and the schema is the second lock on the same door.
+ */
+const MATHML_ELEMENTS = [
+  'annotation',
+  'math',
+  'menclose',
+  'mfrac',
+  'mi',
+  'mn',
+  'mo',
+  'mover',
+  'mpadded',
+  'mphantom',
+  'mrow',
+  'ms',
+  'mspace',
+  'msqrt',
+  'mstyle',
+  'msub',
+  'msubsup',
+  'msup',
+  'mtable',
+  'mtd',
+  'mtext',
+  'mtr',
+  'munder',
+  'munderover',
+  'mroot',
+  'semantics',
+]
+
+/** Presentation-only MathML attributes. `notation` is `\cancel`/`\boxed`; the rest is layout. */
+const MATHML_ATTRIBUTES: AttributeValue[] = [
+  'accent',
+  'accentunder',
+  'columnalign',
+  'columnlines',
+  'columnspacing',
+  'depth',
+  'displaystyle',
+  'display',
+  'encoding',
+  'fence',
+  'height',
+  'largeop',
+  'linebreak',
+  'lspace',
+  'mathbackground',
+  'mathcolor',
+  'mathsize',
+  'mathvariant',
+  'maxsize',
+  'minsize',
+  'movablelimits',
+  'notation',
+  'rowalign',
+  'rowlines',
+  'rowspacing',
+  'rspace',
+  'scriptlevel',
+  'separator',
+  'stretchy',
+  'symmetric',
+  'width',
+  'xmlns',
+]
+
+/**
+ * The SVG KaTeX emits. Its HTML layer is not SVG-free: radicals, `\overline`, accents and stretchy
+ * delimiters are drawn as a `path`, and `\cancel` as a `line`.
+ *
+ * Honest scope note: this makes SVG reachable from our pipeline, which is a Phase 6 input. Mermaid
+ * needs a much larger SVG vocabulary, and containing *that* — size, no foreignObject, no scripts, no
+ * links — is Phase 6's decision. What is allowed here is only what the measurement above required.
+ */
+const SVG_ATTRIBUTES: Record<string, AttributeValue[]> = {
+  svg: [
+    'xmlns',
+    'width',
+    'height',
+    'viewBox',
+    'preserveAspectRatio',
+    MATH_STYLE_ATTRIBUTE,
+  ],
+  path: ['d'],
+  line: ['x1', 'y1', 'x2', 'y2', 'strokeWidth'],
+}
+
+/**
+ * The element allowlist, extended with the vocabulary the two measurements produced.
+ *
+ * `hast-util-sanitize` has two locks, not one: `tagNames` decides which elements exist at all, and
+ * `attributes` decides what they may carry. Missing this list while extending `attributes` is a
+ * silent failure of a particularly nasty kind — the elements are dropped but their **text** is kept,
+ * so a formula renders as `E=mc2E = mc^2` (the concatenated MathML text plus the TeX annotation)
+ * instead of an error, which is how this was found.
+ *
+ * `script`, `style`, `iframe`, `foreignObject`, `annotation-xml` and `maction` stay out, as do all
+ * `on*` attributes.
+ */
+const tagNames: string[] = [
+  ...(defaultSchema.tagNames ?? []),
+  ...MATHML_ELEMENTS,
+  ...Object.keys(SVG_ATTRIBUTES),
+]
+
+const attributes: NonNullable<Schema['attributes']> = {
+  ...defaultSchema.attributes,
+  // `align` is global in the base schema; here it only survives where GFM needs it.
+  '*': withoutAlign(defaultSchema.attributes?.['*']),
+  th: [...withoutAlign(defaultSchema.attributes?.th), ALIGN_ATTRIBUTE],
+  td: [...withoutAlign(defaultSchema.attributes?.td), ALIGN_ATTRIBUTE],
+  // Syntax highlighting (Phase 4) and KaTeX (Phase 5). `ariaHidden` is here because KaTeX marks its
+  // visual HTML layer `aria-hidden="true"`, so assistive technology reads the MathML sibling once
+  // instead of reading the positioning markup as gibberish.
+  span: [
+    ...(defaultSchema.attributes?.span ?? []),
+    ['className', CODE_OR_MATH_CLASS],
+    ['ariaHidden', 'true'],
+    MATH_STYLE_ATTRIBUTE,
+  ],
+  code: [...(defaultSchema.attributes?.code ?? []), ['className', 'hljs']],
+}
+
+for (const name of MATHML_ELEMENTS) {
+  attributes[name] = [...(attributes[name] ?? []), ...MATHML_ATTRIBUTES]
+}
+
+for (const [name, allowed] of Object.entries(SVG_ATTRIBUTES)) {
+  attributes[name] = [...(attributes[name] ?? []), ...allowed]
+}
+
 export const sanitizeSchema: Schema = {
   ...defaultSchema,
 
   clobberPrefix: '',
+
+  tagNames,
 
   protocols: {
     ...defaultSchema.protocols,
@@ -82,18 +308,5 @@ export const sanitizeSchema: Schema = {
     src: ['http', 'https'],
   },
 
-  attributes: {
-    ...defaultSchema.attributes,
-    // `align` is global in the base schema; here it only survives where GFM needs it.
-    '*': withoutAlign(defaultSchema.attributes?.['*']),
-    th: [...withoutAlign(defaultSchema.attributes?.th), ALIGN_ATTRIBUTE],
-    td: [...withoutAlign(defaultSchema.attributes?.td), ALIGN_ATTRIBUTE],
-    // Syntax highlighting (Phase 4) — the deliberate widening that ADR 0005 predicted would be
-    // needed. `rehype-highlight` wraps tokens in `<span class="hljs-…">`, and the base schema only
-    // allows `className` per element, so without this the classes are stripped and the code renders
-    // uncoloured while the tests still see spans. Bounded on purpose: a span may carry a class only
-    // if it is a highlight.js token class, and a document cannot produce spans at all.
-    span: [...(defaultSchema.attributes?.span ?? []), ['className', /^hljs-/]],
-    code: [...(defaultSchema.attributes?.code ?? []), ['className', 'hljs']],
-  },
+  attributes,
 }

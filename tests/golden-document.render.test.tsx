@@ -162,9 +162,29 @@ describe('Golden Test Document', () => {
         'base',
         'form',
         'details',
-        'svg',
       ]) {
         expect(container.querySelectorAll(selector), selector).toHaveLength(0)
+      }
+
+      // Phase 5 changed the shape of this guarantee rather than weakening it. The document now
+      // legitimately contains SVG (`KaTeX` draws radicals with a `<path>`) and MathML, so "no `svg`
+      // anywhere" stopped being the invariant. The invariant is that none of it came from the
+      // document: every such element must belong to a formula.
+      for (const selector of [
+        'svg',
+        'path',
+        'line',
+        'math',
+        'semantics',
+        'annotation',
+        'mi',
+        'mrow',
+      ]) {
+        const fromTheDocument = [
+          ...container.querySelectorAll(selector),
+        ].filter((element) => element.closest('.katex') === null)
+
+        expect(fromTheDocument, selector).toHaveLength(0)
       }
     })
 
@@ -184,11 +204,46 @@ describe('Golden Test Document', () => {
     })
   })
 
-  describe('features that belong to later phases still render as readable text', () => {
-    it('shows maths source rather than breaking, until Phase 5 adds KaTeX', () => {
-      expect(container).toHaveTextContent('\\int_0^\\infty')
+  describe('mathematics', () => {
+    it('renders the document’s formulas with KaTeX, inline and display', () => {
+      // Phase 5. Until it landed, this section asserted the opposite — that the TeX source was still
+      // readable because nothing rendered it.
+      expect(container.querySelectorAll('.katex').length).toBeGreaterThan(0)
+      expect(
+        container.querySelectorAll('.katex-display').length,
+      ).toBeGreaterThan(0)
+      expect(container.querySelectorAll('math').length).toBeGreaterThan(0)
     })
 
+    it('paints glyphs in the visual layer and keeps the source for assistive technology', () => {
+      const visual = [...container.querySelectorAll('.katex-html')]
+        .map((span) => span.textContent ?? '')
+        .join('')
+
+      // An integral is an operator glyph in the visual layer…
+      expect(visual).toContain('∫')
+      expect(visual).not.toContain('\\int')
+      // …and the TeX source survives in the MathML annotation, which is where a screen reader finds
+      // it. Both halves of KaTeX's output are load-bearing.
+      const annotations = [...container.querySelectorAll('annotation')]
+
+      expect(annotations.length).toBeGreaterThan(0)
+      expect(annotations.some((a) => a.textContent?.includes('\\int'))).toBe(
+        true,
+      )
+    })
+
+    it('keeps the currency sentence out of the maths pipeline', () => {
+      // The fixture states this requirement in words; this is the assertion behind it. Without the
+      // delimiter rule in `remark-inline-math-rule.ts` this sentence renders `$5 and the other costs $`
+      // as a formula.
+      expect(container).toHaveTextContent(
+        'the item costs $5 and the other costs $10 today',
+      )
+    })
+  })
+
+  describe('features that belong to a later phase still render as readable text', () => {
     it('shows Mermaid source as a code block, including the deliberately invalid ones, until Phase 6', () => {
       const languages = [
         ...container.querySelectorAll('pre[data-language]'),
