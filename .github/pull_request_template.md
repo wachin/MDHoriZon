@@ -35,7 +35,7 @@
 - [ ] No unrelated files modified
 - [ ] No secrets, keys, credentials or local machine configuration committed
 - [ ] No dependency added without a stated reason and bundle-impact consideration
-- [ ] This does not start Phase 21/22 (the future Markdown editor)
+- [ ] This adds no editor code and no editor dependency (out of scope — see `docs/architecture/0004-editor-out-of-scope.md`)
 
 ## Notes for reviewers
 

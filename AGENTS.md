@@ -11,7 +11,8 @@ Rules for AI agents — and for humans — working in this repository.
 
 MDHoriZon is a **Markdown reading and publishing engine**: one rendering core, reused unchanged across the desktop
 browser, mobile browsers, Android WebView and iOS WebView, with an optional, user-controlled offline content
-library. It is not a CMS, and it is not (yet) an editor.
+library. It is not a CMS, and it is not an editor — that ambition was withdrawn
+([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)).
 
 Current state: **Phase 0 (foundation) is complete**; the app still renders the Vite starter screen because the
 Phase 1 Markdown pipeline has not started.
@@ -20,8 +21,9 @@ Phase 1 Markdown pipeline has not started.
 
 - **`ROADMAP.md` is authoritative.** If it disagrees with `README.md`, the roadmap wins — fix the README instead.
 - Work only on tasks marked in the roadmap. If a task does not exist there, propose it before implementing it.
-- **Phases 21 and 22 (the Live Markdown Editor) are `FUTURE — DO NOT IMPLEMENT YET`.** No editor code, no editor
-  prototypes, no editor dependencies. They may start only after Phases 0–20 are complete and stable.
+- **The Markdown editor is out of scope** ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)): no editor code,
+  no editor dependency. Phases 21–22 were removed from the roadmap. If an editor ever returns, it is a separate
+  project with its own roadmap — not a change to this one.
 - Do not skip phases to reach a more interesting feature.
 - Exact dependency versions come from `package.json` and `package-lock.json`, never from assumptions or prose.
 
@@ -133,7 +135,7 @@ docs/continuing-development.md  ready-to-paste prompt for an agent starting work
 docs/references.md            curated third-party sources, pinned revisions and what was found
 tests/*.test.ts               fixture and cross-cutting guards (node environment)
 src/**/*.test.ts(x)           unit and component tests, colocated with the code (jsdom)
-ROADMAP.md                    authoritative specification (Phases 0–22, milestones M0–M12)
+ROADMAP.md                    authoritative specification (Phases 0–20, milestones M0–M12)
 README.md                     purpose, quick start, contribution guide, bootstrap history
 CONTRIBUTING.md               short entry point for new contributors
 CODE_OF_CONDUCT.md            Contributor Covenant 2.1

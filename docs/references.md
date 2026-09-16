@@ -72,10 +72,10 @@ punctuation and the following character is a CJK script character (Han, Hiragana
 matched with Unicode property escapes rather than a hand-written range table), allow it to close. They plug it into
 the parser, **not** into a React component and **not** as an AST post-process.
 
-Why this matters here: our golden fixture already has CJK text, but **no case that exercises this**. It is exactly
-the class of bug that a conformance suite does not catch and a real user does. It belongs in the fixture, and if we
-want it fixed, it belongs in `src/core/markdown/plugins.ts` — the centralised plugin configuration the architecture
-rules require.
+Why this matters here: the golden fixture pins this case in section 10 — the two shapes that fail and the one that
+must bold — so the gap is visible instead of surprising. It is exactly the class of bug that a conformance suite
+does not catch and a real user does. If we decide to fix it, the fix belongs in `src/core/markdown/plugins.ts` — the
+centralised plugin configuration the architecture rules require.
 
 ### What is verified and what is not
 
@@ -144,16 +144,19 @@ citable revision; see the note on local checkouts above).
 Three things follow, in order of usefulness to us:
 
 1. **A browser-based, MIT editor core exists** — and it is not tied to Electron. It is the concrete prior art behind
-   the roadmap's "Live Preview" idea, which means Phase 21's research question is largely answered by reading it
-   instead of designing from scratch.
+   the "Live Preview" idea this project once planned. That ambition is withdrawn
+   ([ADR 0004](architecture/0004-editor-out-of-scope.md)), but the prior art stays recorded: if an editor ever
+   returns as a separate project, its central research question is answered by reading this instead of designing
+   from scratch.
 2. **The Android port is a working example of the Phase 14 packaging approach**: a web app wrapped with
    **Capacitor** for Android, with the usual `android:sync` / `android:open` workflow. Even if we never use Muya,
    this is the closest thing we have to a reference for "our web reader, packaged for Android".
-3. **The trade-off that decides everything: Muya is a second Markdown implementation.** It carries its own parser,
-   its own rendering and its own editing model. Adopting it as a dependency would deliver a live-preview editor but
-   would collide with the architecture rule _"one Markdown implementation; never duplicate rendering logic"_
-   ([`AGENTS.md`](../AGENTS.md)). So this is not a free win: it is either (a) inspiration only, (b) a deliberate
-   revision of that rule with an ADR, or (c) rejecting the editor ambition and using MarkText as the user's editor.
+3. **The trade-off that decided it: Muya is a second Markdown implementation.** It carries its own parser, its own
+   rendering and its own editing model. Adopting it as a dependency would deliver a live-preview editor but would
+   collide with the architecture rule _"one Markdown implementation; never duplicate rendering logic"_
+   ([`AGENTS.md`](../AGENTS.md)). The project chose the third way: **the editor is out of scope**
+   ([ADR 0004](architecture/0004-editor-out-of-scope.md)), MarkText is the user's editor, and Muya stays recorded here
+   as prior art and as the starting point if an editor ever returns as a separate project.
 
 **Not verified:** rendering correctness, performance claims, the maintenance health of either project, or how
 `@muyajs/core` behaves in a React application (it manages its own DOM, so embedding it is an integration decision,

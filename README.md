@@ -31,7 +31,7 @@ project is, how to run it, how to contribute, and how to avoid destroying the re
 - [The golden rule](#the-golden-rule)
 - [Technology stack](#technology-stack)
 - [Project status](#project-status)
-- [The road ahead: from reader to Live Markdown Editor](#the-road-ahead-from-reader-to-live-markdown-editor)
+- [Out of scope: the Markdown editor](#out-of-scope-the-markdown-editor)
 - [Repository structure](#repository-structure)
 - [The Golden Test Document and fixtures](#the-golden-test-document-and-fixtures)
 - [Bootstrap notes: how this repository was initialized](#bootstrap-notes-how-this-repository-was-initialized)
@@ -158,9 +158,8 @@ These must **not** distract the first implementation: user accounts, authenticat
 payments, a full CMS, a cloud database, server-side rendering, a complex authoring interface, and a complete
 Markdown editor.
 
-The last point matters: editor work has its own future phases and must not start early (see
-[The road ahead](#the-road-ahead-from-reader-to-live-markdown-editor)). Those phases may be considered only after
-the renderer and the reading experience are solid.
+The last point matters, and it is stronger than "deferred": the editor is **out of scope** — see
+[Out of scope: the Markdown editor](#out-of-scope-the-markdown-editor).
 
 ---
 
@@ -356,88 +355,30 @@ Phase 1.
 
 ---
 
-## The road ahead: from reader to Live Markdown Editor
+## Out of scope: the Markdown editor
 
-Phases 21 and 22 of the roadmap describe what happens **if the reader succeeds**. They are recorded now so the
-architecture is built with that future in mind — but they are explicitly marked
-**`Status: FUTURE — DO NOT IMPLEMENT YET`**.
+The roadmap once planned an editor — a "Live Markdown Editor" in Phases 21 and 22, ending with the ambition of
+_"reading and writing the same document as two natural states of one experience"_. **That ambition is withdrawn.**
 
-### Why the reader comes first
+The decision is recorded in
+[`docs/architecture/0004-editor-out-of-scope.md`](docs/architecture/0004-editor-out-of-scope.md). The short version:
 
-The editor is not a separate product that can be bolted on: it must **reuse the mature Markdown core** built in
-Phases 1–20. Without a trustworthy parser, a real sanitization boundary and a stable renderer, an editor would
-duplicate Markdown logic and diverge from the reader's output. That is exactly what this project forbids.
+- **The need is met elsewhere.** MarkText (MIT) is a fast live-preview editor, and there is a Capacitor-based
+  Android port of it. Building a worse one here would be a poor use of the project's effort.
+- **Adopting an editor core would mean two Markdown implementations.** A live-preview editor carries its own parser
+  and rendering model, which is precisely what the architecture rules forbid. Keeping the reader and the editor in
+  agreement forever is a cost nobody has volunteered to own.
+- **MDHoriZon's value is elsewhere**: one Markdown core rendered identically in the browser, in Android WebView and
+  in iOS WebView, behind a security boundary, with a user-controlled offline library.
 
-### Phase 21 — research (`FUTURE — DO NOT IMPLEMENT YET`)
+What this means in practice:
 
-A **research and architectural design** phase, not a product phase. It must not introduce a production editor into
-the repository. Its precondition is that Phases 0–20 are complete and that the reader, renderer, offline system,
-web app, Android app, iOS app, security model, accessibility, performance and cross-platform validation are
-considered stable. It studies the technical foundations (CodeMirror 6 among the candidates) before any
-implementation decision is made.
-
-### Phase 22 — prototype (`FUTURE — DO NOT IMPLEMENT YET`)
-
-Begins only after Phase 21 produces a satisfactory architecture decision. It builds a **controlled prototype**,
-isolated from the stable reader, proving that a user can: open a Markdown document, edit its source, see supported
-formatting rendered inline, move the cursor through rendered content, reveal syntax when appropriate, keep
-editing, preserve valid Markdown, undo/redo, and save.
-
-### The vision: writing and reading as one state
-
-The intended experience, inspired by modern live-preview editors but with its own architecture and identity:
-
-```text
-             WRITE + READ
-
-        not
-
-             WRITE
-               ↓
-             PREVIEW
-```
-
-The document itself is edited in place, with formatting rendered inline and no mandatory side-by-side preview
-pane. A conventional reading view (and a raw source view) remain available, so the app can present:
-
-| Mode             | Content                                                      |
-| ---------------- | ------------------------------------------------------------ |
-| **Reading**      | Pure rendered document                                       |
-| **Live Preview** | Editable rendered Markdown — the principal future innovation |
-| **Source**       | Raw Markdown                                                 |
-
-Two invariants protect the user:
-
-- **Markdown source stays authoritative.** The project must never invent a proprietary document format.
-- **The editor must not weaken the reader's guarantees.** It inherits the same security suite, plus
-  editor-specific cases such as malicious pasted HTML and malformed Mermaid.
-
-The roadmap also warns against a feature explosion: plugins, theme marketplaces, sync services, collaborative
-editing, databases, proprietary formats, complex WYSIWYG conversion, AI writing assistants, cloud accounts and
-publishing platforms are **all out of scope**, to be considered independently in the future.
-
-### The decision gate
-
-Even if the prototype works, the project does **not** automatically become an editor. A separate roadmap for
-_MDHoriZon Live Markdown Editor 1.0_ is created only if the prototype proves the experience can be:
-
-`fast · reliable · beautiful · accessible · secure · cross-platform · offline-capable · faithful to Markdown ·
-pleasant on desktop · pleasant on mobile`
-
-Its progression would be: **Prototype → Alpha → Beta → Desktop-ready → Mobile-ready → Production editor →
-MDHoriZon Editor 1.0**, each stage with its own definition of done.
-
-And the closing principle of the roadmap, which is the whole reason the reader is being built carefully first:
-
-> The ultimate ambition is not to make **another Markdown editor**.
->
-> The ambition is to make **MDHoriZon a first-class Markdown environment where reading and writing the same
-> document feel like two natural states of one experience.**
-
-**For contributors: do not open pull requests that start Phases 21–22.** Help make M1–M12 excellent instead; the
-editor phases depend on them.
-
----
+- **Phases 0–20 are the whole plan.** Nothing in the roadmap is "future research" any more: every phase is meant to
+  be finished.
+- **No editor code and no editor dependency** is added to this repository. That replaces the old "do not touch
+  Phases 21–22" guard, and it is easier to check.
+- If an editor ever returns, it returns as a **separate project with its own roadmap**. The reading is not lost: the
+  MarkText / Muya / Capacitor survey is in [`docs/references.md`](docs/references.md).
 
 ## Repository structure
 
@@ -457,6 +398,7 @@ MDHoriZon/
 │   │   ├── 0001-test-runner-and-test-layout.md
 │   │   ├── 0002-reference-material-lives-outside-the-repo.md
 │   │   ├── 0003-sanitization-policy.md
+│   │   ├── 0004-editor-out-of-scope.md
 │   │   └── README.md                # template, when a record is required, open decisions
 │   ├── continuing-development.md    # prompt for handing the project to an AI agent
 │   └── references.md                # curated sources, pinned revisions and findings
@@ -691,8 +633,8 @@ section before opening a pull request; it is short, and it exists so your work c
 - **Documentation.** Translations of this README, architecture notes under `docs/architecture/`, and clearer
   explanations of the security policy.
 
-Not in scope: anything from Phases 21–22 (the future editor), CMS features, accounts, comments, or a rewrite of
-the architecture. See [The road ahead](#the-road-ahead-from-reader-to-live-markdown-editor).
+Not in scope: a Markdown editor (withdrawn — see [Out of scope](#out-of-scope-the-markdown-editor)), CMS features,
+accounts, comments, or a rewrite of the architecture.
 
 ### Workflow
 
@@ -825,6 +767,7 @@ Copy this into your PR description:
 | [`docs/architecture/0001-test-runner-and-test-layout.md`](docs/architecture/0001-test-runner-and-test-layout.md)                             | Why Vitest, and where each kind of test lives.                                                                                 |
 | [`docs/architecture/0002-reference-material-lives-outside-the-repo.md`](docs/architecture/0002-reference-material-lives-outside-the-repo.md) | Why third-party projects are not vendored here, and how to keep a local reference copy.                                        |
 | [`docs/architecture/0003-sanitization-policy.md`](docs/architecture/0003-sanitization-policy.md)                                             | The layered sanitization policy: no raw HTML, an unconditional sanitization stage, and an explicit URL policy.                 |
+| [`docs/architecture/0004-editor-out-of-scope.md`](docs/architecture/0004-editor-out-of-scope.md)                                             | Why the Markdown editor ambition was withdrawn, and what that changes.                                                         |
 | [`docs/continuing-development.md`](docs/continuing-development.md)                                                                           | Ready-to-paste prompt for handing the project to an AI agent, and why it is written that way.                                  |
 | [`docs/references.md`](docs/references.md)                                                                                                   | What to read in each study project, the pinned revision, what was verified and what is still unread.                           |
 | [`tests/fixtures/Golden-Test-Document.md`](tests/fixtures/Golden-Test-Document.md)                                                           | Rendering specification and regression fixture.                                                                                |

@@ -93,9 +93,18 @@ describe('repository invariants', () => {
     expect(read('.nvmrc').trim()).toMatch(/^\d+$/)
   })
 
-  it('keeps the roadmap decision gates closed', () => {
+  it('keeps the editor decision withdrawn and recorded', () => {
+    // The roadmap once ended with an editor ambition. ADR 0004 withdrew it, and this guard keeps
+    // the withdrawal deliberate: reintroducing editor phases must fail here first.
     const roadmap = read('ROADMAP.md')
-    expect(roadmap).toContain('FUTURE — DO NOT IMPLEMENT YET')
+    expect(roadmap).toContain('# Out of Scope — the Markdown Editor')
+    expect(roadmap).toContain('0004-editor-out-of-scope.md')
+    expect(roadmap).not.toMatch(/^## Phase 2[12] /m)
+    expect(
+      existsSync(
+        join(repoRoot, 'docs/architecture/0004-editor-out-of-scope.md'),
+      ),
+    ).toBe(true)
   })
 })
 

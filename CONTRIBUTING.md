@@ -40,8 +40,8 @@ sandboxed-environment note about the npm cache.
 1. Pick an unchecked task in [`ROADMAP.md`](ROADMAP.md). Say so in the issue or the pull request so two people do
    not build the same thing.
 2. Prefer the [good first contributions](README.md#good-first-contributions) list if you are new to the codebase.
-3. **Phases 21 and 22 (the future Markdown editor) are `FUTURE — DO NOT IMPLEMENT YET`.** They may start only after
-   Phases 0–20 are complete and stable. Pull requests that start them will be asked to wait.
+3. **The Markdown editor is out of scope** ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)): no editor
+   code and no editor dependency. A returning editor would be a separate project with its own roadmap.
 4. If your idea is not in the roadmap, **propose it first** (issue or draft pull request) instead of implementing
    it silently.
 
@@ -133,8 +133,9 @@ problem — ideally as a new case in the Golden Test Document.
 
 If you write code with an AI agent, point it at [`AGENTS.md`](AGENTS.md), and start from the ready-to-paste prompt in
 [`docs/continuing-development.md`](docs/continuing-development.md). The prompt exists because a vague "continue the
-development" makes an agent invent scope — usually the editor in Phases 21–22, which must not start yet, or raw HTML
-"working" in a project whose product is sanitization.
+development" makes an agent invent scope — usually an editor, which is out of scope
+([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)), or raw HTML "working" in a project whose product is
+sanitization.
 
 Whatever the agent writes is **your** responsibility as the contributor: run the checks yourself, and be explicit in
 the pull request about the platforms you could not test.

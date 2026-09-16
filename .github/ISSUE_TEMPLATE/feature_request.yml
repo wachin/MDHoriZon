@@ -10,8 +10,8 @@ body:
         `ROADMAP.md` is the authoritative plan. If your proposal matches an existing task, say which one — that
         makes it much easier to review.
 
-        **Phases 21 and 22 (the future Live Markdown Editor) are `FUTURE — DO NOT IMPLEMENT YET`** and are not open
-        for implementation. They may start only after Phases 0–20 are complete and stable.
+        **The Markdown editor is out of scope** (see `docs/architecture/0004-editor-out-of-scope.md`): no editor code
+        and no editor dependency. A returning editor would be a separate project with its own roadmap.
 
   - type: textarea
     id: problem
@@ -53,7 +53,7 @@ body:
       options:
         - label: I searched the existing issues and pull requests.
           required: true
-        - label: I am not proposing to start Phase 21/22 (the future Markdown editor).
+        - label: I am not proposing editor code or an editor dependency (the editor is out of scope).
           required: true
         - label: If this needs a new dependency, I explained why the platform or existing stack cannot do it.
           required: false

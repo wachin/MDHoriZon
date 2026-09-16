@@ -2,9 +2,11 @@
 
 When someone asks _"what should I tell my agent to continue this project?"_, send them here.
 
-A vague "continue the development" makes an agent invent scope. In this repository the most likely detour is the
-Live Markdown Editor (Phases 21–22), which the roadmap explicitly forbids implementing. A prompt that works fixes
-four things: **where to read**, **what to do**, **what not to touch**, and **how to prove it works**.
+A vague "continue the development" makes an agent invent scope. In this repository the most likely detours are
+building a Markdown editor, which is out of scope and recorded in
+[ADR 0004](architecture/0004-editor-out-of-scope.md), or making raw HTML "work" in a project whose product is
+sanitization. A prompt that works fixes four things: **where to read**, **what to do**, **what not to touch**, and
+**how to prove it works**.
 
 ## Recommended prompt
 
@@ -24,8 +26,8 @@ TASK FOR THIS ITERATION
 Work ONLY on: <PHASE AND TASK — e.g. "Phase 1, Markdown Rendering Core: the reusable MarkdownRenderer
 in src/core/markdown/ with remark-gfm">.
 If that task is not listed as open in ROADMAP.md, say so and do not implement it.
-Do not start any other phase. In particular, do NOT touch Phases 21–22 (the editor): they are marked
-"FUTURE — DO NOT IMPLEMENT YET".
+Do not start any other phase. The Markdown editor is out of scope (docs/architecture/0004-editor-out-of-scope.md):
+do not add editor code or an editor dependency.
 
 RULES YOU CANNOT BREAK
 - One Markdown core: never duplicate rendering logic and never create a separate renderer for web and
@@ -75,7 +77,8 @@ Work only on the next open task in Phase 1 (the MarkdownRenderer), on a branch, 
 English. Every new Markdown feature needs a case in tests/fixtures/Golden-Test-Document.md plus its own
 test.
 Before you say you are done: npm run format:check && npm run lint && npm run typecheck && npm test && npm run build.
-Do not touch Phases 21–22 (the editor), and never run a scaffolder or --overwrite inside the repository.
+The editor is out of scope (no editor code, no editor dependency), and never run a scaffolder or --overwrite
+inside the repository.
 Tell me what you could not verify (you have no real WebView) instead of assuming it.
 ```
 
@@ -91,15 +94,15 @@ pull request by filling in .github/pull_request_template.md. Do not push to main
 
 ## Why the prompt is written this way
 
-| Element                                     | What it prevents                                                                                                          |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Mandatory reading first                     | Re-inventing conventions that are already written down; most of an agent's value is not having to re-derive them          |
-| One named task                              | "Continue the development" produces four half-finished features in one enormous commit                                    |
-| Explicit block on Phases 21–22              | The likeliest detour: the editor is the most attractive work in the roadmap and is forbidden until Phases 0–20 are stable |
-| The sanitizer note for Phase 1              | An agent "making HTML work" introduces XSS into a project whose product _is_ sanitization                                 |
-| The five commands as the definition of done | Declaring something finished that does not compile or pass tests                                                          |
-| The honesty clause about WebView            | The most damaging failure mode: claiming the golden rule while never testing Android or iOS                               |
-| Decisions become ADRs, questions get asked  | The agent picking a library on its own and you discovering it in the pull request                                         |
+| Element                                     | What it prevents                                                                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Mandatory reading first                     | Re-inventing conventions that are already written down; most of an agent's value is not having to re-derive them                           |
+| One named task                              | "Continue the development" produces four half-finished features in one enormous commit                                                     |
+| Explicit block on the editor                | The likeliest detour: building an editor is attractive work, and it is out of scope ([ADR 0004](architecture/0004-editor-out-of-scope.md)) |
+| The sanitizer note for Phase 1              | An agent "making HTML work" introduces XSS into a project whose product _is_ sanitization                                                  |
+| The five commands as the definition of done | Declaring something finished that does not compile or pass tests                                                                           |
+| The honesty clause about WebView            | The most damaging failure mode: claiming the golden rule while never testing Android or iOS                                                |
+| Decisions become ADRs, questions get asked  | The agent picking a library on its own and you discovering it in the pull request                                                          |
 
 ## What not to say
 

@@ -82,7 +82,9 @@ the schema would reject.
 - **Safe by construction: our own `mdast`→React renderer, no sanitizer** (the approach DeepSeek Harness takes, and a
   legitimate one). Rejected for now, not on principle: it is stronger, but we would own and test a renderer — roughly
   700 lines in the reference implementation — and we do not have the constraint that pushed them there (streaming
-  Markdown). It stays available if Phases 21–22 need it; Layers 1 and 3 remain reusable if we switch.
+  Markdown). The editor ambition that once motivated this alternative was withdrawn
+  ([ADR 0004](0004-editor-out-of-scope.md)), so it now stands on maintenance and control grounds alone rather than as
+  a step towards an editor; Layers 1 and 3 remain reusable if we ever switch.
 - **Layer 1 only** (rely on raw HTML being off, no sanitizer). Rejected: it leaves the plugin-generated markup — the
   SVG and the HTML built from untrusted text — with no gate at all.
 - **Widening GitHub's schema as features need it.** Rejected: the schema is narrowed deliberately. A feature that
