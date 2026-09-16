@@ -337,18 +337,18 @@ element, attribute and URL-scheme lists below are the deliverables that fill it 
 ### Tasks
 
 - [x] Evaluate `rehype-sanitize` — recorded in [`docs/architecture/0003-sanitization-policy.md`](docs/architecture/0003-sanitization-policy.md).
-- [ ] Define allowed HTML elements.
-- [ ] Define allowed attributes.
-- [ ] Define allowed URL schemes.
-- [ ] Reject dangerous `javascript:` URLs.
-- [ ] Review `data:` URLs.
-- [ ] Review SVG handling.
-- [ ] Review embedded HTML.
-- [ ] Review external images.
-- [ ] Review links opened externally from Android/iOS.
-- [ ] Add malicious-input fixtures.
+- [x] Define allowed HTML elements.
+- [x] Define allowed attributes.
+- [x] Define allowed URL schemes.
+- [x] Reject dangerous `javascript:` URLs.
+- [x] Review `data:` URLs.
+- [x] Review SVG handling.
+- [x] Review embedded HTML.
+- [x] Review external images.
+- [x] Review links opened externally from Android/iOS.
+- [x] Add malicious-input fixtures.
 - [ ] Verify Mermaid content cannot escape its intended rendering boundary.
-- [ ] Verify code blocks are rendered as text/code rather than executable HTML.
+- [x] Verify code blocks are rendered as text/code rather than executable HTML.
 
 ### Security test cases
 
