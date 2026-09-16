@@ -3,34 +3,37 @@ import { describe, expect, it } from 'vitest'
 import App from './App'
 
 // Smoke test for the application shell and the toolchain: jsdom, Testing Library and the jest-dom
-// matchers are wired up, the app mounts, and the phase 1 rendering core is actually used by it.
+// matchers are wired up, and the application really renders the golden fixture through the core.
 describe('App', () => {
   it('mounts and renders a single top-level heading', () => {
     render(<App />)
 
     const headings = screen.getAllByRole('heading', { level: 1 })
-    expect(headings).toHaveLength(1)
+    expect(headings.length).toBeGreaterThanOrEqual(1)
     expect(headings[0]).toHaveTextContent('MDHoriZon')
   })
 
-  it('renders the sample document through the Markdown renderer', () => {
+  it('renders the golden fixture, not a sample', () => {
     render(<App />)
 
-    expect(screen.getByRole('table')).toBeInTheDocument()
-
-    const checkboxes = screen.getAllByRole('checkbox')
-    expect(checkboxes.length).toBeGreaterThanOrEqual(3)
-    for (const checkbox of checkboxes) expect(checkbox).toBeDisabled()
-
     expect(
-      screen.getByRole('link', { name: 'safe external link' }),
-    ).toHaveAttribute('rel', 'noopener noreferrer')
+      screen.getByRole('heading', { level: 1, name: /Golden Test Document/ }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('table').length).toBeGreaterThanOrEqual(11)
   })
 
-  it('drops the unsafe link in the sample instead of following it', () => {
+  it('keeps the fixture’s unsafe links from being followed', () => {
     const { container } = render(<App />)
 
     expect(container.querySelector('a[href^="javascript:"]')).toBeNull()
-    expect(screen.getByText('unsafe one')).toBeInTheDocument()
+    expect(container.querySelector('a[href^="data:"]')).toBeNull()
+  })
+
+  it('shows the image that cannot be resolved by its alternative text', () => {
+    render(<App />)
+
+    expect(
+      screen.getByAltText('This image intentionally does not exist'),
+    ).toBeInTheDocument()
   })
 })

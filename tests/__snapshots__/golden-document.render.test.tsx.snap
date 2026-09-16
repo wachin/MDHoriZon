@@ -1,0 +1,623 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Golden Test Document > matches the stored rendering, so an intentional change shows up as a diff > rendered document 1`] = `
+"<h1 id="mdhorizon--golden-test-document">MDHoriZon — Golden Test Document<a class="markdown-heading-anchor" href="#mdhorizon--golden-test-document" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>This document is the permanent rendering fixture for MDHoriZon.</p>
+<p>It is intentionally broad. It is not intended to be beautiful content; it is intended to expose rendering regressions.</p>
+<hr>
+<h1 id="1-headings">1. Headings<a class="markdown-heading-anchor" href="#1-headings" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="heading-level-2">Heading level 2<a class="markdown-heading-anchor" href="#heading-level-2" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<h3 id="heading-level-3">Heading level 3<a class="markdown-heading-anchor" href="#heading-level-3" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h3>
+<h4 id="heading-level-4">Heading level 4<a class="markdown-heading-anchor" href="#heading-level-4" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h4>
+<h5 id="heading-level-5">Heading level 5<a class="markdown-heading-anchor" href="#heading-level-5" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h5>
+<h6 id="heading-level-6">Heading level 6<a class="markdown-heading-anchor" href="#heading-level-6" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h6>
+<p>ATX headings may also be closed:</p>
+<h2 id="closed-heading-with-trailing-hashes">Closed heading with trailing hashes<a class="markdown-heading-anchor" href="#closed-heading-with-trailing-hashes" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Setext headings use an underline instead of a leading hash:</p>
+<h1 id="heading-level-1-setext">Heading level 1 (setext)<a class="markdown-heading-anchor" href="#heading-level-1-setext" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="heading-level-2-setext">Heading level 2 (setext)<a class="markdown-heading-anchor" href="#heading-level-2-setext" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Inline markup inside a heading must render without breaking the heading itself:</p>
+<h2 id="heading-with-bold-italic-and-code">Heading with <strong>bold</strong>, <em>italic</em> and <code>code</code><a class="markdown-heading-anchor" href="#heading-with-bold-italic-and-code" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Duplicate headings must receive deterministic and distinct anchor IDs, so that links to either one remain stable:</p>
+<h2 id="duplicate-heading">Duplicate heading<a class="markdown-heading-anchor" href="#duplicate-heading" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<h2 id="duplicate-heading-1">Duplicate heading<a class="markdown-heading-anchor" href="#duplicate-heading-1" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<hr>
+<h1 id="2-paragraphs-and-inline-formatting">2. Paragraphs and Inline Formatting<a class="markdown-heading-anchor" href="#2-paragraphs-and-inline-formatting" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>This is a normal paragraph with <strong>bold text</strong>, <em>italic text</em>, <em><strong>bold italic text</strong></em>, and <del>strikethrough</del>.</p>
+<p>Here is <code>inline code</code>, an escaped character *that should not become italic*, and special characters:</p>
+<p><code>&amp; &lt; &gt; " ' © ® ™ € £ ¥</code></p>
+<hr>
+<h1 id="3-links">3. Links<a class="markdown-heading-anchor" href="#3-links" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<ul>
+<li>External link: <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+<li>Relative link: <a href="../articles/example.md">Another article</a></li>
+<li>Anchor link: <a href="#12-mermaid">Go to Mermaid</a></li>
+<li>Email-style text: <code>example@example.com</code></li>
+</ul>
+<p>GFM autolinks — bare URLs, <code>www.</code> hosts and angle-bracketed URLs must all become links:</p>
+<ul>
+<li>Bare URL: <a href="https://example.com/path?query=1#fragment" target="_blank" rel="noopener noreferrer">https://example.com/path?query=1#fragment</a></li>
+<li>Bare www host: <a href="http://www.example.com" target="_blank" rel="noopener noreferrer">www.example.com</a></li>
+<li>Angle-bracketed URL: <a href="https://example.com/" target="_blank" rel="noopener noreferrer">https://example.com/</a></li>
+<li>Angle-bracketed e-mail: <a href="mailto:example@example.com">example@example.com</a></li>
+</ul>
+<p>Reference-style links, with the definition placed later in this document:</p>
+<ul>
+<li>Full reference: <a href="https://github.com/wachin/MDHoriZon" target="_blank" rel="noopener noreferrer" title="MDHoriZon on GitHub">MDHoriZon repository</a></li>
+<li>Collapsed reference: <a href="https://github.com/wachin/MDHoriZon" target="_blank" rel="noopener noreferrer" title="MDHoriZon on GitHub">repo-ref</a></li>
+<li>Shortcut reference: <a href="https://github.com/wachin/MDHoriZon" target="_blank" rel="noopener noreferrer" title="MDHoriZon on GitHub">repo-ref</a></li>
+</ul>
+<p>A link with a title attribute (the title must survive into the rendered <code>title</code>):</p>
+<p><a href="https://github.com/" target="_blank" rel="noopener noreferrer" title="GitHub home page">GitHub with title</a></p>
+<p>Line breaks. The two lines below are separated by a soft line break; the second pair is separated by two
+trailing spaces, which must produce a hard line break.</p>
+<p>Soft
+break</p>
+<p>Hard<br>
+break</p>
+<p>A backslash at the end of a line must also produce a hard line break:<br>
+this text starts on a new line.</p>
+<hr>
+<h1 id="4-images">4. Images<a class="markdown-heading-anchor" href="#4-images" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>Remote image example. This requires network access; with no network it must fail exactly as gracefully as the
+missing-image case below:</p>
+<p><img alt="MDHoriZon placeholder image" loading="lazy" decoding="async" src="https://placehold.co/640x240/0b3d91/ffffff/png?text=MDHoriZon"></p>
+<p>Relative image example. The file exists at <code>tests/assets/example.png</code> and must resolve relative to this
+document, not relative to the application or the page URL:</p>
+<p><img alt="Relative image" loading="lazy" decoding="async" src="../assets/example.png"></p>
+<p>Redundant <code>./</code> and <code>..</code> segments must be normalized rather than treated as a literal path:</p>
+<p><img alt="Relative image with redundant segments" loading="lazy" decoding="async" src="./../assets/example.png"></p>
+<p>Image with a title attribute (the title must survive into the rendered <code>title</code>):</p>
+<p><img alt="Relative image with title" loading="lazy" decoding="async" title="The relative fixture asset" src="../assets/example.png"></p>
+<p>Decorative image with intentionally empty alt text. It must not be announced by assistive technology and must
+not produce a broken-image placeholder:</p>
+<p><img alt="" loading="lazy" decoding="async" src="../assets/example.png"></p>
+<p>Very wide image. It must stay inside the viewport, keep its aspect ratio, and scroll or shrink instead of
+stretching the layout:</p>
+<p><img alt="Wide fixture asset" loading="lazy" decoding="async" src="../assets/wide.png"></p>
+<p>Very tall image. It must not force the page to become unusable without scrolling:</p>
+<p><img alt="Tall fixture asset" loading="lazy" decoding="async" src="../assets/tall.png"></p>
+<p>Missing image example. <code>tests/assets/does-not-exist.png</code> <strong>intentionally does not exist</strong>; this is a negative
+test, not an unfinished task, and creating that file would delete this test case. Expected behavior: the
+article keeps rendering, the alt text stays available, and nothing throws.</p>
+<p><img alt="This image intentionally does not exist" loading="lazy" decoding="async" src="../assets/does-not-exist.png"></p>
+<p>Image used as a link:</p>
+<p><a href="https://github.com/" target="_blank" rel="noopener noreferrer"><img alt="Linked image" loading="lazy" decoding="async" src="https://placehold.co/320x120/1e88e5/ffffff/png?text=Link"></a></p>
+<p>Image inside a list item:</p>
+<ul>
+<li>List item with an image: <img alt="Inline icon" loading="lazy" decoding="async" src="../assets/example.png"></li>
+<li>Item after the image.</li>
+</ul>
+<p>Image inside a table cell:</p>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Placement</th><th>Image</th></tr></thead><tbody><tr><td>Table cell</td><td><img alt="Icon in a table" loading="lazy" decoding="async" src="../assets/example.png"></td></tr></tbody></table></div>
+<hr>
+<h1 id="5-lists">5. Lists<a class="markdown-heading-anchor" href="#5-lists" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="unordered">Unordered<a class="markdown-heading-anchor" href="#unordered" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul>
+<li>First item</li>
+<li>Second item
+<ul>
+<li>Nested item</li>
+<li>Another nested item
+<ul>
+<li>Third level</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Final item</li>
+</ul>
+<h2 id="ordered">Ordered<a class="markdown-heading-anchor" href="#ordered" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ol>
+<li>First</li>
+<li>Second
+<ol>
+<li>Nested first</li>
+<li>Nested second</li>
+</ol>
+</li>
+<li>Third</li>
+</ol>
+<h2 id="task-list">Task list<a class="markdown-heading-anchor" href="#task-list" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="" type="checkbox" checked=""> Completed item</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Pending item</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Another pending item</li>
+</ul>
+<h2 id="loose-list-blank-lines-between-items">Loose list (blank lines between items)<a class="markdown-heading-anchor" href="#loose-list-blank-lines-between-items" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul>
+<li>
+<p>First item, separated from the next by a blank line.</p>
+</li>
+<li>
+<p>Second item.</p>
+</li>
+<li>
+<p>Third item.</p>
+</li>
+</ul>
+<h2 id="list-item-containing-multiple-paragraphs">List item containing multiple paragraphs<a class="markdown-heading-anchor" href="#list-item-containing-multiple-paragraphs" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ol>
+<li>
+<p>First paragraph of the item.</p>
+<p>Second paragraph of the same item, which must stay inside the item rather than escaping into the document.</p>
+</li>
+<li>
+<p>Next item.</p>
+</li>
+</ol>
+<h2 id="ordered-list-starting-at-a-number-other-than-1">Ordered list starting at a number other than 1<a class="markdown-heading-anchor" href="#ordered-list-starting-at-a-number-other-than-1" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ol start="5">
+<li>Fifth</li>
+<li>Sixth</li>
+<li>Seventh</li>
+</ol>
+<p>The rendered list must preserve the starting number rather than silently renumbering from 1.</p>
+<h2 id="list-item-containing-a-fenced-code-block">List item containing a fenced code block<a class="markdown-heading-anchor" href="#list-item-containing-a-fenced-code-block" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul>
+<li>
+<p>Item with code:</p>
+<pre data-language="bash"><code class="language-bash">echo "code inside a list item"
+</code></pre>
+</li>
+<li>
+<p>Item after the code block.</p>
+</li>
+</ul>
+<h2 id="mixed-nested-list">Mixed nested list<a class="markdown-heading-anchor" href="#mixed-nested-list" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul>
+<li>Unordered item
+<ol>
+<li>Ordered child
+<ul>
+<li>Unordered grandchild</li>
+</ul>
+</li>
+<li>Second ordered child</li>
+</ol>
+</li>
+<li>Final unordered item</li>
+</ul>
+<hr>
+<h1 id="6-blockquotes">6. Blockquotes<a class="markdown-heading-anchor" href="#6-blockquotes" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<blockquote>
+<p>This is a blockquote.</p>
+<p>It contains multiple paragraphs.</p>
+</blockquote>
+<blockquote>
+<p>Nested example:</p>
+<blockquote>
+<p>Inner quotation.</p>
+</blockquote>
+</blockquote>
+<hr>
+<h1 id="7-code-blocks">7. Code Blocks<a class="markdown-heading-anchor" href="#7-code-blocks" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="bash">Bash<a class="markdown-heading-anchor" href="#bash" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="bash"><code class="language-bash">#!/usr/bin/env bash
+
+echo "Hello from MDHoriZon"
+printf 'Current directory: %s\\n' "$PWD"
+</code></pre>
+<h2 id="python">Python<a class="markdown-heading-anchor" href="#python" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="python"><code class="language-python">from pathlib import Path
+
+root = Path(".")
+for path in root.rglob("*.md"):
+    print(path)
+</code></pre>
+<h2 id="javascript">JavaScript<a class="markdown-heading-anchor" href="#javascript" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="javascript"><code class="language-javascript">const message = "Hello, MDHoriZon!";
+console.log(message);
+</code></pre>
+<h2 id="typescript">TypeScript<a class="markdown-heading-anchor" href="#typescript" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="typescript"><code class="language-typescript">interface Article {
+  title: string;
+  tags: string[];
+  offline: boolean;
+}
+
+const article: Article = {
+  title: "Golden Test",
+  tags: ["markdown", "testing"],
+  offline: true,
+};
+</code></pre>
+<h2 id="json">JSON<a class="markdown-heading-anchor" href="#json" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="json"><code class="language-json">{
+  "name": "MDHoriZon",
+  "offline": true,
+  "features": ["GFM", "KaTeX", "Mermaid"]
+}
+</code></pre>
+<h2 id="html">HTML<a class="markdown-heading-anchor" href="#html" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="html"><code class="language-html">&lt;article&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p&gt;HTML should be handled according to the project's security policy.&lt;/p&gt;
+&lt;/article&gt;
+</code></pre>
+<h2 id="css">CSS<a class="markdown-heading-anchor" href="#css" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="css"><code class="language-css">.article {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1rem;
+}
+</code></pre>
+<h2 id="unknown-language">Unknown language<a class="markdown-heading-anchor" href="#unknown-language" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="not-a-real-language"><code class="language-not-a-real-language">This must still render as readable code.
+</code></pre>
+<h2 id="long-line">Long line<a class="markdown-heading-anchor" href="#long-line" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="text"><code class="language-text">This is intentionally an extremely long line intended to verify horizontal scrolling rather than forcing the entire document or viewport to become unnecessarily wide on desktop or mobile devices.
+</code></pre>
+<h2 id="unbroken-long-token">Unbroken long token<a class="markdown-heading-anchor" href="#unbroken-long-token" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="text"><code class="language-text">https://example.com/a/deliberately/long/unbroken/path/that/cannot/wrap/at/all/and/must/instead/scroll/horizontally/without/stretching/the/viewport/0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+</code></pre>
+<h2 id="plain-text-block-with-no-language-declared">Plain text block with no language declared<a class="markdown-heading-anchor" href="#plain-text-block-with-no-language-declared" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre><code>No language is declared for this fence, and it must still render as a readable code block.
+</code></pre>
+<h2 id="empty-code-block">Empty code block<a class="markdown-heading-anchor" href="#empty-code-block" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="text"><code class="language-text"></code></pre>
+<h2 id="indented-code-block-four-spaces-no-fence">Indented code block (four spaces, no fence)<a class="markdown-heading-anchor" href="#indented-code-block-four-spaces-no-fence" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre><code>indented code block, first line
+indented code block, second line
+</code></pre>
+<h2 id="language-alias-and-uppercase-identifier">Language alias and uppercase identifier<a class="markdown-heading-anchor" href="#language-alias-and-uppercase-identifier" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="JS"><code class="language-JS">console.log("Alias and uppercase language identifiers must not crash the highlighter")
+</code></pre>
+<hr>
+<h1 id="8-tables">8. Tables<a class="markdown-heading-anchor" href="#8-tables" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="small-table">Small table<a class="markdown-heading-anchor" href="#small-table" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody><tr><td>Markdown</td><td>Content</td></tr><tr><td>React</td><td>UI</td></tr><tr><td>Mermaid</td><td>Diagram</td></tr></tbody></table></div>
+<h2 id="three-columns">Three columns<a class="markdown-heading-anchor" href="#three-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Feature</th><th style="text-align: right;">Web</th><th style="text-align: right;">Mobile</th></tr></thead><tbody><tr><td>Markdown</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr><tr><td>Offline</td><td style="text-align: right;">Optional</td><td style="text-align: right;">Yes</td></tr><tr><td>Mermaid</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr></tbody></table></div>
+<h2 id="wide-table--12-columns">Wide table — 12 columns<a class="markdown-heading-anchor" href="#wide-table--12-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th><th>C7</th><th>C8</th><th>C9</th><th>C10</th><th>C11</th><th>C12</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td></tr></tbody></table></div>
+<h2 id="formatted-cells">Formatted cells<a class="markdown-heading-anchor" href="#formatted-cells" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Feature</th><th>Example</th></tr></thead><tbody><tr><td>Bold</td><td><strong>important</strong></td></tr><tr><td>Italic</td><td><em>emphasis</em></td></tr><tr><td>Code</td><td><code>npm install</code></td></tr><tr><td>Link</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></td></tr><tr><td>Long text</td><td>This is a deliberately long cell that should remain readable without breaking the table layout.</td></tr></tbody></table></div>
+<h2 id="alignment-variants">Alignment variants<a class="markdown-heading-anchor" href="#alignment-variants" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th style="text-align: left;">Left</th><th style="text-align: center;">Center</th><th style="text-align: right;">Right</th><th>Default</th></tr></thead><tbody><tr><td style="text-align: left;">l</td><td style="text-align: center;">c</td><td style="text-align: right;">r</td><td>d</td></tr><tr><td style="text-align: left;">a longer cell</td><td style="text-align: center;">a longer cell</td><td style="text-align: right;">a longer cell</td><td>a longer cell</td></tr></tbody></table></div>
+<h2 id="table-without-leading-or-trailing-pipes">Table without leading or trailing pipes<a class="markdown-heading-anchor" href="#table-without-leading-or-trailing-pipes" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody><tr><td>Alpha</td><td>1</td></tr><tr><td>Beta</td><td>2</td></tr></tbody></table></div>
+<h2 id="escaped-pipe-and-pipe-inside-inline-code">Escaped pipe and pipe inside inline code<a class="markdown-heading-anchor" href="#escaped-pipe-and-pipe-inside-inline-code" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Case</th><th>Rendered as</th></tr></thead><tbody><tr><td>Escaped pipe</td><td>a | b</td></tr><tr><td>Pipe inside inline code (escaped for the table)</td><td><code>a | b</code></td></tr><tr><td>Pipe escaped inside a link label</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">a | b</a></td></tr></tbody></table></div>
+<h2 id="empty-cells">Empty cells<a class="markdown-heading-anchor" href="#empty-cells" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>1</td><td></td><td>3</td></tr><tr><td></td><td>2</td><td></td></tr></tbody></table></div>
+<h2 id="mathematical-expressions-inside-cells-where-supported">Mathematical expressions inside cells (where supported)<a class="markdown-heading-anchor" href="#mathematical-expressions-inside-cells-where-supported" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Formula</th><th>Meaning</th></tr></thead><tbody><tr><td>$E = mc^2$</td><td>mass-energy equivalence</td></tr><tr><td>$\\frac{a}{b}$</td><td>fraction</td></tr><tr><td>$\\sum_{i=1}^{n} i$</td><td>sum</td></tr></tbody></table></div>
+<h2 id="wide-table--20-columns">Wide table — 20 columns<a class="markdown-heading-anchor" href="#wide-table--20-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th><th>C7</th><th>C8</th><th>C9</th><th>C10</th><th>C11</th><th>C12</th><th>C13</th><th>C14</th><th>C15</th><th>C16</th><th>C17</th><th>C18</th><th>C19</th><th>C20</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td><td>A13</td><td>A14</td><td>A15</td><td>A16</td><td>A17</td><td>A18</td><td>A19</td><td>A20</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td><td>B13</td><td>B14</td><td>B15</td><td>B16</td><td>B17</td><td>B18</td><td>B19</td><td>B20</td></tr></tbody></table></div>
+<hr>
+<h1 id="9-horizontal-rule">9. Horizontal Rule<a class="markdown-heading-anchor" href="#9-horizontal-rule" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>Content before the rule.</p>
+<hr>
+<p>Content after the rule.</p>
+<hr>
+<h1 id="10-escaping-and-special-characters">10. Escaping and Special Characters<a class="markdown-heading-anchor" href="#10-escaping-and-special-characters" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>Literal Markdown characters:</p>
+<p>*asterisk*<br>
+_underscore_<br>
+[brackets]<br>
+# hash<br>
+&gt; greater-than</p>
+<p>HTML entities:</p>
+<p><code>&amp;amp;</code> &amp;<br>
+<code>&amp;lt;</code> &lt;<br>
+<code>&amp;gt;</code> &gt;</p>
+<h2 id="unicode-bidirectional-text-and-emoji">Unicode, bidirectional text and emoji<a class="markdown-heading-anchor" href="#unicode-bidirectional-text-and-emoji" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Accented Latin: á é í ó ú ñ ü ç ß Å Æ Ø å æ ø</p>
+<p>CJK: 日本語のテキスト、中文文本、한국어 텍스트</p>
+<p>Right-to-left: العربية and עברית must render with correct direction, including when they contain punctuation.</p>
+<p>Mixed direction on one line: English text, العربية text, more English text.</p>
+<p>Emoji: 😀 🚀 🧪 🇦🇷 👩‍💻 — the last one is a zero-width-joiner sequence and must not be split apart.</p>
+<p>Mathematical and typographic symbols: ∀x ∈ ℝ, ∑ ± × ÷ ≤ ≥ ≠ ∞ → ⇒ ⌘ € £ ¥ © ® ™ …</p>
+<h2 id="cjk-emphasis-and-the-commonmark-flanking-rules">CJK emphasis and the CommonMark flanking rules<a class="markdown-heading-anchor" href="#cjk-emphasis-and-the-commonmark-flanking-rules" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>CommonMark decides whether <code>**</code> may open or close by <em>flanking</em> rules. One of them is: a closing <code>**</code> that is
+preceded by a punctuation character may only close if it is followed by whitespace or punctuation. Chinese,
+Japanese and Korean prose is written without spaces, so a construction that is completely normal in those
+languages — bold around a quoted phrase, immediately followed by more text — fails that test and the asterisks are
+rendered literally:</p>
+<ul>
+<li>**「重要」**中文 — the closing <code>**</code> is preceded by punctuation (<code>」</code>) and followed by a letter (<code>中</code>), so
+CommonMark refuses to close it. The expected rendering today is <strong>literal asterisks</strong>, not bold.</li>
+<li>**（注）**の続き — the same shape with Japanese brackets and kana.</li>
+<li>中文<strong>强调</strong>。 — this one must <strong>become bold</strong>: the closing <code>**</code> is preceded by a letter, so it is right-flanking.</li>
+</ul>
+<p>An implementation can fix the first two with a parser extension — one that allows <code>**</code> to close after Unicode
+punctuation when the next character is CJK. Whether MDHoriZon adopts one is a Phase 1 decision; the survey of prior
+art is in <a href="../../docs/references.md"><code>docs/references.md</code></a>. That class of fix applies to asterisks only, so
+underscore emphasis (<code>__…__</code>) keeps the CommonMark behavior.</p>
+<p>This section is pinned on purpose: if the extension is adopted, the expected output of the first two lines changes
+and this section must be updated deliberately, with the decision recorded.</p>
+<hr>
+<h1 id="11-mathematics">11. Mathematics<a class="markdown-heading-anchor" href="#11-mathematics" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="inline">Inline<a class="markdown-heading-anchor" href="#inline" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Einstein's famous equation is $E = mc^2$.</p>
+<p>Another example: $a^2 + b^2 = c^2$.</p>
+<h2 id="display">Display<a class="markdown-heading-anchor" href="#display" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\int_0^\\infty e^{-x},dx = 1
+$$</p>
+<h2 id="fraction">Fraction<a class="markdown-heading-anchor" href="#fraction" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\frac{a}{b} + \\frac{c}{d}
+$$</p>
+<h2 id="sum">Sum<a class="markdown-heading-anchor" href="#sum" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}
+$$</p>
+<h2 id="matrix">Matrix<a class="markdown-heading-anchor" href="#matrix" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\begin{bmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6 \\
+7 &amp; 8 &amp; 9
+\\end{bmatrix}
+$$</p>
+<h2 id="long-expression">Long expression<a class="markdown-heading-anchor" href="#long-expression" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\frac{\\partial}{\\partial t}
+\\left(
+\\frac{1}{2}\\rho |\\mathbf{u}|^2
+\\right)
++
+\\nabla \\cdot
+\\left[
+\\left(
+\\frac{1}{2}\\rho |\\mathbf{u}|^2 + p
+\\right)\\mathbf{u}
+\\right]
+= 0
+$$</p>
+<h2 id="superscripts-subscripts-and-greek-letters">Superscripts, subscripts and Greek letters<a class="markdown-heading-anchor" href="#superscripts-subscripts-and-greek-letters" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>Inline: $x^2 + y_1$, $a_{n+1}$, $\\alpha$, $\\beta$, $\\gamma$, $\\Delta$, $\\Omega$, $\\theta$.</p>
+<h2 id="text-inside-math">Text inside math<a class="markdown-heading-anchor" href="#text-inside-math" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\text{rate} = \\frac{\\Delta x}{\\Delta t}
+$$</p>
+<h2 id="aligned-expressions">Aligned expressions<a class="markdown-heading-anchor" href="#aligned-expressions" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>$$
+\\begin{aligned}
+a &amp;= b + c \\
+&amp;= d + e
+\\end{aligned}
+$$</p>
+<h2 id="formulas-inside-lists">Formulas inside lists<a class="markdown-heading-anchor" href="#formulas-inside-lists" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<ul>
+<li>
+<p>Inline math in a list item: $E = mc^2$.</p>
+</li>
+<li>
+<p>Display math inside a list item:</p>
+<p>$$
+\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}
+$$</p>
+</li>
+<li>
+<p>Item after the math.</p>
+</li>
+</ul>
+<h2 id="formulas-inside-blockquotes">Formulas inside blockquotes<a class="markdown-heading-anchor" href="#formulas-inside-blockquotes" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<blockquote>
+<p>Inline math inside a blockquote: $a^2 + b^2 = c^2$.</p>
+<p>Display math inside a blockquote:</p>
+<p>$$
+\\int_0^1 x,dx = \\frac{1}{2}
+$$</p>
+</blockquote>
+<p>Formulas inside table cells are covered in section 8.</p>
+<h2 id="missing-and-invalid-math-must-degrade-gracefully">Missing and invalid math must degrade gracefully<a class="markdown-heading-anchor" href="#missing-and-invalid-math-must-degrade-gracefully" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>An unterminated delimiter must stay literal instead of swallowing the rest of the paragraph: $E = mc^2</p>
+<p>An unknown command must produce an error (or a literal fallback) without crashing the article:
+$\\thisCommandDoesNotExist{x}$</p>
+<p>Currency must not be mistaken for mathematics: the item costs $5 and the other costs $10 today.</p>
+<p>An escaped dollar renders as a literal dollar sign: $100.</p>
+<hr>
+<h1 id="12-mermaid">12. Mermaid<a class="markdown-heading-anchor" href="#12-mermaid" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h2 id="flowchart">Flowchart<a class="markdown-heading-anchor" href="#flowchart" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+    A[Markdown file] --&gt; B[Parser]
+    B --&gt; C{Content type}
+    C --&gt;|Normal Markdown| D[React renderer]
+    C --&gt;|Math| E[KaTeX]
+    C --&gt;|Mermaid| F[Mermaid renderer]
+    D --&gt; G[Article]
+    E --&gt; G
+    F --&gt; G
+</code></pre>
+<h2 id="sequence-diagram">Sequence diagram<a class="markdown-heading-anchor" href="#sequence-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="mermaid"><code class="language-mermaid">sequenceDiagram
+    participant User
+    participant App
+    participant Storage
+    User-&gt;&gt;App: Open article
+    App-&gt;&gt;Storage: Load Markdown
+    Storage--&gt;&gt;App: Markdown + assets
+    App--&gt;&gt;User: Render article
+</code></pre>
+<h2 id="class-style-example">Class-style example<a class="markdown-heading-anchor" href="#class-style-example" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="mermaid"><code class="language-mermaid">classDiagram
+    class MarkdownDocument {
+        +string title
+        +string content
+        +render()
+    }
+
+    class OfflineLibrary {
+        +downloadAll()
+        +update()
+        +deleteAll()
+    }
+
+    MarkdownDocument --&gt; OfflineLibrary
+</code></pre>
+<h2 id="state-diagram">State diagram<a class="markdown-heading-anchor" href="#state-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="mermaid"><code class="language-mermaid">stateDiagram-v2
+    [*] --&gt; Reading
+    Reading --&gt; Downloading: user requests offline copy
+    Downloading --&gt; AvailableOffline: download complete
+    AvailableOffline --&gt; Reading: open from local storage
+    Reading --&gt; [*]
+</code></pre>
+<h2 id="additional-supported-diagram-type">Additional supported diagram type<a class="markdown-heading-anchor" href="#additional-supported-diagram-type" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<pre data-language="mermaid"><code class="language-mermaid">pie title Content sources
+    "Network" : 45
+    "Bundled" : 25
+    "Offline storage" : 30
+</code></pre>
+<h2 id="invalid-diagrams-must-not-crash-the-article">Invalid diagrams must not crash the article<a class="markdown-heading-anchor" href="#invalid-diagrams-must-not-crash-the-article" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<p>The first block below is malformed Mermaid syntax; the second is not Mermaid at all. Both must produce visible
+error feedback (or a readable fallback) while the rest of the document keeps rendering.</p>
+<pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+    A[Unclosed label --&gt; B
+</code></pre>
+<pre data-language="mermaid"><code class="language-mermaid">this is not a valid mermaid diagram at all
+</code></pre>
+<hr>
+<h1 id="13-frontmatter">13. Frontmatter<a class="markdown-heading-anchor" href="#13-frontmatter" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>The following is an example of frontmatter syntax:</p>
+<pre data-language="yaml"><code class="language-yaml">---
+title: Golden Test Document
+description: MDHoriZon renderer validation fixture
+date: 2026-09-13
+tags:
+  - markdown
+  - testing
+  - mdhorizon
+---
+</code></pre>
+<p>The application must decide whether frontmatter is removed before rendering and how metadata is consumed.</p>
+<p>Frontmatter is only recognized at the very start of a file, so this golden document cannot test it directly — the
+block above documents the syntax, it is not a live frontmatter block. Real frontmatter parsing must be covered by a
+separate fixture whose first bytes are the opening delimiter.</p>
+<hr>
+<h1 id="14-raw-html-and-security">14. Raw HTML and Security<a class="markdown-heading-anchor" href="#14-raw-html-and-security" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>The following is intentionally included to verify the project's raw-HTML policy.</p>
+<pre data-language="html"><code class="language-html">&lt;strong&gt;Raw HTML test&lt;/strong&gt;
+</code></pre>
+<p>Potentially dangerous examples must be tested by automated security fixtures rather than relying on visual inspection:</p>
+<pre data-language="html"><code class="language-html">&lt;script&gt;alert("unsafe")&lt;/script&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;img src="x" onerror="alert('unsafe')"&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;a href="javascript:alert('unsafe')"&gt;unsafe link&lt;/a&gt;
+</code></pre>
+<p>Dangerous SVG, embedded documents and other unsafe external resources:</p>
+<pre data-language="html"><code class="language-html">&lt;svg&gt;&lt;script&gt;alert("unsafe")&lt;/script&gt;&lt;/svg&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;svg onload="alert('unsafe')"&gt;&lt;circle r="10" /&gt;&lt;/svg&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;iframe src="https://example.com"&gt;&lt;/iframe&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;object data="https://example.com"&gt;&lt;/object&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;embed src="https://example.com"&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;style&gt;body { display: none }&lt;/style&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;base href="https://evil.example/"&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;meta http-equiv="refresh" content="0;url=https://evil.example/"&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;form action="https://evil.example/"&gt;&lt;input name="secret" type="password"&gt;&lt;/form&gt;
+</code></pre>
+<p>Obfuscated unsafe URLs, which must be rejected by normalization rather than by naive string matching:</p>
+<pre data-language="html"><code class="language-html">&lt;a href="JaVaScRiPt:alert('unsafe')"&gt;mixed-case javascript URL&lt;/a&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;a href="java&amp;#x73;cript:alert('unsafe')"&gt;entity-encoded javascript URL&lt;/a&gt;
+</code></pre>
+<pre data-language="html"><code class="language-html">&lt;a href="  javascript:alert('unsafe')"&gt;javascript URL with leading whitespace&lt;/a&gt;
+</code></pre>
+<p>Markdown-native unsafe URLs must also be rejected, not only the raw-HTML ones:</p>
+<p><a>Markdown link to javascript:</a></p>
+<p><img alt="Markdown image with a data URI" loading="lazy" decoding="async"></p>
+<p><a>Markdown link with a data:text/html URI</a></p>
+<p>Expected behavior is determined by the project's explicit sanitization policy.</p>
+<hr>
+<h1 id="15-nested-content">15. Nested Content<a class="markdown-heading-anchor" href="#15-nested-content" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<blockquote>
+<p><strong>Important note</strong></p>
+<ul>
+<li>List inside a quote</li>
+<li>Another item</li>
+</ul>
+<pre data-language="bash"><code class="language-bash">echo "code inside quote"
+</code></pre>
+</blockquote>
+<hr>
+<h1 id="16-content-mixing">16. Content Mixing<a class="markdown-heading-anchor" href="#16-content-mixing" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>A document can contain <strong>bold</strong>, <code>code</code>, <a href="https://github.com/" target="_blank" rel="noopener noreferrer">links</a>, formulas such as $x^2$, and lists together.</p>
+<ol>
+<li>Install dependencies.</li>
+<li>Run the application.</li>
+<li>Open the article.</li>
+<li>Test the Mermaid diagram.</li>
+<li>Disable the network.</li>
+<li>Open the same article from offline storage.</li>
+</ol>
+<hr>
+<h1 id="17-offline-content-test">17. Offline Content Test<a class="markdown-heading-anchor" href="#17-offline-content-test" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>This section is specifically for the mobile offline feature.</p>
+<p>The article must render correctly when loaded from:</p>
+<ol>
+<li>Network.</li>
+<li>Bundled application content.</li>
+<li>Downloaded offline storage.</li>
+</ol>
+<p>The rendered result should be equivalent regardless of source.</p>
+<p>The application should also be able to resolve the relative image and relative link examples after the content has been downloaded.</p>
+<hr>
+<h1 id="18-accessibility-checks">18. Accessibility Checks<a class="markdown-heading-anchor" href="#18-accessibility-checks" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>The rendered result should expose:</p>
+<ul>
+<li>A logical heading hierarchy.</li>
+<li>Keyboard-accessible links.</li>
+<li>Keyboard-accessible copy buttons.</li>
+<li>Meaningful image alternative text.</li>
+<li>Semantic tables.</li>
+<li>Visible focus indicators.</li>
+<li>Sufficient contrast.</li>
+</ul>
+<p>Content that exercises those requirements:</p>
+<ul>
+<li>A decorative image that must be ignored by assistive technology: <img alt="" loading="lazy" decoding="async" src="../assets/example.png"></li>
+<li>A meaningful image that must be announced: <img alt="MDHoriZon fixture asset" loading="lazy" decoding="async" src="../assets/example.png"></li>
+<li>Collapsible content that must be keyboard operable (subject to the raw-HTML policy — if <code>&lt;details&gt;</code> is
+stripped, this case documents that decision rather than failing):</li>
+</ul>
+
+<p>The hidden sentence.</p>
+
+<hr>
+<h1 id="19-final-regression-checklist">19. Final Regression Checklist<a class="markdown-heading-anchor" href="#19-final-regression-checklist" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="" type="checkbox"> H1–H6, setext and closed ATX headings render correctly.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Duplicate headings receive deterministic, distinct anchors.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Inline formatting renders correctly.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Unicode, bidirectional text and emoji render correctly.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> CJK strong emphasis behaves as this document specifies, including the punctuation-adjacent cases.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Links work, including autolinks, reference-style links, titled links and relative links to another document.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Hard and soft line breaks behave as specified.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Images work or fail gracefully, including the deliberately missing one.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Decorative images expose empty alternative text and are not announced.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Very wide and very tall images keep their aspect ratio without breaking the layout.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Relative assets resolve correctly, including paths with redundant <code>./</code> and <code>..</code> segments.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Lists render correctly, including loose lists, multi-paragraph items and lists starting at 5.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Blockquotes render correctly, including nested ones.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Code blocks highlight correctly, including unknown languages, aliases and indented blocks.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Long code lines and unbroken tokens scroll horizontally.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Copy button works and is keyboard accessible.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Tables scroll horizontally on narrow screens.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Wide tables (up to 20 columns) do not break the viewport.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Table alignment, escaped pipes, empty cells and math inside cells render correctly.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> KaTeX renders correctly, including inside lists and blockquotes.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Invalid or missing math degrades gracefully without crashing the article.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Mermaid renders correctly, including state diagrams and additional diagram types.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Mermaid errors do not crash the article and produce visible feedback.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Themes remain readable.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> Unsafe content is sanitized according to policy, including SVG, iframes, <code>data:</code> URIs and obfuscated <code>javascript:</code> URLs.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> The complete document works offline.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> The complete document works inside Android WebView.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> The complete document works inside iOS WebView when available.</li>
+</ul>
+<hr>
+<p><strong>This file is a rendering specification and regression fixture. Do not simplify it merely because the current application does not yet support every feature. Unsupported sections should become explicit roadmap/test targets.</strong></p>"
+`;

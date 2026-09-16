@@ -389,8 +389,8 @@ This document must contain representative examples of every supported Markdown f
 ### Tasks
 
 - [x] Add the Golden Test Document.
-- [ ] Render it in the application.
-- [ ] Use it as the baseline for every renderer change.
+- [x] Render it in the application.
+- [x] Use it as the baseline for every renderer change.
 - [x] Decide the test tooling and test layout. **Vitest**, with jsdom, Testing Library and jest-dom matchers, for
       unit/component tests colocated with the code (`src/**/*.test.ts(x)`), plus fixture and cross-cutting tests
       under `tests/` that run in Node. Recorded in `docs/architecture/0001-test-runner-and-test-layout.md`; the
@@ -399,8 +399,8 @@ This document must contain representative examples of every supported Markdown f
       `.nvmrc`.
 - [x] Add a CI workflow that runs `format:check`, `lint`, `typecheck`, `build` and the test suite on pull requests,
       using the declared Node.js version.
-- [ ] Add parser/component tests for important edge cases.
-- [ ] Add regression tests whenever a rendering bug is discovered.
+- [x] Add parser/component tests for important edge cases.
+- [x] Add regression tests whenever a rendering bug is discovered.
 - [ ] Test the same fixture in desktop web, mobile web, and Capacitor WebView.
 - [ ] Add a mechanism for comparing expected behavior after intentional renderer changes.
 

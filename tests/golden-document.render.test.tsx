@@ -35,6 +35,15 @@ describe('Golden Test Document', () => {
     expect(container.querySelectorAll('*').length).toBeGreaterThan(500)
   })
 
+  it('matches the stored rendering, so an intentional change shows up as a diff', () => {
+    // The comparison mechanism Phase 3 asks for. This is a golden file: when a renderer change is
+    // deliberate, run `npm test -- -u` and the change appears as a reviewable diff in the commit.
+    // An unintentional change fails here before anyone reads the output.
+    const body = container.querySelector('.markdown-body')
+
+    expect(body?.innerHTML).toMatchSnapshot('rendered document')
+  })
+
   it('renders every numbered section', () => {
     for (const id of [
       '1-headings',

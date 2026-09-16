@@ -1,65 +1,33 @@
+import goldenDocument from '../tests/fixtures/Golden-Test-Document.md?raw'
 import { MarkdownRenderer } from './components/MarkdownRenderer'
 
 /**
- * Phase 1 demo.
+ * Development preview of the rendering core.
  *
- * The rendering core is the deliverable of this phase, not the reading application, so this page
- * exists only to make the core visible and checkable in a real browser. The content model, article
- * navigation and the reading experience are Phases 7 to 10.
+ * The application renders the **Golden Test Document itself**: the rendering specification that
+ * every phase has to keep working, shown live in a browser so a regression is visible and not only
+ * caught by a test. Loading real content, navigation and the reading experience are Phases 7 to 10.
+ *
+ * Importing the fixture as a raw string is deliberate and belongs to this development preview. Once
+ * the content loader exists (Phase 10), documents come from the content layer and this import goes
+ * away with the preview.
  */
-const SAMPLE = [
-  '## What this page is',
-  '',
-  'The Markdown below is rendered by `src/components/MarkdownRenderer.tsx`, the same core the web,',
-  'Android WebView and iOS WebView builds will use. Headings get deterministic ids and a link you',
-  'can copy: hover the heading and look at the **#**.',
-  '',
-  '### GitHub Flavored Markdown',
-  '',
-  '| Layer | What it does | State |',
-  '| --- | --- | --- |',
-  '| Core | Parse and render, no React | done |',
-  '| Sanitizer | Contain what the plugins generate | done |',
-  '| URLs | `http`, `https`, `mailto` only | done |',
-  '',
-  '- [x] Render GFM: tables, task lists, strikethrough, autolinks',
-  '- [x] Anchor links and duplicate-heading ids',
-  '- [ ] Syntax highlighting, maths and diagrams — Phases 4, 5 and 6',
-  '',
-  '```ts',
-  "const policy = ['http:', 'https:', 'mailto:']",
-  '',
-  '// Anything else is dropped, not rendered.',
-  'function applyUrlPolicy(url: string): string | null {',
-  '  return policy.some((scheme) => url.startsWith(scheme)) ? url : null',
-  '}',
-  '```',
-  '',
-  '> Untrusted Markdown cannot create elements: an embedded `<script>` is removed before it can',
-  '> become a node, and an unsafe link loses its `href` instead of being followed.',
-  '',
-  'A [safe external link](https://github.com/wachin/MDHoriZon) opens with',
-  '`rel="noopener noreferrer"`, while an [unsafe one](javascript:alert(1)) keeps its text and loses',
-  'its destination. An [in-page link](#what-this-page-is) still works.',
-  '',
-  '---',
-  '',
-  'Not here yet, by design: maths, Mermaid diagrams, syntax highlighting, themes, the offline',
-  'library and the reading interface.',
-].join('\n')
-
 function App() {
   return (
     <main>
       <header>
         <h1>MDHoriZon</h1>
         <p>
-          Rendering core, phase 1. This page is a development preview of the
-          renderer, not the reading application.
+          The rendering specification, rendered live: this is{' '}
+          <code>tests/fixtures/Golden-Test-Document.md</code> going through the
+          same core the web, Android WebView and iOS WebView builds will use.
+          Maths (KaTeX) and diagrams (Mermaid) are Phases 5 and 6; until then
+          their source is shown as readable text, which is what the document
+          expects.
         </p>
       </header>
 
-      <MarkdownRenderer>{SAMPLE}</MarkdownRenderer>
+      <MarkdownRenderer>{goldenDocument}</MarkdownRenderer>
     </main>
   )
 }
