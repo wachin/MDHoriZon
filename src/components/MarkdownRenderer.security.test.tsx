@@ -50,6 +50,9 @@ const renderMarkdown = (markdown: string): HTMLElement => {
   return body
 }
 
+/** The one inline style the output is allowed to contain, and where it may come from. */
+const DERIVED_TABLE_ALIGNMENT = /^text-align: (left|center|right|justify);?$/
+
 /** The invariants every malicious input has to hold to. */
 function expectNothingDangerous(container: HTMLElement) {
   for (const tag of DANGEROUS_ELEMENTS) {
@@ -57,13 +60,23 @@ function expectNothingDangerous(container: HTMLElement) {
   }
 
   for (const element of container.querySelectorAll('*')) {
+    const tag = element.tagName.toLowerCase()
+
     for (const attribute of element.attributes) {
-      const where = `${element.tagName.toLowerCase()}[${attribute.name}]`
+      const where = `${tag}[${attribute.name}]`
 
       expect(/^on/i.test(attribute.name), `event handler at ${where}`).toBe(
         false,
       )
-      expect(attribute.name, `inline style at ${where}`).not.toBe('style')
+
+      if (attribute.name === 'style') {
+        // The serializer turns a GFM table's `align` into an inline `text-align`. That is the only
+        // inline style allowed, the schema pins it to four values, and a document cannot produce it.
+        expect(tag, `inline style on <${tag}>`).toMatch(/^(th|td)$/)
+        expect(attribute.value, `inline style at ${where}`).toMatch(
+          DERIVED_TABLE_ALIGNMENT,
+        )
+      }
 
       if (attribute.name === 'href' || attribute.name === 'src') {
         expect(

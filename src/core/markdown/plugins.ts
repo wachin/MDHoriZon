@@ -24,8 +24,15 @@ import { sanitizeSchema } from './sanitize-schema'
 
 type PluginList = NonNullable<ReactMarkdownOptions['remarkPlugins']>
 
-/** Remark plugins: parse-side extensions. GFM brings tables, task lists, strikethrough and autolinks. */
-export const remarkPlugins: PluginList = [remarkGfm]
+/**
+ * Remark plugins: parse-side extensions.
+ *
+ * GFM brings tables, task lists, strikethrough and autolinks. `singleTilde` is turned **off**
+ * deliberately: it defaults to on, which turns `~text~` into strikethrough, and a lone tilde is the
+ * home-directory character in prose (`~/Descargas`). A pair of tildes still works, because that is
+ * what the GFM specification defines.
+ */
+export const remarkPlugins: PluginList = [[remarkGfm, { singleTilde: false }]]
 
 /** Rehype plugins: tree-side transformations, ending with the security boundary. */
 export const rehypePlugins: PluginList = [

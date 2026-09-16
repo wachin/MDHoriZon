@@ -104,6 +104,19 @@ describe('sanitize schema', () => {
     expect(names).not.toContain('style')
   })
 
+  it('pins table alignment instead of allowing align everywhere with any value', () => {
+    const global = sanitizeSchema.attributes?.['*'] as AttributeEntry[]
+    const th = sanitizeSchema.attributes?.th as AttributeEntry[]
+    const td = sanitizeSchema.attributes?.td as AttributeEntry[]
+
+    // `align` becomes an inline `text-align` further down the pipeline, so an unbounded value there
+    // would be unbounded CSS. It is global in the base schema; here it is not.
+    expect(defaultSchema.attributes?.['*']).toContain('align')
+    expect(global).not.toContain('align')
+    expect(th).toContainEqual(['align', 'left', 'center', 'right', 'justify'])
+    expect(td).toContainEqual(['align', 'left', 'center', 'right', 'justify'])
+  })
+
   it('forces task-list inputs to be disabled checkboxes', () => {
     const input = sanitizeSchema.attributes?.input as AttributeEntry[]
 
