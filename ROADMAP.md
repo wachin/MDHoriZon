@@ -502,24 +502,24 @@ Also test long text, links, code, bold, lists where supported, and mathematical 
 
 ### Tasks
 
-- [ ] Configure `remark-math`.
-- [ ] Configure `rehype-katex`.
-- [ ] Include KaTeX CSS correctly.
-- [ ] Test inline math.
-- [ ] Test display math.
-- [ ] Test fractions.
-- [ ] Test superscripts/subscripts.
-- [ ] Test Greek letters.
-- [ ] Test integrals.
-- [ ] Test sums/products.
-- [ ] Test matrices.
-- [ ] Test aligned expressions where supported.
-- [ ] Test long formulas on narrow screens.
-- [ ] Test formulas in lists.
-- [ ] Test formulas in blockquotes.
-- [ ] Test formulas in tables where supported.
-- [ ] Test missing/invalid math gracefully.
-- [ ] Evaluate KaTeX font loading and bundle size.
+- [x] Configure `remark-math`.
+- [x] Configure `rehype-katex`.
+- [x] Include KaTeX CSS correctly.
+- [x] Test inline math.
+- [x] Test display math.
+- [x] Test fractions.
+- [x] Test superscripts/subscripts.
+- [x] Test Greek letters.
+- [x] Test integrals.
+- [x] Test sums/products.
+- [x] Test matrices.
+- [x] Test aligned expressions where supported.
+- [x] Test long formulas on narrow screens.
+- [x] Test formulas in lists.
+- [x] Test formulas in blockquotes.
+- [x] Test formulas in tables where supported.
+- [x] Test missing/invalid math gracefully.
+- [x] Evaluate KaTeX font loading and bundle size.
 
 Example fixture:
 
