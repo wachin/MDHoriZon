@@ -110,3 +110,6 @@ android/app/src/main/assets/public/
 # Optional local content generated during development
 .local-content/
 offline-data/
+
+# Personal
+8vo/
