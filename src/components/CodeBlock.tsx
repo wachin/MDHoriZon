@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 import type { ExtraProps } from 'react-markdown'
+import { MermaidDiagram } from './MermaidDiagram'
 
 type PreProps = ComponentPropsWithoutRef<'pre'> & ExtraProps
 type MarkdownNode = NonNullable<ExtraProps['node']>
@@ -101,6 +102,13 @@ export function CodeBlock({ node, children, ...props }: PreProps) {
     if (timer.current !== null) clearTimeout(timer.current)
     timer.current = setTimeout(() => setState('idle'), 2000)
   }, [node])
+
+  // The renderer's one fork (Phase 6): a `mermaid` fence is a diagram, every other language is code.
+  // The decision lives here because this is the component that already reads the fence's language,
+  // so there is exactly one place that interprets `language-*`.
+  if (language === 'mermaid') {
+    return <MermaidDiagram code={textOf(node)} />
+  }
 
   return (
     <div className="markdown-code">

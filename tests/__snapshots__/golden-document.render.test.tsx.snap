@@ -401,7 +401,7 @@ a &amp;= b + c \\\\
 <hr>
 <h1 id="12-mermaid">12. Mermaid<a class="markdown-heading-anchor" href="#12-mermaid" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="flowchart">Flowchart<a class="markdown-heading-anchor" href="#flowchart" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">flowchart TD
     A[Markdown file] --&gt; B[Parser]
     B --&gt; C{Content type}
     C --&gt;|Normal Markdown| D[React renderer]
@@ -410,9 +410,9 @@ a &amp;= b + c \\\\
     D --&gt; G[Article]
     E --&gt; G
     F --&gt; G
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
 <h2 id="sequence-diagram">Sequence diagram<a class="markdown-heading-anchor" href="#sequence-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">sequenceDiagram
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">sequenceDiagram
     participant User
     participant App
     participant Storage
@@ -420,9 +420,9 @@ a &amp;= b + c \\\\
     App-&gt;&gt;Storage: Load Markdown
     Storage--&gt;&gt;App: Markdown + assets
     App--&gt;&gt;User: Render article
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
 <h2 id="class-style-example">Class-style example<a class="markdown-heading-anchor" href="#class-style-example" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">classDiagram
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">classDiagram
     class MarkdownDocument {
         +string title
         +string content
@@ -436,29 +436,29 @@ a &amp;= b + c \\\\
     }
 
     MarkdownDocument --&gt; OfflineLibrary
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
 <h2 id="state-diagram">State diagram<a class="markdown-heading-anchor" href="#state-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">stateDiagram-v2
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">stateDiagram-v2
     [*] --&gt; Reading
     Reading --&gt; Downloading: user requests offline copy
     Downloading --&gt; AvailableOffline: download complete
     AvailableOffline --&gt; Reading: open from local storage
     Reading --&gt; [*]
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
 <h2 id="additional-supported-diagram-type">Additional supported diagram type<a class="markdown-heading-anchor" href="#additional-supported-diagram-type" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">pie title Content sources
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">pie title Content sources
     "Network" : 45
     "Bundled" : 25
     "Offline storage" : 30
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
 <h2 id="invalid-diagrams-must-not-crash-the-article">Invalid diagrams must not crash the article<a class="markdown-heading-anchor" href="#invalid-diagrams-must-not-crash-the-article" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
 <p>The first block below is malformed Mermaid syntax; the second is not Mermaid at all. Both must produce visible
 error feedback (or a readable fallback) while the rest of the document keeps rendering.</p>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">flowchart TD
     A[Unclosed label --&gt; B
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
-<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">this is not a valid mermaid diagram at all
-</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+</pre></figure>
+<figure class="markdown-diagram" data-diagram-state="loading"><div class="markdown-diagram-canvas" aria-busy="true"></div><pre class="markdown-diagram-source" data-language="mermaid">this is not a valid mermaid diagram at all
+</pre></figure>
 <hr>
 <h1 id="13-frontmatter">13. Frontmatter<a class="markdown-heading-anchor" href="#13-frontmatter" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <p>The following is an example of frontmatter syntax:</p>

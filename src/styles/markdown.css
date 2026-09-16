@@ -250,3 +250,50 @@
   overflow-wrap: break-word;
   vertical-align: top;
 }
+
+/* ---------------------------------------------------------------------------------------------
+ * Diagrams (Phase 6)
+ *
+ * Mermaid paints its own SVG with its own theme, so this section is only the box the diagram lands
+ * in: a scroll container for diagrams wider than the screen, and the fallback that keeps the source
+ * readable while the diagram loads or when it cannot be rendered at all.
+ *
+ * Height, wrapping and touch feel are Phase 20's cross-platform validation; nothing here claims a
+ * real device has been checked.
+ * ------------------------------------------------------------------------------------------- */
+
+.markdown-diagram {
+  margin: 1.5rem 0;
+}
+
+.markdown-diagram-canvas {
+  /* A diagram wider than the column scrolls, the same choice the tables make. */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+/* Mermaid emits width="100%" with a `max-width` inline style; this keeps a small diagram from
+ * stretching to the full column on a wide screen. */
+.markdown-diagram-canvas > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.markdown-diagram-source {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--md-code-border);
+  border-radius: 6px;
+  background: var(--md-code-bg);
+  color: var(--md-code-fg);
+  font-size: 0.875rem;
+}
+
+.markdown-diagram-error {
+  margin: 0.5rem 0 0;
+  color: var(--md-token-keyword);
+  font-size: 0.875rem;
+}

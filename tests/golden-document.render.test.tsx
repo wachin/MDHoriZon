@@ -1,8 +1,26 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { render, screen } from '@testing-library/react'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { MarkdownRenderer } from '../src/components/MarkdownRenderer'
+
+/**
+ * Mermaid is mocked in this file, and the reason is worth stating: `mermaid.render` asks the engine
+ * for layout measurements (`getBBox` and friends) that jsdom does not implement, so rendering the
+ * fixture here would exercise the failure path instead of the diagram path.
+ *
+ * This file pins the *document* contract — a `mermaid` fence becomes a diagram, the source stays
+ * readable while it is not drawn, and the rest of the document is untouched. Real diagrams are
+ * rendered in `src/components/MermaidDiagram.test.tsx` (with the layout measurements stubbed) and
+ * every diagram in the document is parsed in `tests/mermaid-fixture.test.ts`.
+ *
+ * The promise never settles on purpose: the diagrams stay in their loading state, which makes the
+ * snapshot deterministic and keeps state updates from escaping the test.
+ */
+vi.mock('../src/core/mermaid/loader', () => ({
+  renderMermaid: () => new Promise(() => undefined),
+  parseMermaid: () => Promise.resolve(),
+}))
 
 /**
  * The Golden Test Document is the rendering contract, and this is its baseline: the whole fixture,
@@ -243,12 +261,58 @@ describe('Golden Test Document', () => {
     })
   })
 
-  describe('features that belong to a later phase still render as readable text', () => {
-    it('shows Mermaid source as a code block, including the deliberately invalid ones, until Phase 6', () => {
+  describe('diagrams', () => {
+    it('turns every mermaid fence into a diagram, not a code block', () => {
+      // Phase 6. Until it landed, this section asserted the opposite — that the source was still
+      // shown as a code block because nothing rendered it.
+      //
+      // Mermaid is mocked in this file (see `vi.mock` at the top): the loader's render needs a layout
+      // engine jsdom does not have, and this test is about the document contract. Real Mermaid
+      // rendering has its own tests in `src/components/MermaidDiagram.test.tsx` and
+      // `tests/mermaid-fixture.test.ts`.
+      expect(
+        container.querySelectorAll('figure.markdown-diagram'),
+      ).toHaveLength(7)
+      // The diagram never takes the code-block path: no toolbar, no copy button. (The document has
+      // plenty of real code blocks with copy buttons — none of them may be a diagram.)
+      expect(
+        container.querySelectorAll('.markdown-code [data-language="mermaid"]'),
+      ).toHaveLength(0)
+      expect(
+        container.querySelectorAll('figure.markdown-diagram .markdown-code'),
+      ).toHaveLength(0)
+    })
+
+    it('keeps a diagram’s source readable while it is not rendered', () => {
+      // A reader on an engine that cannot draw the diagram still gets the information rather than an
+      // empty box — and the document's two deliberately broken diagrams pin that requirement.
+      const sources = [
+        ...container.querySelectorAll('.markdown-diagram-source'),
+      ]
+
+      expect(sources).toHaveLength(7)
+      expect(
+        sources.some((source) => source.textContent?.includes('flowchart TD')),
+      ).toBe(true)
+      expect(
+        sources.some((source) =>
+          source.textContent?.includes('Unclosed label'),
+        ),
+      ).toBe(true)
+    })
+
+    it('still renders every other language as a code block', () => {
       const languages = [
         ...container.querySelectorAll('pre[data-language]'),
       ].map((block) => block.getAttribute('data-language'))
-      expect(languages).toContain('mermaid')
+
+      // The Phase 4 code blocks are untouched by the fork.
+      expect(languages).toContain('bash')
+      expect(languages).toContain('json')
+      // The only `mermaid` left in a `pre` is the diagram fallback, not a code block.
+      expect(
+        container.querySelector('.markdown-code pre[data-language="mermaid"]'),
+      ).toBeNull()
     })
   })
 })
