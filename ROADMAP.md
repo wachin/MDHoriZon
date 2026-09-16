@@ -347,7 +347,7 @@ element, attribute and URL-scheme lists below are the deliverables that fill it 
 - [x] Review external images.
 - [x] Review links opened externally from Android/iOS.
 - [x] Add malicious-input fixtures.
-- [ ] Verify Mermaid content cannot escape its intended rendering boundary.
+- [x] Verify Mermaid content cannot escape its intended rendering boundary.
 - [x] Verify code blocks are rendered as text/code rather than executable HTML.
 
 ### Security test cases
@@ -554,17 +554,17 @@ mermaid code         → MermaidDiagram
 
 ### Tasks
 
-- [ ] Detect `language-mermaid`.
-- [ ] Implement `MermaidDiagram`.
-- [ ] Lazy-load Mermaid.
-- [ ] Prevent Mermaid from unnecessarily increasing initial bundle size.
-- [ ] Support light/dark Mermaid themes.
-- [ ] Handle rendering errors gracefully.
-- [ ] Display useful error feedback without crashing the article.
-- [ ] Test flowcharts.
-- [ ] Test sequence diagrams.
-- [ ] Test additional supported diagram types.
-- [ ] Test diagrams on narrow screens.
+- [x] Detect `language-mermaid`.
+- [x] Implement `MermaidDiagram`.
+- [x] Lazy-load Mermaid.
+- [x] Prevent Mermaid from unnecessarily increasing initial bundle size.
+- [x] Support light/dark Mermaid themes.
+- [x] Handle rendering errors gracefully.
+- [x] Display useful error feedback without crashing the article.
+- [x] Test flowcharts.
+- [x] Test sequence diagrams.
+- [x] Test additional supported diagram types.
+- [x] Test diagrams on narrow screens.
 - [ ] Test diagrams inside offline mode.
 - [ ] Test diagrams inside Android WebView.
 
