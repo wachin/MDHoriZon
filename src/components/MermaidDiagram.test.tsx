@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { initialiseTheme, resetThemeStore } from '../core/theme/store'
 import { MarkdownRenderer } from './MarkdownRenderer'
 
 /**
@@ -76,6 +77,7 @@ const readyDiagram = async (body: HTMLElement): Promise<Element> => {
 }
 
 afterEach(() => {
+  resetThemeStore()
   vi.unstubAllGlobals()
 })
 
@@ -273,6 +275,10 @@ describe('mermaid diagrams', () => {
         removeEventListener: () => undefined,
       })),
     )
+
+    // The diagram follows the *effective* theme, which the store resolves; it must therefore be
+    // listening to the system preference before the synthetic change below can reach it.
+    initialiseTheme()
 
     const body = renderMarkdown(FENCE('flowchart TD\n    A --> B'))
     const figure = await readyDiagram(body)

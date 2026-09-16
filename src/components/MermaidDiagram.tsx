@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
-import {
-  currentColorScheme,
-  subscribeToColorScheme,
-} from '../core/mermaid/color-scheme'
 import { renderMermaid } from '../core/mermaid/loader'
 import { sanitizeMermaidSvg } from '../core/mermaid/sanitize-svg'
+import { currentTheme, subscribeToTheme } from '../core/theme/store'
 
 type DiagramState = 'loading' | 'ready' | 'error'
 
@@ -30,12 +27,13 @@ export type MermaidDiagramProps = {
  *    rest of the article is untouched. The golden document contains two deliberately invalid
  *    diagrams to pin this.
  * 4. **The theme follows the reader.** Mermaid paints its own colours, so the diagram is re-rendered
- *    when the colour scheme changes.
+ *    when the theme changes — the *effective* theme, so a reader who chose light on a dark phone gets
+ *    a light diagram rather than the one their operating system would have picked.
  */
 export function MermaidDiagram({ code }: MermaidDiagramProps) {
   const scheme = useSyncExternalStore(
-    subscribeToColorScheme,
-    currentColorScheme,
+    subscribeToTheme,
+    currentTheme,
     () => 'light' as const,
   )
   const [outcome, setOutcome] = useState<{

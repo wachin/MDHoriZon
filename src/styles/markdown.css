@@ -1,15 +1,24 @@
 /*
- * Minimal, readable defaults for rendered Markdown.
+ * The reading experience for rendered Markdown (Phase 7).
  *
- * This is deliberately not the reading experience: responsive typography, themes and the full
- * light/dark work are Phase 7. What is here is what the Phase 1 components need to behave (tables
- * that scroll, images that fit, code that does not stretch the viewport) plus readable basics.
+ * Every colour and font comes from `theme.css` through a variable, so this file never needs to know
+ * which scheme is on screen. Sizes are in `rem` so that a reader who enlarges their browser's text
+ * gets everything scaled together, and vertical rhythm is in `em` so it follows the local font size.
+ *
+ * Typography is a decision, not a default: the measure is capped at `--reading-width`, the body line
+ * height is `--line-height-body`, and headings step down by a fixed ratio rather than by browser
+ * defaults, which differ between engines.
  */
 
 .markdown-body {
-  color: inherit;
+  color: var(--text-primary);
+  font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.7;
+  /* iOS inflates text in landscape unless told not to; a reading engine must not reflow its own
+     column behind the reader's back. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  line-height: var(--line-height-body);
   overflow-wrap: break-word;
 }
 
@@ -17,14 +26,41 @@
   margin-block-start: 0;
 }
 
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
+.markdown-body p {
+  margin-block: 0 1.15em;
+}
+
+/* Headings ---------------------------------------------------------------- */
+
+.markdown-body :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 600;
   line-height: 1.25;
   margin-block: 1.6em 0.6em;
+  /* An in-page link to a heading must not leave the heading under the top edge. */
+  scroll-margin-block-start: 1rem;
+}
+
+.markdown-body h1 {
+  font-size: 1.75rem;
+}
+
+.markdown-body h2 {
+  font-size: 1.4rem;
+  padding-block-end: 0.25em;
+  border-block-end: 1px solid var(--border-color);
+}
+
+.markdown-body h3 {
+  font-size: 1.175rem;
+}
+
+.markdown-body h4 {
+  font-size: 1.05rem;
+}
+
+.markdown-body :is(h5, h6) {
+  font-size: 1rem;
+  color: var(--text-secondary);
 }
 
 /* The anchor is decoration: it appears on hover or keyboard focus, never in the way. */
@@ -40,22 +76,80 @@
   opacity: 0.5;
 }
 
+/* Lists ------------------------------------------------------------------- */
+
+.markdown-body :is(ul, ol) {
+  margin-block: 0 1.15em;
+  padding-inline-start: 1.6em;
+}
+
+.markdown-body li + li {
+  margin-block-start: 0.35em;
+}
+
+.markdown-body li > :is(ul, ol) {
+  margin-block-start: 0.35em;
+}
+
+/* GFM task lists: the checkbox is the marker, so drop the bullet and pull the list in. */
+.markdown-body li:has(> input[type='checkbox']) {
+  list-style: none;
+  margin-inline-start: -1.35em;
+}
+
+/* Links ------------------------------------------------------------------- */
+
+.markdown-body a {
+  color: var(--link-color);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+.markdown-body a:hover {
+  text-decoration-thickness: 0.15em;
+}
+
+/* The anchor around a heading is not a link in the reading sense: it must not be coloured. */
+.markdown-body :is(h1, h2, h3, h4, h5, h6) a {
+  color: inherit;
+}
+
+/* Horizontal rules -------------------------------------------------------- */
+
+.markdown-body hr {
+  margin-block: 2em;
+  border: 0;
+  border-block-start: 1px solid var(--border-color);
+}
+
 .markdown-body pre {
   overflow-x: auto;
   padding: 0.75rem 1rem;
   border-radius: 0.375rem;
-  background-color: var(--md-surface);
+  background-color: var(--surface);
+  font-family: var(--font-mono);
+  /* Code is read character by character: a slightly smaller size and a tighter line height than
+     prose, which is read in words. */
+  font-size: 0.875rem;
+  line-height: 1.55;
+  tab-size: 2;
 }
 
 .markdown-body :not(pre) > code {
   padding: 0.1em 0.35em;
   border-radius: 0.25rem;
-  background-color: var(--md-surface);
+  background-color: var(--surface);
+  font-family: var(--font-mono);
+  /* Inline code sits inside prose, so it must not change the line rhythm: `em` keeps its box within
+     the body line height. */
+  font-size: 0.9em;
 }
 
 .markdown-body img {
+  /* Images must never widen the column; the intrinsic size is respected. */
   max-width: 100%;
   height: auto;
+  border-radius: 0.25rem;
 }
 
 .markdown-table-scroll {
@@ -70,21 +164,37 @@
 
 .markdown-body table {
   border-collapse: collapse;
+  /* Tables are data, not prose: a step down in size keeps more columns legible. */
+  font-size: 0.9375rem;
 }
 
 .markdown-body :is(th, td) {
-  /* `--md-border`, not a literal colour: a hardcoded black hairline is invisible on a dark surface,
-     which is what made the cell lines disappear in dark mode. See the variable block below. */
-  border: 1px solid var(--md-border);
-  padding: 0.35rem 0.6rem;
+  /* `--border-color`, not a literal colour: a hardcoded black hairline is invisible on a dark
+     surface, which is what made the cell lines disappear in dark mode. */
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.65rem;
+}
+
+.markdown-body th {
+  /* A header row that does not read as a header is a usability bug in a long table. */
+  font-weight: 600;
+  text-align: start;
+  background-color: var(--surface);
 }
 
 .markdown-body blockquote {
   margin-inline: 0;
-  padding-inline-start: 1rem;
-  border-inline-start: 0.25rem solid var(--md-border);
-  color: inherit;
-  opacity: 0.9;
+  margin-block: 0 1.15em;
+  padding: 0.75em 1em;
+  border-inline-start: 0.25rem solid var(--border-color);
+  background-color: var(--blockquote-background);
+  /* Secondary text, not faded primary: `opacity` would also fade the links inside it, and a quoted
+     citation must stay readable and clickable. */
+  color: var(--text-secondary);
+}
+
+.markdown-body blockquote > :last-child {
+  margin-block-end: 0;
 }
 
 /* ---------------------------------------------------------------------------------------------
@@ -95,54 +205,9 @@
  * classes come from highlight.js (`hljs-*`), which the pipeline applies before sanitization.
  * ------------------------------------------------------------------------------------------- */
 
-/* ---------------------------------------------------------------------------------------------
- * Theme variables
- *
- * Both blocks must define the **same set** of variables: a variable defined only for the light theme
- * leaves its rule invisible (or unreadable) in the other one. `src/styles/markdown.test.ts` asserts
- * that, because the failure is easy to introduce and hard to notice.
- * ------------------------------------------------------------------------------------------- */
-
-:root {
-  --md-border: rgb(0 0 0 / 15%);
-  --md-surface: rgb(0 0 0 / 5%);
-  --md-code-fg: #24292f;
-  --md-code-bg: #f6f8fa;
-  --md-code-border: rgb(0 0 0 / 12%);
-  --md-code-chrome: rgb(0 0 0 / 4%);
-  --md-token-comment: #6e7781;
-  --md-token-keyword: #cf222e;
-  --md-token-string: #0a3069;
-  --md-token-number: #0550ae;
-  --md-token-title: #8250df;
-  --md-token-type: #953800;
-  --md-token-attr: #0550ae;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* White rather than black, at the same hairline width. Slightly stronger than the light theme's
-       15 % because a light line on a dark surface reads fainter at equal alpha — the phone check
-       that found this bug is what the value is calibrated against. */
-    --md-border: rgb(255 255 255 / 20%);
-    --md-surface: rgb(255 255 255 / 7%);
-    --md-code-fg: #e6edf3;
-    --md-code-bg: #1b1f24;
-    --md-code-border: rgb(255 255 255 / 14%);
-    --md-code-chrome: rgb(255 255 255 / 6%);
-    --md-token-comment: #8b949e;
-    --md-token-keyword: #ff7b72;
-    --md-token-string: #a5d6ff;
-    --md-token-number: #79c0ff;
-    --md-token-title: #d2a8ff;
-    --md-token-type: #ffa657;
-    --md-token-attr: #79c0ff;
-  }
-}
-
 .markdown-code {
   margin-block: 1.25em;
-  border: 1px solid var(--md-code-border);
+  border: 1px solid var(--border-color);
   border-radius: 0.375rem;
   overflow: hidden;
 }
@@ -153,13 +218,13 @@
   justify-content: space-between;
   gap: 0.5rem;
   padding-inline-start: 0.75rem;
-  border-bottom: 1px solid var(--md-code-border);
-  background: var(--md-code-chrome);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--code-chrome);
   font-size: 0.8125rem;
 }
 
 .markdown-code-language {
-  font-family: ui-monospace, Consolas, monospace;
+  font-family: var(--font-mono);
   opacity: 0.75;
 }
 
@@ -171,13 +236,13 @@
   font: inherit;
   color: inherit;
   background: transparent;
-  border: 1px solid var(--md-code-border);
+  border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   cursor: pointer;
 }
 
 .markdown-code-copy:hover {
-  background: var(--md-code-chrome);
+  background: var(--code-chrome);
 }
 
 .markdown-code-copy:focus-visible {
@@ -202,12 +267,12 @@
 }
 
 .markdown-body pre {
-  color: var(--md-code-fg);
-  background-color: var(--md-code-bg);
+  color: var(--code-foreground);
+  background-color: var(--code-background);
 }
 
 .markdown-body :is(.hljs-comment, .hljs-quote) {
-  color: var(--md-token-comment);
+  color: var(--token-comment);
   font-style: italic;
 }
 
@@ -219,25 +284,25 @@
     .hljs-doctag,
     .hljs-deletion
   ) {
-  color: var(--md-token-keyword);
+  color: var(--token-keyword);
 }
 
 .markdown-body
   :is(.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute) {
-  color: var(--md-token-string);
+  color: var(--token-string);
 }
 
 .markdown-body
   :is(.hljs-number, .hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta) {
-  color: var(--md-token-number);
+  color: var(--token-number);
 }
 
 .markdown-body :is(.hljs-title, .hljs-section, .hljs-selector-id) {
-  color: var(--md-token-title);
+  color: var(--token-title);
 }
 
 .markdown-body :is(.hljs-type, .hljs-built_in, .hljs-builtin-name) {
-  color: var(--md-token-type);
+  color: var(--token-type);
 }
 
 .markdown-body
@@ -248,7 +313,7 @@
     .hljs-name,
     .hljs-selector-class
   ) {
-  color: var(--md-token-attr);
+  color: var(--token-attr);
 }
 
 /* ---------------------------------------------------------------------------------------------
@@ -302,15 +367,15 @@
   margin: 0;
   padding: 0.75rem 1rem;
   overflow-x: auto;
-  border: 1px solid var(--md-code-border);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: var(--md-code-bg);
-  color: var(--md-code-fg);
+  background: var(--code-background);
+  color: var(--code-foreground);
   font-size: 0.875rem;
 }
 
 .markdown-diagram-error {
   margin: 0.5rem 0 0;
-  color: var(--md-token-keyword);
+  color: var(--token-keyword);
   font-size: 0.875rem;
 }

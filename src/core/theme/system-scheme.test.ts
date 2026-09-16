@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { currentColorScheme, subscribeToColorScheme } from './color-scheme'
+import { systemPrefersDark, subscribeToSystemScheme } from './system-scheme'
 
 /**
- * The scheme reader. Mermaid cannot inherit our CSS variables, so this value decides which theme the
- * diagram is painted with — and older WebViews only have the deprecated subscription API, which is
- * the case worth pinning.
+ * The system preference reader. It is only half of the theme decision — the reader's own choice wins
+ * over it — but it is the half that depends on the engine, including the deprecated subscription API
+ * that older WebViews only have.
  */
 
 type Listener = (event: { matches: boolean }) => void
@@ -45,24 +45,24 @@ afterEach(() => {
 })
 
 describe('the colour scheme reader', () => {
-  it('reports light when the engine has no media query support', () => {
+  it('reports no dark preference when the engine has no media query support', () => {
     vi.stubGlobal('matchMedia', undefined)
 
-    expect(currentColorScheme()).toBe('light')
-    expect(() => subscribeToColorScheme(() => undefined)()).not.toThrow()
+    expect(systemPrefersDark()).toBe(false)
+    expect(() => subscribeToSystemScheme(() => undefined)()).not.toThrow()
   })
 
-  it('reports dark when the reader prefers dark', () => {
+  it('reports dark when the operating system asks for it', () => {
     stubMatchMedia(true)
 
-    expect(currentColorScheme()).toBe('dark')
+    expect(systemPrefersDark()).toBe(true)
   })
 
   it('subscribes and unsubscribes through addEventListener', () => {
     const { listeners, removed } = stubMatchMedia(false)
     const onChange = () => undefined
 
-    const unsubscribe = subscribeToColorScheme(onChange)
+    const unsubscribe = subscribeToSystemScheme(onChange)
 
     expect(listeners).toEqual([onChange])
     unsubscribe()
@@ -73,7 +73,7 @@ describe('the colour scheme reader', () => {
     const { listeners, removed } = stubMatchMedia(false, { legacy: true })
     const onChange = () => undefined
 
-    const unsubscribe = subscribeToColorScheme(onChange)
+    const unsubscribe = subscribeToSystemScheme(onChange)
 
     expect(listeners).toEqual([onChange])
     unsubscribe()
@@ -87,6 +87,6 @@ describe('the colour scheme reader', () => {
       vi.fn(() => ({ matches: false, media: '' })),
     )
 
-    expect(() => subscribeToColorScheme(() => undefined)()).not.toThrow()
+    expect(() => subscribeToSystemScheme(() => undefined)()).not.toThrow()
   })
 })

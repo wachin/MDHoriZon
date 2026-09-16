@@ -1,0 +1,124 @@
+/* ---------------------------------------------------------------------------------------------
+ * The visual system.
+ *
+ * One file owns every colour and font in the application, and every rule elsewhere consumes it
+ * through a variable. The roadmap asks for exactly these names, so they are used verbatim:
+ *
+ *   --font-body  --font-mono  --text-primary  --text-secondary  --background  --surface
+ *   --border-color  --link-color  --code-background  --blockquote-background
+ *
+ * Additions beyond that list are named the same way and kept to what the rules actually need
+ * (`--code-foreground`, `--code-chrome`, the `--token-*` palette, `--line-height-body`,
+ * `--reading-width`, `--math-error`).
+ *
+ * ## Why there are three blocks for two themes
+ *
+ * The reader can choose a theme, and until they do the system decides. CSS has no way to share one
+ * set of declarations between two selectors, so the dark palette appears twice: once for "the system
+ * is dark and the reader has not chosen light", once for "the reader chose dark". The duplication is
+ * a maintenance hazard, so `src/styles/theme.test.ts` compares the two blocks — same variables, same
+ * values — and fails if they drift apart.
+ *
+ * `color-scheme` is set per block so that scrollbars and form controls follow the page rather than
+ * the operating system.
+ *
+ * ## The code palette is provisional on purpose
+ *
+ * The roadmap is explicit: "Do not use a fixed syntax-highlighting theme permanently. Define
+ * MDHoriZon's own light/dark code themes later." So the token colours below are readable and
+ * internally consistent — `theme.test.ts` checks every one of them against WCAG AA contrast, which is
+ * why the light comment colour is `#65707c` rather than GitHub's `#6e7781` (4.27:1, just under the
+ * 4.5:1 floor) — but they are placeholders for a palette of our own, not a commitment to
+ * highlight.js's default look.
+ * ------------------------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --font-body:
+    system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+
+  --text-primary: #1f2229;
+  --text-secondary: #59636e;
+  --background: #ffffff;
+  --surface: rgb(0 0 0 / 5%);
+  --border-color: rgb(0 0 0 / 15%);
+  --link-color: #0969da;
+  --code-background: #f6f8fa;
+  --code-foreground: #24292f;
+  --code-chrome: rgb(0 0 0 / 4%);
+  --blockquote-background: rgb(0 0 0 / 3%);
+  --math-error: #cf222e;
+
+  --token-comment: #65707c;
+  --token-keyword: #cf222e;
+  --token-string: #0a3069;
+  --token-number: #0550ae;
+  --token-title: #8250df;
+  --token-type: #953800;
+  --token-attr: #0550ae;
+
+  --line-height-body: 1.7;
+  --reading-width: 46rem;
+}
+
+/* Dark because the operating system says so, for as long as the reader has not chosen light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --text-primary: #e6e6ea;
+    --text-secondary: #9198a1;
+    --background: #16171d;
+    --surface: rgb(255 255 255 / 7%);
+    --border-color: rgb(255 255 255 / 20%);
+    --link-color: #6cb6ff;
+    --code-background: #1b1f24;
+    --code-foreground: #e6edf3;
+    --code-chrome: rgb(255 255 255 / 6%);
+    --blockquote-background: rgb(255 255 255 / 5%);
+    --math-error: #ff7b72;
+
+    --token-comment: #8b949e;
+    --token-keyword: #ff7b72;
+    --token-string: #a5d6ff;
+    --token-number: #79c0ff;
+    --token-title: #d2a8ff;
+    --token-type: #ffa657;
+    --token-attr: #79c0ff;
+  }
+}
+
+/* Dark because the reader chose it. Same values as the block above; the test compares them. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --text-primary: #e6e6ea;
+  --text-secondary: #9198a1;
+  --background: #16171d;
+  --surface: rgb(255 255 255 / 7%);
+  --border-color: rgb(255 255 255 / 20%);
+  --link-color: #6cb6ff;
+  --code-background: #1b1f24;
+  --code-foreground: #e6edf3;
+  --code-chrome: rgb(255 255 255 / 6%);
+  --blockquote-background: rgb(255 255 255 / 5%);
+  --math-error: #ff7b72;
+
+  --token-comment: #8b949e;
+  --token-keyword: #ff7b72;
+  --token-string: #a5d6ff;
+  --token-number: #79c0ff;
+  --token-title: #d2a8ff;
+  --token-type: #ffa657;
+  --token-attr: #79c0ff;
+}
+
+/* The reader chose light on a dark system: the base `:root` block already is light, and the media
+   query above excludes this case. This block only has to set `color-scheme` back. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
