@@ -14,17 +14,22 @@ browser, mobile browsers, Android WebView and iOS WebView, with an optional, use
 library. It is not a CMS, and it is not an editor — that ambition was withdrawn
 ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)).
 
-Current state: **Phases 0–6 are complete** — foundation, the Markdown rendering core, the security boundary, the
-golden test suite, code blocks and tables, mathematics with KaTeX, and Mermaid diagrams. The app renders
-`tests/fixtures/Golden-Test-Document.md` through the real pipeline as a Phase 1 preview screen. Phase 7 (reading
-experience) is next; several earlier phases carry open checkboxes that belong to later work — relative assets
-(Phase 8), the offline path (Phases 10–12) and real-browser/WebView verification (Phase 20). Check `ROADMAP.md`
-for the current list rather than trusting this paragraph.
+Current state: **Phases 0–7 are complete** — foundation, the Markdown rendering core, the security boundary, the
+golden test suite, code blocks and tables, mathematics with KaTeX, Mermaid diagrams, and the reading experience
+(typography, theming, table of contents). The app renders `tests/fixtures/Golden-Test-Document.md` through the
+real pipeline as a Phase 1 preview screen. Phase 8 (images and relative assets) is next; several earlier phases
+carry open checkboxes that belong to later work — the content model and article navigation (Phases 9–10) and
+real-browser/WebView verification (Phase 20). Check `ROADMAP.md` for the current list rather than trusting this
+paragraph.
 
 Two things about Mermaid are worth knowing before touching it: its SVG never passes through the Markdown
 pipeline, so [ADR 0006](docs/architecture/0006-mermaid-svg-boundary.md) is the boundary that applies instead; and
 Mermaid is pinned to the major version that needs no forced transitive pin, for the reason recorded in
 [`docs/references.md`](docs/references.md).
+
+`src/styles/theme.css` is the only file allowed to name a colour or a font
+([ADR 0007](docs/architecture/0007-theming.md)); everything else consumes variables, and
+`src/styles/theme.test.ts` enforces both that rule and the WCAG AA contrast floor in both schemes.
 
 ## 2. Source of truth and phase discipline
 
@@ -181,10 +186,10 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: the content model (Phase 9), the reading experience (Phase 7), the bundle
-budget (Phase 18), the sanitization element/attribute/URL lists that Phases 4–6 each narrowed (Phase 2 — its shape
-is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and end-to-end and WebView testing (Phase 20), which
-is where the device half of every feature lives.
+Checklist items still open include: the content model (Phase 9), the content loader and article navigation
+(Phase 10), the bundle budget (Phase 18), the sanitization element/attribute/URL lists that Phases 4–6 each
+narrowed (Phase 2 — its shape is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and end-to-end and
+WebView testing (Phase 20), which is where the device half of every feature lives.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous
