@@ -10,6 +10,12 @@ import { MarkdownRenderer } from './MarkdownRenderer'
  * case: no dangerous element, no event-handler attribute, no inline style, and no executable URL.
  */
 
+/**
+ * Elements a document must never be able to create.
+ *
+ * `button` is deliberately absent: our own code block renders a copy button. What forbids a document
+ * from producing one is the schema, asserted in `src/core/markdown/sanitize-schema.test.ts`.
+ */
 const DANGEROUS_ELEMENTS = [
   'script',
   'iframe',
@@ -21,11 +27,15 @@ const DANGEROUS_ELEMENTS = [
   'link',
   'form',
   'textarea',
-  'button',
   'select',
   'svg',
   'math',
 ]
+
+/** Elements that are legitimate only when one of our components renders them, and their marker. */
+const OWN_COMPONENT_ELEMENTS: Record<string, string> = {
+  button: 'markdown-code-copy',
+}
 
 const EXECUTABLE_URL = /^(javascript|vbscript|data):/
 
@@ -57,6 +67,17 @@ const DERIVED_TABLE_ALIGNMENT = /^text-align: (left|center|right|justify);?$/
 function expectNothingDangerous(container: HTMLElement) {
   for (const tag of DANGEROUS_ELEMENTS) {
     expect(container.querySelectorAll(tag), `element <${tag}>`).toHaveLength(0)
+  }
+
+  // The exceptions above are checked rather than trusted: a `<button>` may exist, but it has to be
+  // the one our code block renders.
+  for (const [tag, marker] of Object.entries(OWN_COMPONENT_ELEMENTS)) {
+    for (const element of container.querySelectorAll(tag)) {
+      expect(
+        element.classList.contains(marker),
+        `${tag} at ${element.outerHTML.slice(0, 120)}`,
+      ).toBe(true)
+    }
   }
 
   for (const element of container.querySelectorAll('*')) {

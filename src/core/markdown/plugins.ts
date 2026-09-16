@@ -12,6 +12,7 @@ import type {
   Options as ReactMarkdownOptions,
   UrlTransform,
 } from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
@@ -34,10 +35,36 @@ type PluginList = NonNullable<ReactMarkdownOptions['remarkPlugins']>
  */
 export const remarkPlugins: PluginList = [[remarkGfm, { singleTilde: false }]]
 
-/** Rehype plugins: tree-side transformations, ending with the security boundary. */
+/**
+ * Languages whose content is markup or prose, not code: highlighting them would be noise. Mermaid
+ * source in particular is not code, and Phase 6 will render it as a diagram.
+ */
+const PLAIN_TEXT_LANGUAGES = ['mermaid', 'text', 'txt', 'plaintext']
+
+/**
+ * Rehype plugins: tree-side transformations, ending with the security boundary.
+ *
+ * Measured cost of syntax highlighting: the bundle goes from 413 kB to 581 kB (131 kB to 184 kB
+ * gzipped). `rehype-highlight` imports lowlight's 37-grammar `common` set statically, so trimming
+ * languages with its `subset` option changes nothing — verified by building both ways. The real win
+ * is loading the highlighter on demand, which is the same mechanism Phase 6 needs for Mermaid, so it
+ * belongs with that work rather than being bolted on here. Phase 18 owns the budget.
+ */
 export const rehypePlugins: PluginList = [
   // Deterministic, GitHub-compatible heading ids, with `-1`-style suffixes for duplicates.
   rehypeSlug,
+  // Syntax highlighting. It runs before the sanitizer on purpose: the spans it generates go through
+  // the same boundary as everything else.
+  [
+    rehypeHighlight,
+    {
+      plainText: PLAIN_TEXT_LANGUAGES,
+      // Detection off deliberately: guessing a language for an unlabelled fence turns plain text
+      // into a colour guessing game. In this project "language detection" means reading the fence's
+      // own label, and an unknown label falls back to plain code.
+      detect: false,
+    },
+  ],
   // The security boundary. Always last, and never optional.
   [rehypeSanitize, sanitizeSchema],
 ]

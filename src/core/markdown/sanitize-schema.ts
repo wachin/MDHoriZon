@@ -88,5 +88,12 @@ export const sanitizeSchema: Schema = {
     '*': withoutAlign(defaultSchema.attributes?.['*']),
     th: [...withoutAlign(defaultSchema.attributes?.th), ALIGN_ATTRIBUTE],
     td: [...withoutAlign(defaultSchema.attributes?.td), ALIGN_ATTRIBUTE],
+    // Syntax highlighting (Phase 4) — the deliberate widening that ADR 0005 predicted would be
+    // needed. `rehype-highlight` wraps tokens in `<span class="hljs-…">`, and the base schema only
+    // allows `className` per element, so without this the classes are stripped and the code renders
+    // uncoloured while the tests still see spans. Bounded on purpose: a span may carry a class only
+    // if it is a highlight.js token class, and a document cannot produce spans at all.
+    span: [...(defaultSchema.attributes?.span ?? []), ['className', /^hljs-/]],
+    code: [...(defaultSchema.attributes?.code ?? []), ['className', 'hljs']],
   },
 }

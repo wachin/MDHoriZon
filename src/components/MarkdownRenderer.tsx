@@ -9,7 +9,7 @@ import { CodeBlock } from './CodeBlock'
 import { headings } from './Heading'
 import { Link } from './Link'
 import { ResponsiveImage } from './ResponsiveImage'
-import { TableWrapper } from './TableWrapper'
+import { TableHeaderCell, TableWrapper } from './TableWrapper'
 import '../styles/markdown.css'
 
 /**
@@ -22,6 +22,7 @@ const components: Components = {
   img: ResponsiveImage,
   pre: CodeBlock,
   table: TableWrapper,
+  th: TableHeaderCell,
 }
 
 export type MarkdownRendererProps = {

@@ -117,6 +117,21 @@ describe('sanitize schema', () => {
     expect(td).toContainEqual(['align', 'left', 'center', 'right', 'justify'])
   })
 
+  it('allows syntax highlighting classes on spans, and nothing else', () => {
+    const span = sanitizeSchema.attributes?.span as AttributeEntry[]
+    const code = sanitizeSchema.attributes?.code as AttributeEntry[]
+    const allowed = span.find(
+      (entry) => Array.isArray(entry) && entry[0] === 'className',
+    )
+
+    // The highlighter wraps tokens in `<span class="hljs-…">`. Allowing `className` broadly here
+    // would let any class through, so the permission is a bounded pattern.
+    expect(allowed).toEqual(['className', /^hljs-/])
+    expect(span).not.toContain('className')
+    expect(code).toContainEqual(['className', 'hljs'])
+    expect(code).toContainEqual(['className', /^language-./])
+  })
+
   it('forces task-list inputs to be disabled checkboxes', () => {
     const input = sanitizeSchema.attributes?.input as AttributeEntry[]
 

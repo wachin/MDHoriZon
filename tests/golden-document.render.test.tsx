@@ -88,6 +88,18 @@ describe('Golden Test Document', () => {
       ).toBe(true)
     })
 
+    it('covers every table width the roadmap asks to test', () => {
+      const widths = new Set(
+        [...container.querySelectorAll('table')].map(
+          (table) => table.querySelectorAll('thead th').length,
+        ),
+      )
+
+      for (const expected of [2, 3, 5, 8, 12, 20]) {
+        expect([...widths], `a ${expected}-column table`).toContain(expected)
+      }
+    })
+
     it('renders code blocks and keeps their declared language', () => {
       const blocks = container.querySelectorAll('pre[data-language]')
       expect(blocks.length).toBeGreaterThanOrEqual(8)

@@ -89,7 +89,7 @@ article keeps rendering, the alt text stays available, and nothing throws.</p>
 <li>Item after the image.</li>
 </ul>
 <p>Image inside a table cell:</p>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Placement</th><th>Image</th></tr></thead><tbody><tr><td>Table cell</td><td><img alt="Icon in a table" loading="lazy" decoding="async" src="../assets/example.png"></td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Placement</th><th scope="col">Image</th></tr></thead><tbody><tr><td>Table cell</td><td><img alt="Icon in a table" loading="lazy" decoding="async" src="../assets/example.png"></td></tr></tbody></table></div>
 <hr>
 <h1 id="5-lists">5. Lists<a class="markdown-heading-anchor" href="#5-lists" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="unordered">Unordered<a class="markdown-heading-anchor" href="#unordered" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
@@ -157,8 +157,8 @@ article keeps rendering, the alt text stays available, and nothing throws.</p>
 <ul>
 <li>
 <p>Item with code:</p>
-<pre data-language="bash"><code class="language-bash">echo "code inside a list item"
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">bash</span><button type="button" class="markdown-code-copy" aria-label="Copy bash code">Copy</button></div><pre data-language="bash"><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">"code inside a list item"</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 </li>
 <li>
 <p>Item after the code block.</p>
@@ -193,98 +193,102 @@ article keeps rendering, the alt text stays available, and nothing throws.</p>
 <hr>
 <h1 id="7-code-blocks">7. Code Blocks<a class="markdown-heading-anchor" href="#7-code-blocks" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="bash">Bash<a class="markdown-heading-anchor" href="#bash" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="bash"><code class="language-bash">#!/usr/bin/env bash
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">bash</span><button type="button" class="markdown-code-copy" aria-label="Copy bash code">Copy</button></div><pre data-language="bash"><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
 
-echo "Hello from MDHoriZon"
-printf 'Current directory: %s\\n' "$PWD"
-</code></pre>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello from MDHoriZon"</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">'Current directory: %s\\n'</span> <span class="hljs-string">"<span class="hljs-variable">$PWD</span>"</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="python">Python<a class="markdown-heading-anchor" href="#python" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="python"><code class="language-python">from pathlib import Path
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">python</span><button type="button" class="markdown-code-copy" aria-label="Copy python code">Copy</button></div><pre data-language="python"><code class="language-python"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
 
-root = Path(".")
-for path in root.rglob("*.md"):
-    print(path)
-</code></pre>
+root = Path(<span class="hljs-string">"."</span>)
+<span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> root.rglob(<span class="hljs-string">"*.md"</span>):
+    <span class="hljs-built_in">print</span>(path)
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="javascript">JavaScript<a class="markdown-heading-anchor" href="#javascript" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="javascript"><code class="language-javascript">const message = "Hello, MDHoriZon!";
-console.log(message);
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">javascript</span><button type="button" class="markdown-code-copy" aria-label="Copy javascript code">Copy</button></div><pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">const</span> message = <span class="hljs-string">"Hello, MDHoriZon!"</span>;
+<span class="hljs-variable">console</span>.<span class="hljs-title">log</span>(message);
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="typescript">TypeScript<a class="markdown-heading-anchor" href="#typescript" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="typescript"><code class="language-typescript">interface Article {
-  title: string;
-  tags: string[];
-  offline: boolean;
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">typescript</span><button type="button" class="markdown-code-copy" aria-label="Copy typescript code">Copy</button></div><pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title">Article</span> {
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">tags</span>: <span class="hljs-built_in">string</span>[];
+  <span class="hljs-attr">offline</span>: <span class="hljs-built_in">boolean</span>;
 }
 
-const article: Article = {
-  title: "Golden Test",
-  tags: ["markdown", "testing"],
-  offline: true,
+<span class="hljs-keyword">const</span> <span class="hljs-attr">article</span>: <span class="hljs-title">Article</span> = {
+  <span class="hljs-attr">title</span>: <span class="hljs-string">"Golden Test"</span>,
+  <span class="hljs-attr">tags</span>: [<span class="hljs-string">"markdown"</span>, <span class="hljs-string">"testing"</span>],
+  <span class="hljs-attr">offline</span>: <span class="hljs-literal">true</span>,
 };
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="json">JSON<a class="markdown-heading-anchor" href="#json" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="json"><code class="language-json">{
-  "name": "MDHoriZon",
-  "offline": true,
-  "features": ["GFM", "KaTeX", "Mermaid"]
-}
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">json</span><button type="button" class="markdown-code-copy" aria-label="Copy json code">Copy</button></div><pre data-language="json"><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"MDHoriZon"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"offline"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"features"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"GFM"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"KaTeX"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"Mermaid"</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="html">HTML<a class="markdown-heading-anchor" href="#html" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="html"><code class="language-html">&lt;article&gt;
-  &lt;h1&gt;Example&lt;/h1&gt;
-  &lt;p&gt;HTML should be handled according to the project's security policy.&lt;/p&gt;
-&lt;/article&gt;
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>HTML should be handled according to the project's security policy.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="css">CSS<a class="markdown-heading-anchor" href="#css" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="css"><code class="language-css">.article {
-  max-width: 72rem;
-  margin-inline: auto;
-  padding: 1rem;
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">css</span><button type="button" class="markdown-code-copy" aria-label="Copy css code">Copy</button></div><pre data-language="css"><code class="language-css"><span class="hljs-selector-class">.article</span> {
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">72rem</span>;
+  <span class="hljs-attribute">margin-inline</span>: auto;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
 }
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="unknown-language">Unknown language<a class="markdown-heading-anchor" href="#unknown-language" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="not-a-real-language"><code class="language-not-a-real-language">This must still render as readable code.
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">not-a-real-language</span><button type="button" class="markdown-code-copy" aria-label="Copy not-a-real-language code">Copy</button></div><pre data-language="not-a-real-language"><code class="language-not-a-real-language">This must still render as readable code.
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="long-line">Long line<a class="markdown-heading-anchor" href="#long-line" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="text"><code class="language-text">This is intentionally an extremely long line intended to verify horizontal scrolling rather than forcing the entire document or viewport to become unnecessarily wide on desktop or mobile devices.
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">text</span><button type="button" class="markdown-code-copy" aria-label="Copy text code">Copy</button></div><pre data-language="text"><code class="language-text">This is intentionally an extremely long line intended to verify horizontal scrolling rather than forcing the entire document or viewport to become unnecessarily wide on desktop or mobile devices.
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="unbroken-long-token">Unbroken long token<a class="markdown-heading-anchor" href="#unbroken-long-token" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="text"><code class="language-text">https://example.com/a/deliberately/long/unbroken/path/that/cannot/wrap/at/all/and/must/instead/scroll/horizontally/without/stretching/the/viewport/0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">text</span><button type="button" class="markdown-code-copy" aria-label="Copy text code">Copy</button></div><pre data-language="text"><code class="language-text">https://example.com/a/deliberately/long/unbroken/path/that/cannot/wrap/at/all/and/must/instead/scroll/horizontally/without/stretching/the/viewport/0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="plain-text-block-with-no-language-declared">Plain text block with no language declared<a class="markdown-heading-anchor" href="#plain-text-block-with-no-language-declared" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre><code>No language is declared for this fence, and it must still render as a readable code block.
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">text</span><button type="button" class="markdown-code-copy" aria-label="Copy code">Copy</button></div><pre><code>No language is declared for this fence, and it must still render as a readable code block.
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="empty-code-block">Empty code block<a class="markdown-heading-anchor" href="#empty-code-block" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="text"><code class="language-text"></code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">text</span><button type="button" class="markdown-code-copy" aria-label="Copy text code">Copy</button></div><pre data-language="text"><code class="language-text"></code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="indented-code-block-four-spaces-no-fence">Indented code block (four spaces, no fence)<a class="markdown-heading-anchor" href="#indented-code-block-four-spaces-no-fence" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre><code>indented code block, first line
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">text</span><button type="button" class="markdown-code-copy" aria-label="Copy code">Copy</button></div><pre><code>indented code block, first line
 indented code block, second line
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="language-alias-and-uppercase-identifier">Language alias and uppercase identifier<a class="markdown-heading-anchor" href="#language-alias-and-uppercase-identifier" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="JS"><code class="language-JS">console.log("Alias and uppercase language identifiers must not crash the highlighter")
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">JS</span><button type="button" class="markdown-code-copy" aria-label="Copy JS code">Copy</button></div><pre data-language="JS"><code class="language-JS"><span class="hljs-variable">console</span>.<span class="hljs-title">log</span>(<span class="hljs-string">"Alias and uppercase language identifiers must not crash the highlighter"</span>)
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <hr>
 <h1 id="8-tables">8. Tables<a class="markdown-heading-anchor" href="#8-tables" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="small-table">Small table<a class="markdown-heading-anchor" href="#small-table" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Name</th><th>Type</th></tr></thead><tbody><tr><td>Markdown</td><td>Content</td></tr><tr><td>React</td><td>UI</td></tr><tr><td>Mermaid</td><td>Diagram</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Name</th><th scope="col">Type</th></tr></thead><tbody><tr><td>Markdown</td><td>Content</td></tr><tr><td>React</td><td>UI</td></tr><tr><td>Mermaid</td><td>Diagram</td></tr></tbody></table></div>
 <h2 id="three-columns">Three columns<a class="markdown-heading-anchor" href="#three-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Feature</th><th style="text-align: right;">Web</th><th style="text-align: right;">Mobile</th></tr></thead><tbody><tr><td>Markdown</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr><tr><td>Offline</td><td style="text-align: right;">Optional</td><td style="text-align: right;">Yes</td></tr><tr><td>Mermaid</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Feature</th><th scope="col" style="text-align: right;">Web</th><th scope="col" style="text-align: right;">Mobile</th></tr></thead><tbody><tr><td>Markdown</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr><tr><td>Offline</td><td style="text-align: right;">Optional</td><td style="text-align: right;">Yes</td></tr><tr><td>Mermaid</td><td style="text-align: right;">Yes</td><td style="text-align: right;">Yes</td></tr></tbody></table></div>
+<h2 id="five-columns">Five columns<a class="markdown-heading-anchor" href="#five-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Feature</th><th scope="col">Web</th><th scope="col">Mobile</th><th scope="col">Offline</th><th scope="col">Notes</th></tr></thead><tbody><tr><td>Markdown</td><td>Yes</td><td>Yes</td><td>Yes</td><td>One core for every target</td></tr><tr><td>Tables</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Horizontal scrolling on narrow screens</td></tr><tr><td>Mermaid</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Lazy-loaded</td></tr></tbody></table></div>
+<h2 id="eight-columns">Eight columns<a class="markdown-heading-anchor" href="#eight-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">F1</th><th scope="col">F2</th><th scope="col">F3</th><th scope="col">F4</th><th scope="col">F5</th><th scope="col">F6</th><th scope="col">F7</th><th scope="col">F8</th></tr></thead><tbody><tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td><td>f</td><td>g</td><td>h</td></tr><tr><td>i</td><td>j</td><td>k</td><td>l</td><td>m</td><td>n</td><td>o</td><td>p</td></tr></tbody></table></div>
 <h2 id="wide-table--12-columns">Wide table — 12 columns<a class="markdown-heading-anchor" href="#wide-table--12-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th><th>C7</th><th>C8</th><th>C9</th><th>C10</th><th>C11</th><th>C12</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">C1</th><th scope="col">C2</th><th scope="col">C3</th><th scope="col">C4</th><th scope="col">C5</th><th scope="col">C6</th><th scope="col">C7</th><th scope="col">C8</th><th scope="col">C9</th><th scope="col">C10</th><th scope="col">C11</th><th scope="col">C12</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td></tr></tbody></table></div>
 <h2 id="formatted-cells">Formatted cells<a class="markdown-heading-anchor" href="#formatted-cells" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Feature</th><th>Example</th></tr></thead><tbody><tr><td>Bold</td><td><strong>important</strong></td></tr><tr><td>Italic</td><td><em>emphasis</em></td></tr><tr><td>Code</td><td><code>npm install</code></td></tr><tr><td>Link</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></td></tr><tr><td>Long text</td><td>This is a deliberately long cell that should remain readable without breaking the table layout.</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Feature</th><th scope="col">Example</th></tr></thead><tbody><tr><td>Bold</td><td><strong>important</strong></td></tr><tr><td>Italic</td><td><em>emphasis</em></td></tr><tr><td>Code</td><td><code>npm install</code></td></tr><tr><td>Link</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a></td></tr><tr><td>Long text</td><td>This is a deliberately long cell that should remain readable without breaking the table layout.</td></tr></tbody></table></div>
 <h2 id="alignment-variants">Alignment variants<a class="markdown-heading-anchor" href="#alignment-variants" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th style="text-align: left;">Left</th><th style="text-align: center;">Center</th><th style="text-align: right;">Right</th><th>Default</th></tr></thead><tbody><tr><td style="text-align: left;">l</td><td style="text-align: center;">c</td><td style="text-align: right;">r</td><td>d</td></tr><tr><td style="text-align: left;">a longer cell</td><td style="text-align: center;">a longer cell</td><td style="text-align: right;">a longer cell</td><td>a longer cell</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col" style="text-align: left;">Left</th><th scope="col" style="text-align: center;">Center</th><th scope="col" style="text-align: right;">Right</th><th scope="col">Default</th></tr></thead><tbody><tr><td style="text-align: left;">l</td><td style="text-align: center;">c</td><td style="text-align: right;">r</td><td>d</td></tr><tr><td style="text-align: left;">a longer cell</td><td style="text-align: center;">a longer cell</td><td style="text-align: right;">a longer cell</td><td>a longer cell</td></tr></tbody></table></div>
 <h2 id="table-without-leading-or-trailing-pipes">Table without leading or trailing pipes<a class="markdown-heading-anchor" href="#table-without-leading-or-trailing-pipes" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody><tr><td>Alpha</td><td>1</td></tr><tr><td>Beta</td><td>2</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Name</th><th scope="col">Value</th></tr></thead><tbody><tr><td>Alpha</td><td>1</td></tr><tr><td>Beta</td><td>2</td></tr></tbody></table></div>
 <h2 id="escaped-pipe-and-pipe-inside-inline-code">Escaped pipe and pipe inside inline code<a class="markdown-heading-anchor" href="#escaped-pipe-and-pipe-inside-inline-code" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Case</th><th>Rendered as</th></tr></thead><tbody><tr><td>Escaped pipe</td><td>a | b</td></tr><tr><td>Pipe inside inline code (escaped for the table)</td><td><code>a | b</code></td></tr><tr><td>Pipe escaped inside a link label</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">a | b</a></td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Case</th><th scope="col">Rendered as</th></tr></thead><tbody><tr><td>Escaped pipe</td><td>a | b</td></tr><tr><td>Pipe inside inline code (escaped for the table)</td><td><code>a | b</code></td></tr><tr><td>Pipe escaped inside a link label</td><td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">a | b</a></td></tr></tbody></table></div>
 <h2 id="empty-cells">Empty cells<a class="markdown-heading-anchor" href="#empty-cells" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>1</td><td></td><td>3</td></tr><tr><td></td><td>2</td><td></td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">A</th><th scope="col">B</th><th scope="col">C</th></tr></thead><tbody><tr><td>1</td><td></td><td>3</td></tr><tr><td></td><td>2</td><td></td></tr></tbody></table></div>
 <h2 id="mathematical-expressions-inside-cells-where-supported">Mathematical expressions inside cells (where supported)<a class="markdown-heading-anchor" href="#mathematical-expressions-inside-cells-where-supported" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>Formula</th><th>Meaning</th></tr></thead><tbody><tr><td>$E = mc^2$</td><td>mass-energy equivalence</td></tr><tr><td>$\\frac{a}{b}$</td><td>fraction</td></tr><tr><td>$\\sum_{i=1}^{n} i$</td><td>sum</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Formula</th><th scope="col">Meaning</th></tr></thead><tbody><tr><td>$E = mc^2$</td><td>mass-energy equivalence</td></tr><tr><td>$\\frac{a}{b}$</td><td>fraction</td></tr><tr><td>$\\sum_{i=1}^{n} i$</td><td>sum</td></tr></tbody></table></div>
 <h2 id="wide-table--20-columns">Wide table — 20 columns<a class="markdown-heading-anchor" href="#wide-table--20-columns" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th><th>C7</th><th>C8</th><th>C9</th><th>C10</th><th>C11</th><th>C12</th><th>C13</th><th>C14</th><th>C15</th><th>C16</th><th>C17</th><th>C18</th><th>C19</th><th>C20</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td><td>A13</td><td>A14</td><td>A15</td><td>A16</td><td>A17</td><td>A18</td><td>A19</td><td>A20</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td><td>B13</td><td>B14</td><td>B15</td><td>B16</td><td>B17</td><td>B18</td><td>B19</td><td>B20</td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">C1</th><th scope="col">C2</th><th scope="col">C3</th><th scope="col">C4</th><th scope="col">C5</th><th scope="col">C6</th><th scope="col">C7</th><th scope="col">C8</th><th scope="col">C9</th><th scope="col">C10</th><th scope="col">C11</th><th scope="col">C12</th><th scope="col">C13</th><th scope="col">C14</th><th scope="col">C15</th><th scope="col">C16</th><th scope="col">C17</th><th scope="col">C18</th><th scope="col">C19</th><th scope="col">C20</th></tr></thead><tbody><tr><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td><td>A8</td><td>A9</td><td>A10</td><td>A11</td><td>A12</td><td>A13</td><td>A14</td><td>A15</td><td>A16</td><td>A17</td><td>A18</td><td>A19</td><td>A20</td></tr><tr><td>B1</td><td>B2</td><td>B3</td><td>B4</td><td>B5</td><td>B6</td><td>B7</td><td>B8</td><td>B9</td><td>B10</td><td>B11</td><td>B12</td><td>B13</td><td>B14</td><td>B15</td><td>B16</td><td>B17</td><td>B18</td><td>B19</td><td>B20</td></tr></tbody></table></div>
 <hr>
 <h1 id="9-horizontal-rule">9. Horizontal Rule<a class="markdown-heading-anchor" href="#9-horizontal-rule" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <p>Content before the rule.</p>
@@ -413,7 +417,7 @@ $\\thisCommandDoesNotExist{x}$</p>
 <hr>
 <h1 id="12-mermaid">12. Mermaid<a class="markdown-heading-anchor" href="#12-mermaid" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="flowchart">Flowchart<a class="markdown-heading-anchor" href="#flowchart" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">flowchart TD
     A[Markdown file] --&gt; B[Parser]
     B --&gt; C{Content type}
     C --&gt;|Normal Markdown| D[React renderer]
@@ -422,9 +426,9 @@ $\\thisCommandDoesNotExist{x}$</p>
     D --&gt; G[Article]
     E --&gt; G
     F --&gt; G
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="sequence-diagram">Sequence diagram<a class="markdown-heading-anchor" href="#sequence-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="mermaid"><code class="language-mermaid">sequenceDiagram
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">sequenceDiagram
     participant User
     participant App
     participant Storage
@@ -432,9 +436,9 @@ $\\thisCommandDoesNotExist{x}$</p>
     App-&gt;&gt;Storage: Load Markdown
     Storage--&gt;&gt;App: Markdown + assets
     App--&gt;&gt;User: Render article
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="class-style-example">Class-style example<a class="markdown-heading-anchor" href="#class-style-example" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="mermaid"><code class="language-mermaid">classDiagram
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">classDiagram
     class MarkdownDocument {
         +string title
         +string content
@@ -448,42 +452,42 @@ $\\thisCommandDoesNotExist{x}$</p>
     }
 
     MarkdownDocument --&gt; OfflineLibrary
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="state-diagram">State diagram<a class="markdown-heading-anchor" href="#state-diagram" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="mermaid"><code class="language-mermaid">stateDiagram-v2
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">stateDiagram-v2
     [*] --&gt; Reading
     Reading --&gt; Downloading: user requests offline copy
     Downloading --&gt; AvailableOffline: download complete
     AvailableOffline --&gt; Reading: open from local storage
     Reading --&gt; [*]
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="additional-supported-diagram-type">Additional supported diagram type<a class="markdown-heading-anchor" href="#additional-supported-diagram-type" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
-<pre data-language="mermaid"><code class="language-mermaid">pie title Content sources
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">pie title Content sources
     "Network" : 45
     "Bundled" : 25
     "Offline storage" : 30
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <h2 id="invalid-diagrams-must-not-crash-the-article">Invalid diagrams must not crash the article<a class="markdown-heading-anchor" href="#invalid-diagrams-must-not-crash-the-article" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
 <p>The first block below is malformed Mermaid syntax; the second is not Mermaid at all. Both must produce visible
 error feedback (or a readable fallback) while the rest of the document keeps rendering.</p>
-<pre data-language="mermaid"><code class="language-mermaid">flowchart TD
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">flowchart TD
     A[Unclosed label --&gt; B
-</code></pre>
-<pre data-language="mermaid"><code class="language-mermaid">this is not a valid mermaid diagram at all
-</code></pre>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">mermaid</span><button type="button" class="markdown-code-copy" aria-label="Copy mermaid code">Copy</button></div><pre data-language="mermaid"><code class="language-mermaid">this is not a valid mermaid diagram at all
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <hr>
 <h1 id="13-frontmatter">13. Frontmatter<a class="markdown-heading-anchor" href="#13-frontmatter" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <p>The following is an example of frontmatter syntax:</p>
-<pre data-language="yaml"><code class="language-yaml">---
-title: Golden Test Document
-description: MDHoriZon renderer validation fixture
-date: 2026-09-13
-tags:
-  - markdown
-  - testing
-  - mdhorizon
----
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">yaml</span><button type="button" class="markdown-code-copy" aria-label="Copy yaml code">Copy</button></div><pre data-language="yaml"><code class="language-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">Golden</span> <span class="hljs-string">Test</span> <span class="hljs-string">Document</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">MDHoriZon</span> <span class="hljs-string">renderer</span> <span class="hljs-string">validation</span> <span class="hljs-string">fixture</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2026-09-13</span>
+<span class="hljs-attr">tags:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">markdown</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">testing</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">mdhorizon</span>
+<span class="hljs-meta">---
+</span></code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <p>The application must decide whether frontmatter is removed before rendering and how metadata is consumed.</p>
 <p>Frontmatter is only recognized at the very start of a file, so this golden document cannot test it directly — the
 block above documents the syntax, it is not a live frontmatter block. Real frontmatter parsing must be covered by a
@@ -491,41 +495,41 @@ separate fixture whose first bytes are the opening delimiter.</p>
 <hr>
 <h1 id="14-raw-html-and-security">14. Raw HTML and Security<a class="markdown-heading-anchor" href="#14-raw-html-and-security" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <p>The following is intentionally included to verify the project's raw-HTML policy.</p>
-<pre data-language="html"><code class="language-html">&lt;strong&gt;Raw HTML test&lt;/strong&gt;
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Raw HTML test<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <p>Potentially dangerous examples must be tested by automated security fixtures rather than relying on visual inspection:</p>
-<pre data-language="html"><code class="language-html">&lt;script&gt;alert("unsafe")&lt;/script&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;img src="x" onerror="alert('unsafe')"&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;a href="javascript:alert('unsafe')"&gt;unsafe link&lt;/a&gt;
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class=""><span class="hljs-title">alert</span>(<span class="hljs-string">"unsafe"</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"x"</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">"alert('unsafe')"</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:alert('unsafe')"</span>&gt;</span>unsafe link<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <p>Dangerous SVG, embedded documents and other unsafe external resources:</p>
-<pre data-language="html"><code class="language-html">&lt;svg&gt;&lt;script&gt;alert("unsafe")&lt;/script&gt;&lt;/svg&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;svg onload="alert('unsafe')"&gt;&lt;circle r="10" /&gt;&lt;/svg&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;iframe src="https://example.com"&gt;&lt;/iframe&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;object data="https://example.com"&gt;&lt;/object&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;embed src="https://example.com"&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;style&gt;body { display: none }&lt;/style&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;base href="https://evil.example/"&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;meta http-equiv="refresh" content="0;url=https://evil.example/"&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;form action="https://evil.example/"&gt;&lt;input name="secret" type="password"&gt;&lt;/form&gt;
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class=""><span class="hljs-title">alert</span>(<span class="hljs-string">"unsafe"</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">"alert('unsafe')"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">circle</span> <span class="hljs-attr">r</span>=<span class="hljs-string">"10"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">object</span> <span class="hljs-attr">data</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">object</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">embed</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://example.com"</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class=""><span class="hljs-selector-tag">body</span> { <span class="hljs-attribute">display</span>: none }</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">base</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://evil.example/"</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"refresh"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"0;url=https://evil.example/"</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"https://evil.example/"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"secret"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <p>Obfuscated unsafe URLs, which must be rejected by normalization rather than by naive string matching:</p>
-<pre data-language="html"><code class="language-html">&lt;a href="JaVaScRiPt:alert('unsafe')"&gt;mixed-case javascript URL&lt;/a&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;a href="java&amp;#x73;cript:alert('unsafe')"&gt;entity-encoded javascript URL&lt;/a&gt;
-</code></pre>
-<pre data-language="html"><code class="language-html">&lt;a href="  javascript:alert('unsafe')"&gt;javascript URL with leading whitespace&lt;/a&gt;
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"JaVaScRiPt:alert('unsafe')"</span>&gt;</span>mixed-case javascript URL<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"java<span class="hljs-symbol">&amp;#x73;</span>cript:alert('unsafe')"</span>&gt;</span>entity-encoded javascript URL<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">html</span><button type="button" class="markdown-code-copy" aria-label="Copy html code">Copy</button></div><pre data-language="html"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"  javascript:alert('unsafe')"</span>&gt;</span>javascript URL with leading whitespace<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 <p>Markdown-native unsafe URLs must also be rejected, not only the raw-HTML ones:</p>
 <p><a>Markdown link to javascript:</a></p>
 <p><img alt="Markdown image with a data URI" loading="lazy" decoding="async"></p>
@@ -539,8 +543,8 @@ separate fixture whose first bytes are the opening delimiter.</p>
 <li>List inside a quote</li>
 <li>Another item</li>
 </ul>
-<pre data-language="bash"><code class="language-bash">echo "code inside quote"
-</code></pre>
+<div class="markdown-code"><div class="markdown-code-toolbar"><span class="markdown-code-language">bash</span><button type="button" class="markdown-code-copy" aria-label="Copy bash code">Copy</button></div><pre data-language="bash"><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">"code inside quote"</span>
+</code></pre><span class="markdown-code-status" role="status" aria-live="polite"></span></div>
 </blockquote>
 <hr>
 <h1 id="16-content-mixing">16. Content Mixing<a class="markdown-heading-anchor" href="#16-content-mixing" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>

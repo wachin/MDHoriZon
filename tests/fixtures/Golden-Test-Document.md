@@ -363,6 +363,21 @@ console.log("Alias and uppercase language identifiers must not crash the highlig
 | Offline | Optional | Yes |
 | Mermaid | Yes | Yes |
 
+## Five columns
+
+| Feature | Web | Mobile | Offline | Notes |
+|---|---|---|---|---|
+| Markdown | Yes | Yes | Yes | One core for every target |
+| Tables | Yes | Yes | Yes | Horizontal scrolling on narrow screens |
+| Mermaid | Yes | Yes | Yes | Lazy-loaded |
+
+## Eight columns
+
+| F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 |
+|---|---|---|---|---|---|---|---|
+| a | b | c | d | e | f | g | h |
+| i | j | k | l | m | n | o | p |
+
 ## Wide table — 12 columns
 
 | C1 | C2 | C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | C11 | C12 |

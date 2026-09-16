@@ -456,18 +456,18 @@ The document should cover:
 
 Implement:
 
-- [ ] Language detection.
-- [ ] Language label.
-- [ ] Syntax highlighting.
-- [ ] Copy button.
-- [ ] Copy success feedback.
-- [ ] Copy failure fallback.
-- [ ] Long-line horizontal scrolling.
-- [ ] Unknown-language fallback.
-- [ ] Plain-text code block support.
-- [ ] Accessible copy button.
-- [ ] Keyboard accessibility.
-- [ ] Mobile usability.
+- [x] Language detection.
+- [x] Language label.
+- [x] Syntax highlighting.
+- [x] Copy button.
+- [x] Copy success feedback.
+- [x] Copy failure fallback.
+- [x] Long-line horizontal scrolling.
+- [x] Unknown-language fallback.
+- [x] Plain-text code block support.
+- [x] Accessible copy button.
+- [x] Keyboard accessibility.
+- [x] Mobile usability.
 
 Do not use a fixed syntax-highlighting theme permanently. Define MDHoriZon's own light/dark code themes later.
 
@@ -475,13 +475,13 @@ Do not use a fixed syntax-highlighting theme permanently. Define MDHoriZon's own
 
 Implement:
 
-- [ ] Responsive table wrapper.
-- [ ] Horizontal touch scrolling.
-- [ ] Desktop overflow behavior.
-- [ ] Long cell handling.
-- [ ] Wide tables.
-- [ ] Formatted table content.
-- [ ] Accessible table semantics.
+- [x] Responsive table wrapper.
+- [x] Horizontal touch scrolling.
+- [x] Desktop overflow behavior.
+- [x] Long cell handling.
+- [x] Wide tables.
+- [x] Formatted table content.
+- [x] Accessible table semantics.
 
 Test at least:
 
