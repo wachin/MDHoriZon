@@ -574,16 +574,16 @@ mermaid code         → MermaidDiagram
 
 ### Typography
 
-- [ ] Establish readable body typography.
-- [ ] Establish heading hierarchy.
-- [ ] Establish line height.
-- [ ] Establish paragraph spacing.
-- [ ] Establish list spacing.
-- [ ] Establish blockquote styling.
-- [ ] Establish code typography.
-- [ ] Establish table typography.
-- [ ] Establish image sizing rules.
-- [ ] Establish maximum reading width.
+- [x] Establish readable body typography.
+- [x] Establish heading hierarchy.
+- [x] Establish line height.
+- [x] Establish paragraph spacing.
+- [x] Establish list spacing.
+- [x] Establish blockquote styling.
+- [x] Establish code typography.
+- [x] Establish table typography.
+- [x] Establish image sizing rules.
+- [x] Establish maximum reading width.
 
 ### Themes
 
@@ -602,19 +602,19 @@ Use CSS variables for the visual system:
 --blockquote-background
 ```
 
-- [ ] Light theme.
-- [ ] Dark theme.
-- [ ] Follow system preference.
-- [ ] Manual theme selection.
-- [ ] Persist user preference.
-- [ ] Verify KaTeX readability in both themes.
-- [ ] Verify Mermaid readability in both themes.
-- [ ] Verify code readability in both themes.
+- [x] Light theme.
+- [x] Dark theme.
+- [x] Follow system preference.
+- [x] Manual theme selection.
+- [x] Persist user preference.
+- [x] Verify KaTeX readability in both themes.
+- [x] Verify Mermaid readability in both themes.
+- [x] Verify code readability in both themes.
 
 ### Navigation
 
-- [ ] Table of contents.
-- [ ] Heading anchors.
+- [x] Table of contents.
+- [x] Heading anchors.
 - [ ] Article navigation.
 - [ ] Scroll position handling.
 - [ ] Back navigation on mobile.
