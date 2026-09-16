@@ -87,15 +87,31 @@ Verified: the licence, the revision, the files and their sizes, the libraries in
 direct-renderer approach would suit a _reader_ (they need streaming; we do not). Treat every "decision this informs"
 item above as an input to a decision, never as a recommendation to copy.
 
-### Local copy, outside this repository
+### Where local checkouts live
+
+Reference material is never committed (see [ADR 0002](architecture/0002-reference-material-lives-outside-the-repo.md)).
+Put it either outside the repository or in a gitignored directory inside it. The convention currently in use is
+**`8vo/`** at the repository root, which is listed in `.gitignore`:
 
 ```bash
-git clone --depth 1 https://github.com/deepseek-ai/deepseek-harness /tmp/deepseek-harness-reference
-# or, to keep it inside the project without it ever touching git (`.cache/` is ignored):
-git clone --depth 1 https://github.com/deepseek-ai/deepseek-harness .cache/reference/deepseek-harness
+git clone --depth 1 https://github.com/deepseek-ai/deepseek-harness 8vo/deepseek-harness
+git clone --depth 1 https://github.com/marktext/marktext              8vo/marktext
 ```
 
-Pin the revision you studied when you take notes from it — a moving `main` is not a citable source.
+**Any such directory must also be excluded from the linters**, because being gitignored is not enough:
+
+| Tool       | Behaviour                                                                                                                                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Prettier   | Honours `.gitignore` by default (`prettier --file-info` reports `ignored: true`), and `.prettierignore` lists `8vo/` as well                                                                                                                               |
+| **ESLint** | **Walks into it anyway and breaks**: these projects ship their own nested `eslint.config.js`, and loading one fails when its plugins are not installed here. `npm run lint` then fails locally while CI — where the directory does not exist — stays green |
+
+So `8vo` is listed in `globalIgnores` in [`eslint.config.js`](../eslint.config.js), and it must be added to
+`.prettierignore` too whenever a new reference directory is introduced. That failure mode is worth knowing: it is
+the same CI/local divergence that removed the DeepSeek Harness submodule, arriving by a different route.
+
+Pin the revision you studied when you take notes from it — a moving `main` is not a citable source. A downloaded
+ZIP has no `.git`, so it cannot even tell you which commit it is: clone instead, or record the download date and
+branch alongside the notes.
 
 ---
 
@@ -112,13 +128,44 @@ that no application repository can give you:
 | [Mermaid documentation](https://mermaid.js.org/)                               | Supported diagram types, and what a syntax error looks like            |
 | [WCAG 2.2](https://www.w3.org/TR/WCAG22/)                                      | Phase 19 accessibility expectations                                    |
 
+## MarkText, Muya and the Android port (all MIT)
+
+Verified by inspecting the local checkouts in `8vo/` (both are **downloaded ZIPs, not clones** — no `.git`, so no
+citable revision; see the note on local checkouts above).
+
+|             | MarkText                                                                                                                                | marktext-android                                                                                                                                     |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Source      | `marktext/marktext`, branch `develop`                                                                                                   | `Renakoni/marktext-android`, branch `main`                                                                                                           |
+| Licence     | MIT (© 2017-present Luo Ran)                                                                                                            | MIT (© 2026 Renakoni)                                                                                                                                |
+| Version     | `0.20.0-dev` monorepo                                                                                                                   | `marktext-for-android` 0.2.1                                                                                                                         |
+| Stack       | Electron ~42; packages `desktop`, `muya`, `muyajs`, `website`                                                                           | **Vue 3.5 + Capacitor 8** (`@capacitor/android`, `app`, `app-launcher`), `sortablejs`, with an `android/` Gradle project and a `capacitor.config.ts` |
+| Editor core | `@marktext/muyajs` 0.1.2 ("a browser based markdown editor that powers MarkText v1") and `@muyajs/core` 0.2.0 ("core package for muya") | Vendors `@muyajs/core` through `file:third_party/muya`                                                                                               |
+
+Three things follow, in order of usefulness to us:
+
+1. **A browser-based, MIT editor core exists** — and it is not tied to Electron. It is the concrete prior art behind
+   the roadmap's "Live Preview" idea, which means Phase 21's research question is largely answered by reading it
+   instead of designing from scratch.
+2. **The Android port is a working example of the Phase 14 packaging approach**: a web app wrapped with
+   **Capacitor** for Android, with the usual `android:sync` / `android:open` workflow. Even if we never use Muya,
+   this is the closest thing we have to a reference for "our web reader, packaged for Android".
+3. **The trade-off that decides everything: Muya is a second Markdown implementation.** It carries its own parser,
+   its own rendering and its own editing model. Adopting it as a dependency would deliver a live-preview editor but
+   would collide with the architecture rule _"one Markdown implementation; never duplicate rendering logic"_
+   ([`AGENTS.md`](../AGENTS.md)). So this is not a free win: it is either (a) inspiration only, (b) a deliberate
+   revision of that rule with an ADR, or (c) rejecting the editor ambition and using MarkText as the user's editor.
+
+**Not verified:** rendering correctness, performance claims, the maintenance health of either project, or how
+`@muyajs/core` behaves in a React application (it manages its own DOM, so embedding it is an integration decision,
+not a drop-in).
+
 ## Other implementations worth reading
 
 | Project                           | Licence  | Why                                                                                   |
 | --------------------------------- | -------- | ------------------------------------------------------------------------------------- |
 | `remark` / `rehype` / `micromark` | MIT      | The ecosystem itself: plugin architecture, AST contracts, extension points            |
 | `react-markdown`                  | MIT      | The pipeline the roadmap plans; read its component-override model before replacing it |
-| MarkText / Muya                   | MIT      | Renderer/editor separation, for Phase 21                                              |
+| MarkText / Muya                   | MIT      | See the section above: a browser-based editor core and a Capacitor Android port       |
 | Zettlr                            | GPL-3.0  | A mature reading/writing experience, themes and citation handling                     |
 | Joplin, HedgeDoc, Outline         | AGPL/MIT | Content loading, offline behaviour, publishing                                        |
 | Shiki, `highlight.js`             | MIT      | The two realistic syntax-highlighting choices                                         |

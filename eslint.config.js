@@ -6,7 +6,11 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // `8vo/` holds local reference checkouts (gitignored; see docs/references.md). ESLint must not
+  // walk into it: those projects ship their own nested `eslint.config.js`, and loading one fails
+  // when its plugins are not installed here — which broke `npm run lint` locally while CI, where
+  // the directory does not exist, stayed green.
+  globalIgnores(['dist', '8vo']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
