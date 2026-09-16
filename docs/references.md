@@ -173,3 +173,29 @@ not a drop-in).
 | Zettlr                            | GPL-3.0  | A mature reading/writing experience, themes and citation handling                     |
 | Joplin, HedgeDoc, Outline         | AGPL/MIT | Content loading, offline behaviour, publishing                                        |
 | Shiki, `highlight.js`             | MIT      | The two realistic syntax-highlighting choices                                         |
+
+## Mermaid and DOMPurify (both MIT)
+
+Used by Phase 6. **Pinned to `mermaid@11.17.2`, not `12.0.0`**, and the reason is worth knowing before someone
+"helpfully" bumps it:
+
+- `mermaid@12.0.0` reaches `chevrotain` → `@chevrotain/gast` → `lodash-es`, and that `lodash-es` range carries two
+  high-severity advisories — code injection through `_.template` key names
+  ([GHSA-r5fr-rjxr-66jc](https://github.com/advisories/GHSA-r5fr-rjxr-66jc)) and prototype pollution through
+  `_.unset`/`_.omit` ([GHSA-f23m-r3pf-42rh](https://github.com/advisories/GHSA-f23m-r3pf-42rh)). npm cannot resolve
+  them without `--force`, because the dependency does not accept the patched `lodash-es@4.18.x`.
+- `mermaid@11.17.2` resolves to the patched `lodash-es` through `dagre-d3-es`, and `npm audit` reports **zero**
+  vulnerabilities. Verified by installing both and running `npm audit` and `npm audit fix`.
+- The threat matters here because a diagram comes from a document, and a document is untrusted input: `_.template`
+  is a code-injection sink, which is the last function untrusted text should be able to reach.
+
+Upgrading to 12 is worth re-checking once its `chevrotain` dependency accepts a patched `lodash-es`; until then the
+choice is the newest major that needs no forced transitive pin.
+
+`dompurify` is used directly by `src/core/mermaid/sanitize-svg.ts`, although Mermaid already depends on it, because
+the boundary belongs to this project and a phantom dependency on someone else's transitive tree is not a boundary.
+It is imported on demand, so it travels with Mermaid's lazy chunk instead of the initial bundle.
+
+**Measured, and the reason the reference policy exists:** DOMPurify's SVG profile removes `script`, `on*`,
+`javascript:`, `foreignObject`, SMIL and `data:` references, but it **keeps** `<image xlink:href="http://…">` and
+remote `url(…)` inside `<style>` — both of which are network requests triggered by document content.

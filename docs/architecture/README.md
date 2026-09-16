@@ -60,7 +60,6 @@ wants to own them:
 | Frontmatter parser and the supported metadata model                                                   | Phase 9  |
 | Content loading sources and their precedence                                                          | Phase 10 |
 | Offline storage mechanism and integrity strategy                                                      | Phase 11 |
-| Mermaid lazy-loading strategy, its bundle budget, and how its SVG output is contained                 | Phase 6  |
 
 ## Existing records
 
@@ -71,3 +70,4 @@ wants to own them:
 | [0003](0003-sanitization-policy.md)                       | The sanitization policy is layered and none of its layers is optional: no raw HTML from the document, an unconditional sanitization stage for plugin-generated markup, and an explicit URL policy |
 | [0004](0004-editor-out-of-scope.md)                       | The Markdown editor is out of scope: Phases 21–22 removed, no editor code or editor dependency, and a returning editor would be a separate project                                                |
 | [0005](0005-phase-2-security-policy.md)                   | The explicit element, attribute and URL-scheme lists, plus the reviews of `data:` URLs, SVG, embedded HTML, external images and links opened from the WebViews                                    |
+| [0006](0006-mermaid-svg-boundary.md)                      | Mermaid's SVG boundary: lazy loading, defensive configuration, three sanitisation stages that insert an element rather than markup, and the source as the reader's fallback                       |
