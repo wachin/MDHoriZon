@@ -107,17 +107,18 @@ Never report work as complete based only on "it looked right in the browser".
 
 ## 6. Files to treat with care
 
-| Path                                     | Rule                                                                                                                                                                                 |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ROADMAP.md`                             | The specification. Do not restructure or reformat it. Updating task checkboxes is fine, in its own commit.                                                                           |
-| `tests/fixtures/Golden-Test-Document.md` | The rendering contract. **Never simplify it** because a feature is unimplemented — add sections and let unsupported ones become explicit targets. Excluded from Prettier on purpose. |
-| `tests/assets/does-not-exist.png`        | **Must never exist.** It is a deliberate negative test for graceful image failure.                                                                                                   |
-| `tests/assets/example.png`               | Keep the filename and the relative path used by the fixture.                                                                                                                         |
-| `tests/articles/example.md`              | The target of the cross-directory relative link. Keep it short and keep both of its relative paths working.                                                                          |
-| `package-lock.json`                      | Generated. Never hand-edit it; change dependencies through npm.                                                                                                                      |
-| `.gitignore`                             | Hand-curated (Capacitor, Android/iOS, keystores, secrets). Never overwrite it with a template default.                                                                               |
-| `.prettierignore`                        | Keeps the spec documents byte-stable. Do not remove `ROADMAP.md` or `tests/fixtures/` from it.                                                                                       |
-| `vite.config.ts`                         | `base` is `/MDHoriZon/` in production and overridable with `VITE_BASE`. Do not hard-code a different base.                                                                           |
+| Path                                       | Rule                                                                                                                                                                                                                                      |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ROADMAP.md`                               | The specification. Do not restructure or reformat it. Updating task checkboxes is fine, in its own commit.                                                                                                                                |
+| `tests/fixtures/Golden-Test-Document.md`   | The rendering contract. **Never simplify it** because a feature is unimplemented — add sections and let unsupported ones become explicit targets. Excluded from Prettier on purpose.                                                      |
+| `tests/fixtures/images/example.png`        | Keep the filename and the relative path used by the fixture.                                                                                                                                                                              |
+| `tests/fixtures/images/does-not-exist.png` | **Must never exist.** It is a deliberate negative test for graceful image failure.                                                                                                                                                        |
+| `tests/fixtures/images/`                   | The images sit **beside** the document that uses them, in an `images/` folder — the shape real content will have. Keep it that way; see its `README.md`.                                                                                  |
+| `tests/articles/example.md`                | The target of the cross-directory relative link. Keep it short and keep both of its relative paths working.                                                                                                                               |
+| `package-lock.json`                        | Generated. Never hand-edit it; change dependencies through npm.                                                                                                                                                                           |
+| `.gitignore`                               | Hand-curated (Capacitor, Android/iOS, keystores, secrets). Never overwrite it with a template default.                                                                                                                                    |
+| `.prettierignore`                          | Keeps the spec documents byte-stable. Do not remove `ROADMAP.md` or `tests/fixtures/` from it.                                                                                                                                            |
+| `vite.config.ts`                           | `base` is `/MDHoriZon/` in production and overridable with `VITE_BASE`. Do not hard-code a different base. `previewFixtureImages` copies the fixture's images into the build so the deployed preview resolves what the document asks for. |
 
 ## 7. Dangerous operations — forbidden
 
@@ -142,7 +143,7 @@ Never report work as complete based only on "it looked right in the browser".
 ```text
 src/                          application code; the Markdown core will live in src/core/
 tests/fixtures/               Golden Test Document (rendering contract) — Prettier-excluded
-tests/assets/                 assets referenced by the fixtures (see its README.md)
+tests/fixtures/images/        the fixture's images, beside the document that uses them (see its README.md)
 tests/articles/               relative-link targets used by the fixtures
 public/                       static files copied verbatim into dist/, including .nojekyll
 .github/workflows/            ci.yml (PR verification) and deploy-pages.yml (GitHub Pages)
