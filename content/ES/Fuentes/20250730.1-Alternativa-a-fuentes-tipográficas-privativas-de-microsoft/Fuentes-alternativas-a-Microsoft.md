@@ -1,4 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirrN7IkvUf7w97QGE4geWEGLzqzw3PkuE0IohXXxqNAb3gaKltDEDdl0PMwVOC2vpXPBTCoi6NqVtHxAjNYnj-CfOx0CQuezkEu8R1k7w3QPciMGcuf8VI2hXRSg2rDC_ioPhNkKAuPgcBcVrIaXtjpGsBSEQnY39wPo7gUW9kw5n4Ef5UizAXOr9JOl4/s1536/Portada.jpg =640x)
+## Instalación de las fuentes libres desde repositorios Linux (Debian/MX Linux/Ubuntu, etc)
+
+![](images/Portada.jpg)
 
 # Alternativa a fuentes tipográficas privativas de microsoft
 
@@ -27,8 +29,6 @@ La siguiente es una tabla donde están indicandos los usos típicos en documento
 | **Rockwell**             | **Arvo**                                                                                                                | Títulos con impacto visual                                         | Alternativas de estilo slab-serif.                                                   |
 | **Baskerville**          | **Goudy Bookletter 1911**                                                                                               | Cuerpo de texto en documentos clásicos y elegantes                 | Fuente con excelente legibilidad impresa.                                            |
 | **Consolas**             | **JetBrains Mono** / **DejaVu Sans Mono** / **Fira Code** / **Hack** / **Iosevka** / **Victor Mono** /**Fragment Mono** | Código de programación, terminales, documentos técnicos            | Consolas es monoespaciada, sus alternativas tienen soporte para ligaduras de código. |
-
-## Instalación de las fuentes libres desde repositorios Linux (Debian/MX Linux/Ubuntu, etc)
 
 Instala las fuentes libres directamente desde los repositorios con este comando:
 
