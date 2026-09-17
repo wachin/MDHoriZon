@@ -14,13 +14,21 @@ browser, mobile browsers, Android WebView and iOS WebView, with an optional, use
 library. It is not a CMS, and it is not an editor — that ambition was withdrawn
 ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)).
 
-Current state: **Phases 0–8 are complete** — foundation, the Markdown rendering core, the security boundary, the
+Current state: **Phases 0–9 are complete** — foundation, the Markdown rendering core, the security boundary, the
 golden test suite, code blocks and tables, mathematics with KaTeX, Mermaid diagrams, the reading experience
-(typography, theming, table of contents), and a document's own relative assets. The app renders
-`tests/fixtures/Golden-Test-Document.md` through the real pipeline as a Phase 1 preview screen. Phase 9 (content
-model and frontmatter) is next; several earlier phases carry open checkboxes that belong to later work — the
-content loader and article navigation (Phase 10), offline storage (Phases 11–12) and real-browser/WebView
-verification (Phase 20). Check `ROADMAP.md` for the current list rather than trusting this paragraph.
+(typography, theming, table of contents), a document's own relative assets, and the content model. The app still
+renders `tests/fixtures/Golden-Test-Document.md` as a Phase 1 preview; **`content/` now holds the real library**
+(122 documents in `content/<LANG>/<Program>/<YYYYMMDD…>/`), and Phase 10 (content loading) is what will serve it.
+Several earlier phases carry open checkboxes that belong to later work — article navigation and search interfaces
+(Phase 17), offline storage (Phases 11–12) and real-browser/WebView verification (Phase 20). Check `ROADMAP.md`
+for the current list rather than trusting this paragraph.
+
+The content model is [ADR 0009](docs/architecture/0009-content-model.md): identity comes from the folder tree, not
+from frontmatter — measured, **none** of the 122 real documents declares any — and legacy Blogger markup (embedded
+players, image size hints) is rescued in the text before rendering, so raw HTML still never reaches the tree.
+Playing a video in place is a click-to-play facade, recorded as
+[ADR 0010](docs/architecture/0010-media-and-embeds.md), and is **not implemented yet**.
+`tests/content-library.test.ts` indexes the whole real library, so a change that breaks it is caught here.
 
 A document's relative paths are resolved at render time against the `documentUrl` the caller supplies and are never
 rewritten into the document ([ADR 0008](docs/architecture/0008-assets-and-the-content-package.md)); the URL policy
@@ -117,6 +125,7 @@ Never report work as complete based only on "it looked right in the browser".
 | `tests/articles/example.md`                | The target of the cross-directory relative link. Keep it short and keep both of its relative paths working.                                                                                                                               |
 | `package-lock.json`                        | Generated. Never hand-edit it; change dependencies through npm.                                                                                                                                                                           |
 | `.gitignore`                               | Hand-curated (Capacitor, Android/iOS, keystores, secrets). Never overwrite it with a template default.                                                                                                                                    |
+| `public/images/default-cover.png`          | The cover used by entries with no image of their own (56 of 122). Deleting it leaves those entries with a broken image.                                                                                                                   |
 | `.prettierignore`                          | Keeps the spec documents byte-stable. Do not remove `ROADMAP.md` or `tests/fixtures/` from it.                                                                                                                                            |
 | `vite.config.ts`                           | `base` is `/MDHoriZon/` in production and overridable with `VITE_BASE`. Do not hard-code a different base. `previewFixtureImages` copies the fixture's images into the build so the deployed preview resolves what the document asks for. |
 
@@ -142,6 +151,7 @@ Never report work as complete based only on "it looked right in the browser".
 
 ```text
 src/                          application code; the Markdown core will live in src/core/
+content/                      the real library: <LANG>/<Program>/<YYYYMMDD…>/<file>.md + images/
 tests/fixtures/               Golden Test Document (rendering contract) — Prettier-excluded
 tests/fixtures/images/        the fixture's images, beside the document that uses them (see its README.md)
 tests/articles/               relative-link targets used by the fixtures
@@ -191,10 +201,11 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: the content model (Phase 9), the content loader and article navigation
-(Phase 10), the bundle budget (Phase 18), the sanitization element/attribute/URL lists that Phases 4–6 each
-narrowed (Phase 2 — its shape is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and end-to-end and
-WebView testing (Phase 20), which is where the device half of every feature lives.
+Checklist items still open include: the content loader that serves `content/` (Phase 10), the video player facade
+([ADR 0010](docs/architecture/0010-media-and-embeds.md)), the navigation and search interfaces (Phase 17), the
+bundle budget (Phase 18), the sanitization element/attribute/URL lists that Phases 4–6 each narrowed (Phase 2 —
+its shape is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and end-to-end and WebView testing
+(Phase 20), which is where the device half of every feature lives.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous
