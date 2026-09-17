@@ -1,5 +1,8 @@
 # Cómo instalar Android Studio en MX Linux - Guía paso a paso
 
+
+![](images/Portada.jpg)
+
 Si usas **MX Linux** y quieres comenzar a desarrollar aplicaciones Android, en esta guía aprenderás a instalar correctamente **Android Studio** paso a paso, incluyendo la configuración de virtualización para usar el emulador de forma rápida.
 
 ---
