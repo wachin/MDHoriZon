@@ -1,5 +1,7 @@
 # LightDM no cambia el idioma de AV Linux MXe 25 al iniciar sesión en Fluxbox
 
+![](images/Portada.jpg)
+
 Si utilizas **AV Linux MX Edition 25**:
 
 [https://www.bandshed.net/avlinux/](https://www.bandshed.net/avlinux/)

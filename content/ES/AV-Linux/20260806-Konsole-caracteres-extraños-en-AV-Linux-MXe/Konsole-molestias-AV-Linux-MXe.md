@@ -1,5 +1,7 @@
 # Solución: Konsole muestra «not directly running in terminology» y caracteres extraños en AV Linux MXe
 
+![](images/Portada.jpg)
+
 Si estás utilizando **[AV Linux MXe](https://www.bandshed.net/avlinux/)** y decides instalar **Konsole** como terminal alternativa a **Terminology**, es posible que al abrir Konsole aparezca un mensaje similar al siguiente:
 
 ```bash
