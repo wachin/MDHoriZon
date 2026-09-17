@@ -663,15 +663,15 @@ tags:
 
 ### Tasks
 
-- [ ] Choose frontmatter parser.
-- [ ] Define supported metadata.
-- [ ] Define required vs optional fields.
-- [ ] Build a content manifest.
-- [ ] Build article index.
-- [ ] Build categories/tags if useful.
-- [ ] Build previous/next navigation.
-- [ ] Build search.
-- [ ] Support deterministic article IDs/paths.
+- [x] Choose frontmatter parser.
+- [x] Define supported metadata.
+- [x] Define required vs optional fields.
+- [x] Build a content manifest.
+- [x] Build article index.
+- [x] Build categories/tags if useful.
+- [x] Build previous/next navigation.
+- [x] Build search.
+- [x] Support deterministic article IDs/paths.
 
 Avoid introducing a headless CMS at this stage.
 
