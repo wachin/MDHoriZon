@@ -14,13 +14,17 @@ browser, mobile browsers, Android WebView and iOS WebView, with an optional, use
 library. It is not a CMS, and it is not an editor — that ambition was withdrawn
 ([ADR 0004](docs/architecture/0004-editor-out-of-scope.md)).
 
-Current state: **Phases 0–7 are complete** — foundation, the Markdown rendering core, the security boundary, the
-golden test suite, code blocks and tables, mathematics with KaTeX, Mermaid diagrams, and the reading experience
-(typography, theming, table of contents). The app renders `tests/fixtures/Golden-Test-Document.md` through the
-real pipeline as a Phase 1 preview screen. Phase 8 (images and relative assets) is next; several earlier phases
-carry open checkboxes that belong to later work — the content model and article navigation (Phases 9–10) and
-real-browser/WebView verification (Phase 20). Check `ROADMAP.md` for the current list rather than trusting this
-paragraph.
+Current state: **Phases 0–8 are complete** — foundation, the Markdown rendering core, the security boundary, the
+golden test suite, code blocks and tables, mathematics with KaTeX, Mermaid diagrams, the reading experience
+(typography, theming, table of contents), and a document's own relative assets. The app renders
+`tests/fixtures/Golden-Test-Document.md` through the real pipeline as a Phase 1 preview screen. Phase 9 (content
+model and frontmatter) is next; several earlier phases carry open checkboxes that belong to later work — the
+content loader and article navigation (Phase 10), offline storage (Phases 11–12) and real-browser/WebView
+verification (Phase 20). Check `ROADMAP.md` for the current list rather than trusting this paragraph.
+
+A document's relative paths are resolved at render time against the `documentUrl` the caller supplies and are never
+rewritten into the document ([ADR 0008](docs/architecture/0008-assets-and-the-content-package.md)); the URL policy
+always judges the _resolved_ URL, never the relative one.
 
 Two things about Mermaid are worth knowing before touching it: its SVG never passes through the Markdown
 pipeline, so [ADR 0006](docs/architecture/0006-mermaid-svg-boundary.md) is the boundary that applies instead; and
