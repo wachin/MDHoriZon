@@ -55,9 +55,7 @@ export type MetadataResult = {
   issues: ContentIssue[]
 }
 
-export function readMetadata(
-  data: Record<string, unknown>,
-): MetadataResult {
+export function readMetadata(data: Record<string, unknown>): MetadataResult {
   const issues: ContentIssue[] = []
   const metadata: ArticleMetadata = { tags: [], draft: false }
 
@@ -111,7 +109,10 @@ function readString(
   }
 
   issues.push(
-    warning(`\`${field}\` must be text; \`${describe(value)}\` was ignored.`, field),
+    warning(
+      `\`${field}\` must be text; \`${describe(value)}\` was ignored.`,
+      field,
+    ),
   )
   return undefined
 }
@@ -139,7 +140,10 @@ function readDate(value: unknown, issues: ContentIssue[]): string | undefined {
   }
 
   issues.push(
-    warning(`\`date\` must be text; \`${describe(value)}\` was ignored.`, 'date'),
+    warning(
+      `\`date\` must be text; \`${describe(value)}\` was ignored.`,
+      'date',
+    ),
   )
   return undefined
 }
@@ -165,7 +169,10 @@ function readTags(value: unknown, issues: ContentIssue[]): string[] {
   for (const entry of list) {
     if (typeof entry !== 'string') {
       issues.push(
-        warning(`A tag must be text; \`${describe(entry)}\` was ignored.`, 'tags'),
+        warning(
+          `A tag must be text; \`${describe(entry)}\` was ignored.`,
+          'tags',
+        ),
       )
       continue
     }
@@ -193,15 +200,25 @@ function readNumber(
 
   if (typeof value === 'number' && Number.isFinite(value)) return value
 
-  if (typeof value === 'string' && value.trim() !== '' && Number.isFinite(Number(value))) {
+  if (
+    typeof value === 'string' &&
+    value.trim() !== '' &&
+    Number.isFinite(Number(value))
+  ) {
     issues.push(
-      warning(`\`${field}\` was written as text; \`${value.trim()}\` was read as a number.`, field),
+      warning(
+        `\`${field}\` was written as text; \`${value.trim()}\` was read as a number.`,
+        field,
+      ),
     )
     return Number(value)
   }
 
   issues.push(
-    warning(`\`${field}\` must be a number; \`${describe(value)}\` was ignored.`, field),
+    warning(
+      `\`${field}\` must be a number; \`${describe(value)}\` was ignored.`,
+      field,
+    ),
   )
   return undefined
 }

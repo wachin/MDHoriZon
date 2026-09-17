@@ -36,5 +36,7 @@ export function attributeTo(
   issues: ContentIssue[],
   source: string,
 ): ContentIssue[] {
-  return issues.map((issue) => (issue.source === undefined ? { ...issue, source } : issue))
+  return issues.map((issue) =>
+    issue.source === undefined ? { ...issue, source } : issue,
+  )
 }

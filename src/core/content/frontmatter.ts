@@ -49,7 +49,10 @@ export function parseFrontmatter(markdown: string): FrontmatterResult {
 
   const lines = text.split('\n')
   // `lines[0]` is the opening delimiter; both `\n` and `\r\n` were consumed by the pattern above.
-  const closing = lines.findIndex((line, index) => index > 0 && CLOSING.test(line.trimEnd().replace(/\r$/, '')))
+  const closing = lines.findIndex(
+    (line, index) =>
+      index > 0 && CLOSING.test(line.trimEnd().replace(/\r$/, '')),
+  )
 
   if (closing === -1) {
     return {
@@ -64,7 +67,12 @@ export function parseFrontmatter(markdown: string): FrontmatterResult {
     }
   }
 
-  const yaml = lines.slice(1, closing).join('\n')
+  // Carriage returns are stripped from the metadata only: a value ending in an invisible `\r` breaks
+  // date comparison and sorting, which is how this was found. The body keeps its own line endings.
+  const yaml = lines
+    .slice(1, closing)
+    .map((line) => line.replace(/\r$/, ''))
+    .join('\n')
   const body = lines
     .slice(closing + 1)
     .join('\n')
@@ -87,13 +95,12 @@ function readYaml(yaml: string): {
   try {
     parsed = parseYaml(yaml)
   } catch (cause) {
-    const detail = cause instanceof Error ? cause.message.split('\n')[0] : 'unknown error'
+    const detail =
+      cause instanceof Error ? cause.message.split('\n')[0] : 'unknown error'
 
     return {
       data: {},
-      issues: [
-        error(`The frontmatter is not valid YAML: ${detail}`),
-      ],
+      issues: [error(`The frontmatter is not valid YAML: ${detail}`)],
     }
   }
 
@@ -116,11 +123,17 @@ function readYaml(yaml: string): {
   const data: Record<string, unknown> = {}
   const issues: ContentIssue[] = []
 
-  for (const [key, value] of Object.entries(parsed as Record<string, unknown>)) {
+  for (const [key, value] of Object.entries(
+    parsed as Record<string, unknown>,
+  )) {
     if (typeof key === 'string') {
       data[key] = value
     } else {
-      issues.push(warning(`The frontmatter key \`${key}\` is not a name and was ignored.`))
+      issues.push(
+        warning(
+          `The frontmatter key \`${key}\` is not a name and was ignored.`,
+        ),
+      )
     }
   }
 

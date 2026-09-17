@@ -51,9 +51,10 @@ export function buildManifest(
     })
   }
 
-  const kept = options.includeDrafts === true
-    ? articles
-    : articles.filter((article) => !article.draft)
+  const kept =
+    options.includeDrafts === true
+      ? articles
+      : articles.filter((article) => !article.draft)
 
   return { articles: sortArticles(kept), issues }
 }
@@ -145,12 +146,17 @@ export type SectionNode = {
  *
  * A section with no articles of its own is still created for its children, so a tree never loses a
  * document because its parent folder happened to contain none.
+ *
+ * The grouping path is `article.collection`, not `article.section`: the entry's own date folder is
+ * dropped, so `ES/Go/20260101-uno/uno.md` is listed under `ES/Go` — the program — rather than under a
+ * category named after its own storage folder.
  */
 export function buildSectionTree(articles: Article[]): SectionNode[] {
   const root: SectionNode = { name: '', path: '', articles: [], children: [] }
 
   for (const article of articles) {
-    const segments = article.section === '' ? [] : article.section.split('/')
+    const segments =
+      article.collection === '' ? [] : article.collection.split('/')
     let node = root
 
     for (const segment of segments) {

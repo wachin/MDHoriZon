@@ -222,3 +222,22 @@ describe('MarkdownRenderer', () => {
     })
   })
 })
+
+describe('a destination Markdown cannot parse', () => {
+  it('shows the source as text rather than the image', () => {
+    // This is why the content layer rescues Blogger's `=650x` size hint: with the space left in place
+    // the reader sees the Markdown source, and the image is simply gone.
+    const { container } = renderMarkdown('![x](https://e.test/a.jpg =650x)')
+
+    expect(container.querySelector('img')).toBeNull()
+    expect(container.textContent).toContain('![x](https://e.test/a.jpg =650x)')
+  })
+
+  it('accepts the same destination once the hint is removed', () => {
+    const { container } = renderMarkdown('![x](https://e.test/a.jpg)')
+
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(
+      'https://e.test/a.jpg',
+    )
+  })
+})
