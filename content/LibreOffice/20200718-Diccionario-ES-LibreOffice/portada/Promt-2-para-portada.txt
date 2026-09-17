@@ -1,0 +1,53 @@
+Diseñar una miniatura moderna tipo tutorial tecnológico para YouTube.
+
+FORMATO:
+- Resolución 1280x720 (16:9)
+- Estilo moderno, limpio y llamativo
+- Diseño profesional tipo thumbnail de tecnología
+
+IMAGEN BASE (MUY IMPORTANTE):
+- Usar EXACTAMENTE la imagen proporcionada "LibreOffice imagen para Portada.png"
+- La imagen debe ocupar TODO el fondo (sin recortes importantes)
+- No alterar colores ni elementos de la captura
+
+COMPOSICIÓN (CRÍTICO):
+- Colocar TODOS los textos en el LADO DERECHO de la imagen
+- Los textos deben estar ENCIMA de la imagen (overlay), no detrás
+- Mantener el lado izquierdo más limpio para que se vea la interfaz
+- Alinear el texto en bloque vertical (tipo columna derecha)
+- El título arriba y el subtítulo debajo
+- Respetar una distribución visual equilibrada como en miniaturas de YouTube
+- Añadir un leve degradado oscuro o sombra en el lado derecho para mejorar legibilidad
+
+TIPOGRAFÍA:
+- Letras grandes, gruesas, estilo YouTube
+- TODO EN MAYÚSCULAS
+- Alto contraste: blanco y amarillo
+- Añadir sombra fuerte o contorno oscuro
+- El título debe ser MUCHO más grande que el subtítulo
+
+EFECTOS:
+- Añadir glow o resplandor suave detrás del título principal
+- Se pueden agregar líneas tecnológicas sutiles o detalles modernos
+- No saturar el diseño
+
+TEXTO (UBICACIÓN EXACTA):
+
+TÍTULO PRINCIPAL (ARRIBA A LA DERECHA, GRANDE):
+LIBREOFFICE COMPLETO EN LINUX
+
+SUBTEXTO (DEBAJO DEL TÍTULO, MÁS PEQUEÑO, EN LISTA):
++ CORRECTOR ORTOGRÁFICO
++ SINÓNIMOS
++ ESTILO DE ICONOS
++ DIVISIÓN DE PALABRAS
+
+IMPORTANTE:
+- El texto debe quedar alineado a la derecha como una columna
+- Debe parecer que el texto "flota" sobre la imagen
+- Evitar cubrir elementos importantes de la interfaz en el lado izquierdo
+
+RESULTADO FINAL:
+- Miniatura clara, moderna y profesional
+- Texto grande, legible incluso en pantallas pequeñas
+- Composición similar a thumbnails tecnológicos de alto nivel

@@ -1,0 +1,241 @@
+{
+  "main": {
+    "id": "bab3c949fd4c3f44",
+    "type": "split",
+    "children": [
+      {
+        "id": "530c42f09462f140",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7c07a1188c27a6d7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Inteligencia Artificial/opencode/OpenCode en Linux y Termux y usar modelos de IA gratis (tareas pequeñas o medianas) con OpenRouter.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OpenCode en Linux y Termux y usar modelos de IA gratis (tareas pequeñas o medianas) con OpenRouter"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "14835a13091aac26",
+    "type": "split",
+    "children": [
+      {
+        "id": "0080f05977010dae",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4ec2e825747ebf7b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "260e25fac6409240",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "19e62bb07d3b8ba1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 230.5
+  },
+  "right": {
+    "id": "3c406383ad09c7eb",
+    "type": "split",
+    "children": [
+      {
+        "id": "b635d1d121063fba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe6cadda3373114a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "git/20260915 Cómo subir archivos grandes a un repositorio Git usando Git LFS/index.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "e1c622496290f6d3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "git/20260915 Cómo subir archivos grandes a un repositorio Git usando Git LFS/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "adaf16cf19560019",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "81238cfbd37a6250",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "6d145fcae6d32b9f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Inteligencia Artificial/Qwen Code/20260828.1 en qwen CLI no puedo seleccionar texto largo/qwen texto largo seleccionar.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "6d145fcae6d32b9f",
+  "lastOpenFiles": [
+    "Sin título.canvas",
+    "git/20260915 Cómo subir archivos grandes a un repositorio Git usando Git LFS/index.md",
+    "AI-dev/Obsidian/squashfs-root/04 Pomt Deep Technical Investigation of Obsidian's.md",
+    "Inteligencia Artificial/20260521.3 TRAE en Fluxbox, cómo aplicar el fix del keyring en MX Linux 23/TRAE fix Fluxbox MX 23.md",
+    "AI-dev/Obsidian/squashfs-root/02 Instrucciones para extraer.md",
+    "git/20260915 Cómo subir archivos grandes a un repositorio Git usando Git LFS",
+    "git/Nueva carpeta",
+    "Inteligencia Artificial/20260503.1 Error de permisos del sandbox en VS Code al migrar repositorios Git/Error permisos repo VS Code.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/tab_control_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/static_text_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/radio_button_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/palette_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/markup_text_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_view_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_edit_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/html/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_box_properties.html",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/tab_control_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/static_text_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/radio_button_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/palette_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/markup_text_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_view_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_edit_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/list_box_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/group_box_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/edit_control_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/dialog_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/date_time_picker_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/common_dialog_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/combo_box_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/check_box_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_control_properties/button_properties.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/language_overlays.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/sizing_and_positioning_dialog_controls.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/using_the_layout_commands.md",
+    "AI-dev/linux-file-manager/script-opus-docs-download/dopus_docs_downloader/documentacion_directory_opus/markdown/scripting/script_editor/editors/dialog_editor/dialog_editor_commands.md",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/lengthwise/Thesis/Professional.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/lengthwise/Thesis/Pinstripe.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/lengthwise/Thesis/Line.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/lengthwise/Thesis/Austere.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/lengthwise/Thesis/General.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/transverse/transverse/Traditional.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/transverse/transverse/Stacks.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/transverse/transverse/Newsprint.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/transverse/transverse/Line.png",
+    "AI-dev/WPS Office/WPS_Office_12x_Es/mui/es_ES/templates/coverpage/buildin/transverse/transverse/Dots.png"
+  ]
+}

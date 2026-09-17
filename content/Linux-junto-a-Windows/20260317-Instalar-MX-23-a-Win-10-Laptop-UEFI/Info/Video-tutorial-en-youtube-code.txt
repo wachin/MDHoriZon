@@ -1,0 +1,3 @@
+
+
+<div class="separator" style="clear: both; text-align: center;"><iframe allowfullscreen="" class="BLOG_video_class" height="266" src="https://www.youtube.com/embed/1bAonwzjo30" width="320" youtube-src-id="1bAonwzjo30"></iframe></div>

@@ -1,0 +1,65 @@
+
+
+### Cómo poner la API de NVIDIA en bashrc
+
+Como ese archivo contiene tu API Key, algunos usuarios prefieren guardar solo la URL y el modelo en `~/.aider.conf.yml`:
+
+```yaml
+openai-api-base: https://integrate.api.nvidia.com/v1
+model: openai/nvidia/usdcode-llama-3.1-70b-instruct
+show-model-warnings: false
+```
+
+Y colocar la clave en `~/.bashrc`:
+
+```bash
+nano ~/.bashrc
+```
+
+Añadiendo al final:
+
+```bash
+export OPENAI_API_KEY="nvapi-XXXXXXXXXXXXXXXXXXXXXXXX"
+```
+
+Luego:
+
+```bash
+source ~/.bashrc
+```
+
+Así la clave queda separada de la configuración de Aider.
+
+---
+
+Antes de editar nada, yo haría esta comprobación:
+
+```bash
+aider --model openai/nvidia/usdcode-llama-3.1-70b-instruct
+```
+
+y dentro de Aider:
+
+```text
+/model
+```
+
+o
+
+```text
+/settings
+```
+
+para confirmar que realmente está usando el modelo de NVIDIA y no alguna configuración previa que tengas guardada.
+
+Por cierto, si piensas usar Aider frecuentemente en PyWriter, te recomiendo arrancarlo así:
+
+```bash
+cd ~/Dev/AI-dev/PyWriter/PyWriter/pywriter
+
+aider \
+  --subtree-only \
+  --model openai/nvidia/usdcode-llama-3.1-70b-instruct
+```
+
+porque tu repositorio completo tiene más de 8.000 archivos y eso puede hacer que Aider consuma más tiempo y tokens de los necesarios.

@@ -1,0 +1,56 @@
+@page {
+    size: A4;
+    margin: 2cm;
+
+    @bottom-center {
+        content: "Página " counter(page) " de " counter(pages);
+        color: #666;
+        font-size: 9pt;
+    }
+}
+
+body {
+    font-family: sans-serif;
+    color: #222;
+    font-size: 11pt;
+    line-height: 1.45;
+}
+
+h1, h2, h3 {
+    color: #174a70;
+}
+
+h1 {
+    border-bottom: 2px solid #174a70;
+    padding-bottom: 0.25em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #aaa;
+    padding: 0.4em;
+    vertical-align: top;
+}
+
+th {
+    background: #eaf2f8;
+}
+
+tr {
+    break-inside: avoid;
+}
+
+a {
+    color: #125b91;
+}
+
+code {
+    font-family: monospace;
+    background: #f2f2f2;
+}

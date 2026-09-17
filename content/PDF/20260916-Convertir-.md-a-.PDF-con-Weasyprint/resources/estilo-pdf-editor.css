@@ -1,0 +1,115 @@
+/* Estilo para convertir Markdown a PDF con Pandoc + WeasyPrint.
+   Variante "editor": el resaltado de las cajas de código es continuo,
+   como en Obsidian, Typora o VNote.
+
+   Clave del truco: Pandoc envuelve cada línea del código en <span>
+   dentro de un <code> en línea. Si el fondo se aplica a <code> (en
+   línea), WeasyPrint lo pinta línea por línea y el resaltado se corta.
+   Por eso el fondo se aplica a los contenedores de bloque
+   (div.sourceCode y pre), que se pintan de una sola pieza. */
+
+@page {
+    size: A4;
+    margin: 2cm;
+
+    @bottom-center {
+        content: "Página " counter(page) " de " counter(pages);
+        color: #666;
+        font-size: 9pt;
+    }
+}
+
+body {
+    font-family: sans-serif;
+    color: #222;
+    font-size: 11pt;
+    line-height: 1.45;
+}
+
+h1, h2, h3 {
+    color: #174a70;
+}
+
+h1 {
+    border-bottom: 2px solid #174a70;
+    padding-bottom: 0.25em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 9.5pt;
+}
+
+th, td {
+    border: 1px solid #aaa;
+    padding: 0.4em;
+    vertical-align: top;
+}
+
+th {
+    background: #eaf2f8;
+}
+
+tr {
+    break-inside: avoid;
+}
+
+a {
+    color: #125b91;
+}
+
+/* ---------- Cajas de código ---------- */
+
+/* El fondo va en los contenedores de BLOQUE: se pinta de una sola
+   pieza, sin cortes entre líneas. Cubre tanto los bloques envueltos
+   por Pandoc (div.sourceCode) como los pre sueltos. */
+pre,
+div.sourceCode {
+    background-color: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+}
+
+pre {
+    margin: 1em 0;
+    padding: 0.7em 1em;
+    font-family: "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    white-space: pre-wrap;        /* las líneas largas se doblan, no se salen de la página */
+    overflow-wrap: break-word;
+}
+
+div.sourceCode {
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* Cuando el pre va dentro del div de Pandoc, no debe repetir
+   borde, fondo ni márgenes: los aporta el div. */
+div.sourceCode pre {
+    margin: 0;
+    padding: 0.7em 1em;
+    background-color: transparent;
+    border: none;
+}
+
+/* Código en línea: se distingue del bloque con un fondo más pequeño. */
+code {
+    font-family: "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background-color: #eceff3;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+/* El code de dentro de una caja NO debe verse como código en línea. */
+pre code,
+div.sourceCode code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+}

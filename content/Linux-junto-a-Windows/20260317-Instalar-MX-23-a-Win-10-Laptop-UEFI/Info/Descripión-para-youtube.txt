@@ -1,0 +1,103 @@
+
+🐧 Instalar MX Linux 23 junto a Windows 10 (Dual Boot) UEFI | Guía completa paso a paso
+
+Aprende a instalar MX Linux 23 sin borrar Windows 10 en equipos UEFI (GPT). Guía completa y real paso a paso en laptop HP Pavilion.
+
+En este video te muestro cómo instalar MX Linux 23 en dual boot con Windows 10 de forma segura, manteniendo ambos sistemas operativos en el mismo equipo.
+
+✅ Probado en:
+- Laptop HP Pavilion
+- Windows 10 Home
+- Disco con UEFI + GPT
+
+⚠️ IMPORTANTE:
+Antes de comenzar realiza copia de seguridad de tus archivos, ya que este proceso modifica las particiones del disco.
+
+💾 PREPARACIÓN:
+- Pendrive USB (en este caso SanDisk 16GB)
+- Ventoy instalado
+- ISO de MX Linux 23
+
+📥 Descarga MX Linux:
+https://sourceforge.net/projects/mx-linux/files/Old
+Versiones nuevas:
+https://sourceforge.net/projects/mx-linux/
+
+🔄 Alternativas a Ventoy:
+- Rufus
+- Balena Etcher
+
+🧱 PASOS PRINCIPALES:
+1. Reducir partición en Windows, visita mi página https://wachin.github.io/windows-disk-shrink-simulator/
+2. Arrancar USB en modo UEFI (NO Legacy)
+3. Crear particiones en GParted
+4. Configurar instalación:
+   - Partición EFI → ESP (NO formatear)
+   - Partición Linux → /
+   - Swap → opcional (según RAM)
+5. Instalar GRUB en el disco principal
+
+⚠️ MUY IMPORTANTE:
+Debes reutilizar la partición EFI como ESP.
+Si no haces esto, la instalación en sistemas UEFI no funcionará.
+
+💡 Nota:
+La partición EFI puede llamarse sda1, sda2 u otro nombre dependiendo del equipo.
+
+⚠️ DESACTIVAR FAST STARTUP EN WINDOWS:
+Evita problemas como:
+- Particiones bloqueadas
+- Solo lectura en Linux
+- Riesgo de corrupción de datos
+
+Ruta:
+Panel de control → Opciones de energía → Desactivar "Inicio rápido"
+
+🎯 RESULTADO:
+Al finalizar tendrás un menú de arranque (GRUB) donde podrás elegir:
+- MX Linux
+- Windows 10
+
+📌 Este método funciona en la mayoría de equipos modernos con UEFI y GPT.
+
+💬 Si te sirvió este tutorial:
+- Dale like 👍
+- Suscríbete 🔔
+- Comparte 🚀
+
+⚠️ IMPORTANTE: Recuerda desactivar Fast Startup en Windows para evitar problemas con Linux, revisa los pasos con exactitud en mi blog:
+https://facilitarelsoftwarelibre.blogspot.com/2026/03/como-instalar-mx-linux-23-junto-windows-10-dualboot-laptop-uefi.html
+
+---
+
+00:00 Introducción e importante aviso de seguridad (copia de seguridad)
+00:25 Preparación del pendrive booteable (Ventoy + ISO MX Linux)
+00:50 Presentación del equipo (Laptop con Windows 10)
+01:20 Abrir Administrador de discos en Windows
+01:40 Verificación del disco duro y espacio disponible
+02:10 Reducción de partición (Shrink Volume)
+03:00 Uso de herramienta para calcular espacio
+04:00 Decidir cuánto espacio dejar para Linux
+05:00 Resultado: espacio no asignado para Linux
+06:00 Reinicio del equipo
+06:40 Arranque desde USB (Boot Menu UEFI)
+08:00 Selección de MX Linux en Ventoy
+08:40 Configuración inicial (idioma, teclado, zona horaria)
+09:20 Inicio del instalador de MX Linux
+10:00 Selección del tipo de instalación (personalizada)
+11:00 Explicación de particiones (root, home, swap, ESP)
+14:00 Requisitos importantes de particionado
+16:30 Identificación del disco y particiones existentes
+18:00 Explicación de partición EFI (ESP)
+20:00 Abrir GParted y ubicar espacio no asignado
+21:00 Crear partición para Linux (ext4)
+22:00 Crear partición SWAP
+24:00 Ajustes finales de particiones
+
+---
+
+#mxlinux
+#linux
+#dualboot
+#windows10
+#uefi

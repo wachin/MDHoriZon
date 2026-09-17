@@ -1,0 +1,24 @@
+
+Por favor hazme una entrada para mi blog de cómo conseguir la API China gratis de Zhipu AI, usa esta información:
+
+```
+Open Bigmodel (Zhipu AI)
+https://open.bigmodel.cn/
+tienes que usar Google Chrome para que puedas entender dónde dar clic en esa página china, debes dar clic en las tres rayitas y clic abajo en "Iniciar sesión/Registrarse", y allí hay que poner el número de teléfono (hay que elegir el código del país donde se encuentre, Ecuador +593 en mi caso), seguido del número, y es complicado porque hay que pedirle a una inteligencia artificial que pueda reconocer caracteres chinos, yo usé chatgpt, para que me ayude a poner el orden de las imágenes del CHAPTA, es decir le tomé capturas de pantalla y lo pasaba a chatgpt y le preguntaba:
+"Este es un chapta con caracteres chinos, analízalos bien, y dime cual es el orden en que debo dar clic"
+y me respondia, ejemplo:
+"Debes hacer clic en estos caracteres chinos en este orden:
+常 → el carácter de arriba al centro
+才 → el carácter grande del centro-izquierda
+激 → el carácter de arriba a la izquierda"
+Y sólo así pude pasar ese chapta(pero les cuento que el primer día que lo intenté no funcionó y era de noche acá en Ecuador, pero luego intenté en el día siguiente en el día y si funcionó), y de allí y apareción una ventanita en la que hay que mover una cosa, y luego me salió un mensaje que me enviarian al celular un codigo, y lo puse allí y seguí
+De allí busqué en la ayuda:
+https://docs.bigmodel.cn/cn/faq/batch-api-issues
+y allí encontré la siguiente ayuda para los Agentes
+https://open.bigmodel.cn/console/marketplace/index/agent
+Me envían a:
+https://open.bigmodel.cn/apikey/platform
+Y allí genero una API, y la pongo en un lugar seguro.
+"Opcional, se puede hacer un registro con documentos de pasaporte a china y otros y dan api para batch
+https://open.bigmodel.cn/usercenter/settings/auth"
+```

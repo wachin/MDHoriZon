@@ -1,0 +1,33 @@
+Diseñar una miniatura moderna tipo tutorial tecnológico para YouTube.
+
+FORMATO:
+- Resolución 1280x720 (16:9)
+- Estilo moderno, limpio y llamativo
+
+ELEMENTOS VISUALES:
+- Usa la imagen aquí adjunta del archivo "LibreOffice imagen para Portada.png" haciendo que ocupe todo el lienzo de la portada, esta imagen es de la interfaz de LibreOffice Writer en Linux, donde hay un documento abierto donde estoy corrigiendo una palabra
+
+COMPOSICIÓN:
+- Los textos debe estar al frente, a la derecha encima de la imagen "LibreOffice imagen para Portada.png", bien visibles
+- Añadir un leve brillo o resplandor detrás del texto principal
+
+TIPOGRAFÍA:
+- Letras grandes, gruesas, estilo YouTube
+- TODO en mayúsculas
+- Color blanco y amarillo para alto contraste
+- Sombra o contorno oscuro para mejor legibilidad
+
+TEXTO (MUY IMPORTANTE: GRANDE Y LEGIBLE):
+
+TÍTULO PRINCIPAL:
+LIBREOFFICE COMPLETO EN LINUX
+
+SUBTEXTO:
+Corrector ortográfico + Sinónimos + estilo de iconos + División de palabras
+
+Nota: Estos textos deben de quedar ubicados como están en la imagen del archivo "Como deberán quedar los textos.png"
+
+EXTRAS:
+- Añadir pequeños detalles visuales como líneas luminosas o efectos tecnológicos
+- Mantener diseño limpio (no saturado)
+- Estilo profesional y moderno
