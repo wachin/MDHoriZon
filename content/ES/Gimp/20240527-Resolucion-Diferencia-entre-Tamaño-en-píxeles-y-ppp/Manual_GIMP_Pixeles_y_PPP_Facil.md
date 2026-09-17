@@ -9,7 +9,6 @@ La fórmula es: **Tamaño Físico = Número de Píxeles / Resolución**
 Por ejemplo, una imagen de 3000 píxeles de ancho puede imprimirse a 10 pulgadas (25.4 cm) si usamos una resolución de 300 ppp, o a 41.6 pulgadas (105 cm) si usamos 72 ppp. En pantalla, siempre se ven por píxeles.
 
 ## 🎓 Objetivo de la lectura
-
 Al finalizar este tutorial el lector podrá:
 
 - Diferenciar claramente entre píxeles y resolución.
@@ -20,7 +19,6 @@ Al finalizar este tutorial el lector podrá:
 ---
 
 ## 🧠 Idea Central
-
 Una imagen digital tiene DOS propiedades independientes:
 
 1. Tamaño en píxeles (px)
@@ -48,7 +46,7 @@ Nunca son lo mismo.
 
 Un píxel es el cuadrito más pequeño de una imagen digital.
 
-![Ejemplo de pixeles](image/diagrama_pixeles.png)
+![Ejemplo de pixeles](images/diagrama_pixeles.png)
 
 Si una imagen mide 10 x 10 píxeles, tiene 100 cuadritos.
 
@@ -87,7 +85,7 @@ DPI = Dots Per Inch (puntos físicos de tinta)
 
 ## 🖨 MISMA IMAGEN, DISTINTA IMPRESIÓN (Comprendiendo la Impresión)
 
-![Concepto de impresion](image/diagrama_impresion.png)
+![Concepto de impresion](images/diagrama_impresion.png)
 
 Si una imagen tiene 1000 píxeles:
 
@@ -101,22 +99,7 @@ Pero la imagen digital NO cambió.
 # 🟨 UNIDADES EN GIMP
 
 ## Anchura y Altura
-En la siguiente imagen se ve en la sección `Tamaño de la imagen`en:
 
-Anchura
-Altura
-
-al dar clic en `px`:
-
-![](image/01-Ventana,-Crear-una-Nueva-Imagen.png)
-
-que se despliega y aparecen los siguientes valores:
-
-![](image/02-Crear-una-Nueva-Imagen_Tamaño-de-la-imagen_clic-en-px.png)
-
-los cuales les he puesto en una lista:
-
-```
 pixeles  
 inches  
 milimeters  
@@ -128,24 +111,11 @@ feet
 yards  
 tupogr.points  
 typogr.picas  
-```
 
-Estos valores sirven para cambiar el tamaño de la imagen.
+Estas cambian el tamaño.
 
 ## Resolución X / Y
 
-Al dar clic más abajo en `Opciones avanzadas`y en:
-
-Resolucón X:
-Resolución Y;
-
-al dar clic en `pixeles/in` se despliegan en la siguiente lista;
-
-![](image/03-Crear-una-Nueva-imagen_Opciones-Avanzadas_clic-en-pixeles-in.png)
-
-unos valores
-
-```
 pixeles/in
 pixeles/mm
 pixeles/pt
@@ -156,9 +126,9 @@ pixeles/ft
 pixeles/yd
 pixeles/tpt
 pixeles/tpc 
-```
 
-estos cambian la densidad de impresión.
+Estas cambian la densidad de impresión.
+
 
 ---
 
@@ -168,27 +138,26 @@ Estas unidades definen las **dimensiones totales del lienzo**.
 
 - **¿Qué controlan?** El tamaño del lienzo sobre el que estás trabajando.
 - **¿Por qué hay tantas?** Te permiten definir el tamaño de tu lienzo pensando en el resultado final.
-  - Si estás diseñando algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**. Sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
-  - Si estás diseñando algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**. Así puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm x 55 mm) sin tener que hacer cálculos mentales.
+    - Si estás diseñando algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**. Sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
+    - Si estás diseñando algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**. Así puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm x 55 mm) sin tener que hacer cálculos mentales.
 
 ### 2. Unidades de "Opciones avanzadas" (Resolución X / Y)
 
 Estas unidades definen la **densidad de píxeles**. Responden a la pregunta: "Si mi imagen tiene que medir 10 cm en el mundo real, ¿cuántos píxeles debo meter dentro de esos 10 cm?".
 
 - **¿Qué controlan?** La relación entre el mundo digital (píxeles) y el mundo físico (centímetros, pulgadas...).
-
 - **¿Por qué hay tantas?** Para que puedas trabajar con la unidad de medida física que te resulte más cómoda para tu proyecto de impresión. Simplemente le estás diciendo a GIMP: "La regla con la que voy a medir mi densidad de píxeles será esta".
 
-  * **píxeles/in (pulgada):** Esta es la unidad **más importante y famosa** de todas. Seguro que has oído hablar de **ppp (píxeles por pulgada) o dpi (dots per inch)**. Es el estándar de la industria. Una calidad de impresión profesional suele ser de 300 píxeles/in.
-  * **píxeles/mm (milímetro):** Cuántos píxeles hay en un milímetro. Es una unidad muy precisa para trabajos de alta calidad, pero los números suelen ser pequeños (por ejemplo, 11.8 píxeles/mm equivalen a 300 píxeles/pulgada).
-  * **píxeles/pt (punto tipográfico):** Muy útil para diseño editorial y maquetación. Un punto (pt) es una unidad de medida clásica en tipografía (1 pt = 1/72 de pulgada). Si sabes que tu texto va a ir a un tamaño de cuerpo de 12 pt, configurar la resolución en píxeles/pt te ayuda a visualizar y calcular mejor.
-  * **píxeles/pc (pica):** Otra unidad tipográfica. Una pica equivale a 12 puntos. Es muy usada en diseño gráfico y periodístico en algunos países.
-  * **píxeles/cm (centímetro):** Es la versión del milímetro pero más "gruesa". Se usa mucho porque el centímetro es una unidad familiar para todos.
-  * **píxeles/m (metro):** Para proyectos enormes, como vallas publicitarias o lonas gigantes. Nadie habla de píxeles por milímetro para una lona de 10 metros, pero sí de píxeles por metro para hacerse una idea de la calidad final.
-  * **píxeles/ft (pie):** La versión del sistema imperial (pies) para quienes trabajan con él.
-  * **píxeles/yd (yarda):** La versión del sistema imperial (yardas) para quienes trabajan con él.
-  * **píxeles/tpt (punto tipográfico tradicional):** Es una unidad de medida tipográfica "antigua" o tradicional, que tiene una diferencia mínima con el punto moderno (pt). Es para usos muy específicos en tipografía de alto nivel o para mantener la fidelidad con documentos históricos.
-  * **píxeles/tpc (pica tipográfica tradicional):** Lo mismo que el tpt, pero para la pica tradicional. Un complemento para tipografía de alto nivel.
+    *   **píxeles/in (pulgada):** Esta es la unidad **más importante y famosa** de todas. Seguro que has oído hablar de **ppp (píxeles por pulgada) o dpi (dots per inch)**. Es el estándar de la industria. Una calidad de impresión profesional suele ser de 300 píxeles/in.
+    *   **píxeles/mm (milímetro):** Cuántos píxeles hay en un milímetro. Es una unidad muy precisa para trabajos de alta calidad, pero los números suelen ser pequeños (por ejemplo, 11.8 píxeles/mm equivalen a 300 píxeles/pulgada).
+    *   **píxeles/pt (punto tipográfico):** Muy útil para diseño editorial y maquetación. Un punto (pt) es una unidad de medida clásica en tipografía (1 pt = 1/72 de pulgada). Si sabes que tu texto va a ir a un tamaño de cuerpo de 12 pt, configurar la resolución en píxeles/pt te ayuda a visualizar y calcular mejor.
+    *   **píxeles/pc (pica):** Otra unidad tipográfica. Una pica equivale a 12 puntos. Es muy usada en diseño gráfico y periodístico en algunos países.
+    *   **píxeles/cm (centímetro):** Es la versión del milímetro pero más "gruesa". Se usa mucho porque el centímetro es una unidad familiar para todos.
+    *   **píxeles/m (metro):** Para proyectos enormes, como vallas publicitarias o lonas gigantes. Nadie habla de píxeles por milímetro para una lona de 10 metros, pero sí de píxeles por metro para hacerse una idea de la calidad final.
+    *   **píxeles/ft (pie):** La versión del sistema imperial (pies) para quienes trabajan con él.
+    *   **píxeles/yd (yarda):** La versión del sistema imperial (yardas) para quienes trabajan con él.
+    *   **píxeles/tpt (punto tipográfico tradicional):** Es una unidad de medida tipográfica "antigua" o tradicional, que tiene una diferencia mínima con el punto moderno (pt). Es para usos muy específicos en tipografía de alto nivel o para mantener la fidelidad con documentos históricos.
+    *   **píxeles/tpc (pica tipográfica tradicional):** Lo mismo que el tpt, pero para la pica tradicional. Un complemento para tipografía de alto nivel.
 
 ### En Resumen y para la práctica diaria:
 
@@ -197,7 +166,7 @@ Estas unidades definen la **densidad de píxeles**. Responden a la pregunta: "Si
 
 **El truco:** No te compliques. Si vas a hacer algo para imprimir, pon el tamaño en **centímetros** en la parte de arriba y, en las opciones avanzadas, busca el equivalente de 300 píxeles por pulgada (que son 118 píxeles/cm o 11.8 píxeles/mm). Si es para pantalla, asegúrate de que la unidad de arriba sean **píxeles** y la resolución te dará igual, déjala en píxeles/mm o en lo que esté por defecto.
 
-## 🔍 7. DIFERENCIA CLAVE
+## 🔍 7. DIFERENCIA CLAVE 
 
 | Tamaño (Anchura & Altura) (Comportamiento en Pantalla) | Resolución X y Y (Comprendiendo la Impresión) |
 | ------------------------------------------------------ | --------------------------------------------- |
@@ -206,6 +175,9 @@ Estas unidades definen la **densidad de píxeles**. Responden a la pregunta: "Si
 | Afecta calidad real                                    | Solo afecta impresión                         |
 
 ---
+
+
+
 
 # 🎯 ¿Por qué existen PPP, PPI y DPI si en GIMP no aparecen?
 
@@ -235,10 +207,9 @@ Entonces:
 
 Este es el término técnico correcto cuando hablamos de:
 
+
 ---
-
 ## 🖥 Sección: Comportamiento en Pantalla
-
 ---
 
 * Pantallas
@@ -281,7 +252,7 @@ Son puntos físicos de tinta que una impresora coloca en el papel.
 
 #### 📌 Diferencia real
 
-| Término | Se usa para                   | Qué mide realmente      |
+| Término |          Se usa para          |   Qué mide realmente    |
 | ------- | ----------------------------- | ----------------------- |
 | PPI     | Imágenes digitales            | Píxeles en pantalla     |
 | PPP     | Lo mismo que PPI (en español) | Píxeles                 |
@@ -338,17 +309,17 @@ En **Imagen → Propiedades de la imagen**, GIMP muestra (entre otras cosas):
 
 ### Ejemplo real (200×200 px)
 
-![Propiedades: 200×200 px y 150 ppp](image/image2.jpeg)
+![Propiedades: 200×200 px y 150 ppp](images/image2.jpeg)
 
 En la captura se ve:
 
 - **Tamaño en píxeles: 200×200 px** (esto define cuánta información tiene la imagen).  
-- **Resolución: 150×150 ppp** (esto sirve para calcular el tamaño en papel).
+- **Resolución: 150×150 ppp** (esto sirve para calcular el tamaño en papel).  
 
 Piensa así:
 
 - **px = cuántos LEGO tienes**.  
-- **ppp = qué tan apretados pones esos LEGO cuando los imprimes**.
+- **ppp = qué tan apretados pones esos LEGO cuando los imprimes**.  
 
 ---
 
@@ -367,7 +338,7 @@ Piensa así:
 Aquí sí importa la resolución:
 
 - Si tienes pocos px y quieres imprimir muy grande, se verá **pixelado**.  
-- Si tienes muchos px, puedes imprimir más grande y con mejor detalle.
+- Si tienes muchos px, puedes imprimir más grande y con mejor detalle.  
 
 **Para imprimir:** debes pensar en **(px) ÷ (ppp)** para saber el tamaño en pulgadas.
 
@@ -377,13 +348,13 @@ Cuando creas una imagen nueva en GIMP, por defecto suele venir con **300 ppp**.
 
 Ruta: **Archivo → Nuevo** y luego abrir **Opciones avanzadas**:
 
-![Crear imagen nueva: opciones avanzadas](image/image4.png)
+![Crear imagen nueva: opciones avanzadas](images/image4.png)
 
-![Resolución por defecto 300 ppp](image/image5.png)
+![Resolución por defecto 300 ppp](images/image5.png)
 
 Luego puedes verificarlo en **Imagen → Propiedades de la imagen**:
 
-![Propiedades: 1920×1080 px y 300 ppp](image/image6.jpeg)
+![Propiedades: 1920×1080 px y 300 ppp](images/image6.jpeg)
 
 ## GIMP no siempre escribe **ppp (píxeles por pulgada)** con esas letras.
 
@@ -438,6 +409,8 @@ Ahora las unidades menos conocidas:
 
 Estas últimas se usan en imprentas y diseño editorial profesional.
 
+
+
 ## 🎯 Entonces… ¿Dónde está el famoso '300 ppp'?
 
 Si eliges pulgadas como unidad y pones 300 en resolución,
@@ -450,13 +423,13 @@ eso también equivale a 300 ppp porque:
 
 ## 🔄 Diferencia CLARA entre Tamaño y Resolución
 
-| Anchura / Altura                 | Resolución X / Y                 |
+|         Anchura / Altura         |         Resolución X / Y         |
 | -------------------------------- | -------------------------------- |
 | Cambia el tamaño real en píxeles | Cambia la densidad de impresión  |
 | Afecta cómo se ve en pantalla    | No cambia cómo se ve en pantalla |
 | Puede perder calidad si reduces  | No cambia calidad digital        |
 
-## 🧠 Regla sencilla
+## 🧠 Regla sencilla 
 
 - Para YouTube, web, iconos → usa pixeles.
 - Para imprimir → usa centímetros o pulgadas + resolución (300 ppp recomendado).
@@ -473,11 +446,11 @@ En Gimp con una imagen abierta, y dando clic en:
 
 **Imagen → Escalar la imagen…**
 
-![Menú: Escalar la imagen](image/image21.jpeg)
+![Menú: Escalar la imagen](images/image21.jpeg)
 
 y he colocado un comentario, en el texto de la imagen dice que si cambias la resolución, **no afecta** el tamaño en pantalla:
 
-![Cambiar resolución no cambia el tamaño](image/image22.jpeg)
+![Cambiar resolución no cambia el tamaño](images/image22.jpeg)
 
 **y ¿Cómo se cambia el tamaño real (px)?**
 
@@ -512,29 +485,27 @@ En Linux, los temas de iconos guardan **varias versiones** del mismo icono en di
 
 Así el sistema puede elegir el tamaño correcto y verse nítido.
 
-![Carpetas de tamaños en un tema de iconos (Adwaita)](image/image23.png)
+![Carpetas de tamaños en un tema de iconos (Adwaita)](images/image23.png)
 
 ### Comparación: el mismo icono en 48×48 vs 256×256
 
 #### Icono 48×48
 
-![Archivo en carpeta 48×48](image/image14.png)
+![Archivo en carpeta 48×48](images/image14.png)
 
-![Propiedades del icono 48×48](image/image15.jpeg)
+![Propiedades del icono 48×48](images/image15.jpeg)
+
 
 ---
-
 ## 🖥 Sección: Comportamiento en Pantalla
-
 ---
-
 Aquí el icono es pequeño (48×48 px), por eso ocupa poco en pantalla.
 
 #### Icono 256×256
 
-![Archivo en carpeta 256×256](image/image19.png)
+![Archivo en carpeta 256×256](images/image19.png)
 
-![Propiedades del icono 256×256](image/image20.jpeg)
+![Propiedades del icono 256×256](images/image20.jpeg)
 
 Aquí el icono tiene más píxeles (256×256), por eso se puede ver **más grande** y normalmente con **más detalle**.
 
@@ -542,12 +513,10 @@ Aquí el icono tiene más píxeles (256×256), por eso se puede ver **más grand
 
 Fíjate que en las capturas de 48×48 y 256×256 aparece el mismo valor de **píxeles/mm**, pero **el tamaño en px** es diferente.
 
----
 
+---
 ## 🖥 Sección: Comportamiento en Pantalla
-
 ---
-
 **Conclusión:** para pantalla, lo que manda es el **tamaño en píxeles**.
 
 ## 8) ¿Cuándo me importa el ppp?
@@ -557,30 +526,22 @@ Te dejo una guía rápida:
 - ✅ **Web / redes / miniaturas / UI / iconos:** piensa en **px**.
 
 ---
-
 ## 🖨 Sección: Comprendiendo la Impresión
-
 ---
-
 - ✅ **Impresión:** piensa en **cm + ppp**.
 
----
 
+---
 ## 🖨 Sección: Comprendiendo la Impresión
-
 ---
-
 Valores típicos de impresión (regla práctica):
 
 - **300 ppp**: calidad alta (revistas, folletos, textos pequeños).
 - **150 ppp**: aceptable para impresiones grandes vistas a distancia.
 
 ---
-
 ## 🖥 Sección: Comportamiento en Pantalla
-
 ---
-
 - **72–96 ppp**: suele ser “histórico de pantallas”, **no** es una regla moderna; hoy lo importante es px.
 
 ## 9) Ejercicios rápidos (para comprobar que entendiste)
@@ -589,14 +550,13 @@ Valores típicos de impresión (regla práctica):
 - Pulgadas: 1200/300 = 4 in, 900/300 = 3 in
 - En cm: 4×2.54 = 10.16 cm, 3×2.54 = 7.62 cm
 
----
 
+---
 ## 🖥 Sección: Comportamiento en Pantalla
-
 ---
-
 2) Si cambias solo el ppp en GIMP, ¿cambia el peso del archivo o la nitidez en pantalla?
 - Respuesta esperada: **no** (si no cambias px).
+
 3) ¿Por qué los temas de iconos tienen varias carpetas (48×48, 256×256, etc.)?
 - Respuesta esperada: para que el sistema elija el tamaño correcto y se vea nítido.
 
@@ -606,3 +566,11 @@ Valores típicos de impresión (regla práctica):
 - **ppp** = densidad para imprimir (convierte px ↔ cm/pulgadas).
 
 ---
+## 🖨 Sección: Comprendiendo la Impresión
+---
+
+---
+## 🖥 Sección: Comportamiento en Pantalla
+---
+- Cambiar **ppp** sin cambiar **px**: cambia “tamaño de impresión”, no la imagen en pantalla.
+- Cambiar **px** (escalar): sí cambia la imagen.

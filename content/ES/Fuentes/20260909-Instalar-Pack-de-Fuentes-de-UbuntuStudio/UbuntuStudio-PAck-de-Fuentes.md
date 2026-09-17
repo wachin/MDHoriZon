@@ -1,7 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjE29-auec0Y632qsw7zV5Ld3dp2yogqr5gXYOlQYqcSGLGdCd781_5CPj0nBPEkIknnzjEcoCTWPw85QGfBTC5vOOh9hm_VnYNbtfatkwZ4yGGeoBVEjez3S-5CUvcA6hKa48Gm_XilQU_DmimkQMLO2c4ir9Laro-m_tWyjlZ50B8jYfBE5shnt_Zl_w/s1536/Portada.jpg =650x)
-
-
 # UbuntuStudio Pack de Fuentes
+
+![](images/Portada.jpg)
 
 Este tutorial es para sistemas operativos Linux basados en paquetería deb como Debian, MX Linux, Ubuntu, Mint, etc, etc, pero también se podría adaptar a los que usan la paquetería RPM 
 
