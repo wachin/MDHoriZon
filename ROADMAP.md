@@ -627,17 +627,17 @@ Images deserve their own validation because Markdown documents may reference loc
 
 ### Tasks
 
-- [ ] Support remote images.
-- [ ] Support relative images.
-- [ ] Support images next to Markdown files.
-- [ ] Make images responsive.
-- [ ] Preserve aspect ratio.
-- [ ] Handle very wide images.
-- [ ] Handle very tall images.
-- [ ] Handle missing images.
-- [ ] Display meaningful alt text.
-- [ ] Test image links.
-- [ ] Define how image assets are included in offline downloads.
+- [x] Support remote images.
+- [x] Support relative images.
+- [x] Support images next to Markdown files.
+- [x] Make images responsive.
+- [x] Preserve aspect ratio.
+- [x] Handle very wide images.
+- [x] Handle very tall images.
+- [x] Handle missing images.
+- [x] Display meaningful alt text.
+- [x] Test image links.
+- [x] Define how image assets are included in offline downloads.
 - [ ] Prevent broken relative paths after content is copied to local storage.
 
 The offline content system must know that a Markdown article and its referenced local assets form a content package.
