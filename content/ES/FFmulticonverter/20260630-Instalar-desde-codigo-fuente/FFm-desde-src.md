@@ -1,4 +1,4 @@
-
+# Cómo instalar FFmulticonverter desde código fuente
 
 Este tutorial es si alguien lo desea instalar desde código fuente puesto que así se puede instalar en una variedad más amplia de Linux, pero si lo quiere instalar desde paquete deb vea esta [entrada](https://facilitarelsoftwarelibre.blogspot.com/2020/10/como-instalar-ffmulticonverter-18-en-mx.html).
 

@@ -1,4 +1,3 @@
-
 # Configuración de Apagado en Fluxbox para MX Linux 23 XFCE (SysVinit vs Systemd)
 
 MX Linux es especial porque ofrece dos "sabores" o formas de gestionar el sistema. Cuando enciendes tu ordenador y ves el menú del GRUB, te estás enfrentando a esta elección:
@@ -18,13 +17,17 @@ Si te gusta la idea de tener un sistema que no depende de una pieza gigante de s
 **1. Configurar permisos (Sudoers)**
 SysVinit requiere permisos de superusuario para apagar, pero no queremos escribir la contraseña cada vez.
 1. Abre una terminal y escribe:
-   ```bash
-   sudo visudo
-   ```
+
+```bash
+sudo visudo
+```
+
 2. Al final del archivo, añade esta línea (cambia `wachin` por tu usuario):
-   ```text
-   wachin ALL = NOPASSWD: /sbin/poweroff, /sbin/reboot, /usr/sbin/pm-suspend
-   ```
+
+```text
+wachin ALL = NOPASSWD: /sbin/poweroff, /sbin/reboot, /usr/sbin/pm-suspend
+```
+
 3. Guarda (`Ctrl+O`, `Enter`) y sal (`Ctrl+X`).
 
 **2. Configurar el menú de Fluxbox**
@@ -38,6 +41,9 @@ Edita tu archivo `~/.fluxbox/menu` y usa estos comandos tradicionales:
    [exit] (Cerrar Sesión) </usr/share/icons/gnome/16x16/actions/system-log-out.png>
  [end]
 ```
+
+**Nota**: El comando `pm-suspend` viene del paquete `pm-utils` que debería estar instalado
+
 *Recarga Fluxbox y listo. Tienes un sistema limpio y funcional.*
 
 ---
@@ -62,6 +68,30 @@ Si has entrado con Systemd, ya no necesitas `sudo` ni trucos, el sistema maneja 
    [exit] (Cerrar Sesión) </usr/share/icons/gnome/16x16/actions/system-log-out.png>
  [end]
 ```
+
+Si no funciona posiblemente necesites hacer lo siguiente:
+
+**3. Configurar permisos (Sudoers)**
+Systemd puede requerir de superusuario para apagar, pero no queremos escribir la contraseña cada vez.
+
+1. Abre una terminal y escribe:
+
+```bash
+sudo visudo
+```
+
+2. Al final del archivo, añade esta línea (cambia `wachin` por tu usuario):
+
+```text
+wachin ALL = NOPASSWD: /usr/bin/systemctl
+```
+
+así como muestra la siguiente imagen:
+
+![](images/01-NOPASSWD-a-usr_bin_systemctl.png)
+
+3. Guarda (`Ctrl+O`, `Enter`) y sal (`Ctrl+X`).
+
 
 ---
 
