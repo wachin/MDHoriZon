@@ -62,34 +62,34 @@ this text starts on a new line.</p>
 <p>Remote image example. This requires network access; with no network it must fail exactly as gracefully as the
 missing-image case below:</p>
 <p><img alt="MDHoriZon placeholder image" loading="lazy" decoding="async" src="https://placehold.co/640x240/0b3d91/ffffff/png?text=MDHoriZon"></p>
-<p>Relative image example. The file exists at <code>tests/assets/example.png</code> and must resolve relative to this
+<p>Relative image example. The file exists at <code>tests/fixtures/images/example.png</code> and must resolve relative to this
 document, not relative to the application or the page URL:</p>
-<p><img alt="Relative image" loading="lazy" decoding="async" src="../assets/example.png"></p>
+<p><img alt="Relative image" loading="lazy" decoding="async" src="images/example.png"></p>
 <p>Redundant <code>./</code> and <code>..</code> segments must be normalized rather than treated as a literal path:</p>
-<p><img alt="Relative image with redundant segments" loading="lazy" decoding="async" src="./../assets/example.png"></p>
+<p><img alt="Relative image with redundant segments" loading="lazy" decoding="async" src="./images/example.png"></p>
 <p>Image with a title attribute (the title must survive into the rendered <code>title</code>):</p>
-<p><img title="The relative fixture asset" alt="Relative image with title" loading="lazy" decoding="async" src="../assets/example.png"></p>
+<p><img title="The relative fixture asset" alt="Relative image with title" loading="lazy" decoding="async" src="images/example.png"></p>
 <p>Decorative image with intentionally empty alt text. It must not be announced by assistive technology and must
 not produce a broken-image placeholder:</p>
-<p><img alt="" loading="lazy" decoding="async" src="../assets/example.png"></p>
+<p><img alt="" loading="lazy" decoding="async" src="images/example.png"></p>
 <p>Very wide image. It must stay inside the viewport, keep its aspect ratio, and scroll or shrink instead of
 stretching the layout:</p>
-<p><img alt="Wide fixture asset" loading="lazy" decoding="async" src="../assets/wide.png"></p>
+<p><img alt="Wide fixture asset" loading="lazy" decoding="async" src="images/wide.png"></p>
 <p>Very tall image. It must not force the page to become unusable without scrolling:</p>
-<p><img alt="Tall fixture asset" loading="lazy" decoding="async" src="../assets/tall.png"></p>
-<p>Missing image example. <code>tests/assets/does-not-exist.png</code> <strong>intentionally does not exist</strong>; this is a negative
+<p><img alt="Tall fixture asset" loading="lazy" decoding="async" src="images/tall.png"></p>
+<p>Missing image example. <code>tests/fixtures/images/does-not-exist.png</code> <strong>intentionally does not exist</strong>; this is a negative
 test, not an unfinished task, and creating that file would delete this test case. Expected behavior: the
 article keeps rendering, the alt text stays available, and nothing throws.</p>
-<p><img alt="This image intentionally does not exist" loading="lazy" decoding="async" src="../assets/does-not-exist.png"></p>
+<p><img alt="This image intentionally does not exist" loading="lazy" decoding="async" src="images/does-not-exist.png"></p>
 <p>Image used as a link:</p>
 <p><a href="https://github.com/" target="_blank" rel="noopener noreferrer"><img alt="Linked image" loading="lazy" decoding="async" src="https://placehold.co/320x120/1e88e5/ffffff/png?text=Link"></a></p>
 <p>Image inside a list item:</p>
 <ul>
-<li>List item with an image: <img alt="Inline icon" loading="lazy" decoding="async" src="../assets/example.png"></li>
+<li>List item with an image: <img alt="Inline icon" loading="lazy" decoding="async" src="images/example.png"></li>
 <li>Item after the image.</li>
 </ul>
 <p>Image inside a table cell:</p>
-<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Placement</th><th scope="col">Image</th></tr></thead><tbody><tr><td>Table cell</td><td><img alt="Icon in a table" loading="lazy" decoding="async" src="../assets/example.png"></td></tr></tbody></table></div>
+<div class="markdown-table-scroll" role="region" aria-label="Table, scrollable horizontally" tabindex="0"><table><thead><tr><th scope="col">Placement</th><th scope="col">Image</th></tr></thead><tbody><tr><td>Table cell</td><td><img alt="Icon in a table" loading="lazy" decoding="async" src="images/example.png"></td></tr></tbody></table></div>
 <hr>
 <h1 id="5-lists">5. Lists<a class="markdown-heading-anchor" href="#5-lists" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <h2 id="unordered">Unordered<a class="markdown-heading-anchor" href="#unordered" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h2>
@@ -566,8 +566,8 @@ separate fixture whose first bytes are the opening delimiter.</p>
 </ul>
 <p>Content that exercises those requirements:</p>
 <ul>
-<li>A decorative image that must be ignored by assistive technology: <img alt="" loading="lazy" decoding="async" src="../assets/example.png"></li>
-<li>A meaningful image that must be announced: <img alt="MDHoriZon fixture asset" loading="lazy" decoding="async" src="../assets/example.png"></li>
+<li>A decorative image that must be ignored by assistive technology: <img alt="" loading="lazy" decoding="async" src="images/example.png"></li>
+<li>A meaningful image that must be announced: <img alt="MDHoriZon fixture asset" loading="lazy" decoding="async" src="images/example.png"></li>
 <li>Collapsible content that must be keyboard operable (subject to the raw-HTML policy — if <code>&lt;details&gt;</code> is
 stripped, this case documents that decision rather than failing):</li>
 </ul>

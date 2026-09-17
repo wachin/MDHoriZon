@@ -99,38 +99,38 @@ missing-image case below:
 
 ![MDHoriZon placeholder image](https://placehold.co/640x240/0b3d91/ffffff/png?text=MDHoriZon)
 
-Relative image example. The file exists at `tests/assets/example.png` and must resolve relative to this
+Relative image example. The file exists at `tests/fixtures/images/example.png` and must resolve relative to this
 document, not relative to the application or the page URL:
 
-![Relative image](../assets/example.png)
+![Relative image](images/example.png)
 
 Redundant `./` and `..` segments must be normalized rather than treated as a literal path:
 
-![Relative image with redundant segments](./../assets/example.png)
+![Relative image with redundant segments](./images/example.png)
 
 Image with a title attribute (the title must survive into the rendered `title`):
 
-![Relative image with title](../assets/example.png "The relative fixture asset")
+![Relative image with title](images/example.png "The relative fixture asset")
 
 Decorative image with intentionally empty alt text. It must not be announced by assistive technology and must
 not produce a broken-image placeholder:
 
-![](../assets/example.png)
+![](images/example.png)
 
 Very wide image. It must stay inside the viewport, keep its aspect ratio, and scroll or shrink instead of
 stretching the layout:
 
-![Wide fixture asset](../assets/wide.png)
+![Wide fixture asset](images/wide.png)
 
 Very tall image. It must not force the page to become unusable without scrolling:
 
-![Tall fixture asset](../assets/tall.png)
+![Tall fixture asset](images/tall.png)
 
-Missing image example. `tests/assets/does-not-exist.png` **intentionally does not exist**; this is a negative
+Missing image example. `tests/fixtures/images/does-not-exist.png` **intentionally does not exist**; this is a negative
 test, not an unfinished task, and creating that file would delete this test case. Expected behavior: the
 article keeps rendering, the alt text stays available, and nothing throws.
 
-![This image intentionally does not exist](../assets/does-not-exist.png)
+![This image intentionally does not exist](images/does-not-exist.png)
 
 Image used as a link:
 
@@ -138,14 +138,14 @@ Image used as a link:
 
 Image inside a list item:
 
-- List item with an image: ![Inline icon](../assets/example.png)
+- List item with an image: ![Inline icon](images/example.png)
 - Item after the image.
 
 Image inside a table cell:
 
 | Placement | Image |
 |---|---|
-| Table cell | ![Icon in a table](../assets/example.png) |
+| Table cell | ![Icon in a table](images/example.png) |
 
 ---
 
@@ -862,8 +862,8 @@ The rendered result should expose:
 
 Content that exercises those requirements:
 
-- A decorative image that must be ignored by assistive technology: ![](../assets/example.png)
-- A meaningful image that must be announced: ![MDHoriZon fixture asset](../assets/example.png)
+- A decorative image that must be ignored by assistive technology: ![](images/example.png)
+- A meaningful image that must be announced: ![MDHoriZon fixture asset](images/example.png)
 - Collapsible content that must be keyboard operable (subject to the raw-HTML policy — if `<details>` is
   stripped, this case documents that decision rather than failing):
 

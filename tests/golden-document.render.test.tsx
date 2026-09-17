@@ -136,17 +136,17 @@ describe('Golden Test Document', () => {
       ).toBeInTheDocument()
       expect(
         screen.getByAltText('This image intentionally does not exist'),
-      ).toHaveAttribute('src', '../assets/does-not-exist.png')
+      ).toHaveAttribute('src', 'images/does-not-exist.png')
     })
 
     it('leaves relative sources as written when the document’s location is unknown', () => {
       // The rendering core is usable without a content loader (Phase 10), and with no base there is
       // nothing correct to resolve against — so the document's own words survive untouched.
       expect(
-        container.querySelector('img[src="../assets/wide.png"]'),
+        container.querySelector('img[src="images/wide.png"]'),
       ).not.toBeNull()
       expect(
-        container.querySelector('img[src="./../assets/example.png"]'),
+        container.querySelector('img[src="./images/example.png"]'),
       ).not.toBeNull()
     })
 
@@ -160,7 +160,8 @@ describe('Golden Test Document', () => {
         </MarkdownRenderer>,
       )
 
-      // `../assets/...` climbs out of `tests/fixtures/` and lands in `tests/assets/`.
+      // The document keeps its images beside itself, in its own `images/` folder: the same shape a
+      // content package will have (ADR 0008).
       for (const asset of [
         'example.png',
         'wide.png',
@@ -168,13 +169,13 @@ describe('Golden Test Document', () => {
         'does-not-exist.png',
       ]) {
         expect(
-          resolved.querySelector(`img[src="/tests/assets/${asset}"]`),
+          resolved.querySelector(`img[src="/tests/fixtures/images/${asset}"]`),
           asset,
         ).not.toBeNull()
       }
       // Redundant segments are normalized rather than kept literally.
       expect(
-        resolved.querySelector('img[src="./../assets/example.png"]'),
+        resolved.querySelector('img[src="./images/example.png"]'),
       ).toBeNull()
       // Remote images are absolute already and must not be rewritten.
       expect(

@@ -16,7 +16,7 @@ const documents = [
 ]
 
 /** Destinations that must stay broken: the fixture's deliberate negative cases. */
-const intentionallyMissing = new Set(['../assets/does-not-exist.png'])
+const intentionallyMissing = new Set(['images/does-not-exist.png'])
 
 const read = (relativePath: string) =>
   readFileSync(join(repoRoot, relativePath), 'utf8')
@@ -146,11 +146,11 @@ describe('golden fixture', () => {
 
   it('keeps the missing-image negative test, and keeps it missing', () => {
     expect(fixture).toContain(
-      '![This image intentionally does not exist](../assets/does-not-exist.png)',
+      '![This image intentionally does not exist](images/does-not-exist.png)',
     )
-    expect(existsSync(join(repoRoot, 'tests/assets/does-not-exist.png'))).toBe(
-      false,
-    )
+    expect(
+      existsSync(join(repoRoot, 'tests/fixtures/images/does-not-exist.png')),
+    ).toBe(false)
   })
 
   it('keeps the CJK emphasis case that pins a CommonMark limitation', () => {

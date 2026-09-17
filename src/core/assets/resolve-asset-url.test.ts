@@ -18,7 +18,10 @@ describe('resolving relative asset paths', () => {
   })
 
   it('walks up with `..`', () => {
-    // This is the case that mattered: the golden document asks for `./../assets/example.png`.
+    // Reaching out of the document's own folder must work too: the fixture does it for a link
+    // (`../articles/example.md`), and an article that keeps its images elsewhere will do it for
+    // images. The documents themselves keep their images in a folder beside them, which is the
+    // "walks down" case below.
     expect(resolveAssetUrl('./../assets/example.png', DOC)).toBe(
       'https://example.test/articles/assets/example.png',
     )

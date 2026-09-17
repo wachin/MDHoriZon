@@ -10,9 +10,10 @@ directory boundary (`tests/fixtures/` → `tests/articles/`), so a correct resol
 resolution has to keep working after the document has been downloaded for offline reading.
 
 Because this file sits in a different directory than the fixture, the image below also proves that assets are
-resolved relative to **the document that references them**, not relative to the application URL:
+resolved relative to **the document that references them**, not relative to the application URL — it climbs out
+of `tests/articles/` and into the fixture's own `images/` folder:
 
-![Shared example asset](../assets/example.png)
+![Shared example asset](../fixtures/images/example.png)
 
 A relative link back to the fixture closes the round trip:
 
