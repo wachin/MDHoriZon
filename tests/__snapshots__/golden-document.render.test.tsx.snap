@@ -68,7 +68,7 @@ document, not relative to the application or the page URL:</p>
 <p>Redundant <code>./</code> and <code>..</code> segments must be normalized rather than treated as a literal path:</p>
 <p><img alt="Relative image with redundant segments" loading="lazy" decoding="async" src="./../assets/example.png"></p>
 <p>Image with a title attribute (the title must survive into the rendered <code>title</code>):</p>
-<p><img alt="Relative image with title" loading="lazy" decoding="async" title="The relative fixture asset" src="../assets/example.png"></p>
+<p><img title="The relative fixture asset" alt="Relative image with title" loading="lazy" decoding="async" src="../assets/example.png"></p>
 <p>Decorative image with intentionally empty alt text. It must not be announced by assistive technology and must
 not produce a broken-image placeholder:</p>
 <p><img alt="" loading="lazy" decoding="async" src="../assets/example.png"></p>

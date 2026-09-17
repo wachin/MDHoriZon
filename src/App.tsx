@@ -23,6 +23,16 @@ function App() {
   const [headings, setHeadings] = useState<ArticleHeading[]>([])
 
   /**
+   * Where this document lives, so its own relative assets resolve against it (Phase 8).
+   *
+   * In the dev server this points at the file in the repository, and the fixture's images load. In
+   * the built preview the test assets are deliberately not part of the application bundle, so those
+   * images fail — which is the fixture's own missing-image case, and the reason a broken source now
+   * renders a legible placeholder instead of the engine's broken-image glyph.
+   */
+  const documentUrl = `${import.meta.env.BASE_URL}tests/fixtures/Golden-Test-Document.md`
+
+  /**
    * The table of contents is read from the rendered document, after React has committed it: the ids
    * `rehype-slug` generated are the only correct anchors, and reading them is cheaper and safer than
    * parsing the Markdown a second time.
@@ -46,7 +56,9 @@ function App() {
       <TableOfContents headings={headings} />
 
       <article ref={article}>
-        <MarkdownRenderer>{document}</MarkdownRenderer>
+        <MarkdownRenderer documentUrl={documentUrl}>
+          {document}
+        </MarkdownRenderer>
       </article>
     </main>
   )

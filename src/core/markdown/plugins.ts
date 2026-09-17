@@ -18,6 +18,7 @@ import rehypeSanitize from 'rehype-sanitize'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import { resolveAssetUrl } from '../assets/resolve-asset-url'
 import { remarkInlineMathDelimiterRule } from './remark-inline-math-rule'
 import {
   ALLOWED_IMAGE_PROTOCOLS,
@@ -108,11 +109,23 @@ export const rehypePlugins: PluginList = [
 /**
  * The URL policy applied by the renderer to every `href` and `src`.
  *
+ * Order matters: the document's own relative paths are resolved first, and the policy judges the
+ * *resolved* URL. Doing it the other way round would let a resolved path bypass the scheme check.
+ *
  * Returning `null` removes the attribute, which is what happens to `javascript:` links, `data:`
  * images and any other scheme the policy does not allow.
+ *
+ * @param documentUrl Where the document lives, so `../assets/x.png` means the right thing. Without
+ *   it, relative URLs are left exactly as the document wrote them.
  */
-export const urlTransform: UrlTransform = (url, key) => {
-  const allowed =
-    key === 'src' ? ALLOWED_IMAGE_PROTOCOLS : ALLOWED_LINK_PROTOCOLS
-  return applyUrlPolicy(url, allowed)
+export function createUrlTransform(documentUrl?: string): UrlTransform {
+  return (url, key) => {
+    const allowed =
+      key === 'src' ? ALLOWED_IMAGE_PROTOCOLS : ALLOWED_LINK_PROTOCOLS
+
+    return applyUrlPolicy(resolveAssetUrl(url, documentUrl), allowed)
+  }
 }
+
+/** The policy with no document base: for a document whose location is not known. */
+export const urlTransform: UrlTransform = createUrlTransform()

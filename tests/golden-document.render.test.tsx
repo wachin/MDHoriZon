@@ -139,13 +139,53 @@ describe('Golden Test Document', () => {
       ).toHaveAttribute('src', '../assets/does-not-exist.png')
     })
 
-    it('keeps relative sources untouched, so Phase 8 can resolve them', () => {
+    it('leaves relative sources as written when the document’s location is unknown', () => {
+      // The rendering core is usable without a content loader (Phase 10), and with no base there is
+      // nothing correct to resolve against — so the document's own words survive untouched.
       expect(
         container.querySelector('img[src="../assets/wide.png"]'),
       ).not.toBeNull()
       expect(
         container.querySelector('img[src="./../assets/example.png"]'),
       ).not.toBeNull()
+    })
+
+    it('resolves every relative image against the document when its location is known', () => {
+      // Phase 8. The fixture is explicit — a relative image "must resolve relative to this document,
+      // not relative to the application or the page URL" — and this is that requirement, checked
+      // against the real contract document rather than against a sample.
+      const { container: resolved } = render(
+        <MarkdownRenderer documentUrl="/tests/fixtures/Golden-Test-Document.md">
+          {fixture}
+        </MarkdownRenderer>,
+      )
+
+      // `../assets/...` climbs out of `tests/fixtures/` and lands in `tests/assets/`.
+      for (const asset of [
+        'example.png',
+        'wide.png',
+        'tall.png',
+        'does-not-exist.png',
+      ]) {
+        expect(
+          resolved.querySelector(`img[src="/tests/assets/${asset}"]`),
+          asset,
+        ).not.toBeNull()
+      }
+      // Redundant segments are normalized rather than kept literally.
+      expect(
+        resolved.querySelector('img[src="./../assets/example.png"]'),
+      ).toBeNull()
+      // Remote images are absolute already and must not be rewritten.
+      expect(
+        resolved.querySelector('img[src^="https://placehold.co/"]'),
+      ).not.toBeNull()
+      // Nothing is left pointing at the page.
+      expect(
+        [...resolved.querySelectorAll('img[src^="../"]')].map((image) =>
+          image.getAttribute('src'),
+        ),
+      ).toEqual([])
     })
 
     it('renders a decorative image with an empty alt', () => {

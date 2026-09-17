@@ -146,10 +146,27 @@
 }
 
 .markdown-body img {
-  /* Images must never widen the column; the intrinsic size is respected. */
+  /* Images must never widen the column, and a small image must not be stretched up to fill it:
+     `max-width` rather than `width`. `height: auto` is what preserves the aspect ratio. A very tall
+     image is deliberately left at its natural size — capping its height would shrink an infographic
+     to something unreadable — so it scrolls with the article, the way text does. */
   max-width: 100%;
   height: auto;
   border-radius: 0.25rem;
+}
+
+/* A source that could not be loaded: show what the image was meant to be instead of the engine's
+   broken-image glyph. The alt text is already inside the element; this gives it a box to be read in,
+   which is what makes a wrong relative path visible rather than silent. */
+.markdown-body img[data-image-state='missing'] {
+  display: inline-block;
+  max-width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--border-color);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
 }
 
 .markdown-table-scroll {

@@ -1,9 +1,10 @@
+import { useMemo } from 'react'
 import Markdown from 'react-markdown'
 import type { Components } from 'react-markdown'
 import {
+  createUrlTransform,
   rehypePlugins,
   remarkPlugins,
-  urlTransform,
 } from '../core/markdown/plugins'
 import { CodeBlock } from './CodeBlock'
 import { headings } from './Heading'
@@ -30,6 +31,11 @@ export type MarkdownRendererProps = {
   children: string
   /** Extra class names for the wrapper element. */
   className?: string
+  /**
+   * Where this document lives, so its own relative assets resolve against it rather than against the
+   * page. The content loader supplies it (Phase 10); without it, relative paths are left as written.
+   */
+  documentUrl?: string
 }
 
 /**
@@ -44,7 +50,14 @@ export type MarkdownRendererProps = {
 export function MarkdownRenderer({
   children,
   className,
+  documentUrl,
 }: MarkdownRendererProps) {
+  // Kept stable across renders so react-markdown's own memoisation is not defeated by a new closure.
+  const urlTransform = useMemo(
+    () => createUrlTransform(documentUrl),
+    [documentUrl],
+  )
+
   return (
     <div
       className={
