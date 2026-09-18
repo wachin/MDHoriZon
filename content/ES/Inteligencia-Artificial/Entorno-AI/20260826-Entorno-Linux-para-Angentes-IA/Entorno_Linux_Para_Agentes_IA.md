@@ -2,7 +2,7 @@
 
 ![](images/Designer.jpg)
 
-> Guía definitiva para preparar un entorno Linux donde un agente de código pueda investigar, analizar, compilar y documentar proyectos de software.
+Guía definitiva para preparar un entorno Linux donde un agente de código de inteligencia artificial pueda investigar, analizar, compilar y documentar proyectos de software en Linux
 
 ---
 
@@ -12,7 +12,111 @@
 sudo apt update
 ```
 
+## 2. Comando de Instalación Completa (Copia y Pega)
+
+Para instalar **todas** las herramientas de una sola vez:
+
+```bash
+sudo apt update && sudo apt install -y \
+  git \
+  git-lfs \
+  git-flow \
+  gitk \
+  tig \
+  gh \
+  python3 \
+  python3-pip \
+  python3-venv \
+  python3-dev \
+  build-essential \
+  ripgrep \
+  fd-find \
+  jq \
+  tree \
+  bat \
+  silversearcher-ag \
+  universal-ctags \
+  findutils \
+  coreutils \
+  grep \
+  sed \
+  gawk \
+  diffutils \
+  parallel \
+  unzip \
+  zip \
+  tar \
+  xz-utils \
+  zstd \
+  p7zip-full \
+  rsync \
+  file \
+  binutils \
+  elfutils \
+  strace \
+  ltrace \
+  patchelf \
+  dpkg-dev \
+  debhelper \
+  devscripts \
+  fakeroot \
+  lintian \
+  desktop-file-utils \
+  dpkg-repack \
+  squashfs-tools \
+  squashfuse \
+  fuse3 \
+  fuse \
+  curl \
+  wget \
+  httpie \
+  socat \
+  ncat \
+  net-tools \
+  iproute2 \
+  less \
+  vim \
+  nano \
+  htop \
+  btop \
+  tmux \
+  screen \
+  pandoc \
+  cppcheck
+```
+
+de estos algunos necesitan configuración, revise:
+
+
+## 3. Configuración Post-Instalación
+
+### Configurar `fd` en Debian
+
+```bash
+mkdir -p ~/.local/bin
+ln -sf "$(command -v fdfind)" ~/.local/bin/fd
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Configurar GitHub CLI
+
+```bash
+gh auth status
+# Si no has iniciado sesión:
+gh auth login
+```
+
+### Configurar Git con tu correo, ejemplo Proton
+
+```bash
+git config --global user.email "linuxfrontier@proton.me"
+git config --global user.name "Tu Nombre"
+```
+
 ---
+A continuación los comandos mismos separados por secciones:
+
 
 ## 2. Herramientas Principales del Sistema
 
@@ -328,107 +432,6 @@ sudo apt install -y \
 
 ---
 
-## 13. Comando de Instalación Completa (Copia y Pega)
-
-Para instalar **todas** las herramientas de una sola vez:
-
-```bash
-sudo apt update && sudo apt install -y \
-  git \
-  git-lfs \
-  git-flow \
-  gitk \
-  tig \
-  gh \
-  python3 \
-  python3-pip \
-  python3-venv \
-  python3-dev \
-  build-essential \
-  ripgrep \
-  fd-find \
-  jq \
-  tree \
-  bat \
-  silversearcher-ag \
-  universal-ctags \
-  findutils \
-  coreutils \
-  grep \
-  sed \
-  gawk \
-  diffutils \
-  parallel \
-  unzip \
-  zip \
-  tar \
-  xz-utils \
-  zstd \
-  p7zip-full \
-  rsync \
-  file \
-  binutils \
-  elfutils \
-  strace \
-  ltrace \
-  patchelf \
-  dpkg-dev \
-  debhelper \
-  devscripts \
-  fakeroot \
-  lintian \
-  desktop-file-utils \
-  dpkg-repack \
-  squashfs-tools \
-  squashfuse \
-  fuse3 \
-  fuse \
-  curl \
-  wget \
-  httpie \
-  socat \
-  ncat \
-  net-tools \
-  iproute2 \
-  less \
-  vim \
-  nano \
-  htop \
-  btop \
-  tmux \
-  screen \
-  pandoc \
-  cppcheck
-```
-
----
-
-## 14. Configuración Post-Instalación
-
-### Configurar `fd` en Debian
-
-```bash
-mkdir -p ~/.local/bin
-ln -sf "$(command -v fdfind)" ~/.local/bin/fd
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-### Configurar GitHub CLI
-
-```bash
-gh auth status
-# Si no has iniciado sesión:
-gh auth login
-```
-
-### Configurar Git con tu correo de Proton
-
-```bash
-git config --global user.email "linuxfrontier@proton.me"
-git config --global user.name "Tu Nombre"
-```
-
 ### Verificar todo con un solo bloque
 
 ```bash
@@ -449,19 +452,6 @@ echo "=== bat ===" && bat --version
 echo "=== parallel ===" && parallel --version | head -1
 echo "=== GitHub auth ===" && gh auth status 2>&1
 ```
-
----
-
-## 15. ¿Qué NO instalar todavía?
-
-Para un agente que investiga código, **NO** instales:
-
-- PyQt6, PyInstaller, Nuitka (dependencias de proyectos)
-- napari, Pyzo, CARA (aplicaciones específicas)
-- `pip install -r requirements.txt` (dependencias de proyectos)
-- appimagetool, linuxdeploy (binarios externos)
-
-Primero investiga qué usa cada proyecto antes de instalar sus dependencias.
 
 ---
 
