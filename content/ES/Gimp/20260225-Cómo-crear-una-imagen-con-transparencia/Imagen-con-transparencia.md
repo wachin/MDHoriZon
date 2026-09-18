@@ -1,4 +1,9 @@
 
+# Cómo crear una imagen con transparencia en Gimp
+
+Ver video:
+
+[Cómo crear una imagen con transparencia en Gimp](https://youtu.be/loKuYJWwjX4?si=NsxdVqzDnzk3SQX3)
 
 Necesitaba crear una imagen de 128 x 128 px en gimp con transparencia, estos son los pasos
 

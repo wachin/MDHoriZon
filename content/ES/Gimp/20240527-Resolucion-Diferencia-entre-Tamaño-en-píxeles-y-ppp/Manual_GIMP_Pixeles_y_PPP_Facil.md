@@ -513,54 +513,228 @@ Fíjate que en las capturas de 48×48 y 256×256 aparece el mismo valor de **pí
 
 
 ---
-# Sección: Comportamiento en Pantalla
+# 🎓 ¿Cuánto has comprendido estos conceptos en GIMP?
 
-**Conclusión:** para pantalla, lo que manda es el **tamaño en píxeles**.
+Esta es la parte más importante del tutorial: **el repaso fácil**. Si llegaste hasta aquí, ya viste todos los conceptos. Ahora vamos a ordenarlos como se los explicarías a un amigo que acaba de llegar de Windows y abre GIMP por primera vez. 😊
 
-## ¿Cuándo me importa el ppp?
+---
+
+## 🧠 El repaso de 30 segundos
+
+Todo el tutorial se resume en esta imagen mental:
+
+> 🧱 **px (píxeles) = cuántos LEGO tienes.**
+> 🖨 **ppp = qué tan apretados pones esos LEGO cuando los imprimes.**
+
+Y dos verdades que nunca cambian:
+
+1. **En pantalla solo importan los px.** Cambiar el ppp no mueve ni un píxel.
+2. **El ppp solo importa al imprimir.** Es el traductor que convierte px → centímetros de papel.
+
+---
+
+## 🪟 ¿Vienes de Windows? Esto ya lo conocías, solo cambió el nombre
+
+No estás perdido. Windows ya te mostraba estos mismos números, solo que en otras ventanas y con otros nombres:
+
+| Lo que hacías en Windows | Dónde está ahora en GIMP | El número que miras |
+| --- | --- | --- |
+| Clic derecho en la foto → **Propiedades → Detalles** | **Imagen → Propiedades de la imagen** | Tamaño en píxeles (px) |
+| **Paint → Cambiar tamaño** (opción "Píxeles") | **Imagen → Escalar la imagen…** | Anchura / Altura en px |
+| La línea "Resolución horizontal: 300 dpi" de las propiedades | "Resolución X / Y" en GIMP | Es el ppp (aunque diga pixeles/mm o pixeles/cm) |
+| Aplicación **Fotos → botón Imprimir** | **Archivo → Imprimir…** | cm en el papel + ppp |
+
+👉 Es **el mismo conocimiento con otra ropa**. Como cuando cambias de ciudad: la farmacia sigue existiendo, solo que ya no está en la esquina de siempre. 🏪
+
+---
+
+## 🔢 El traductor de números de GIMP
+
+Cuando GIMP te muestre un número raro, pregúntate **una sola cosa**:
+
+> ¿Este número habla de **píxeles** o de **papel**?
+
+| Si GIMP muestra… | Es… | ¿Cuándo me importa? |
+| --- | --- | --- |
+| `1920 × 1080` con unidad **px** | El tamaño digital real (cuántos LEGO tienes) | **Siempre** |
+| `300` con unidad **pixeles/in** | La densidad de impresión: **300 ppp** | Solo al imprimir |
+| `11.81` con unidad **pixeles/mm** | **Lo mismo que 300 ppp** (300 ÷ 25.4 ≈ 11.81) | Solo al imprimir |
+| `118.1` con unidad **pixeles/cm** | **Lo mismo que 300 ppp** | Solo al imprimir |
+| `10.16 × 7.62` con unidad **cm** | Lo que ocupará en el papel (px ÷ ppp) | Solo al imprimir |
+
+**Truco infalible para no perderte:**
+
+- La unidad es **px** → es **tamaño** (cuenta cuadritos).
+- La unidad es **pixeles/ ALGO** (in, mm, cm…) → es **densidad para imprimir**.
+- La unidad es **solo cm/mm** (sin "pixeles/") → es **tamaño en el papel**.
+
+---
+
+## 👀 ¿Dónde veo estos números en GIMP?
+
+En **Imagen → Propiedades de la imagen**. Fíjate en la captura del tutorial (una imagen de 200×200 px):
+
+![Propiedades: 200×200 px y 150 ppp](images/image2.jpeg)
+
+- **Tamaño en píxeles: 200×200 px** → los LEGO que tienes 🧱.
+- **Resolución: 150×150 ppp** → qué tan apretados van al papel 🖨.
+
+---
+
+## 🖼 La ventana "Escalar la imagen", traducida
+
+Es la ventana que más confunde, porque mezcla los dos números. Aquí está etiquetada:
+
+```
+┌────────────────────────────────────────────────────────┐
+│  Escalar la imagen                                     │
+│                                                        │
+│  Anchura: 1200          [px         ▼]                 │
+│  Altura:   900          [px         ▼] ← TAMAÑO (px)  │
+│                             esto SÍ cambia la imagen   │
+│                                                        │
+│  Resolución X: 11.81    [pixeles/mm ▼]                 │
+│  Resolución Y: 11.81    [pixeles/mm ▼] ← DENSIDAD      │
+│                             (= 300 ppp)                │
+│                             esto NO cambia la imagen,  │
+│                             solo el papel              │
+└────────────────────────────────────────────────────────┘
+```
+
+- **Arriba (Anchura/Altura):** cambias los px → la imagen **sí** cambia.
+- **Abajo (Resolución X/Y):** cambias el ppp → la imagen **no** cambia, solo el "tamaño de impresión".
+
+---
+
+## ✅ La única pregunta que necesitas hacerte: ¿pantalla o papel?
+
+### Para pantalla (web, redes, iconos, fondos) → piensa en px
 
 - ✅ **Web / redes / miniaturas / UI / iconos:** piensa en **px**.
+- Ejemplos: avatar de 256×256 px, imagen para redes de 1080×1080 px, icono de un tema de Linux de 48×48 px.
+- El ppp puede quedarse como venga: en pantalla **no afecta en nada**.
 
-
-## Sección: Comprendiendo la Impresión
+### Para impresión (hojas, fotos, trípticos, carteles) → piensa en cm + ppp
 
 - ✅ **Impresión:** piensa en **cm + ppp**.
 
+Valores típicos (regla práctica):
 
-## Sección: Comprendiendo la Impresión
+| Valor | ¿Para qué sirve? |
+| --- | --- |
+| **300 ppp** | Calidad alta: revistas, folletos, fotos, textos pequeños |
+| **150 ppp** | Aceptable para cosas grandes que se ven de lejos (carteles, lonas) |
+| **72–96 ppp** | "Histórico de pantallas": **no** es una regla moderna; en pantalla hoy lo que manda son los px |
 
-Valores típicos de impresión (regla práctica):
+### 📐 Chuleta: cuántos px necesito para imprimir bien (a 300 ppp)
 
-- **300 ppp**: calidad alta (revistas, folletos, textos pequeños).
-- **150 ppp**: aceptable para impresiones grandes vistas a distancia.
+| Quiero imprimir… | Necesito una imagen de al menos… |
+| --- | --- |
+| Foto clásica 10 × 15 cm | ≈ 1181 × 1772 px |
+| Hoja A4 completa (21 × 29.7 cm) | ≈ 2480 × 3508 px |
+| Tarjeta de presentación 85 × 55 mm | ≈ 1004 × 650 px |
 
+El cálculo es siempre el mismo: **centímetros ÷ 2.54 × 300**.
 
-## Sección: Comportamiento en Pantalla
+---
 
-- **72–96 ppp**: suele ser “histórico de pantallas”, **no** es una regla moderna; hoy lo importante es px.
+## ✍️ Ejercicios (con solución paso a paso)
 
-## Ejercicios rápidos (para comprobar que entendiste)
+Hazlos de verdad en GIMP si puedes: estos números se aprenden con las manos. 💪
 
-1) Tienes una imagen de **1200×900 px**. ¿Qué tamaño máximo en papel da a 300 ppp?
-- Pulgadas: 1200/300 = 4 in, 900/300 = 3 in
-- En cm: 4×2.54 = 10.16 cm, 3×2.54 = 7.62 cm
+### Ejercicio 1 — El avatar para el foro (pantalla)
 
-2) Si cambias solo el ppp en GIMP, ¿cambia el peso del archivo o la nitidez en pantalla?
-- Respuesta esperada: **no** (si no cambias px).
+Te registras en un foro de Linux y pide un avatar de **256 × 256 px**. ¿Tienes que preocuparte por el ppp?
 
-3) ¿Por qué los temas de iconos tienen varias carpetas (48×48, 256×256, etc.)?
-- Respuesta esperada: para que el sistema elija el tamaño correcto y se vea nítido.
+**Solución:** No. En pantalla manda el px.
 
-## 1Resumen final (para recordar)
+1. **Archivo → Nuevo**.
+2. Anchura: `256`, Altura: `256`, unidad **px**.
+3. Abre **Opciones avanzadas** y deja la resolución como esté (300 ppp por defecto): es irrelevante para la pantalla.
+4. Comprueba en **Imagen → Propiedades de la imagen**: debe decir `256 × 256 píxeles`.
 
-- **px** = tamaño digital real.
+### Ejercicio 2 — La foto para el marco (impresión)
+
+Quieres imprimir una foto de **10 × 15 cm** con buena calidad (**300 ppp**). ¿Cuántos px necesita?
+
+**Solución paso a paso:**
+
+- Ancho: 10 cm ÷ 2.54 = **3.94 pulgadas** → 3.94 × 300 ≈ **1181 px**
+- Alto: 15 cm ÷ 2.54 = **5.91 pulgadas** → 5.91 × 300 ≈ **1772 px**
+
+Y en GIMP ni siquiera tienes que calcular:
+
+1. **Archivo → Nuevo**.
+2. Haz clic en la unidad `px` (junto a Anchura) y elige **centimeters**.
+3. Escribe `10` × `15`.
+4. En **Opciones avanzadas**, pon Resolución X/Y en `300` con unidad **pixeles/in**.
+5. Vuelve a cambiar la unidad a **px** y verás que GIMP ya puso ≈ `1181` × `1772`. ¡Lo calculó solo! 🤖
+
+### Ejercicio 3 — El número disfrazado
+
+GIMP te muestra **Resolución: 11.81 pixeles/mm**. ¿Qué ppp es? ¿Cambia cómo se ve la imagen en pantalla?
+
+**Solución:** 11.81 × 25.4 ≈ **300 ppp** (porque 1 pulgada = 25.4 mm). Es el mismo dato con otra unidad, como decir "un kilo" o "mil gramos". Y **no**: en pantalla no cambia nada, solo importa al imprimir.
+
+### Ejercicio 4 — Tocar solo el ppp
+
+Abre cualquier imagen y ve a **Imagen → Escalar la imagen…**. Cambia **solo** la Resolución X/Y (por ejemplo de 300 a 150) sin tocar Anchura/Altura. Luego mira en **Imagen → Propiedades de la imagen**.
+
+![Menú: Escalar la imagen](images/image21.jpeg)
+
+**Solución:**
+
+- ¿Cambia la nitidez en pantalla? **No.**
+- ¿Cambia el peso del archivo? **No.**
+- ¿Qué sí cambia? Solo el "tamaño de impresión": a 150 ppp la foto ocuparía **el doble de centímetros** en el papel (los mismos LEGO, más separados).
+
+![Cambiar resolución no cambia el tamaño](images/image22.jpeg)
+
+### Ejercicio 5 — Los 3000 px del tutorial
+
+Al inicio del tutorial vimos una imagen de **3000 px de ancho**. ¿Cuánto medirá de ancho en el papel a 300 ppp? ¿Y a 150 ppp?
+
+**Solución:**
+
+- 3000 ÷ 300 = **10 pulgadas = 25.4 cm**
+- 3000 ÷ 150 = **20 pulgadas = 50.8 cm**
+
+Y la imagen digital **sigue teniendo 3000 px** en los dos casos: no cambió ni un cuadrito. Ese es exactamente el diagrama de "misma imagen, distinta impresión".
+
+### Ejercicio 6 — ¿Verdadero o falso?
+
+Contesta antes de mirar la solución. 😉
+
+1. "Si cambio el ppp de 300 a 150, el archivo pesa menos en el disco."
+2. "Una imagen de 500 × 500 px me sirve para un póster de 50 × 50 cm a 300 ppp."
+3. "11.81 pixeles/mm y 300 ppp son lo mismo."
+4. "Para el avatar de un foro, lo importante es el ppp."
+5. "Si escalo una imagen de 2000 px a 500 px, pierdo detalle para siempre."
+
+**Soluciones:**
+
+1. ❌ **Falso.** El ppp no toca los px: el archivo queda igual.
+2. ❌ **Falso.** 500 px a 300 ppp solo dan ≈ 4.2 cm. Para 50 cm necesitas ≈ 5906 px.
+3. ✅ **Verdadero.** 300 ÷ 25.4 ≈ 11.81. Misma densidad, distinta unidad.
+4. ❌ **Falso.** En pantalla manda el px.
+5. ✅ **Verdadero.** GIMP tira píxeles que ya no recuperas. Guarda una copia antes de escalar.
+
+### Ejercicio 7 — El misterio de los iconos de Linux
+
+Los temas de iconos guardan **varias carpetas** (16×16, 48×48, 256×256…) y todas tienen **el mismo ppp**. ¿Por qué tantas versiones del mismo icono?
+
+**Solución:** Porque en pantalla **manda el px, no el ppp**. El sistema elige el tamaño que necesita en cada sitio: 48×48 para las listas pequeñas, 256×256 para las vistas de iconos grandes. Así siempre se ve nítido, sin borroso ni pixelado.
+
+---
+
+## 🎯 Resumen final (para recordar)
+
+- **px** = tamaño digital real (los LEGO 🧱).
 - **ppp** = densidad para imprimir (convierte px ↔ cm/pulgadas).
+- Cambiar **ppp** sin cambiar **px** → cambia el "tamaño de impresión", **no** la imagen en pantalla ni el archivo.
+- Cambiar **px** (escalar) → **sí** cambia la imagen, y puede perder calidad.
+- Para **mirar** estos números: **Imagen → Propiedades de la imagen**.
+- Para **cambiar** el tamaño: **Imagen → Escalar la imagen…** (y ya sabes qué número tocar arriba y cuál abajo).
+- **300 ppp = 11.81 pixeles/mm = 118.1 pixeles/cm**. Son lo mismo en distinta unidad.
 
-
-## Sección: Comprendiendo la Impresión
-
-
-## Sección: Comportamiento en Pantalla
-
-- Cambiar **ppp** sin cambiar **px**: cambia “tamaño de impresión”, no la imagen en pantalla.
-- Cambiar **px** (escalar): sí cambia la imagen.
+> 🎓 **Y ya está.** Ya no hay números misteriosos: en GIMP, igual que en Windows, todo son píxeles… y un dato extra (el ppp) que solo se usa cuando llega la hora de imprimir.
