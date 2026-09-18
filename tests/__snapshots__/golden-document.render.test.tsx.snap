@@ -581,10 +581,10 @@ cover image when that entry has no image of its own — or when the video comes 
 counts images and videos together.</p>
 <p>A video URL that makes up a whole paragraph is the case the in-page player is for. A video URL <em>inside a sentence</em>
 stays an ordinary link, because replacing it with a player would break the prose around it:</p>
-<p><a href="https://youtu.be/G7ZqUvFMSes?si=Qpzhs52nIY8xvdHv" target="_blank" rel="noopener noreferrer">DeepSeek Harness: Tu propio Claude Code GRATIS</a></p>
+<div class="markdown-video"><button type="button" class="markdown-video-play" aria-label="Play video: DeepSeek Harness: Tu propio Claude Code GRATIS"><img class="markdown-video-poster" alt="" loading="lazy" decoding="async" src="https://i.ytimg.com/vi/G7ZqUvFMSes/hqdefault.jpg"><span class="markdown-video-glyph" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48" focusable="false"><path d="M66.52 7.74a8.4 8.4 0 0 0-5.9-5.9C55.5.4 34 .4 34 .4s-21.5 0-26.6 1.44a8.4 8.4 0 0 0-5.9 5.9C0 12.9 0 24 0 24s0 11.1 1.5 16.26a8.4 8.4 0 0 0 5.9 5.9C12.5 47.6 34 47.6 34 47.6s21.5 0 26.6-1.44a8.4 8.4 0 0 0 5.9-5.9C68 35.1 68 24 68 24s0-11.1-1.48-16.26z" fill="#f00"></path><path d="M27 34.5 45 24 27 13.5z" fill="#fff"></path></svg></span></button></div>
 <p>The same video as a bare URL must be turned into a link, and must still be recognised as a video, query string and
 all:</p>
-<p><a href="https://youtu.be/G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">https://youtu.be/G7ZqUvFMSes</a></p>
+<div class="markdown-video"><button type="button" class="markdown-video-play" aria-label="Play video: YouTube video"><img class="markdown-video-poster" alt="" loading="lazy" decoding="async" src="https://i.ytimg.com/vi/G7ZqUvFMSes/hqdefault.jpg"><span class="markdown-video-glyph" aria-hidden="true"><svg viewBox="0 0 68 48" width="68" height="48" focusable="false"><path d="M66.52 7.74a8.4 8.4 0 0 0-5.9-5.9C55.5.4 34 .4 34 .4s-21.5 0-26.6 1.44a8.4 8.4 0 0 0-5.9 5.9C0 12.9 0 24 0 24s0 11.1 1.5 16.26a8.4 8.4 0 0 0 5.9 5.9C12.5 47.6 34 47.6 34 47.6s21.5 0 26.6-1.44a8.4 8.4 0 0 0 5.9-5.9C68 35.1 68 24 68 24s0-11.1-1.48-16.26z" fill="#f00"></path><path d="M27 34.5 45 24 27 13.5z" fill="#fff"></path></svg></span></button></div>
 <p>The same video, this time inside a sentence, which must stay a link: mira este vídeo sobre <a href="https://www.youtube.com/watch?v=G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">DeepSeek
 Harness</a> y dime qué te parece.</p>
 <hr>

@@ -226,10 +226,12 @@ describe('Golden Test Document', () => {
         expect(container.querySelectorAll(selector), selector).toHaveLength(0)
       }
 
-      // Phase 5 changed the shape of this guarantee rather than weakening it. The document now
-      // legitimately contains SVG (`KaTeX` draws radicals with a `<path>`) and MathML, so "no `svg`
-      // anywhere" stopped being the invariant. The invariant is that none of it came from the
-      // document: every such element must belong to a formula.
+      // Phase 5 changed the shape of this guarantee rather than weakening it, and Phase 9 changed it
+      // again. The document legitimately produces SVG — `KaTeX` draws radicals with a `<path>` — and
+      // our own components do too: the video control draws its play glyph in SVG. So "no `svg`
+      // anywhere" stopped being the invariant long ago. What it is now is narrower and still the one
+      // that matters: every such element must belong to one of **our** components, none to the
+      // document.
       for (const selector of [
         'svg',
         'path',
@@ -242,7 +244,9 @@ describe('Golden Test Document', () => {
       ]) {
         const fromTheDocument = [
           ...container.querySelectorAll(selector),
-        ].filter((element) => element.closest('.katex') === null)
+        ].filter(
+          (element) => element.closest('.katex, .markdown-video') === null,
+        )
 
         expect(fromTheDocument, selector).toHaveLength(0)
       }

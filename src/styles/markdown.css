@@ -396,3 +396,63 @@
   color: var(--token-keyword);
   font-size: 0.875rem;
 }
+
+/* ---------------------------------------------------------------------------------------------
+ * Video (Phase 9)
+ *
+ * The poster is shown immediately and the player is created only when the reader asks for it, so
+ * opening an article never contacts YouTube. `aspect-ratio` keeps a 16:9 box on engines that support
+ * it; an older engine simply shows the poster at its own ratio, which is a graceful difference rather
+ * than a broken layout.
+ * ------------------------------------------------------------------------------------------- */
+
+.markdown-video {
+  margin-block: 1.25em;
+}
+
+.markdown-video-play {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  background: var(--surface);
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+}
+
+.markdown-video-play:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.markdown-video-poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Crops the letterbox bars YouTube bakes into its 4:3 still. */
+  object-fit: cover;
+}
+
+.markdown-video-glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markdown-video-glyph svg {
+  width: 4.5rem;
+  height: auto;
+}
+
+.markdown-video-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0.375rem;
+  aspect-ratio: 16 / 9;
+}
