@@ -1,8 +1,6 @@
-Hay un detalle que conviene corregir antes de publicarlo: los comandos que encontraste con `sudo apt-get install -y nsolid` instalan **N|Solid**, que es la distribución de Node.js de NodeSource orientada a monitorización y entornos empresariales. Para instalar Node.js normal desde NodeSource, conviene usar `sudo apt-get install -y nodejs`. NodeSource ofrece ambas opciones. ([NodeSource][1])
-
-Te dejo el tutorial preparado para que lo puedan seguir otras personas en MX Linux, Debian y distribuciones derivadas.
-
 # Cómo instalar Freebuff en MX Linux, Debian y derivados
+
+![](images/Portada.jpg
 
 Freebuff es un agente de inteligencia artificial para programación que funciona directamente desde la terminal. Permite abrir un proyecto de software, conversar con el agente y pedirle que analice o modifique el código.
 
@@ -14,205 +12,96 @@ Este procedimiento puede utilizarse en MX Linux, Debian y otras distribuciones b
 
 ---
 
-## 1. Instalar curl
+## 1. Requisitos (Node.js, pnpm, curl) 
 
-Primero actualizamos la información de los repositorios:
+Necesitamos:
+
+- **Node.js** (versión 22.19 o superior, o 24+). Si no lo tienes, instálalo desde el repositorio de NodeSource (instrucciones detalladas en [Cómo instalar node en Linux](https://facilitarelsoftwarelibre.blogspot.com/2026/08/como-instalar-nodejs-24-en-ubuntu-debian-etc.html)):
 
 ```bash
 sudo apt update
-```
-
-Instalamos `curl`:
-
-```bash
 sudo apt-get install -y curl
-```
-
-`curl` será utilizado para descargar el script de configuración del repositorio de NodeSource.
-
----
-
-## 2. Agregar el repositorio de NodeSource
-
-Los repositorios normales de Debian pueden incluir una versión de Node.js diferente de la que necesitamos para algunas herramientas modernas.
-
-NodeSource mantiene repositorios específicos que permiten instalar versiones recientes de Node.js.
-
-Para agregar el repositorio de **Node.js 24**, ejecutamos:
-
-```bash
 curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
-```
-
-Este comando configura el repositorio correspondiente a la rama 24.x de Node.js.
-
-> **Nota:** NodeSource también ofrece N|Solid, su distribución especializada de Node.js. Para utilizar herramientas normales de npm como Freebuff no necesitamos N|Solid; instalaremos Node.js directamente.
-
----
-
-## 3. Instalar Node.js
-
-Ahora instalamos Node.js:
-
-```bash
 sudo apt-get install -y nodejs
 ```
 
-El paquete de Node.js proporcionado por NodeSource también incluye npm.
-
-Podemos comprobar la versión instalada con:
+Comprueba la versión con:
 
 ```bash
 node --version
 ```
 
-Y la versión de npm:
-
-```bash
-npm --version
-```
-
-Por ejemplo, podríamos obtener algo semejante a:
-
-```text
-v24.x.x
-```
-
-y:
-
-```text
-11.x.x
-```
-
-Las versiones exactas pueden cambiar con el tiempo.
-
-También podemos comprobar de dónde provienen los ejecutables:
-
-```bash
-which node
-which npm
-```
-
-Normalmente veremos:
-
-```text
-/usr/bin/node
-/usr/bin/npm
-```
-
----
-
-# 4. Evitar el error EACCES al instalar paquetes globales con npm
-
-En Debian y MX Linux es posible encontrarnos con un problema al intentar instalar Freebuff de esta manera:
-
-```bash
-npm install -g freebuff
-```
-
-npm podría mostrar un error parecido a:
-
-```text
-npm error code EACCES
-npm error syscall mkdir
-npm error path /usr/lib/node_modules/freebuff
-npm error errno -13
-npm error Error: EACCES: permission denied
-```
-
-Esto ocurre porque npm intenta instalar el programa dentro de:
-
-```text
-/usr/lib/node_modules/
-```
-
-Ese directorio pertenece al sistema y un usuario normal no tiene permisos para escribir en él.
-
-Aunque podríamos utilizar:
-
-```bash
-sudo npm install -g freebuff
-```
-
-es preferible evitar instalar paquetes globales de npm como administrador.
-
-Una solución mucho más limpia consiste en configurar un directorio dentro de nuestro propio HOME para los paquetes globales de npm.
-
----
-
-# 5. Crear un directorio para los paquetes globales de npm
-
-Creamos el directorio:
+> **Nota sobre permisos de npm:** si al instalar paquetes globales (`npm install -g ...`) aparece un error `EACCES: permission directed`, no modifiques los permisos de `/usr/lib`. En su lugar, configura las instalaciones globales en tu HOME:
 
 ```bash
 mkdir -p ~/.local/npm
-```
-
-Ahora le indicamos a npm que utilice ese directorio como prefijo para las instalaciones globales:
-
-```bash
 npm config set prefix ~/.local/npm
-```
-
-Podemos comprobarlo con:
-
-```bash
-npm config get prefix
-```
-
-La salida debería ser semejante a:
-
-```text
-/home/usuario/.local/npm
-```
-
-Por ejemplo:
-
-```text
-/home/wachin/.local/npm
-```
-
----
-
-# 6. Agregar los programas npm al PATH
-
-Los ejecutables instalados mediante npm quedarán dentro de:
-
-```text
-~/.local/npm/bin
-```
-
-Por ello debemos agregar este directorio a la variable `PATH`.
-
-Si utilizamos Bash, ejecutamos:
-
-```bash
 echo 'export PATH="$HOME/.local/npm/bin:$PATH"' >> ~/.bashrc
-```
-
-Después recargamos la configuración:
-
-```bash
 source ~/.bashrc
 ```
 
-También podemos cerrar la terminal y abrir una nueva.
-
-Para comprobar que el directorio fue agregado correctamente:
+- **pnpm** (un gestor de dependencias). Si no lo tienes instálalo mediante npm:
 
 ```bash
-echo $PATH
+sudo npm install -g pnpm
 ```
 
-Entre los directorios mostrados debería aparecer:
+- **git**, para clonar el repositorio:
 
-```text
-/home/usuario/.local/npm/bin
+```bash
+sudo apt install -y git
 ```
+
+> **Ojo:** el paquete `dsh` que hay en `apt` **no es DeepSeek Harness**. Es un programa antiguo de Linux llamado *Distributed Shell*. Si lo instalas por error, no pasa nada, pero no sirve para lo que queremos. Para desinstalarlo si lo instalaste sin querer:
+>
+> ```bash
+> sudo apt remove dsh libdshconfig1
+> ```
 
 ---
 
-# 7. Instalar Freebuff
+## 2. Clonar e instalar DeepSeek Harness
+
+```bash
+git clone https://github.com/deepseek-ai/deepseek-harness.git
+cd deepseek-harness
+pnpm install
+pnpm run build
+```
+
+`pnpm install` descarga todas las dependencias y `pnpm run build` compila el proyecto. Este paso tarda varios minutos la primera vez, pero **solo es necesario hacerlo una vez**.
+
+### Si actualizas el repositorio más adelante
+
+Cuando pase el tiempo y quieras actualizar, **no basta con `pnpm install && pnpm run build`**. Hay que hacer tres pasos, y uno de ellos es imprescindible para que no falle:
+
+```bash
+cd ~/Dev3/deepseek-harness
+git pull                      # traer el código nuevo
+pnpm install --frozen-lockfile
+pnpm run clean                # ← ESTO ES LO QUE EVITA EL ERROR
+pnpm run build
+```
+
+**¿Por qué es necesario `pnpm run clean`?**
+
+Cuando compilas, se generan archivos de caché (`.tsbuildinfo` y carpetas `lib/`) que dicen "esto ya está compilado, no hace falta repetirlo". Al actualizar el código, esos archivos se quedan **desincronizados**: apuntan a versiones antiguas que ya no existen. El compilador entonces falla con un error tipo:
+
+```
+[MISSING_EXPORT] "DEFAULT_PREPARED_SESSION_CACHE_SIZE" is not exported by ...
+```
+
+Ese error significa: "el código nuevo espera una función que la parte compilada antigua no tiene". `pnpm run clean` borra esos archivos viejos y obliga a recompilar todo desde cero, de forma coherente.
+
+Si después del `clean` sigue fallando, haz una limpieza total:
+
+```bash
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+pnpm run build
+```
+
+## 3. Instalar Freebuff
 
 Ahora sí podemos instalar Freebuff sin utilizar `sudo`:
 
@@ -242,7 +131,7 @@ Deberíamos obtener algo semejante a:
 
 ---
 
-# 8. Ejecutar Freebuff dentro de un proyecto
+## 4. Ejecutar Freebuff dentro de un proyecto
 
 Ahora podemos entrar al directorio de un proyecto.
 
@@ -270,7 +159,7 @@ freebuff
 
 ---
 
-# 9. Ejemplo de una instalación funcionando
+## 5. Ejemplo de una instalación funcionando
 
 Podemos revisar toda nuestra configuración con:
 
@@ -310,7 +199,7 @@ No es necesario que las versiones coincidan exactamente con estas, ya que Node.j
 
 ---
 
-# 10. ¿Por qué no usar `sudo npm install -g freebuff`?
+## 6. ¿Por qué no usar `sudo npm install -g freebuff`?
 
 Utilizar:
 
@@ -359,7 +248,7 @@ De esta manera:
 
 ---
 
-# 11. Actualizar Node.js
+## 7. Actualizar Node.js
 
 Como Node.js fue instalado utilizando un repositorio de NodeSource, sus actualizaciones dentro de la rama configurada llegarán mediante APT.
 
@@ -390,7 +279,7 @@ https://deb.nodesource.com/node_24.x
 
 ---
 
-# 12. Actualizar Freebuff
+## 8. Actualizar Freebuff
 
 Como Freebuff fue instalado mediante npm, podemos actualizarlo posteriormente con:
 
@@ -406,7 +295,7 @@ freebuff --version
 
 ---
 
-# 13. Desinstalar Freebuff
+## 9. Desinstalar Freebuff
 
 Si en algún momento queremos eliminarlo:
 
@@ -416,7 +305,7 @@ npm uninstall -g freebuff
 
 ---
 
-# Resumen de comandos
+## Resumen de comandos
 
 Para una instalación nueva podemos utilizar:
 

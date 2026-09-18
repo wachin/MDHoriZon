@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg17B8dnErhUFmtXPGKc_u29C6X256Lt5S0Fg1XLHZM6qSCb2QLEi-myuDPcrLYmCDPGd_dN8m3IWWYcrYuXpvgUlXw4OqXqr78sBXbJ8qFcLE_ugEY4HlMhRfkh82w_gHiXk5tnyZ7nD9T3KNQSw6yGQ_rF8EmfUqVQ-G1kWWtyi6ZUOSBJt-xEPqIERA/s1600-rw/Designer.png)
-
 # Guía Completa: Paquetes para que un Agente IA Trabaje en Linux (Debian 13)
+
+![](images/Designer.jpg)
 
 > Guía definitiva para preparar un entorno Linux donde un agente de código pueda investigar, analizar, compilar y documentar proyectos de software.
 

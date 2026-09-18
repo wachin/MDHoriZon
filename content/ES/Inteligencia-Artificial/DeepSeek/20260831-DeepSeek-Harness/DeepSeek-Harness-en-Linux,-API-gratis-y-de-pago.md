@@ -74,7 +74,7 @@ Antes de empezar, vamos a explicar algunas palabras que van a aparecer y que qui
 
 ---
 
-## 1. Requisitos
+## 1. Requisitos (Node.js, pnpm, curl) 
 
 Necesitamos:
 
@@ -94,13 +94,13 @@ node --version
 ```
 
 > **Nota sobre permisos de npm:** si al instalar paquetes globales (`npm install -g ...`) aparece un error `EACCES: permission directed`, no modifiques los permisos de `/usr/lib`. En su lugar, configura las instalaciones globales en tu HOME:
->
-> ```bash
-> mkdir -p ~/.local/npm
-> npm config set prefix ~/.local/npm
-> echo 'export PATH="$HOME/.local/npm/bin:$PATH"' >> ~/.bashrc
-> source ~/.bashrc
-> ```
+
+```bash
+mkdir -p ~/.local/npm
+npm config set prefix ~/.local/npm
+echo 'export PATH="$HOME/.local/npm/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
 
 - **pnpm** (un gestor de dependencias). Si no lo tienes instálalo mediante npm:
 

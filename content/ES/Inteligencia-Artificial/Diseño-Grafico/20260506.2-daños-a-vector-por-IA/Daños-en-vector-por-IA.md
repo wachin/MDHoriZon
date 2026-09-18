@@ -1,5 +1,7 @@
 # Descubrí un editor SVG online [https://svgmaker.io/editor](https://svgmaker.io/editor) que me ayudó a reparar SVG dañados por IA
 
+![](images/Portada.jpg)
+
 Durante estos meses he estado usando bastante herramientas de inteligencia artificial para generar imágenes SVG, especialmente para:
 
 * Portadas para YouTube
