@@ -48,7 +48,7 @@ sees the Markdown source instead of the image.
 6. **The cover is the Blogger rule**: the first image or video in the document, in whichever order they
    appear, and the `alt` text is irrelevant — `![](images/Portada.jpg)` is how the real content writes
    covers. A video's cover is YouTube's own thumbnail, so a video needs no embed to be a cover. An entry
-   with no media gets `public/images/default-cover.png` (56 of 122 today), which lives in `defaults.ts` so
+   with no media gets `public/images/default-cover.webp` (56 of 122 today), which lives in `defaults.ts` so
    an index and an article cannot disagree.
 7. **Legacy markup is rescued in the text, before rendering.** The embedded players become the Markdown
    links an author would write today, and the size hints are dropped. This is what keeps layer 1 of

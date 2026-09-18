@@ -6,7 +6,7 @@
  * cannot disagree about it.
  *
  * The path is relative to the site root, because that is what `public/` is: the file is served from
- * `public/images/default-cover.png`, and the caller prepends its own base path (the Pages build adds
+ * `public/images/default-cover.webp`, and the caller prepends its own base path (the Pages build adds
  * `/MDHoriZon/`). Keeping the base out of the model is what lets the same model serve a WebView
  * loading from a local scheme.
  */
@@ -14,7 +14,7 @@
 import type { Article } from './article'
 import type { Cover } from './media'
 
-export const DEFAULT_COVER_PATH = 'images/default-cover.png'
+export const DEFAULT_COVER_PATH = 'images/default-cover.webp'
 
 /**
  * The cover to show for an entry: its own, or the default.
