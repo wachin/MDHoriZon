@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJm3ztFE3bGqpU2gWvUt5Zf79CdW-gM8iaFs6iGI-hgtIqeiZtapTtdVnnzhMNz2SG34EFkEC_GxGyM4AV4u3CVN9AzDgsFeprrvwYwkSk13yeuhQihGUIzYNNWA5DxRwJOHpYnTv97kIjRZiII5MJ1FIuUtbJGU2VTEt0qNcBtWGIVWLF9zZlkARC4f0/s1536/Portada.jpg)
-
 # Cómo usar Kilo Code gratis en Visual Studio Code y desde la terminal (Qwen Code Free y otras)
+
+![](images/Portada.jpg)
 
 Kilo Code es un agente de Inteligencia Artificial para programación que podemos utilizar directamente desde **Visual Studio Code**, otros IDE y también desde la **terminal mediante Kilo CLI**.
 
@@ -53,7 +53,7 @@ Después de instalarla aparecerá el icono de Kilo Code en la barra lateral de V
 
 Página oficial:
 
-https://kilo.ai/
+[https://kilo.ai](https://kilo.ai)
 
 ## Iniciar sesión
 
@@ -201,6 +201,8 @@ Posteriormente instalamos Kilo CLI:
 ```bash
 npm install -g @kilocode/cli
 ```
+
+**Nota**: en la pagina web esta esta instrucciones y otras maneras [https://kilo.ai/](https://kilo.ai/)
 
 Comprobamos la instalación:
 
