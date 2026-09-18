@@ -1,6 +1,8 @@
 
 ### Cómo crear un token en GitLab con permisos similares a los de GitHub
 
+![](images/Token-Gitlab-como-Github.jpg)
+
 Este tutorial te ayudará a entender cómo crear un **token de acceso personal en GitLab** con permisos equivalentes al permiso **repo** de GitHub, especialmente para trabajar con repositorios privados y públicos mediante Git (HTTPS).
 
 ---
@@ -274,19 +276,6 @@ Estos están relacionados con:
 - Rotación automática del token
 
 Para trabajar normalmente con repositorios usando Git, no son necesarios.
-
----
-
-## Conclusión
-
-Si vienes de GitHub y usas el permiso `repo`, el equivalente práctico en GitLab para trabajar con Git mediante HTTPS es:
-
-✔ `read_repository`  
-✔ `write_repository`
-
-Usa `api` solo cuando realmente lo necesites.
-
-Aplicar el principio de mínimo privilegio mejora tu seguridad y reduce riesgos.
 
 ---
 

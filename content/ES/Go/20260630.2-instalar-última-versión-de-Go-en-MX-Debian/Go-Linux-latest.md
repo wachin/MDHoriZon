@@ -1,5 +1,7 @@
 # Cómo instalar la última versión de Go (Golang) en MX Linux 23 (Debian 12)
 
+![](images/Portada.jpg)
+
 Una de las limitaciones de **MX Linux 23**, al estar basado en **Debian 12 Stable**, es que los paquetes incluidos en sus repositorios no siempre contienen las versiones más recientes de algunos lenguajes de programación.
 
 Por ejemplo, al momento de escribir este artículo, el paquete oficial disponible mediante APT instala **Go 1.19.8** (yo la había instalado con `sudo apt install golang`), mientras que muchos proyectos actuales requieren **Go 1.22 o superior**.

@@ -1,5 +1,7 @@
 # Los 3 Mejores Packs de Iconos Gratuitos para Aplicaciones PyQt6 en Linux, Windows y macOS
 
+![](images/Portada-iconos-gratis-pack-para-desarrollo.jpg)
+
 Cuando desarrollamos aplicaciones modernas en PyQt6, uno de los aspectos más importantes es la consistencia visual. Un buen conjunto de iconos puede hacer que nuestra aplicación se vea más profesional, más intuitiva y más agradable para el usuario.
 
 Después de investigar las opciones disponibles, estas son las tres bibliotecas de iconos que más recomiendo para proyectos de escritorio multiplataforma.
