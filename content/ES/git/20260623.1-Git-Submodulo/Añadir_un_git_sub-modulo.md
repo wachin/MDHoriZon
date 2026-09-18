@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7Dj0QPb8irAxQ4Vyd-a4JmTBybDXSXfvJQU9BsW78oSZP5Otn_28dUr6_wwJ-gqtfBE2Cj9jSVSy_OpNMEc567AcM3FvR3hTNMuEnGy50vIVc8Vvf6I6dxshooiejVjnDwEfPCKDApZpWzOQ7uwdAH-2VryNj1PFNhXJyUxQw7BrfoeYnGuFaMEpXFwQ/s16000-rw/Portada%20instala%20Sub-modulos%20en%20git.jpg)
-
 # Cómo añadir un repositorio Git como submódulo dentro de otro proyecto
+
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7Dj0QPb8irAxQ4Vyd-a4JmTBybDXSXfvJQU9BsW78oSZP5Otn_28dUr6_wwJ-gqtfBE2Cj9jSVSy_OpNMEc567AcM3FvR3hTNMuEnGy50vIVc8Vvf6I6dxshooiejVjnDwEfPCKDApZpWzOQ7uwdAH-2VryNj1PFNhXJyUxQw7BrfoeYnGuFaMEpXFwQ/s16000-rw/Portada%20instala%20Sub-modulos%20en%20git.jpg)
 
 Cuando desarrollamos un proyecto grande, a veces necesitamos incluir otro repositorio Git dentro de nuestro código fuente. Por ejemplo, puede tratarse de una colección de diccionarios, una biblioteca de terceros, documentación compartida o cualquier otro componente que se mantenga de forma independiente.
 

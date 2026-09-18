@@ -1,4 +1,4 @@
-# 🐧 Git en Windows muestra advertencias sobre CRLF y LF: qué significa y cómo solucionarlo
+# Git en Windows muestra advertencias sobre CRLF y LF: qué significa y cómo solucionarlo
 
 ### ❓ El problema
 
@@ -19,7 +19,7 @@ A simple vista parece un error, pero en realidad es **una advertencia importante
 
 ---
 
-## 🧠 ¿Qué significa LF y CRLF?
+## ¿Qué significa LF y CRLF?
 
 Los archivos de texto usan un carácter especial para indicar un salto de línea (cuando presionamos Enter):
 
@@ -34,7 +34,7 @@ Cuando Git en Windows detecta archivos con LF, intenta convertirlos a CRLF autom
 
 ---
 
-## ⚠️ ¿Por qué esto es un problema?
+## ⚠¿Por qué esto es un problema?
 
 Si Git empieza a convertir los saltos de línea:
 
@@ -47,7 +47,7 @@ Esto es especialmente peligroso cuando trabajas en proyectos multiplataforma (Li
 
 ---
 
-# ✅ La solución correcta
+# La solución correcta
 
 La solución es decirle a Git que **no convierta los saltos de línea** y que siempre use el formato Linux (LF), incluso en Windows.
 
@@ -64,7 +64,7 @@ Esto le dice a Git:
 
 ---
 
-## 🧹 Limpieza del repositorio
+## Limpieza del repositorio
 
 Después de cambiar la configuración, hay que limpiar el índice de Git para que vuelva a leer los archivos correctamente:
 
@@ -84,7 +84,7 @@ Esto **no borra tus archivos**, solo los reindexa correctamente.
 
 ---
 
-## 🛡️ Protección permanente (recomendado)
+##  Protección permanente (recomendado)
 
 Para evitar que esto vuelva a pasar, crea un archivo llamado `.gitattributes` en la raíz del repositorio con este contenido:
 
@@ -102,19 +102,4 @@ git commit -m "Force LF line endings"
 Esto garantiza que **todos los colaboradores**, usen Windows o Linux, trabajen con archivos en formato correcto.
 
 ---
-
-## 🎯 Conclusión
-
-Ese mensaje de Git no es un error, es una advertencia que dice:
-
-> “Estos archivos son Linux (LF), pero Windows quiere convertirlos a CRLF”.
-
-Si usas Linux, Bash, Python, Pandoc o Markdown, **debes mantener siempre LF**.
-
-Con estos dos comandos lo arreglas para siempre:
-
-```bash
-git config --global core.autocrlf false
-git config --global core.eol lf
-```
 

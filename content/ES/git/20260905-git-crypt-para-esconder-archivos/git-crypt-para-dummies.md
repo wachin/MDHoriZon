@@ -290,6 +290,3 @@ git-crypt protege tus archivos **en GitHub**, pero no olvides:
 
 ---
 
-**¡Ahora tus archivos sensibles están seguros!** 🎉
-
-*Tutorial creado por Wachín | Septiembre 2026*
