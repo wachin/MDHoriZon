@@ -1,4 +1,4 @@
-# Consejos para desarrollar con un Agente de IA y carpetas de sub-módulos de solo consulta
+# git Consejos para desarrollar con un Agente de IA y carpetas de sub-módulos de solo consulta
 
 Cuando estás desarrollando un programa asistido por un agente de IA (como
 Claude Code, Copilot, Cursor, opencode u otros), y además mantienes en el

@@ -1,4 +1,6 @@
-# Paquetes esenciales de Linux para que funcione Freebuff AppImage
+# Freebuff AppImage paquetes esenciales de Linux para que funcione 
+
+![](images/Designer.webp)
 
 Para que puedas usar FreeBuff en AppImage en Linux:
 
