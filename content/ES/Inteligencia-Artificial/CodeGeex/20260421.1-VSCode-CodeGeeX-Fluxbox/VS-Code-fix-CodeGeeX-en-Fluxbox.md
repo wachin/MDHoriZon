@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiy7sXyRC-BeJNNAFuq5t39cZ_-i-7WdJHe0SYXYGpmtxpObp-pqsDhNsMWjslzKCAjuDX0-6m1C2hzfk8Vlr0rMU4xcpoUvC2lMgtre5JMEmrZdqd4vTIeSZaifQfzhQRHGSGKoOO61nVwd6UyLPubqXycQWeKp3pN_7SMLTKM5Sdk8Chv0Fy3v8avFtQ/s1536/Portada.jpg =640x)
-
 # Visual Studio Code no arranca, no funciona con la extensión CodeGeeX en Fluxbox
+
+![](images/Portada.jpg)
 
 Los siguientes son los requisitos para este tutorial:
 

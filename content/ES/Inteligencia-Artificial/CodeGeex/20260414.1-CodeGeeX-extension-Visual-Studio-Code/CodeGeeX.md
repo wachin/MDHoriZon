@@ -20,7 +20,7 @@
 
 👉 Soporta **más de 100 lenguajes** y funciona en VS Code y otros IDEs 
 
-**Pero**: No sirve para hacer tareas grandes
+**Pero**: No sirve para hacer tareas grandes, y se caduca muy rapido
 
 ---
 
