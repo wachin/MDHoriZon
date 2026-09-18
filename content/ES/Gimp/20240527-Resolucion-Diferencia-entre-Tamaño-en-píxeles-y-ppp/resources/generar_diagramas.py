@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Genera los diagramas didácticos del manual GIMP (px vs ppp).
-Los PNG se guardan en ./images/
+Guarda cada diagrama en dos formatos:
+  - .png  → en ../images/  (listos para incrustar en el manual)
+  - .svg  → en ./          (vectoriales, para retocarlos con Inkscape)
 """
 import os
 import numpy as np
@@ -12,8 +14,11 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 from matplotlib.colors import to_rgb
 
-FIG_DIR = "images"
-os.makedirs(FIG_DIR, exist_ok=True)
+# El script vive en resources/: los PNG van a images/ y los SVG se quedan aquí
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PNG_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "images"))
+SVG_DIR = BASE_DIR
+os.makedirs(PNG_DIR, exist_ok=True)
 
 # ---------- Paleta ----------
 BG = "#FBF9F4"        # papel cálido
@@ -75,11 +80,18 @@ def title(ax, s, y=None, size=16):
 
 
 def save(fig, name):
-    path = os.path.join(FIG_DIR, name)
-    fig.savefig(path, dpi=160, facecolor=BG, bbox_inches="tight",
-                pad_inches=0.22)
+    """Guarda el diagrama en PNG (para el manual) y en SVG (para Inkscape)."""
+    base, _ = os.path.splitext(name)
+    outputs = []
+    for directory, ext, kwargs in ((PNG_DIR, ".png", dict(dpi=160)),
+                                   (SVG_DIR, ".svg", {})):
+        path = os.path.join(directory, base + ext)
+        fig.savefig(path, facecolor=BG, bbox_inches="tight", pad_inches=0.22,
+                    **kwargs)
+        outputs.append(path)
     plt.close(fig)
-    print("OK", path)
+    for path in outputs:
+        print("OK", path)
 
 
 def smiley(n):
@@ -432,4 +444,4 @@ if __name__ == "__main__":
     diag_windows_gimp()
     diag_decisor()
     diag_iconos()
-    print("Listo: 7 diagramas generados.")
+    print("Listo: 7 diagramas generados en PNG y SVG.")
