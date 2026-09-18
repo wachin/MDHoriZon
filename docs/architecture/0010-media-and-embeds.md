@@ -1,7 +1,7 @@
 # 0010. Video: covers now, and a player that waits to be asked
 
-- **Status:** proposed — the cover half is implemented, the player is the next step
-- **Date:** 2026-09-17
+- **Status:** accepted — implemented in `src/components/VideoEmbed.tsx` and `MarkdownParagraph.tsx`
+- **Date:** 2026-09-17 (implemented 2026-09-18)
 - **Context:** Phase 9; follows [ADR 0003](0003-sanitization-policy.md) (sanitization) and
   [ADR 0009](0009-content-model.md) (content model)
 
@@ -47,6 +47,26 @@ Two constraints shape the answer:
   not set advertising cookies — but it does not change the fact that a request happens; the facade is what
   fixes that.
 
+## What the implementation settled
+
+- **Where the decision lives.** `MarkdownParagraph` reads the sanitized `node` it is already given, the same
+  way `CodeBlock` reads a fence's language. Nothing was added to the pipeline and the sanitize schema was not
+  touched: a video is recognised from what survived sanitization.
+- **How strict "stands alone" is.** The link must be the paragraph's own content — not wrapped in emphasis —
+  and the only other children may be whitespace. `**[video](url)**` stays a paragraph, because the author wrote
+  emphasis and a rule that unwraps it to find a video is a rule that will surprise someone.
+- **`youtube-nocookie.com`** for the player: the domain that does not set advertising cookies.
+- **The poster is `hqdefault.jpg`, cropped.** It is the still YouTube always publishes; it is 4:3 with the
+  letterbox bars baked in, so the box is 16:9 with `object-fit: cover`. On an engine without `aspect-ratio` the
+  poster simply shows at its own ratio — a difference, not a broken layout.
+- **Focus moves into the player** once it exists. A keyboard reader who presses play must not be dropped back
+  at the top of the document.
+- **The control is a `<button>`**, so it is operable by keyboard and announced as a control; the poster carries
+  no alt text because the button has the name. A link whose text is the URL is named "YouTube video" rather
+  than read out as an address.
+- **The interface text is English**, like the rest of the application chrome. The content around it may be
+  Spanish or English; a language switcher is a separate concern, and this record does not pretend to settle it.
+
 ## Consequences
 
 - The facade is a component, not a sanitizer change: it is our own markup, created after an interaction,
@@ -55,4 +75,8 @@ Two constraints shape the answer:
   a single image, and one the content already depends on for its covers — worth recording in Phase 14's
   privacy review alongside remote images.
 - Phase 17 (search and navigation) and Phase 19 (accessibility) inherit the facade: a play control needs a
-  keyboard path and an accessible name, and a thumbnail that is also a link needs both roles kept distinct.
+  keyboard path and an accessible name, and a thumbnail that is also a link needs both roles kept distinct. The
+  first is done here; the second does not arise, because the poster is not a link.
+- Measured on the golden document: the two standalone video paragraphs in section 19 render as a control and a
+  still image, the in-sentence one stays a link, and the rendering contains **no iframe at all** until a reader
+  presses play. Three tests pin that order: the facade, the paragraph rule, and the fixture's own render.

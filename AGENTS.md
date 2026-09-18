@@ -26,8 +26,10 @@ for the current list rather than trusting this paragraph.
 The content model is [ADR 0009](docs/architecture/0009-content-model.md): identity comes from the folder tree, not
 from frontmatter — measured, **none** of the 122 real documents declares any — and legacy Blogger markup (embedded
 players, image size hints) is rescued in the text before rendering, so raw HTML still never reaches the tree.
-Playing a video in place is a click-to-play facade, recorded as
-[ADR 0010](docs/architecture/0010-media-and-embeds.md), and is **not implemented yet**.
+Playing a video in place is a click-to-play facade
+([ADR 0010](docs/architecture/0010-media-and-embeds.md)): a paragraph that is only a video link shows the still
+image, and YouTube is contacted **only** when the reader presses play. Our own components may therefore draw SVG
+(the play glyph) — the rule is that no SVG comes from a document, and the golden test asserts exactly that.
 `tests/content-library.test.ts` indexes the whole real library, so a change that breaks it is caught here.
 
 A document's relative paths are resolved at render time against the `documentUrl` the caller supplies and are never
@@ -201,11 +203,10 @@ A pull request must state **what** changed, **why** (with the roadmap phase/mile
 
 ## 11. Useful first tasks
 
-Checklist items still open include: the content loader that serves `content/` (Phase 10), the video player facade
-([ADR 0010](docs/architecture/0010-media-and-embeds.md)), the navigation and search interfaces (Phase 17), the
-bundle budget (Phase 18), the sanitization element/attribute/URL lists that Phases 4–6 each narrowed (Phase 2 —
-its shape is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and end-to-end and WebView testing
-(Phase 20), which is where the device half of every feature lives.
+Checklist items still open include: the content loader that serves `content/` (Phase 10), the navigation and
+search interfaces (Phase 17), the bundle budget (Phase 18), the sanitization element/attribute/URL lists that
+Phases 4–6 each narrowed (Phase 2 — its shape is [ADR 0003](docs/architecture/0003-sanitization-policy.md)), and
+end-to-end and WebView testing (Phase 20), which is where the device half of every feature lives.
 Pick one from `ROADMAP.md` rather than inventing work.
 
 ## 12. When something is ambiguous
