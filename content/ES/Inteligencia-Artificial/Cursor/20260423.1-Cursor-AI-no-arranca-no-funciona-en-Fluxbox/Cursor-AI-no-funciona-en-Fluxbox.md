@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzaaIJ68kGHE_yIIqPmAe-NFYm2AXuPbS3sc7VV_OpbD4AxWlEEF1nwotUqt5vfeDdV8XOPFB6D3l-Fq4DgFGj5oNZtD0eDq1QqyrvdMmwB49Ogg36Pxla_LBwOwfsRt1EMi04AyzklMR4sSOvr-b9RmDaRIIlyThrJ9Qtwb8KWntHxCDpwbY7NQi7kH0/s1536/Cursor%20no%20arranca,%20no%20funciona%20en%20Fluxbox%20en%20MX%20Linux%2023%20XFCE.jpg =700x)
-
 # Cursor no arranca, no funciona en Fluxbox en MX Linux 23 XFCE
+
+![](images/Cursor-no-arranca,-no-funciona-en-Fluxbox-en-MX-Linux-23-XFCE.jpg)
 
 Estaba usando Cursor en MX Linux 23 (que está basado en Debian 12) la versión XFCE y funcionaba todo bien, pero luego instalé el gestor de ventanas Fluxbox (por cierto, MX Linux tiene una versión con Fluxbox, pero no me gusta, por eso mejor yo mismo lo instalo y lo configuro a mi gusto), pero no funciona
 
