@@ -1,5 +1,7 @@
 # Cómo instalar DeepSeek Harness en Linux y configurar sus modelos (APIs gratis y de pago)
 
+![](images/Designer.webp)
+
 > **Nota importante sobre el comando `dsh`**
 >
 > Si escribes `dsh --version` en la terminal y te aparece algo como *"Distributed Shell / Dancer's shell version 0.25.10"*, **no es DeepSeek Harness**. Existe un programa antiguo de Linux que también se llama `dsh` (de *Distributed Shell*) y que no tiene nada que ver. En Debian/Ubuntu, si haces `sudo apt install dsh`, instalarás ese otro programa antiguo, no el nuestro.

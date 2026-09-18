@@ -1,5 +1,7 @@
 # Guía completa de DeepSeek API desde cero
 
+![](images/Designer.webp)
+
 ## 1. Primero, entendamos las palabras básicas (no te asustes, no son difíciles)
 
 Antes de empezar, hay que entender algunos términos. Yo tampoco los entendía, pero con el tiempo los aprendí:
@@ -34,7 +36,7 @@ Estos son todos los enlaces que usarás en la plataforma de DeepSeek. Los he org
 | **Generar API Key** | https://platform.deepseek.com/api_keys | Aquí creas tu "llave" secreta. **No se la muestres a nadie** |
 | **Ver uso** | https://platform.deepseek.com/usage | Ver cuánto saldo te queda y cuántos Tokens has usado |
 
-### ⚠️ El pago
+### ⚠El pago
 
 - Soy de Ecuador y he testeado pagar con Google Play y me funcionó una vez pero después no me funcionó, y después intenté con **PayPal** y si me funcionó. 
 - Existen métodos de pago chinos (WeChat Pay, Alipay).
@@ -43,7 +45,7 @@ Estos son todos los enlaces que usarás en la plataforma de DeepSeek. Los he org
 
 ---
 
-### 💰 Nuevos precios para Flash (desde el 10 de septiembre 2026)
+### Nuevos precios para Flash (desde el 10 de septiembre 2026)
 
 DeepSeek ha bajado el precio de la serie Flash. Los precios oficiales están en yuanes, pero para tu referencia, aquí están los valores aproximados en dólares por millón de tokens para el horario de menor demanda (off-peak):
 
@@ -53,7 +55,7 @@ DeepSeek ha bajado el precio de la serie Flash. Los precios oficiales están en 
 
 Durante el horario de mayor demanda (peak), estos precios se duplican. El horario peak es de **lunes a viernes, de 9:00 a 12:00 y de 14:00 a 18:00, hora de Beijing**.
 
-### 🔄 El fin de V4 Pro y la redirección a Flash (14 de septiembre)
+### El fin de V4 Pro y la redirección a Flash (14 de septiembre)
 
 A partir del **14 de septiembre**, si intentas usar el modelo **V4 Pro**, DeepSeek redirigirá automáticamente tus solicitudes al modelo **V4.1 Flash**. Esto significa que:
 1.  **El servicio V4 Pro desaparecerá**: Ya no podrás usar el modelo antiguo.
@@ -61,7 +63,7 @@ A partir del **14 de septiembre**, si intentas usar el modelo **V4 Pro**, DeepSe
 
 ---
 
-## 🌎 Primero: la diferencia de hora para aprovechar el horario off-peak
+## Primero: la diferencia de hora para aprovechar el horario off-peak
 
 **Aprovecha el horario off-peak**: Dado que vives en Ecuador, la diferencia horaria con Beijing es de 13 horas. El horario peak de China (9:00-12:00 y 14:00-18:00) corresponde a la **noche y madrugada en Ecuador**. Si puedes programar tus tareas para que corran en horario off-peak de China, pagarás la mitad del precio.
 
@@ -72,7 +74,7 @@ China (Beijing) está **13 horas adelante** de Ecuador.
 
 ---
 
-## 📖 Palabras que quizás no conozcas
+## Palabras que quizás no conozcas
 
 | Palabra en inglés | Qué significa |
 |---|---|
@@ -88,7 +90,7 @@ China (Beijing) está **13 horas adelante** de Ecuador.
 
 ---
 
-## ⏰ Tabla de horarios en Ecuador (hora local)
+## Tabla de horarios en Ecuador (hora local)
 
 | Hora en Ecuador | Hora en China (Beijing) | ¿Peak o Off-peak? | ¿Te conviene? |
 |---|---|---|---|
@@ -101,7 +103,7 @@ China (Beijing) está **13 horas adelante** de Ecuador.
 
 ---
 
-## ✅ Resumen fácil de recordar
+## Resumen fácil de recordar
 
 - **CARO (peak) en Ecuador:** desde las **8:00 P.M. hasta las 8:00 A.M.** (toda la noche y madrugada).
 - **BARATO (off-peak) en Ecuador:** desde las **8:00 A.M. hasta las 8:00 P.M.** (todo el día).
@@ -110,13 +112,13 @@ China (Beijing) está **13 horas adelante** de Ecuador.
 
 ---
 
-## 💡 Consejo práctico
+## Consejo práctico
 
 Si puedes **programar tus tareas pesadas** (las que usan mucho texto o muchas respuestas) para que corran **durante el día en Ecuador** (8:00 A.M. a 8:00 P.M.), **pagarás la mitad** que si las corres de noche.
 
 ---
 
-## 📊 Ejemplo: cuánto pagas según la hora
+## Ejemplo: cuánto pagas según la hora
 
 Vamos a suponer que haces **una tarea** que gasta:
 
@@ -134,7 +136,7 @@ Y supongamos que **todo tu input es "cache miss"** (texto nuevo, el caso más ca
 
 ---
 
-## 🧮 Cuenta de esa tarea
+## Cuenta de esa tarea
 
 | Concepto | Off-peak | Peak |
 |---|---|---|
@@ -146,7 +148,7 @@ Y supongamos que **todo tu input es "cache miss"** (texto nuevo, el caso más ca
 
 ---
 
-## 📅 Ejemplo de un mes completo
+## Ejemplo de un mes completo
 
 Supongamos que haces **esta tarea 1 vez al día, los 30 días del mes**:
 
@@ -172,7 +174,7 @@ Supongamos que haces **esta tarea 1 vez al día, los 30 días del mes**:
 
 ---
 
-## 🎁 Bonus: si usas "cache hit" ahorras aún más
+## Bonus: si usas "cache hit" ahorras aún más
 
 Si repites mucho el **mismo texto de entrada**, el sistema lo recuerda y te cobra muchísimo menos:
 
@@ -181,6 +183,6 @@ Si repites mucho el **mismo texto de entrada**, el sistema lo recuerda y te cobr
 | Input **cache hit** (repetido) | **$0.003** (¡casi nada!) |
 | Input **cache miss** (nuevo) | $0.15 |
 
-👉 La diferencia es **50 veces más barato** si repites texto. Por eso, si puedes **reutilizar el mismo texto de entrada**, ahorras muchísimo.
+👉 La diferencia es tal bez **50 veces más barato** si repites texto. Por eso, si puedes **reutilizar el mismo texto de entrada**, ahorras muchísimo.
 
 ---
