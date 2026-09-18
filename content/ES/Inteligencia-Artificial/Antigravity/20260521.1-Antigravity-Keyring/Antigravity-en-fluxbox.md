@@ -1,4 +1,6 @@
-# Antigravity en Fluxbox: cómo aplicar el fix del keyring en MX Linux 23 XFCE (Debian 12)
+# Antigravity en Fluxbox: cómo aplicar el fix del keyring en MX Linux  
+
+![](images/Portada.jpg)
 
 Instalé [Antigravity](https://antigravity.google/download/linux) (de Google) en MX Linux 23 (basado en Debian 12) y, al igual que Windsurf, Cursor, Kiro y otros forks de VS Code, puede presentar problemas con el almacenamiento de credenciales (keyring) cuando se usa en Fluxbox.
 
