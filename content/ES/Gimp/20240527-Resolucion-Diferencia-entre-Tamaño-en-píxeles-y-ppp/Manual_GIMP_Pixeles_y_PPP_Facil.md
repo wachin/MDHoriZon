@@ -98,7 +98,11 @@ Pero la imagen digital NO cambió.
 
 # 🟨 UNIDADES EN GIMP
 
+![](images/01-Ventana,-Crear-una-Nueva-Imagen.png)
+
 ## Anchura y Altura
+
+![](images/02-Crear-una-Nueva-Imagen_Tamaño-de-la-imagen_clic-en-px.png)
 
 pixeles  
 inches  
@@ -112,9 +116,18 @@ yards
 tupogr.points  
 typogr.picas  
 
-Estas cambian el tamaño.
+### Unidades de "Tamaño de imagen" (Anchura / Altura)
+
+Estas unidades definen las **dimensiones totales del lienzo**.
+
+- **¿Qué controlan?** El tamaño del lienzo sobre el que estás trabajando.
+- **¿Por qué hay tantas?** Te permiten definir el tamaño de tu lienzo pensando en el resultado final.
+    - Si estás diseñando algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**. Sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
+    - Si estás diseñando algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**. Así puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm x 55 mm) sin tener que hacer cálculos mentales.
 
 ## Resolución X / Y
+
+![](images/03-Crear-una-Nueva-imagen_Opciones-Avanzadas_clic-en-pixeles-in.png)
 
 pixeles/in
 pixeles/mm
@@ -129,19 +142,7 @@ pixeles/tpc
 
 Estas cambian la densidad de impresión.
 
-
----
-
-### 1. Unidades de "Tamaño de imagen" (Anchura / Altura)
-
-Estas unidades definen las **dimensiones totales del lienzo**.
-
-- **¿Qué controlan?** El tamaño del lienzo sobre el que estás trabajando.
-- **¿Por qué hay tantas?** Te permiten definir el tamaño de tu lienzo pensando en el resultado final.
-    - Si estás diseñando algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**. Sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
-    - Si estás diseñando algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**. Así puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm x 55 mm) sin tener que hacer cálculos mentales.
-
-### 2. Unidades de "Opciones avanzadas" (Resolución X / Y)
+### Unidades de "Opciones avanzadas" (Resolución X / Y)
 
 Estas unidades definen la **densidad de píxeles**. Responden a la pregunta: "Si mi imagen tiene que medir 10 cm en el mundo real, ¿cuántos píxeles debo meter dentro de esos 10 cm?".
 
