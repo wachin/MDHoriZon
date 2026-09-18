@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfJ7ZdhRumeuJ3cR7ESdV0QMlaTk1vd413dM3jaSubzE-nvBkjda7nRx_WdZfnmRE0DKwJSGd2TD2m9MwMEkbD8lyxBvPqWeCF7qbXSHnItCJ6r-X-pJbp3FiBlHWpLZ84ygqX9IljG8VeyfIwqHC_m_gxzY6vtqrdLlGj6l4g0hpM3uOAQKf5pg6bVjo/s1536/Portada.jpg =640x)
-
 # Cómo instalar CodeGeeX en Visual Studio Code (Windows, Linux, MAC)
+
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfJ7ZdhRumeuJ3cR7ESdV0QMlaTk1vd413dM3jaSubzE-nvBkjda7nRx_WdZfnmRE0DKwJSGd2TD2m9MwMEkbD8lyxBvPqWeCF7qbXSHnItCJ6r-X-pJbp3FiBlHWpLZ84ygqX9IljG8VeyfIwqHC_m_gxzY6vtqrdLlGj6l4g0hpM3uOAQKf5pg6bVjo/s1536/Portada.jpg =640x)
 
 ## ¿Qué es CodeGeeX?
 
@@ -19,6 +19,8 @@
 * Puede analizar todos los archivos que estén en la carpeta de un proyecto, y pedirle hacer cambios
 
 👉 Soporta **más de 100 lenguajes** y funciona en VS Code y otros IDEs 
+
+**Pero**: No sirve para hacer tareas grandes
 
 ---
 
