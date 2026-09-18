@@ -1,6 +1,8 @@
 # ¿Por qué no podía editar partes de un archivo SVG? (Y cómo solucionarlo)
 
-Puede ocurrir que cuando descargamos un archivo **SVG**, a veces ocurre algo extraño: -> vemos el dibujo, pero **no podemos editar partes internas**, como teclas, formas o textos.
+![](images/Qué-hacer-si-no-pudo-editar-partes-de-un-SVG.png)
+
+Puede ocurrir que cuando descargamos un archivo **SVG**, a veces ocurre algo extraño: -> vemos el dibujo, pero **no podemos editar partes internas**, como teclas, formas o textos.
 
 Eso no es un error del programa. Es por cómo fue construido el SVG.
 
@@ -10,10 +12,10 @@ Eso no es un error del programa. Es por cómo fue construido el SVG.
 
 Muchos SVG usan esta estructura:
 
--   `<defs>` → guarda dibujos como plantillas
--   `<use href="#algo">` → coloca una copia de esa plantilla en el documento
+-   `<defs>` → guarda dibujos como plantillas
+-   `<use href="#algo">` → coloca una copia de esa plantilla en el documento
 
-Es como un **sello** o **molde**.
+Es como un **sello** o **molde**.
 
 Ejemplo simple:
 
@@ -21,13 +23,13 @@ Ejemplo simple:
 
 ### ¿Qué pasa entonces?
 
-El editor ve eso como un **objeto enlazado**, no como un dibujo independiente. Por eso:
+El editor ve eso como un **objeto enlazado**, no como un dibujo independiente. Por eso:
 
 -   No puedes editar una tecla específica
 -   No puedes borrar una forma interna
 -   No puedes cambiar textos dentro del teclado
 
-Porque en realidad **no están ahí directamente**.
+Porque en realidad **no están ahí directamente**.
 
 ---
 
@@ -45,7 +47,7 @@ haz esto:
 Edición → Clonar → Desvincular clon
 ```
 
-_(En inglés: **Edit → Clone → Unlink Clone**)_
+_(En inglés: **Edit → Clone → Unlink Clone**)_
 
 1.  Luego presiona varias veces:
 
@@ -53,7 +55,7 @@ _(En inglés: **Edit → Clone → Unlink Clone**)_
 Shift + Ctrl + G
 ```
 
-Eso es **Desagrupar**.
+Eso es **Desagrupar**.
 
 Hazlo hasta que las piezas se separen:
 
