@@ -876,7 +876,34 @@ The hidden sentence.
 
 ---
 
-# 19. Final Regression Checklist
+# 19. Video
+
+A video is media, not decoration. A YouTube URL must preview on the page, and it must be usable as an entry's
+cover image when that entry has no image of its own — or when the video comes first. That is why the cover rule
+counts images and videos together.
+
+A video URL that makes up a whole paragraph is the case the in-page player is for. A video URL *inside a sentence*
+stays an ordinary link, because replacing it with a player would break the prose around it:
+
+[DeepSeek Harness: Tu propio Claude Code GRATIS](https://youtu.be/G7ZqUvFMSes?si=Qpzhs52nIY8xvdHv)
+
+The same video as a bare URL must be turned into a link, and must still be recognised as a video, query string and
+all:
+
+https://youtu.be/G7ZqUvFMSes
+
+The same video, this time inside a sentence, which must stay a link: mira este vídeo sobre [DeepSeek
+Harness](https://www.youtube.com/watch?v=G7ZqUvFMSes) y dime qué te parece.
+
+The legacy Blogger form of the same embed. Raw HTML never reaches the document tree, so as written here it is
+removed — the content layer rescues it into the link form above before rendering, which is how three entries in
+the real library keep their video:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/G7ZqUvFMSes" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+
+---
+
+# 20. Final Regression Checklist
 
 - [ ] H1–H6, setext and closed ATX headings render correctly.
 - [ ] Duplicate headings receive deterministic, distinct anchors.
@@ -901,6 +928,9 @@ The hidden sentence.
 - [ ] Invalid or missing math degrades gracefully without crashing the article.
 - [ ] Mermaid renders correctly, including state diagrams and additional diagram types.
 - [ ] Mermaid errors do not crash the article and produce visible feedback.
+- [ ] A YouTube link that stands alone is recognised as a video and previews without loading a third party.
+- [ ] A video URL inside a sentence stays a link.
+- [ ] A video URL with a query string is recognised.
 - [ ] Themes remain readable.
 - [ ] Unsafe content is sanitized according to policy, including SVG, iframes, `data:` URIs and obfuscated `javascript:` URLs.
 - [ ] The complete document works offline.

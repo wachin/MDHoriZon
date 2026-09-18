@@ -575,7 +575,24 @@ stripped, this case documents that decision rather than failing):</li>
 <p>The hidden sentence.</p>
 
 <hr>
-<h1 id="19-final-regression-checklist">19. Final Regression Checklist<a class="markdown-heading-anchor" href="#19-final-regression-checklist" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<h1 id="19-video">19. Video<a class="markdown-heading-anchor" href="#19-video" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
+<p>A video is media, not decoration. A YouTube URL must preview on the page, and it must be usable as an entry's
+cover image when that entry has no image of its own — or when the video comes first. That is why the cover rule
+counts images and videos together.</p>
+<p>A video URL that makes up a whole paragraph is the case the in-page player is for. A video URL <em>inside a sentence</em>
+stays an ordinary link, because replacing it with a player would break the prose around it:</p>
+<p><a href="https://youtu.be/G7ZqUvFMSes?si=Qpzhs52nIY8xvdHv" target="_blank" rel="noopener noreferrer">DeepSeek Harness: Tu propio Claude Code GRATIS</a></p>
+<p>The same video as a bare URL must be turned into a link, and must still be recognised as a video, query string and
+all:</p>
+<p><a href="https://youtu.be/G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">https://youtu.be/G7ZqUvFMSes</a></p>
+<p>The same video, this time inside a sentence, which must stay a link: mira este vídeo sobre <a href="https://www.youtube.com/watch?v=G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">DeepSeek
+Harness</a> y dime qué te parece.</p>
+<p>The legacy Blogger form of the same embed. Raw HTML never reaches the document tree, so as written here it is
+removed — the content layer rescues it into the link form above before rendering, which is how three entries in
+the real library keep their video:</p>
+
+<hr>
+<h1 id="20-final-regression-checklist">20. Final Regression Checklist<a class="markdown-heading-anchor" href="#20-final-regression-checklist" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <ul class="contains-task-list">
 <li class="task-list-item"><input disabled="" type="checkbox"> H1–H6, setext and closed ATX headings render correctly.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Duplicate headings receive deterministic, distinct anchors.</li>
@@ -600,6 +617,9 @@ stripped, this case documents that decision rather than failing):</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Invalid or missing math degrades gracefully without crashing the article.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Mermaid renders correctly, including state diagrams and additional diagram types.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Mermaid errors do not crash the article and produce visible feedback.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> A YouTube link that stands alone is recognised as a video and previews without loading a third party.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> A video URL inside a sentence stays a link.</li>
+<li class="task-list-item"><input disabled="" type="checkbox"> A video URL with a query string is recognised.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Themes remain readable.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> Unsafe content is sanitized according to policy, including SVG, iframes, <code>data:</code> URIs and obfuscated <code>javascript:</code> URLs.</li>
 <li class="task-list-item"><input disabled="" type="checkbox"> The complete document works offline.</li>

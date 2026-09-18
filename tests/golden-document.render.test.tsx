@@ -68,7 +68,8 @@ describe('Golden Test Document', () => {
       '4-images',
       '8-tables',
       '12-mermaid',
-      '19-final-regression-checklist',
+      '19-video',
+      '20-final-regression-checklist',
     ]) {
       expect(byId(id), id).not.toBeNull()
     }
