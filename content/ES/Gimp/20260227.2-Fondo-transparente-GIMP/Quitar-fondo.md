@@ -1,6 +1,3 @@
-
-
-
 # Cómo quitar el fondo de una imagen en GIMP y dejarlo transparente (Paso a paso)
 
 > Tengo la imagen de un teclado pero sólo quiero el teclado, y borrar todo lo demás (contornos) y que el fondo quede transparente. Pero cuando uso el borrador no queda transparente.”

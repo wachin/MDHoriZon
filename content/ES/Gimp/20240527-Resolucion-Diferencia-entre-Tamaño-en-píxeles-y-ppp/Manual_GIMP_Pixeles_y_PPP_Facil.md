@@ -1,64 +1,62 @@
 # 📘 Guía Didáctica: Píxeles vs Resolución (PPP/PPI) en GIMP
 
-# El Concepto Clave: La Resolución
+> Manual pensado para personas que llegan de Windows a Linux y se topan con GIMP: nada de números misteriosos.
 
-La resolución actúa como un puente entre el mundo digital (píxeles) y el mundo físico (centímetros, pulgadas). Se mide en **ppp** (píxeles por pulgada) o **dpi** (dots per inch) .
+**Versión de GIMP de las capturas:** GIMP 2.10. En GIMP 3.x los menús cambian un poco (por ejemplo, *Imagen → Escalar la imagen* se llama *Imagen → Escalar imagen*), pero los conceptos son exactamente los mismos.
 
-La fórmula es: **Tamaño Físico = Número de Píxeles / Resolución**
+---
 
-Por ejemplo, una imagen de 3000 píxeles de ancho puede imprimirse a 10 pulgadas (25.4 cm) si usamos una resolución de 300 ppp, o a 41.6 pulgadas (105 cm) si usamos 72 ppp. En pantalla, siempre se ven por píxeles.
+# Capítulo 0 · La idea en 30 segundos
+
+**La resolución actúa como un puente** entre el mundo digital (píxeles) y el mundo físico (centímetros, pulgadas). Se mide en **ppp** (píxeles por pulgada) o **dpi** (*dots per inch*).
+
+La fórmula es: **Tamaño físico = Número de píxeles ÷ Resolución**
+
+Por ejemplo, una imagen de **3000 px** de ancho puede imprimirse:
+
+- a **300 ppp** → 10 pulgadas (**25.4 cm**) de ancho,
+- a **150 ppp** → 20 pulgadas (**50.8 cm**),
+- a **72 ppp** → ≈ 41.7 pulgadas (**≈ 105.8 cm**).
+
+En pantalla, en cambio, las imágenes siempre se ven **por píxeles**: el ppp no pinta nada.
+
+![La analogía de los LEGO: mismos px, distinto apretón](images/diagrama_lego.png)
 
 ## Objetivo de la lectura
+
 Al finalizar este tutorial el lector podrá:
 
 - Diferenciar claramente entre píxeles y resolución.
 - Calcular el tamaño real de impresión.
-- Entender por qué en pantalla el PPP no afecta la imagen.
+- Entender por qué en pantalla el ppp no afecta la imagen.
 - Aplicar correctamente estos conceptos en GIMP.
 
----
+**Idea central:** una imagen digital tiene **DOS propiedades independientes** que nunca son lo mismo:
 
-## Idea Central
-Una imagen digital tiene DOS propiedades independientes:
-
-1. Tamaño en píxeles (px)
-2. Resolución (PPP / PPI)
-
-⚠️ Son conceptos diferentes.
-⚠️ Cumplen funciones distintas.
+1. **Tamaño en píxeles (px)** → *cuántos cuadritos tiene la imagen.*
+2. **Resolución (ppp / PPI)** → *con qué densidad se colocan esos cuadritos al imprimir.*
 
 ---
 
-# Diferencia entre **tamaño en píxeles** y **resolución (ppp / ppi / dpi)**
+# Capítulo 1 · ¿Qué es un píxel?
 
-## 1. EXPLICACIONES PREVIAS
+Un píxel es el **cuadrito más pequeño** de una imagen digital.
 
-Una imagen digital tiene DOS cosas diferentes:
+![Ejemplo de píxeles](images/diagrama_pixeles.png)
 
-1️⃣ Tamaño en píxeles  
-2️⃣ Resolución de impresión  
+Si una imagen mide 10 × 10 píxeles, tiene 100 cuadritos.
 
-Nunca son lo mismo.
+**En pantalla SOLO importa esto.**
 
----
-
-## 2. ¿QUÉ ES UN PÍXEL?
-
-Un píxel es el cuadrito más pequeño de una imagen digital.
-
-![Ejemplo de pixeles](images/diagrama_pixeles.png)
-
-Si una imagen mide 10 x 10 píxeles, tiene 100 cuadritos.
-
-En pantalla SOLO importa esto.
+Para acercarte al 800 % cualquier imagen en GIMP lo comprobarás con tus propios ojos: los cuadritos se agrandan… pero eso lo vemos en el Capítulo 4.
 
 ---
 
-## 3. ¿QUÉ ES RESOLUCIÓN?
+# Capítulo 2 · ¿Qué es la resolución?
 
-Resolución significa:
+La resolución responde a una pregunta:
 
-¿Cuántos píxeles caben en una unidad física cuando se imprime?
+> ¿Cuántos píxeles caben en una unidad física **cuando se imprime**?
 
 Puede mostrarse como:
 
@@ -67,122 +65,26 @@ Puede mostrarse como:
 - pixeles/ft
 - etc.
 
-> Las unidades mm, cm, ft, etc son medidas que la persona puede medir físicamente con una regla, metro, etc
+> Las unidades mm, cm, ft, etc. son medidas que la persona puede medir físicamente con una regla, un metro, etc.
 
-Eso es lo mismo que decir PPI o PPP.
+Eso es lo mismo que decir **PPI** o **PPP**.
 
----
+## 🖨 Misma imagen, distinta impresión
 
-## 📏 PPP, PPI y DPI
-
-PPP = Píxeles Por Pulgada  
-PPI = Pixels Per Inch (lo mismo ue PPP pero en inglés)  
-DPI = Dots Per Inch (puntos físicos de tinta)
-
-👉 En GIMP realmente trabajamos con PPI aunque no aparezca escrito así.
-
----
-
-## 🖨 MISMA IMAGEN, DISTINTA IMPRESIÓN (Comprendiendo la Impresión)
-
-![Concepto de impresion](images/diagrama_impresion.png)
+![Concepto de impresión](images/diagrama_impresion.png)
 
 Si una imagen tiene 1000 píxeles:
 
-- A 300 ppp se imprime pequeña y nítida.
-- A 150 ppp se imprime más grande pero menos detallada.
+- A **300 ppp** se imprime pequeña y nítida.
+- A **150 ppp** se imprime más grande pero menos detallada.
 
-Pero la imagen digital NO cambió.
+Pero la imagen digital **NO cambió**.
 
----
-
-# UNIDADES EN GIMP
-
-![](images/01-Ventana,-Crear-una-Nueva-Imagen.png)
-
-## Anchura y Altura
-
-![](images/02-Crear-una-Nueva-Imagen_Tamaño-de-la-imagen_clic-en-px.png)
-
-pixeles  
-inches  
-milimeters  
-points  
-picas  
-centimeters  
-meters  
-feet  
-yards  
-tupogr.points  
-typogr.picas  
-
-### Unidades de "Tamaño de imagen" (Anchura / Altura)
-
-Estas unidades definen las **dimensiones totales del lienzo**.
-
-- **¿Qué controlan?** El tamaño del lienzo sobre el que estás trabajando.
-- **¿Por qué hay tantas?** Te permiten definir el tamaño de tu lienzo pensando en el resultado final.
-    - Si estás diseñando algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**. Sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
-    - Si estás diseñando algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**. Así puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm x 55 mm) sin tener que hacer cálculos mentales.
-
-## Resolución X / Y
-
-![](images/03-Crear-una-Nueva-imagen_Opciones-Avanzadas_clic-en-pixeles-in.png)
-
-pixeles/in
-pixeles/mm
-pixeles/pt
-pixeles/pc
-pixeles/cm
-pixeles/m
-pixeles/ft
-pixeles/yd
-pixeles/tpt
-pixeles/tpc 
-
-Estas cambian la densidad de impresión.
-
-### Unidades de "Opciones avanzadas" (Resolución X / Y)
-
-Estas unidades definen la **densidad de píxeles**. Responden a la pregunta: "Si mi imagen tiene que medir 10 cm en el mundo real, ¿cuántos píxeles debo meter dentro de esos 10 cm?".
-
-- **¿Qué controlan?** La relación entre el mundo digital (píxeles) y el mundo físico (centímetros, pulgadas...).
-- **¿Por qué hay tantas?** Para que puedas trabajar con la unidad de medida física que te resulte más cómoda para tu proyecto de impresión. Simplemente le estás diciendo a GIMP: "La regla con la que voy a medir mi densidad de píxeles será esta".
-
-    *   **píxeles/in (pulgada):** Esta es la unidad **más importante y famosa** de todas. Seguro que has oído hablar de **ppp (píxeles por pulgada) o dpi (dots per inch)**. Es el estándar de la industria. Una calidad de impresión profesional suele ser de 300 píxeles/in.
-    *   **píxeles/mm (milímetro):** Cuántos píxeles hay en un milímetro. Es una unidad muy precisa para trabajos de alta calidad, pero los números suelen ser pequeños (por ejemplo, 11.8 píxeles/mm equivalen a 300 píxeles/pulgada).
-    *   **píxeles/pt (punto tipográfico):** Muy útil para diseño editorial y maquetación. Un punto (pt) es una unidad de medida clásica en tipografía (1 pt = 1/72 de pulgada). Si sabes que tu texto va a ir a un tamaño de cuerpo de 12 pt, configurar la resolución en píxeles/pt te ayuda a visualizar y calcular mejor.
-    *   **píxeles/pc (pica):** Otra unidad tipográfica. Una pica equivale a 12 puntos. Es muy usada en diseño gráfico y periodístico en algunos países.
-    *   **píxeles/cm (centímetro):** Es la versión del milímetro pero más "gruesa". Se usa mucho porque el centímetro es una unidad familiar para todos.
-    *   **píxeles/m (metro):** Para proyectos enormes, como vallas publicitarias o lonas gigantes. Nadie habla de píxeles por milímetro para una lona de 10 metros, pero sí de píxeles por metro para hacerse una idea de la calidad final.
-    *   **píxeles/ft (pie):** La versión del sistema imperial (pies) para quienes trabajan con él.
-    *   **píxeles/yd (yarda):** La versión del sistema imperial (yardas) para quienes trabajan con él.
-    *   **píxeles/tpt (punto tipográfico tradicional):** Es una unidad de medida tipográfica "antigua" o tradicional, que tiene una diferencia mínima con el punto moderno (pt). Es para usos muy específicos en tipografía de alto nivel o para mantener la fidelidad con documentos históricos.
-    *   **píxeles/tpc (pica tipográfica tradicional):** Lo mismo que el tpt, pero para la pica tradicional. Un complemento para tipografía de alto nivel.
-
-### En Resumen y para la práctica diaria:
-
-- **Usa las unidades de "Tamaño de imagen"** para decirle a GIMP **lo grande que quieres que sea tu lienzo**. Si es para web o pantallas, usa **píxeles**. Si es para impresión, usa **centímetros** o **milímetros**.
-- **Usa las unidades de "Resolución"** para decirle a GIMP **con qué densidad vas a imprimir**. En el 99% de los casos de impresión, usarás **píxeles/cm** o **píxeles/mm** (dependiendo de si piensas en cm o mm), o la más famosa de todas: **píxeles/pulgada (ppp o dpi)**.
-
-**El truco:** No te compliques. Si vas a hacer algo para imprimir, pon el tamaño en **centímetros** en la parte de arriba y, en las opciones avanzadas, busca el equivalente de 300 píxeles por pulgada (que son 118 píxeles/cm o 11.8 píxeles/mm). Si es para pantalla, asegúrate de que la unidad de arriba sean **píxeles** y la resolución te dará igual, déjala en píxeles/mm o en lo que esté por defecto.
-
-## 🔍 7. DIFERENCIA CLAVE 
-
-| Tamaño (Anchura & Altura) (Comportamiento en Pantalla) | Resolución X y Y (Comprendiendo la Impresión) |
-| ------------------------------------------------------ | --------------------------------------------- |
-| Cambia cómo se ve en pantalla                          | No cambia pantalla                            |
-| Cambia peso del archivo                                | No cambia peso                                |
-| Afecta calidad real                                    | Solo afecta impresión                         |
+![El ejemplo de los 3000 px con las tres resoluciones típicas](images/diagrama_misma_imagen_distinta_impresion.png)
 
 ---
 
-# ¿Por qué existen PPP, PPI y DPI si en GIMP no aparecen?
-
-En realidad…
-
-👉 **Muchas veces significan prácticamente lo mismo**,
-pero se usan en contextos distintos.
+# Capítulo 3 · PPP, PPI y DPI: la familia de siglas
 
 ## 1️⃣ PPP (píxeles por pulgada)
 
@@ -196,42 +98,24 @@ Es simplemente la traducción de:
 
 Entonces:
 
-> ✅ PPP = PPI
-> (son lo mismo, pero en distinto idioma)
-
----
+> ✅ PPP = PPI (son lo mismo, pero en distinto idioma)
 
 ## 2️⃣ PPI (Pixels Per Inch)
 
 Este es el término técnico correcto cuando hablamos de:
 
-
----
-## 🖥 Sección: Comportamiento en Pantalla
----
-
-* Pantallas
-* Imágenes digitales
-* Resolución en programas como GIMP
-* Fotografía digital
+- Pantallas
+- Imágenes digitales
+- Resolución en programas como GIMP
+- Fotografía digital
 
 Significa:
 
 > Cuántos píxeles hay en una pulgada.
 
-Ejemplo:
-300 PPI significa que en 1 pulgada caben 300 píxeles.
+Ejemplo: **300 PPI** significa que en 1 pulgada caben 300 píxeles.
 
-En GIMP, cuando ves algo como:
-
-```
-pixeles/mm
-pixeles/cm
-```
-
-Eso es lo mismo que PPI pero en otra unidad.
-
----
+En GIMP, cuando ves algo como `pixeles/mm` o `pixeles/cm`, es lo mismo que PPI pero en otra unidad.
 
 ## 3️⃣ DPI (Dots Per Inch)
 
@@ -243,136 +127,97 @@ DPI significa:
 
 > Dots Per Inch (puntos por pulgada)
 
-Pero los "dots" no son píxeles digitales.
-Son puntos físicos de tinta que una impresora coloca en el papel.
-
----
+Pero los "dots" no son píxeles digitales: son **puntos físicos de tinta** que una impresora coloca en el papel.
 
 ### 📌 Diferencia real
 
-| Término |          Se usa para          |   Qué mide realmente    |
-| ------- | ----------------------------- | ----------------------- |
-| PPI     | Imágenes digitales            | Píxeles en pantalla     |
-| PPP     | Lo mismo que PPI (en español) | Píxeles                 |
-| DPI     | Impresoras                    | Puntos físicos de tinta |
+| Término | Se usa para | Qué mide realmente |
+| ------- | ----------- | ------------------ |
+| PPI | Imágenes digitales | Píxeles |
+| PPP | Lo mismo que PPI (en español) | Píxeles |
+| DPI | Impresoras | Puntos físicos de tinta |
 
----
-
-# Entonces… ¿por qué la gente los mezcla?
+## Entonces… ¿por qué la gente los mezcla?
 
 Porque:
 
-* Para imprimir, necesitas convertir píxeles en tinta.
-* Entonces 300 PPI normalmente se imprime como 300 DPI.
-* En la práctica, muchas personas dicen DPI cuando realmente hablan de PPI.
+- Para imprimir, necesitas convertir píxeles en tinta.
+- Entonces 300 PPI normalmente se imprime como 300 DPI.
+- En la práctica, muchas personas dicen DPI cuando realmente hablan de PPI.
 
-Es como si todos dijeran “caballos de fuerza” aunque estén hablando de kilovatios.
+Es como si todos dijeran "caballos de fuerza" aunque estén hablando de kilovatios.
 
----
+## 🖥 ¿Y en pantalla? El "72 ppp" de los monitores viejos
 
-# En GIMP
-
-GIMP trabaja con:
-
-✔ PPI (aunque no lo llame así directamente)
-✔ Lo muestra como pixeles/mm, pixeles/cm, etc.
-
-No usa la palabra DPI porque GIMP no controla la impresora,
-solo guarda la información de densidad.
-
----
-
-# Ejemplo sencillo
-
-Imagina una imagen de 3000 píxeles de ancho.
-
-Si la imprimes a:
-
-* 300 PPI → 10 pulgadas
-* 150 PPI → 20 pulgadas
-
-Pero la imagen digital sigue teniendo 3000 píxeles.
-No cambió.
-
-> DPI = puntos físicos de impresión
-> En GIMP hablamos realmente de PPI aunque no aparezca escrito así.
-
-## ¿Qué significa cada dato en GIMP?
-
-En **Imagen → Propiedades de la imagen**, GIMP muestra (entre otras cosas):
-
-- **Tamaño en píxeles:** el tamaño real digital.
-- **Tamaño de la impresión:** cuántos **mm/cm** ocuparía al imprimir.
-- **Resolución:** ppp (píxeles por pulgada) o a veces píxeles/mm.
-
-### Ejemplo real (200×200 px)
-
-![Propiedades: 200×200 px y 150 ppp](images/image2.jpeg)
-
-En la captura se ve:
-
-- **Tamaño en píxeles: 200×200 px** (esto define cuánta información tiene la imagen).  
-- **Resolución: 150×150 ppp** (esto sirve para calcular el tamaño en papel).  
-
-Piensa así:
-
-- **px = cuántos LEGO tienes**.  
-- **ppp = qué tan apretados pones esos LEGO cuando los imprimes**.  
-
----
-
-### En pantalla (web, YouTube, redes, iconos)
-
-- La pantalla trabaja con **píxeles**.
-- Si tu imagen es **256×256 px**, en pantalla se verá “como” 256×256 píxeles (dependiendo del zoom/escala).
-- Cambiar ppp normalmente **no cambia nada visible** en pantalla.
+- **72–96 ppp** suele ser el "histórico de pantallas": **no** es una regla moderna. Hoy lo importante en pantalla son los **px**.
+- En pantalla, **cambiar el ppp no cambia nada visible**.
 
 **Para Internet:** casi siempre solo te preocupa **px**.
 
+## En GIMP
+
+GIMP trabaja con:
+
+- ✔ PPI (aunque no lo llame así directamente)
+- ✔ Lo muestra como pixeles/mm, pixeles/cm, etc.
+
+No usa la palabra DPI porque GIMP no controla la impresora: **solo guarda la información de densidad** dentro del archivo (es el mismo dato "Resolución horizontal: 300 dpi" que veías en las propiedades de un JPEG en Windows).
+
 ---
 
-### En impresión (hojas, afiches, trípticos)
+# Capítulo 4 · Pantalla vs Impresión: las dos caras de una moneda
+
+## En pantalla (web, YouTube, redes, iconos)
+
+- La pantalla trabaja con **píxeles**.
+- Si tu imagen es **256 × 256 px**, en pantalla se verá "como" 256 × 256 píxeles (dependiendo del zoom/escala).
+- Cambiar el ppp normalmente **no cambia nada visible** en pantalla.
+
+## El zoom engaña: acercar la vista no cambia la imagen
+
+![El zoom solo agranda los cuadritos en tu pantalla](images/diagrama_zoom_vs_calidad.png)
+
+Si acercas la vista al 800 % y ves "cuadritos", la imagen **no se estropeó**: el zoom solo agranda los píxeles en tu pantalla. Los px del archivo, su peso y la calidad de impresión **no cambian**. Aléjate al 100 % y todo vuelve a verse nítido.
+
+## En impresión (hojas, afiches, trípticos)
 
 Aquí sí importa la resolución:
 
-- Si tienes pocos px y quieres imprimir muy grande, se verá **pixelado**.  
-- Si tienes muchos px, puedes imprimir más grande y con mejor detalle.  
+- Si tienes pocos px y quieres imprimir muy grande, se verá **pixelado**.
+- Si tienes muchos px, puedes imprimir más grande y con mejor detalle.
 
 **Para imprimir:** debes pensar en **(px) ÷ (ppp)** para saber el tamaño en pulgadas.
 
-## GIMP por defecto crea imágenes a 300 ppp
+## 🔍 Diferencia clave (memoriza esta tabla)
 
-Cuando creas una imagen nueva en GIMP, por defecto suele venir con **300 ppp**.
+| Tamaño en px (Anchura y Altura) | Resolución (ppp / pixeles/mm…) |
+| ------------------------------- | ------------------------------ |
+| Cambia cómo se ve en pantalla | No cambia la pantalla |
+| Cambia el peso del archivo | No cambia el peso |
+| Afecta la calidad real | Solo afecta la impresión |
 
-Ruta: **Archivo → Nuevo** y luego abrir **Opciones avanzadas**:
+## El dato escondido: el ppp vive dentro del archivo
 
-![Crear imagen nueva: opciones avanzadas](images/image4.png)
+Cuando guardas un JPEG, GIMP guarda también la resolución como metadato (en Windows lo veías como "Resolución horizontal: 300 dpi" en *Propiedades → Detalles*). Ese número **no** cambia cuántos píxeles tiene el archivo ni cuánto pesa: solo espera, pacientemente, a que alguien imprima.
 
-![Resolución por defecto 300 ppp](images/image5.png)
+## Regla sencilla
 
-Luego puedes verificarlo en **Imagen → Propiedades de la imagen**:
+- Para YouTube, web, iconos → usa **píxeles**.
+- Para imprimir → usa **centímetros o pulgadas + resolución** (300 ppp recomendado).
 
-![Propiedades: 1920×1080 px y 300 ppp](images/image6.jpeg)
+---
 
-## GIMP no siempre escribe **ppp (píxeles por pulgada)** con esas letras.
+# Capítulo 5 · Las unidades en GIMP
 
-En realidad, cuando ves unidades como:
+Cuando creas una imagen nueva (**Archivo → Nuevo**) GIMP te enseña dos grupos de números distintos:
 
-- pixeles/mm
-- pixeles/cm
-- pixeles/ft
+![Ventana: crear una nueva imagen](images/01-Ventana,-Crear-una-Nueva-Imagen.png)
 
-Eso ES la resolución.
+## 5.1 Anchura y Altura (el tamaño del lienzo)
 
-👉 **ppp = pixeles por pulgada (pixeles por inch)**
+![Unidades de tamaño: clic en px](images/02-Crear-una-Nueva-Imagen_Tamaño-de-la-imagen_clic-en-px.png)
 
-Si trabajas en pulgadas y colocas 300, estás usando **300 ppp**.
-
-## 1️⃣ Unidades que aparecen en 'Anchura' y 'Altura'
-
-Estas unidades afectan el TAMAÑO de la imagen.
-
-Aparecen exactamente así en GIMP:
+Aparecen exactamente así en GIMP (as ajustar si tu versión difiere):
 
 ```
 pixeles
@@ -384,7 +229,7 @@ centimeters
 meters
 feet
 yards
-tupogr.points
+typogr.points
 typogr.picas
 ```
 
@@ -402,62 +247,100 @@ Ahora las unidades menos conocidas:
 
 **points** → puntos tipográficos (1 point = 1/72 pulgada).
 **picas** → 1 pica = 12 points.
-**tupogr.points** → puntos tipográficos tradicionales.
+**typogr.points** → puntos tipográficos tradicionales.
 **typogr.picas** → picas tipográficas tradicionales.
 
 Estas últimas se usan en imprentas y diseño editorial profesional.
 
+### ¿Por qué hay tantas unidades de tamaño?
 
+Te permiten definir el lienzo pensando en el resultado final:
 
-## Entonces… ¿Dónde está el famoso '300 ppp'?
+- Si diseñas algo **para una pantalla** (redes sociales, web, etc.), lo más lógico es usar **píxeles (px)**: sabes que una imagen para Instagram debe tener, por ejemplo, 1080 px de ancho.
+- Si diseñas algo **para imprimir** (un folleto, una foto, un cartel), es mucho más intuitivo pensar en **milímetros (mm)** o **centímetros (cm)**: puedes crear un lienzo del tamaño exacto de una tarjeta de presentación (85 mm × 55 mm) sin hacer cálculos mentales.
 
-Si eliges pulgadas como unidad y pones 300 en resolución,
-eso equivale a **300 pixeles por pulgada (300 ppp)**.
+## 5.2 Resolución X / Y (la densidad de impresión)
 
-Si estás en pixeles/mm y ves algo como 11.81 pixeles/mm,
-eso también equivale a 300 ppp porque:
+![Unidades de resolución: clic en pixeles/in](images/03-Crear-una-Nueva-imagen_Opciones-Avanzadas_clic-en-pixeles-in.png)
 
-300 ÷ 25.4 ≈ 11.81
+Aparecen exactamente así en GIMP:
 
-## Diferencia CLARA entre Tamaño y Resolución
+```
+pixeles/in
+pixeles/mm
+pixeles/pt
+pixeles/pc
+pixeles/cm
+pixeles/m
+pixeles/ft
+pixeles/yd
+pixeles/tpt
+pixeles/tpc
+```
 
-|         Anchura / Altura         |         Resolución X / Y         |
-| -------------------------------- | -------------------------------- |
-| Cambia el tamaño real en píxeles | Cambia la densidad de impresión  |
-| Afecta cómo se ve en pantalla    | No cambia cómo se ve en pantalla |
-| Puede perder calidad si reduces  | No cambia calidad digital        |
+Estas cambian la **densidad de impresión**. Responden a la pregunta: *"Si mi imagen tiene que medir 10 cm en el mundo real, ¿cuántos píxeles debo meter dentro de esos 10 cm?"*.
 
-## Regla sencilla 
+Las más importantes:
 
-- Para YouTube, web, iconos → usa pixeles.
-- Para imprimir → usa centímetros o pulgadas + resolución (300 ppp recomendado).
+- **píxeles/in (pulgada):** la unidad **más famosa**. Es el **ppp** de toda la vida. Calidad de impresión profesional: 300 píxeles/in.
+- **píxeles/mm (milímetro):** muy precisa; los números son pequeños: **11.81 píxeles/mm = 300 ppp** (porque 1 pulgada = 25.4 mm).
+- **píxeles/cm (centímetro):** la versión "familiar" del mm: **118.1 píxeles/cm = 300 ppp**.
+- **píxeles/m (metro):** para proyectos enormes (lonas, vallas publicitarias).
+- **píxeles/pt y píxeles/pc:** unidades tipográficas (1 pt = 1/72 de pulgada; 1 pc = 12 pt). Útiles en diseño editorial y maquetación.
+- **pixeles/ft, pixeles/yd, pixeles/tpt, pixeles/tpc:** versiones imperial y tipográficas "tradicionales", para usos muy específicos.
 
-## 5) Lo más importante: cambiar ppp NO cambia los píxeles
+> 👉 En todos los casos es **la misma resolución** escrita con distinta regla: **300 ppp = 11.81 pixeles/mm = 118.1 pixeles/cm**.
 
-En GIMP hay dos cosas distintas:
+## 5.3 GIMP por defecto crea imágenes a 300 ppp
 
-1) **Cambiar el tamaño en píxeles** (esto sí cambia el archivo, y puede perder o ganar detalle).
-2) **Cambiar la resolución (ppp)** sin tocar los píxeles (esto cambia solo el “dato para impresión”).
+Cuando creas una imagen nueva en GIMP, por defecto suele venir con **300 ppp**.
 
-**Mira este ejemplo**
-En Gimp con una imagen abierta, y dando clic en:
+Ruta: **Archivo → Nuevo** y luego abrir **Opciones avanzadas**:
 
-**Imagen → Escalar la imagen…**
+![Crear imagen nueva: opciones avanzadas](images/image4.png)
 
-![Menú: Escalar la imagen](images/image21.jpeg)
+![Resolución por defecto 300 ppp](images/image5.png)
 
-y he colocado un comentario, en el texto de la imagen dice que si cambias la resolución, **no afecta** el tamaño en pantalla:
+Luego puedes verificarlo en **Imagen → Propiedades de la imagen**:
 
-![Cambiar resolución no cambia el tamaño](images/image22.jpeg)
+![Propiedades: 1920×1080 px y 300 ppp](images/image6.jpeg)
 
-**y ¿Cómo se cambia el tamaño real (px)?**
+## 5.4 El truco (no te compliques)
 
-En esa ventana:
+- Si vas a hacer algo **para imprimir**: pon el tamaño en **centímetros** en la parte de arriba y, en las opciones avanzadas, usa **300 pixeles/in** (o su equivalente: 11.81 pixeles/mm / 118.1 pixeles/cm).
+- Si es **para pantalla**: asegúrate de que la unidad de arriba sean **píxeles** y olvídate de la resolución: déjala como esté.
 
-- Si cambias **Anchura/Altura (px)** → i cambias el tamaño real de la imagen (en la imágen de arriba dice 48 x48 px).
-- Si cambias **Resolución X/Y** → solo cambias el dato de impresión (en la imagen de arriba los valores están en pixeles/mm, pero depende esto de la imagen pues puede estar con otras unidades de longitud).
+---
 
-## ¿ppp (ppi/dpi) y píxeles/mm son lo mismo?
+# Capítulo 6 · Los números en pantalla: dónde mirar en GIMP
+
+## 6.1 Propiedades de la imagen
+
+En **Imagen → Propiedades de la imagen**, GIMP muestra (entre otras cosas):
+
+- **Tamaño en píxeles:** el tamaño real digital.
+- **Tamaño de la impresión:** cuántos **mm/cm** ocuparía al imprimir.
+- **Resolución:** ppp (píxeles por pulgada) o a veces pixeles/mm.
+
+### Ejemplo real (200 × 200 px)
+
+![Propiedades: 200×200 px y 150 ppp](images/image2.jpeg)
+
+En la captura se ve:
+
+- **Tamaño en píxeles: 200 × 200 px** → define cuánta información tiene la imagen.
+- **Resolución: 150 × 150 ppp** → sirve para calcular el tamaño en papel.
+
+¿Y cuánto mediría impresa? Se calcula solito:
+
+- 200 px ÷ 150 ppp = **1.33 pulgadas ≈ 3.39 cm por lado**
+
+Piensa así:
+
+- **px = cuántos LEGO tienes.**
+- **ppp = qué tan apretados pones esos LEGO cuando los imprimes.**
+
+## 6.2 ¿ppp (ppi/dpi) y píxeles/mm son lo mismo?
 
 Son lo mismo pero en **unidades distintas**:
 
@@ -470,11 +353,48 @@ Conversión:
 - Entonces: **ppp = (px/mm) × 25.4**
 - Y: **px/mm = ppp ÷ 25.4**
 
-Ejemplo: si ves **3.543 px/mm**, entonces:
+Ejemplo: si ves **3.543 px/mm**, entonces 3.543 × 25.4 ≈ **90 ppp** (aprox.).
 
-- 3.543 × 25.4 ≈ **90 ppp** (aprox.)
+## 6.3 Lo más importante: cambiar ppp NO cambia los píxeles
 
-## 7) Ejemplo con iconos de Linux (por qué hay carpetas 48×48, 256×256, etc.)
+En GIMP hay dos cosas distintas:
+
+1. **Cambiar el tamaño en píxeles** (esto sí cambia el archivo, y puede perder o ganar detalle).
+2. **Cambiar la resolución (ppp)** sin tocar los píxeles (esto cambia solo el "dato para impresión").
+
+**Mira este ejemplo.** En GIMP, con una imagen abierta, haz clic en:
+
+**Imagen → Escalar la imagen…**
+
+![Menú: Escalar la imagen](images/image21.jpeg)
+
+He colocado un comentario en la imagen: como dice el texto, si cambias la resolución, **no afecta** el tamaño en pantalla:
+
+![Cambiar resolución no cambia el tamaño](images/image22.jpeg)
+
+**¿Y cómo se cambia el tamaño real (px)?**
+
+En esa ventana:
+
+- Si cambias **Anchura/Altura (px)** → cambias el tamaño real de la imagen (en la imagen de arriba dice 48 × 48 px).
+- Si cambias **Resolución X/Y** → solo cambias el dato de impresión (en la imagen de arriba los valores están en pixeles/mm, pero depende de la imagen: puede estar con otras unidades de longitud).
+
+### La ventana "Escalar la imagen", traducida
+
+![La ventana Escalar la imagen: arriba cambia la imagen, abajo solo el papel](images/diagrama_escalar_ventana.png)
+
+- **Arriba (Anchura/Altura):** cambias los px → la imagen **sí** cambia.
+- **Abajo (Resolución X/Y):** cambias el ppp → la imagen **no** cambia, solo el "tamaño de impresión".
+
+### ¿Y si mi imagen ya está creada?
+
+La misma ventana sirve para las dos cosas:
+
+- **¿Solo quieres cambiar el ppp** (p. ej., la impresora te pide 300 ppp)? Abre **Imagen → Escalar la imagen…** y cambia **únicamente** Resolución X/Y, sin tocar Anchura/Altura. La imagen no pierde ni gana píxeles.
+- **¿Quieres cambiar el tamaño en px?** Cambia Anchura/Altura. Ojo: si **reduces**, GIMP tira píxeles que luego no puedes recuperar (guarda una copia antes).
+- **¿Cambiar el tamaño sin perder calidad ni recortar?** Prueba **Imagen → Lienzo → Tamaño del lienzo** para el papel/recorte, o simplemente exporta de nuevo con otra resolución. (El zoom de la vista, como vimos, nunca cambia nada.)
+
+## 6.4 Ejemplo con iconos de Linux (por qué hay carpetas 48×48, 256×256, etc.)
 
 En Linux, los temas de iconos guardan **varias versiones** del mismo icono en diferentes tamaños:
 
@@ -485,6 +405,8 @@ Así el sistema puede elegir el tamaño correcto y verse nítido.
 
 ![Carpetas de tamaños en un tema de iconos (Adwaita)](images/image23.png)
 
+![El mismo icono a tamaño real en 16, 48 y 256 px](images/diagrama_iconos_linux.png)
+
 ### Comparación: el mismo icono en 48×48 vs 256×256
 
 #### Icono 48×48
@@ -493,47 +415,25 @@ Así el sistema puede elegir el tamaño correcto y verse nítido.
 
 ![Propiedades del icono 48×48](images/image15.jpeg)
 
+Aquí el icono es pequeño (48 × 48 px), por eso ocupa poco en pantalla.
 
----
-## Sección: Comportamiento en Pantalla
----
-Aquí el icono es pequeño (48×48 px), por eso ocupa poco en pantalla.
-
-### Icono 256×256
+#### Icono 256×256
 
 ![Archivo en carpeta 256×256](images/image19.png)
 
 ![Propiedades del icono 256×256](images/image20.jpeg)
 
-Aquí el icono tiene más píxeles (256×256), por eso se puede ver **más grande** y normalmente con **más detalle**.
+Aquí el icono tiene más píxeles (256 × 256), por eso se puede ver **más grande** y normalmente con **más detalle**.
 
 ### Ojo: el ppp puede ser igual, pero el tamaño en px cambia todo
 
-Fíjate que en las capturas de 48×48 y 256×256 aparece el mismo valor de **píxeles/mm**, pero **el tamaño en px** es diferente.
-
-
----
-# 🎓 ¿Cuánto has comprendido estos conceptos en GIMP?
-
-Esta es la parte más importante del tutorial: **el repaso fácil**. Si llegaste hasta aquí, ya viste todos los conceptos. Ahora vamos a ordenarlos como se los explicarías a un amigo que acaba de llegar de Windows y abre GIMP por primera vez. 😊
+Fíjate que en las capturas de 48×48 y 256×256 aparece el mismo valor de **píxeles/mm**, pero **el tamaño en px** es diferente. En pantalla manda el px, no el ppp.
 
 ---
 
-## 🧠 El repaso de 30 segundos
+# Capítulo 7 · ¿Vienes de Windows? Es lo mismo con otro nombre
 
-Todo el tutorial se resume en esta imagen mental:
-
-> 🧱 **px (píxeles) = cuántos LEGO tienes.**
-> 🖨 **ppp = qué tan apretados pones esos LEGO cuando los imprimes.**
-
-Y dos verdades que nunca cambian:
-
-1. **En pantalla solo importan los px.** Cambiar el ppp no mueve ni un píxel.
-2. **El ppp solo importa al imprimir.** Es el traductor que convierte px → centímetros de papel.
-
----
-
-## 🪟 ¿Vienes de Windows? Esto ya lo conocías, solo cambió el nombre
+![Traducción de rutas: de Windows a GIMP](images/diagrama_ruta_windows_vs_gimp.png)
 
 No estás perdido. Windows ya te mostraba estos mismos números, solo que en otras ventanas y con otros nombres:
 
@@ -542,13 +442,15 @@ No estás perdido. Windows ya te mostraba estos mismos números, solo que en otr
 | Clic derecho en la foto → **Propiedades → Detalles** | **Imagen → Propiedades de la imagen** | Tamaño en píxeles (px) |
 | **Paint → Cambiar tamaño** (opción "Píxeles") | **Imagen → Escalar la imagen…** | Anchura / Altura en px |
 | La línea "Resolución horizontal: 300 dpi" de las propiedades | "Resolución X / Y" en GIMP | Es el ppp (aunque diga pixeles/mm o pixeles/cm) |
-| Aplicación **Fotos → botón Imprimir** | **Archivo → Imprimir…** | cm en el papel + ppp |
+| Aplicación **Fotos** → botón Imprimir | **Archivo → Imprimir…** | cm en el papel + ppp |
 
-👉 Es **el mismo conocimiento con otra ropa**. Como cuando cambias de ciudad: la farmacia sigue existiendo, solo que ya no está en la esquina de siempre. 🏪
+👉 Es **el mismo conocimiento con otra ropa**. Como cuando cambias de ciudad: la farmacia sigue existiendo, solo que ya no está en la esquina de siempre.
 
 ---
 
-## 🔢 El traductor de números de GIMP
+# Capítulo 8 · ¿Pantalla o papel? El traductor de números
+
+![Árbol de decisión: ¿pantalla o papel?](images/diagrama_decisor.png)
 
 Cuando GIMP te muestre un número raro, pregúntate **una sola cosa**:
 
@@ -565,66 +467,15 @@ Cuando GIMP te muestre un número raro, pregúntate **una sola cosa**:
 **Truco infalible para no perderte:**
 
 - La unidad es **px** → es **tamaño** (cuenta cuadritos).
-- La unidad es **pixeles/ ALGO** (in, mm, cm…) → es **densidad para imprimir**.
+- La unidad es **pixeles/ALGO** (in, mm, cm…) → es **densidad para imprimir**.
 - La unidad es **solo cm/mm** (sin "pixeles/") → es **tamaño en el papel**.
 
----
-
-## 👀 ¿Dónde veo estos números en GIMP?
-
-En **Imagen → Propiedades de la imagen**. Fíjate en la captura del tutorial (una imagen de 200×200 px):
-
-![Propiedades: 200×200 px y 150 ppp](images/image2.jpeg)
-
-- **Tamaño en píxeles: 200×200 px** → los LEGO que tienes 🧱.
-- **Resolución: 150×150 ppp** → qué tan apretados van al papel 🖨.
-
----
-
-## 🖼 La ventana "Escalar la imagen", traducida
-
-Es la ventana que más confunde, porque mezcla los dos números. Aquí está etiquetada:
-
-```
-┌────────────────────────────────────────────────────────┐
-│  Escalar la imagen                                     │
-│                                                        │
-│  Anchura: 1200          [px         ▼]                 │
-│  Altura:   900          [px         ▼] ← TAMAÑO (px)  │
-│                             esto SÍ cambia la imagen   │
-│                                                        │
-│  Resolución X: 11.81    [pixeles/mm ▼]                 │
-│  Resolución Y: 11.81    [pixeles/mm ▼] ← DENSIDAD      │
-│                             (= 300 ppp)                │
-│                             esto NO cambia la imagen,  │
-│                             solo el papel              │
-└────────────────────────────────────────────────────────┘
-```
-
-- **Arriba (Anchura/Altura):** cambias los px → la imagen **sí** cambia.
-- **Abajo (Resolución X/Y):** cambias el ppp → la imagen **no** cambia, solo el "tamaño de impresión".
-
----
-
-## ✅ La única pregunta que necesitas hacerte: ¿pantalla o papel?
-
-### Para pantalla (web, redes, iconos, fondos) → piensa en px
-
-- ✅ **Web / redes / miniaturas / UI / iconos:** piensa en **px**.
-- Ejemplos: avatar de 256×256 px, imagen para redes de 1080×1080 px, icono de un tema de Linux de 48×48 px.
-- El ppp puede quedarse como venga: en pantalla **no afecta en nada**.
-
-### Para impresión (hojas, fotos, trípticos, carteles) → piensa en cm + ppp
-
-- ✅ **Impresión:** piensa en **cm + ppp**.
-
-Valores típicos (regla práctica):
+## Valores típicos de impresión (regla práctica)
 
 | Valor | ¿Para qué sirve? |
 | --- | --- |
 | **300 ppp** | Calidad alta: revistas, folletos, fotos, textos pequeños |
 | **150 ppp** | Aceptable para cosas grandes que se ven de lejos (carteles, lonas) |
-| **72–96 ppp** | "Histórico de pantallas": **no** es una regla moderna; en pantalla hoy lo que manda son los px |
 
 ### 📐 Chuleta: cuántos px necesito para imprimir bien (a 300 ppp)
 
@@ -637,6 +488,20 @@ Valores típicos (regla práctica):
 El cálculo es siempre el mismo: **centímetros ÷ 2.54 × 300**.
 
 ---
+
+# Capítulo 9 · 🎓 ¿Cuánto has comprendido? (con soluciones paso a paso)
+
+Esta es la parte más importante del tutorial: **el repaso fácil**. Si llegaste hasta aquí, ya viste todos los conceptos. Ahora vamos a ordenarlos como se los explicarías a un amigo que acaba de llegar de Windows y abre GIMP por primera vez. 😊
+
+## 🧠 El repaso de 30 segundos
+
+> 🧱 **px (píxeles) = cuántos LEGO tienes.**
+> 🖨 **ppp = qué tan apretados pones esos LEGO cuando los imprimes.**
+
+Y dos verdades que nunca cambian:
+
+1. **En pantalla solo importan los px.** Cambiar el ppp no mueve ni un píxel.
+2. **El ppp solo importa al imprimir.** Es el traductor que convierte px → centímetros de papel.
 
 ## ✍️ Ejercicios (con solución paso a paso)
 
@@ -680,19 +545,15 @@ GIMP te muestra **Resolución: 11.81 pixeles/mm**. ¿Qué ppp es? ¿Cambia cómo
 
 Abre cualquier imagen y ve a **Imagen → Escalar la imagen…**. Cambia **solo** la Resolución X/Y (por ejemplo de 300 a 150) sin tocar Anchura/Altura. Luego mira en **Imagen → Propiedades de la imagen**.
 
-![Menú: Escalar la imagen](images/image21.jpeg)
-
 **Solución:**
 
 - ¿Cambia la nitidez en pantalla? **No.**
 - ¿Cambia el peso del archivo? **No.**
 - ¿Qué sí cambia? Solo el "tamaño de impresión": a 150 ppp la foto ocuparía **el doble de centímetros** en el papel (los mismos LEGO, más separados).
 
-![Cambiar resolución no cambia el tamaño](images/image22.jpeg)
-
 ### Ejercicio 5 — Los 3000 px del tutorial
 
-Al inicio del tutorial vimos una imagen de **3000 px de ancho**. ¿Cuánto medirá de ancho en el papel a 300 ppp? ¿Y a 150 ppp?
+En el Capítulo 0 vimos una imagen de **3000 px de ancho**. ¿Cuánto medirá de ancho en el papel a 300 ppp? ¿Y a 150 ppp?
 
 **Solución:**
 
@@ -725,7 +586,11 @@ Los temas de iconos guardan **varias carpetas** (16×16, 48×48, 256×256…) y 
 
 **Solución:** Porque en pantalla **manda el px, no el ppp**. El sistema elige el tamaño que necesita en cada sitio: 48×48 para las listas pequeñas, 256×256 para las vistas de iconos grandes. Así siempre se ve nítido, sin borroso ni pixelado.
 
----
+### Ejercicio 8 — Ver la pixelación con tus propios ojos
+
+Toma un icono pequeño (por ejemplo uno de **48 × 48 px**) y crea un lienzo A4 a 300 ppp (**Archivo → Nuevo** → 21 × 29.7 cm, 300 ppp). Copia el icono dentro y escálalo hasta llenar la hoja. Ahora imprímelo… o simplemente míralo al 100 %.
+
+**Solución / qué pasarás a ver:** el icono se ve **pixelado y borroso**. A 300 ppp, un icono de 48 px solo mide ≈ **0.41 cm** en papel: para llenar la hoja GIMP tuvo que "inventar" píxeles que no existían. Moraleja: **la impresión grande necesita imágenes con muchos px**; el ppp solo decide cuánto papel se reparte.
 
 ## 🎯 Resumen final (para recordar)
 
@@ -733,8 +598,27 @@ Los temas de iconos guardan **varias carpetas** (16×16, 48×48, 256×256…) y 
 - **ppp** = densidad para imprimir (convierte px ↔ cm/pulgadas).
 - Cambiar **ppp** sin cambiar **px** → cambia el "tamaño de impresión", **no** la imagen en pantalla ni el archivo.
 - Cambiar **px** (escalar) → **sí** cambia la imagen, y puede perder calidad.
+- El **zoom** de la vista no cambia nada: solo agranda cuadritos en tu pantalla.
 - Para **mirar** estos números: **Imagen → Propiedades de la imagen**.
 - Para **cambiar** el tamaño: **Imagen → Escalar la imagen…** (y ya sabes qué número tocar arriba y cuál abajo).
 - **300 ppp = 11.81 pixeles/mm = 118.1 pixeles/cm**. Son lo mismo en distinta unidad.
 
 > 🎓 **Y ya está.** Ya no hay números misteriosos: en GIMP, igual que en Windows, todo son píxeles… y un dato extra (el ppp) que solo se usa cuando llega la hora de imprimir.
+
+---
+
+## 📎 Anexo · Índice de imágenes del tutorial
+
+| Imagen | Qué muestra |
+| --- | --- |
+| `diagrama_lego.png` | La analogía px/LEGO: mismos px, distinta impresión |
+| `diagrama_pixeles.png` | Qué es un píxel (cuadritos) |
+| `diagrama_impresion.png` | Misma imagen, distinta impresión |
+| `diagrama_misma_imagen_distinta_impresion.png` | Los 3000 px a 72/150/300 ppp |
+| `diagrama_zoom_vs_calidad.png` | El zoom no cambia la imagen |
+| `diagrama_escalar_ventana.png` | La ventana "Escalar la imagen" traducida |
+| `diagrama_iconos_linux.png` | Iconos 16/48/256 px a tamaño real |
+| `diagrama_ruta_windows_vs_gimp.png` | Traducción de rutas Windows → GIMP |
+| `diagrama_decisor.png` | ¿Pantalla o papel? Árbol de decisión |
+| `01…03…png` | Ventanas de "Archivo → Nuevo" en GIMP |
+| `image2…image23…` | Capturas reales de GIMP usadas como ejemplos |
