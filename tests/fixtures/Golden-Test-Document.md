@@ -895,12 +895,6 @@ https://youtu.be/G7ZqUvFMSes
 The same video, this time inside a sentence, which must stay a link: mira este vídeo sobre [DeepSeek
 Harness](https://www.youtube.com/watch?v=G7ZqUvFMSes) y dime qué te parece.
 
-The legacy Blogger form of the same embed. Raw HTML never reaches the document tree, so as written here it is
-removed — the content layer rescues it into the link form above before rendering, which is how three entries in
-the real library keep their video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/G7ZqUvFMSes" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-
 ---
 
 # 20. Final Regression Checklist

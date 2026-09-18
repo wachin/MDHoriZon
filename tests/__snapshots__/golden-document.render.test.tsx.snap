@@ -587,10 +587,6 @@ all:</p>
 <p><a href="https://youtu.be/G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">https://youtu.be/G7ZqUvFMSes</a></p>
 <p>The same video, this time inside a sentence, which must stay a link: mira este vídeo sobre <a href="https://www.youtube.com/watch?v=G7ZqUvFMSes" target="_blank" rel="noopener noreferrer">DeepSeek
 Harness</a> y dime qué te parece.</p>
-<p>The legacy Blogger form of the same embed. Raw HTML never reaches the document tree, so as written here it is
-removed — the content layer rescues it into the link form above before rendering, which is how three entries in
-the real library keep their video:</p>
-
 <hr>
 <h1 id="20-final-regression-checklist">20. Final Regression Checklist<a class="markdown-heading-anchor" href="#20-final-regression-checklist" aria-label="Link to this section"><span aria-hidden="true">#</span></a></h1>
 <ul class="contains-task-list">
