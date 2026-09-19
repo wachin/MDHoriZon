@@ -1,4 +1,3 @@
-
 # Cómo usar la API gratuita de TokenRouter en Qwen Code para Linux
 
 En este tutorial vamos a configurar una API de **TokenRouter** para utilizar modelos de inteligencia artificial desde **Qwen Code** en Linux.
