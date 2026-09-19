@@ -1,5 +1,7 @@
 # Cómo solucionar el problema de selección de texto largo en Qwen Code CLI en Linux
 
+![](images/Designer.webp)
+
 Si utilizas **Qwen Code CLI** desde una terminal en Linux, es posible que hayas encontrado un problema muy molesto: cuando Qwen genera una respuesta que ocupa muchas líneas, **no puedes seleccionarla completa con el ratón haciendo clic al principio y arrastrando hacia abajo**.
 
 El problema se vuelve especialmente evidente cuando la respuesta es mucho más larga que el área visible de la terminal.

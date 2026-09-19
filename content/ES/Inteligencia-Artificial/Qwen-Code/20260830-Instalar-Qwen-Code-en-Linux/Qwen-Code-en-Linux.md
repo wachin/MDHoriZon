@@ -1,6 +1,8 @@
 
 # Instalar Qwen Code en Linux
 
+![](images/Portada.jpg)
+
 El comando de instalación está en:
 
 [https://qwen.ai/qwencode](https://qwen.ai/qwencode)
