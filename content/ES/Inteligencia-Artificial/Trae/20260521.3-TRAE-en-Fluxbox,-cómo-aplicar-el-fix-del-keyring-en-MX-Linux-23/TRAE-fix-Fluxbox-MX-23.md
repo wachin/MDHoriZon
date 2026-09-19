@@ -1,4 +1,6 @@
-# TRAE en Fluxbox: cómo aplicar el fix del keyring en MX Linux 23 XFCE (Debian 12)
+# TRAE en Fluxbox: cómo aplicar el fix del keyring en MX Linux
+
+![](images/Portada.jpg)
 
 [TRAE AI IDE](https://www.trae.ai/) es un editor de código con inteligencia artificial desarrollado por la compañía china ByteDance, conocida mundialmente por crear TikTok.
 
