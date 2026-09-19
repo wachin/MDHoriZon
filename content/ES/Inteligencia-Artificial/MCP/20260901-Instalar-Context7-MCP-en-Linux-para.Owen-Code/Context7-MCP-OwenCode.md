@@ -1,5 +1,6 @@
-
 # Cómo instalar Context7 MCP en Linux para usarlo con Qwen Code
+
+![](images/Designer2.jpg)
 
 Si utilizas un agente de inteligencia artificial para programar, probablemente ya has visto el término **MCP** (Model Context Protocol). Al principio puede parecer otro concepto más relacionado con IA, pero en realidad es bastante sencillo:
 

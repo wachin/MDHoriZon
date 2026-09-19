@@ -1,9 +1,6 @@
-
-
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqNgwMpTw4tzvQ8qg3EEJwbODdgdoKsHk2i26MfwIlrAKy07gGG1mIYkWDCzkeondsOq7j7Edngj5EnHfNypAhH-EWDTjil1a9UZiz-TIdz89rOisO9ZiSkTesSJe8Lb-gfB-bOlPS9wDGmPP4Kq4tyZ2PuD1OfSnmGNPevC8HHi3lrj6l1xGQJXomgYQ/s1536/Kiro%20en%20Fluxbox%20cómo%20aplicar%20el%20fix%20del%20keyring%20en%20MX%20Linux%2023%20XFCE%20Debian%2012.jpg =640x)
-
-
 # Kiro en Fluxbox: cómo aplicar el fix del keyring en MX Linux 23 XFCE (Debian 12)
+
+![](images/Kiro-Keyring.jpg)
 
 Instalé Kiro en MX Linux 23 (basado en Debian 12) y abre, pero como este está basado en VS Code así como Cursor y en este ultimo tuve que aplicar un fix:
 
@@ -11,7 +8,6 @@ Instalé Kiro en MX Linux 23 (basado en Debian 12) y abre, pero como este está 
 [https://facilitarelsoftwarelibre.blogspot.com/2026/04/cursor-no-arranca-no-funciona-en-fluxbox-en-mx-linux-23-xce-debian12.html](https://facilitarelsoftwarelibre.blogspot.com/2026/04/cursor-no-arranca-no-funciona-en-fluxbox-en-mx-linux-23-xce-debian12.html)  
 
 entonces mejor lo aplico desde ya, pero luego instalé el gestor de ventanas Fluxbox (igual que en el caso de Cursor)
-
 
 ---
 
