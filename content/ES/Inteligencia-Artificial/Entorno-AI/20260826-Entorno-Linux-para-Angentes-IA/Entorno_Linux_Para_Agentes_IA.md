@@ -92,6 +92,10 @@ de estos algunos necesitan configuración, revise:
 
 ### Configurar `fd` en Debian
 
+**En una frase:** `fd` es una alternativa moderna al comando `find`: hace lo mismo, pero se escribe mucho menos y es bastante más rápido.
+
+En Debian y Ubuntu el paquete se llama **`fd-find`** y el programa se instala como **`fdfind`**, no como `fd`, porque el nombre `fd` ya estaba ocupado por otro paquete. Por eso aquí se crea un enlace simbólico: para poder escribir `fd`, igual que en cualquier otra distribución.
+
 ```bash
 mkdir -p ~/.local/bin
 ln -sf "$(command -v fdfind)" ~/.local/bin/fd
@@ -99,7 +103,29 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
+Línea por línea:
+
+- **`mkdir -p ~/.local/bin`** — crea la carpeta donde van tus propios ejecutables. `-p` significa "no falles si ya existe, y crea las carpetas intermedias que falten".
+- **`ln -sf "$(command -v fdfind)" ~/.local/bin/fd`** — `command -v fdfind` devuelve la ruta completa donde está instalado (`/usr/bin/fdfind`); `ln -s` crea un enlace simbólico llamado `fd` que apunta ahí; `-f` lo sobrescribe si ya existía.
+- **`echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc`** — añade esa carpeta al final de tu `~/.bashrc` para que el sistema busque programas ahí. `>>` **añade** al final del archivo; con un solo `>` lo borrarías entero.
+- **`source ~/.bashrc`** — vuelve a leer el archivo en la terminal actual, para no tener que cerrarla y abrir otra.
+
+Comprobar que quedó bien, y ejemplos de uso:
+
+```bash
+fd --version            # debe responder sin errores
+fd config               # archivos y carpetas que contienen 'config' en el nombre
+fd -e md                # solo archivos .md
+fd -t f                 # solo archivos
+fd -t d                 # solo carpetas
+fd -H config            # incluir archivos ocultos (por defecto los ignora)
+```
+
+Dos detalles que lo hacen distinto de `find`: **respeta el `.gitignore`** (no te lista `node_modules` ni la carpeta `dist/`, así que las búsquedas dentro de un proyecto devuelven solo lo que importa) y su sintaxis es la del `grep`: el patrón va primero y las opciones después.
+
 ### Configurar GitHub CLI
+
+**En una frase:** `gh` es la herramienta oficial de GitHub para la terminal: te deja hacer desde ahí lo que normalmente harías en el navegador (repositorios, issues, pull requests, releases, ejecuciones de CI) y además **autentica git**, para que no tengas que escribir tu contraseña al hacer `push`.
 
 ```bash
 gh auth status
@@ -107,18 +133,34 @@ gh auth status
 gh auth login
 ```
 
-### Configurar Git con tu correo, ejemplo Proton
+- **`gh auth status`** — solo informa: con qué cuenta y en qué servidor estás, y qué permisos tiene el token. Es el primer comando que conviene ejecutar cuando algo falla al subir código.
+- **`gh auth login`** — proceso guiado. Te pregunta si es GitHub.com o un servidor empresarial, si prefieres HTTPS o SSH, y si quieres autenticarte **por el navegador** o **pegando un token**. Además configura el ayudante de credenciales de git, así que después `git push` funciona sin pedirte contraseña.
+
+Otros comandos que acabarás usando:
+
+```bash
+gh repo clone usuario/repositorio    # clonar sin copiar la URL a mano
+gh pr create                         # abrir un pull request
+gh issue list                        # ver los issues abiertos
+gh run watch                         # seguir en vivo una ejecución de CI
+```
+
+#### Configurar Git con tu correo, ejemplo Proton
+
+Esto **no** es autenticación: es el nombre y el correo que quedan escritos **dentro de cada commit**, es decir, quién hizo el cambio. Si no lo configuras, git lo deduce del equipo y los commits no aparecerán vinculados a tu cuenta.
 
 ```bash
 git config --global user.email "linuxfrontier@proton.me"
 git config --global user.name "Tu Nombre"
 ```
 
+Detalle importante: GitHub relaciona un commit con tu cuenta **por el correo**, así que conviene que sea el mismo con el que te registraste (o el correo `@users.noreply.github.com` que GitHub te ofrece para no publicar el tuyo). `--global` lo aplica a todos tus repositorios; dentro de uno concreto puedes usar `--local` para poner otro distinto.
+
 ---
 A continuación los comandos mismos separados por secciones:
 
 
-## 2. Herramientas Principales del Sistema
+## 4. Herramientas Principales del Sistema
 
 Estas son las herramientas base que todo agente necesita:
 
@@ -153,7 +195,7 @@ sudo apt install -y \
 
 ---
 
-## 3. Búsqueda y Análisis de Código
+## 5. Búsqueda y Análisis de Código
 
 Herramientas para que el agente pueda buscar, analizar y entender código rápidamente:
 
@@ -179,18 +221,12 @@ sudo apt install -y \
 | `silversearcher-ag` | `ag` | Búsqueda rápida de código fuente |
 | `ctags` / `universal-ctags` | `ctags` | Generación de índices de código |
 
-### Configurar `fd` en Debian
-
-En Debian, `fd-find` se instala como `fdfind`. Para usar `fd`:
-
-```bash
-mkdir -p ~/.local/bin
-ln -sf "$(command -v fdfind)" ~/.local/bin/fd
-```
+> En Debian, `fd-find` se instala como `fdfind`; el ajuste para poder llamarlo `fd` está
+explicado paso a paso en la sección 3.
 
 ---
 
-## 4. Herramientas GNU Esenciales
+## 6. Herramientas GNU Esenciales
 
 El conjunto básico de herramientas Unix que todo agente debe conocer:
 
@@ -218,7 +254,7 @@ sudo apt install -y \
 
 ---
 
-## 5. Compresión y Archivos
+## 7. Compresión y Archivos
 
 Para trabajar con cualquier formato de archivo:
 
@@ -246,7 +282,7 @@ sudo apt install -y \
 
 ---
 
-## 6. Herramientas de Inspección de Ejecutables
+## 8. Herramientas de Inspección de Ejecutables
 
 Para analizar binarios, bibliotecas y paquetes:
 
@@ -292,7 +328,7 @@ patchelf --set-rpath /mi/ruta programa
 
 ---
 
-## 7. Herramientas para Paquetes Debian (.deb)
+## 9. Herramientas para Paquetes Debian (.deb)
 
 Para investigar y crear paquetes Debian:
 
@@ -319,7 +355,7 @@ sudo apt install -y \
 
 ---
 
-## 8. Herramientas para AppImage
+## 10. Herramientas para AppImage
 
 Para trabajar con formato AppImage:
 
@@ -341,7 +377,7 @@ sudo apt install -y \
 
 ---
 
-## 9. Herramientas de Red y Debugging
+## 11. Herramientas de Red y Debugging
 
 Para debugging de red y peticiones HTTP:
 
@@ -368,7 +404,7 @@ sudo apt install -y \
 
 ---
 
-## 10. Herramientas de Texto y Documentación
+## 12. Herramientas de Texto y Documentación
 
 Para generar y documentar:
 
@@ -393,7 +429,7 @@ sudo apt install -y \
 
 ---
 
-## 11. Herramientas Git Avanzadas
+## 13. Herramientas Git Avanzadas
 
 Para un mejor control de versiones:
 
@@ -414,7 +450,7 @@ sudo apt install -y \
 
 ---
 
-## 12. Herramientas de Análisis de Código
+## 14. Herramientas de Análisis de Código
 
 Para análisis estático y detección de patrones:
 
@@ -451,6 +487,57 @@ echo "=== lintian ===" && lintian --version
 echo "=== bat ===" && bat --version
 echo "=== parallel ===" && parallel --version | head -1
 echo "=== GitHub auth ===" && gh auth status 2>&1
+```
+
+---
+
+## ¿A qué agentes de IA beneficia este entorno?
+
+**En una frase:** a todos los que trabajan ejecutando comandos en tu terminal, porque todos buscan más o menos las mismas herramientas y, cuando no las encuentran, pierden tiempo o te preguntan.
+
+Un agente de código (Copilot, Claude Code, Cursor, Aider, Cline, Gemini CLI, Qwen Code…) **no "ve" tu disco**: explora el proyecto lanzando comandos. Cuando la herramienta que espera no está instalada, le ocurren dos cosas: o se detiene a preguntarte si puede instalarla, o cae en una alternativa peor —recorrer carpetas a mano, abrir archivos de uno en uno—, y eso se nota en la calidad de la respuesta y en el tiempo que tarda.
+
+Caso real: usando **Copilot en Visual Studio Code**, el agente se detuvo a decir que no encontraba una herramienta para buscar. Después de instalar la lista completa de esta guía, no volvió a preguntarlo nunca más.
+
+Estas son las que más buscan, y para qué las usan:
+
+| Herramienta | Para qué la busca el agente |
+|-------------|-----------------------------|
+| `rg` (ripgrep) | Buscar texto en todo el proyecto. Es **la que más se echa de menos**: `grep` funciona, pero `rg` respeta el `.gitignore` y es mucho más rápido |
+| `fd` | Encontrar archivos por nombre sin recorrer `node_modules` ni `dist/` |
+| `gh` | Abrir pull requests, leer issues y ver el estado del CI sin salir de la terminal |
+| `git`, `git-lfs` | Clonar, ramificar, commitear y subir; con `git-lfs` para repositorios con archivos grandes |
+| `jq` | Leer y filtrar JSON: respuestas de APIs, `package.json`, archivos de configuración |
+| `bat` | Ver un archivo con números de línea y resaltado, que es como mejor lo interpreta |
+| `tree` | Ver la estructura del proyecto de un vistazo |
+| `python3`, `pip`, `venv` | Ejecutar scripts, probar código y usar herramientas escritas en Python |
+| `build-essential`, `pkg-config` | Compilar cuando un proyecto lo pide (extensiones, dependencias nativas) |
+| `file`, `binutils`, `elfutils` | Inspeccionar binarios: qué es un archivo, de qué depende, qué símbolos exporta |
+| `strace`, `ltrace` | Averiguar por qué un programa falla: qué llamadas hace al sistema |
+| `tar`, `xz`, `zstd`, `7z` | Abrir cualquier comprimido que aparezca en un tutorial |
+| `pandoc` | Convertir documentación entre formatos |
+| `tmux`, `htop`, `curl`, `wget` | Procesos largos, ver recursos del equipo y descargar |
+
+Clasificadas por cuánto se nota que falten:
+
+- **Imprescindibles** (su ausencia se nota enseguida): `rg`, `fd`, `gh`, `git`, `jq`, `curl`.
+- **Muy útiles**: `bat`, `tree`, `python3` + `pip` + `venv`, `file`, `build-essential`.
+- **Para casos concretos**: `strace`, `ltrace`, `binutils`, `elfutils`, `patchelf`, `dpkg-dev`, `debhelper`, `lintian`, `squashfs-tools`.
+
+Y no hay que instalar nada distinto por cada agente: todos usan el **mismo shell** del sistema, así que esta lista sirve igual para el que llegue mañana.
+
+### Comprobar que no falta ninguna
+
+Cuando un agente diga que "no encuentra una herramienta", este bloque te dice en un segundo cuál es:
+
+```bash
+for t in rg fd gh jq bat tree file gcc make python3 pip3 curl wget strace git; do
+  if command -v "$t" >/dev/null 2>&1; then
+    echo "ok     $t"
+  else
+    echo "FALTA  $t"
+  fi
+done
 ```
 
 ---
