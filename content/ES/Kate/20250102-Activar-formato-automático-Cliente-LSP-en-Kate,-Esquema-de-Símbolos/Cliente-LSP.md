@@ -1,5 +1,7 @@
 # Habilitar formato automático o autocompletado con Cliente LSP (python3-pylsp) en Kate ("Esquema de Símbolos" python y otros lenguajes) 
 
+![](images/Portada.jpg)
+
 En el editor de texto **Kate** es posible habilitar funciones como el **formato automático** o el **autocompletado de código** al momento de escribir, similar a lo que ocurre en VS Code.
 
 La siguiente imagen muestra el Editor de Texto Kate con el autocompletado habilitado para el lenguaje de programación Python:

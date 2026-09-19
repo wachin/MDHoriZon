@@ -1,5 +1,7 @@
 ## Ksnip, cómo habilitar marcadores y búsqueda de archivos en el diálogo “Abrir”en escritorios no KDE ( XFCE, Fluxbox, etc)
 
+![](images/Portada.png)
+
 Si usas Ksnip en Linux que no es KDE o basado en KDE alguna vez pensaste:
 
 > “¿Por qué no puedo arrastrar carpetas a favoritos?”

@@ -1,7 +1,5 @@
 # Cómo instalar y usar Jack Audio Connection Kit JACK + Ardour y sus plugins con un Kernel Tiempo Real en MX Linux, Debian
 
-
-
 **Actualización Mayo 2026.** Este tutorial funciona para Linux que usen tanto PipeWire como Pulseaudio
 
 # Este tutorial es para Linux que usen PulseAudio o Pipewire
