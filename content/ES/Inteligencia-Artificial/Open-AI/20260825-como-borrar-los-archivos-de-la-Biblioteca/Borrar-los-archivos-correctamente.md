@@ -1,5 +1,7 @@
 # Cómo borrar los archivos de la biblioteca de ChatGPT cuando se llena
 
+![](images/Designer.webp)
+
 Me sucedió que llegó un momento en el que ya no podía añadir ningún archivo a un chat de ChatGPT para hacer preguntas. La solución fue **eliminar los archivos de la biblioteca**.
 
 ### 1. Eliminar los archivos de la biblioteca

@@ -1,7 +1,5 @@
 # Cómo revisar el consumo de Codex CLI en ChatGPT Plus
 
-Autor: Washington Indacochea Delgado
-
 ## ¿Qué significa el mensaje?
 
 A veces Codex CLI muestra un aviso como este:
@@ -33,11 +31,11 @@ Ese comando muestra:
 
 También puedes abrir el panel web de Codex:
 
-https://chatgpt.com/codex/settings/usage
+[https://chatgpt.com/codex/cloud/settings/analytics](https://chatgpt.com/codex/cloud/settings/analytics)
 
 Allí verás algo similar a esta captura:
 
-![Estado de uso de Codex](estado_uso_codex.png)
+![](images/estado_uso_codex.png)
 
 ## Explicación de los límites
 
