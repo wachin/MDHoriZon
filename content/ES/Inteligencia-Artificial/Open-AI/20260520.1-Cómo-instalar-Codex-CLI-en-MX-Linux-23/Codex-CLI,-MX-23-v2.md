@@ -1,6 +1,6 @@
-
-
 # Instalar Codex CLI en Linux (Guía actualizada 2026)
+
+![](images/Portada.webp)
 
 Actualmente OpenAI en su pagina oficial, que se encuentra en:
 

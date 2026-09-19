@@ -1,7 +1,6 @@
-
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjruyNEM0odPH6yLGfjuFVJ_xFY4xGFfW8wsWM2Yig3W95ctj6A6xoNI3vcWCh0nb6wtz3wQZws9dRqM79JfZskOil42dUGJ7xvg75aqp58dkmBdi4DcFaDIB7l20b3-w3ozKbNcRiWxrd2tLvV1SkdBS7RePFfYBdiqseyUJzg7YArTcecaaMDKlKdFM0/s1536/Portada.jpg =700x)
-
 # Guía Completa: Cómo instalar y usar Codex de OpenAI (Windows, Linux y macOS)
+
+![](images/Portada.webp)
 
 Codex es el **agente de programación de OpenAI** que trabaja directamente dentro de tu editor de código, ayudándote a escribir, entender, corregir y automatizar tareas de desarrollo.
 
