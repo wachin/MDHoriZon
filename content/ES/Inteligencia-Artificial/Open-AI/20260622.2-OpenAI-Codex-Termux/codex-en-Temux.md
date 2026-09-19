@@ -2,6 +2,8 @@
 
 Este tutorial explica cómo instalar Codex en Termux sobre Android y cómo habilitar el MCP Filesystem para que Codex pueda leer y analizar proyectos almacenados en el teléfono.
 
+![](images/01-Codex-en-Android.webp)
+
 ## 1. Actualizar Termux
 
 Primero actualizamos los paquetes del sistema:
