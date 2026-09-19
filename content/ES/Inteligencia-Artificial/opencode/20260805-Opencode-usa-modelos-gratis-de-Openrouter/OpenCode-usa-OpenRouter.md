@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDKyWbVOdNDYFxCEwFq4SExTwO9_JDIlpVWXDAaVCucXzVFGGQn7BfulKxx8kzHlel32VPK2yrHG75VkxyWx8n5OcA2dYqqTHpUW63di958d8M-YXW4n2UXSmpFUYi_9EdEhZkep7cVHdbG9wGZSFfOHKaVVVAjMuV4vzbTYila12aEL-xAY8P06mPAx8/s1600-rw/Portada.jpg)
-
 # Cómo instalar OpenCode en Linux y Termux y usar modelos de IA gratis (para tareas pequeñas o medianas) con OpenRouter
+
+![](images/Portada.jpg)
 
 OpenCode es un agente de programación de código abierto que funciona desde la terminal y permite utilizar modelos de inteligencia artificial para trabajar directamente sobre proyectos de software.
 
