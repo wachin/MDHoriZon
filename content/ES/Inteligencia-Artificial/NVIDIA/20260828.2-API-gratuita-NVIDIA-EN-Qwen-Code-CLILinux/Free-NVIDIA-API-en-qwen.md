@@ -1,7 +1,6 @@
 # Cómo usar la API gratuita de NVIDIA en Qwen Code para Linux
 
-
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRE2A5xvfzjsHwRxANixGWud_X269rgd80IxzSQnkn4O705vnAZHTbMVfRzgw9nOp76Mj17PMHCw_-Mn8hkeQtffRX8iAjpVE4EDkeXd7BiWoWWLswX3eNC_3mIjuj21GAukjrGkSRzsenQP378q9ONbV6qTyUf2_sWiN63PfN0BM_Upn7X7i2NJEJnww/s1600-rw/Portada.webp)
+![](images/Portada.webp)
 
 En este tutorial vamos a configurar una API de NVIDIA para utilizar modelos de inteligencia artificial desde **Qwen Code** en Linux.
 
