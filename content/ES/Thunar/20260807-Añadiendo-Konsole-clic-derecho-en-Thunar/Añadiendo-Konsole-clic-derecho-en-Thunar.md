@@ -1,5 +1,7 @@
 # Cómo añadir «Abrir Konsole aquí» al menú de clic derecho de Thunar
 
+![](images/Portada.jpg)
+
 Thunar es el administrador de archivos del escritorio Xfce y dispone de una característica muy útil llamada **Acciones personalizadas** (*Custom Actions*), que permite añadir nuestros propios comandos al menú contextual que aparece al hacer clic derecho.
 
 En este tutorial vamos a crear una acción llamada **«Abrir Konsole aquí»**, de manera que podamos hacer clic derecho dentro de cualquier directorio abierto en Thunar y abrir inmediatamente la terminal **Konsole** en esa misma ubicación.

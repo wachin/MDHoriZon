@@ -1,5 +1,7 @@
 # Cómo convertir Markdown (.md) a HTML con clic derecho en Thunar usando Pandoc
 
+![](images/Portada.jpg)
+
 Si utilizamos **Thunar** como administrador de archivos y trabajamos frecuentemente con documentos Markdown, podemos crear una **Acción personalizada** que permita convertir un archivo `.md` a `.html` simplemente haciendo clic derecho sobre él.
 
 Para realizar la conversión utilizaremos **Pandoc**, pero no tendremos que abrir una terminal ni escribir manualmente el comando cada vez.

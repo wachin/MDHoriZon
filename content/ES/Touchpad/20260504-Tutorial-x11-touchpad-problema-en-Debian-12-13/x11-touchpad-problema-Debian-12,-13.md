@@ -3,6 +3,7 @@
 A todos nos ha pasado: instalamos Linux en una laptop y, por defecto, el touchpad no nos permite hacer clic tocándolo suavemente (tap-to-click), obligándonos a usar físicamente los botones below. 
 
 Si buscas la solución en internet, la guía más extendida te dirá que abras una terminal y modifiques este archivo:
+
 `sudo gedit /usr/share/X11/xorg.conf.d/40-libinput.conf`
 
 Sin embargo, hay un par de advertencias vitales sobre esa solución que muy pocos artículos mencionan, especialmente si estamos en 2026 y usas distribuciones basadas en Debian 13.
@@ -37,11 +38,13 @@ Abre tu terminal y aplica estos dos simples pasos:
 
 **1. Crea el archivo en la ruta segura (`/etc/...`):**
 Primero, nos aseguramos de que la carpeta existe y luego creamos el archivo:
+
 ```bash
 sudo mkdir -p /etc/X11/xorg.conf.d
 sudo nano /etc/X11/xorg.conf.d/40-libinput.conf
 ```
 Pega dentro de nano el siguiente bloque de texto:
+
 ```text
 Section "InputClass"
     Identifier "libinput touchpad catchall"
@@ -59,10 +62,12 @@ Con esto, la próxima vez que enciendas tu equipo, el doble clic ya estará acti
 Como acabamos de crear un archivo de sistema, X11 no lo va a leer hasta el próximo inicio. Para activarlo en la sesión actual sin reiniciar, usaremos `xinput`.
 
 Primero, averigua cómo se llama tu touchpad:
+
 ```bash
 xinput list
 ```
 Busca la línea que contenga la palabra "Touchpad" (ej. *SynPS/2 Synaptics TouchPad*). Luego, ejecuta el comando de activación usando ese nombre exacto entre comillas:
+
 ```bash
 xinput set-prop "AQUÍ_EL_NOMBRE_EXACTO_DE_TU_TOUCHPAD" "libinput Tapping Enabled" 1
 ```

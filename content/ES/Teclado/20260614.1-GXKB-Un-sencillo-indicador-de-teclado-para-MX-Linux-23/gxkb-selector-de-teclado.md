@@ -1,5 +1,6 @@
-
 # GXKB: Un sencillo indicador de teclado para MX Linux 23
+
+![](images/Portada.jpg)
 
 Si utilizas más de una distribución de teclado en Linux, seguramente te ha pasado que necesitas cambiar constantemente entre español, inglés u otros idiomas. Aunque muchos entornos de escritorio incluyen herramientas para ello, existe una pequeña utilidad disponible en los repositorios de MX Linux 23 llamada **GXKB**, que destaca por ser ligera, simple y compatible con prácticamente cualquier gestor de ventanas.
 

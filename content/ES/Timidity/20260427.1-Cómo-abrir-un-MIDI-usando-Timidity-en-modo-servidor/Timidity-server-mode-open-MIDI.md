@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh68n7Ci1RpYmLyzKMD2IjhjT7-AXEunEtNpEhqIqbykDWFTtID1lLkROmJPpSpNSsxdktlFkKdomf3Ypif6dlcPFG015Z_XEjd6e-m5h-OLTlkWBJ3Kq9rzljB6Wc4FZw7xkTTfJpVrFjR9r__KuXFpvhN3miC8ytkvXuHmVkkK7PxDzRY9LQ28sd9OIc/s1536/Portada.jpg =700x)
-
 # Usando Timidity en el modo servidor para abrir y escuchar un MIDI
+
+![](images/Portada.jpg)
 
 Hoy veremos cómo usar Timidity en modo servidor, con este modo no podremos usar la manera simple para abrir un midi, ejemplo `timidity tu_archivo.mid`
 

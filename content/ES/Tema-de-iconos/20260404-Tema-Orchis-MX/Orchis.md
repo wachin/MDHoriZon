@@ -1,5 +1,7 @@
 # Con el Tema de iconos Orchis en MX Linux 23 XFCE se pueden redimensionar mejor las esquinas de las ventanas porque aparece más rapido
 
+![](images/Portada.jpg)
+
 Si algo tiene la comunidad de MX Linux es un gran apego a su estética por defecto. Es limpia, profesional y funciona a la perfección. Sin embargo, en **MX Linux 23**, sentía que me faltaba algo. No era el color, no eran los iconos... era la fluidez al hacer una de las acciones más básicas: **redimensionar una ventana**.
 
 Seguramente te haya pasado: quieres ajustar el tamaño de una ventana desde la esquina inferior derecha, acercas el cursor, y parece que tienes que jugar al "busca el punto exacto" para que aparezca el icono de redimensionar. Ese pequeño retraso, esa milésima de segundo de espera, rompe la experiencia de un sistema que se supone rápido.
