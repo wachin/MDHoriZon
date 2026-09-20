@@ -1,6 +1,6 @@
 # Qt5ct no configura mis aplicaciones Qt5 de KDE ejem el Administrador de Archivos Dolphin, Kdenlive, Kate, Ksnip, etc
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8usgEJ4sR8AoHCtXoySjalAaUa9EypmpfmXhlqoZqjYawe_2bfYHK92jzhkrJH8ravjQXFGrE9Ky2sviuufXPctnCWgOJFl2aPSDsBjFa8D9_PejKi7Zo-f4UNY4qxy92VIQ7PAuryZftNFF5y1yZQCHblw95C6Wm2bIkC7AhZnk-qnqySub5k7PJv6Q/s1536/Portada.jpg)
+![](images/Portada.jpg)
 
 **Actualizado 20260409:** 
 

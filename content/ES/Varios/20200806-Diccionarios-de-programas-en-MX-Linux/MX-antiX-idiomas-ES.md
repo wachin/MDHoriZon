@@ -1,6 +1,6 @@
 # Instalar diccionarios e idiomas en MX Linux 23 y antiX 23 para el idioma Español | Guía paso a paso
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhey2EAf3vbmhV9ugA9U19Q49MAUax8zHV3lthsYFGLHTt8bKeS8rxIvpCdTwymr2cGRzqQ33zOOevRyq0Im_xnPDkpO15JmK4s1n8-C5U7oI-GaoU2JODWfz6IjQenybu52c5dG1vK0cYDgHH9bpF5WNVjzyh7VYvTlQGq25cBAhQKOpTSyvf68hDvMf4/s1536/Portada.jpg =640x)
+![](images/Portada.jpg)
 
 Cuando instalamos **MX Linux** o **antiX**, es común que algunos programas no incluyan por defecto:
 
@@ -258,5 +258,3 @@ Por eso, muchos paquetes de idioma **no vienen instalados por defecto** (en otro
 Dios les bendiga
 
 ---
-
-    

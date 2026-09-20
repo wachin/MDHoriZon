@@ -1,6 +1,6 @@
 # Cómo usar Minka (Repositorio Nacional de Software Público) igual que GitHub
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMWQlab_UzyikiPUfWXgLGgSu1qsB95jfY5rkB4uMzbyk2KaggLeEpeDM6zdVhgdwEOTau-RCFLXyZbrP4EG-cx2-3-FPVIFYybum5w6OpBUtk6WqeqkFsx-u7-tec5whkiqIr3rDk6iNfuELeYeJp12HaggUGAqv-JrzMSsrLLOotkG3OWHGJ15zkV_o/s16000-rw/Portada.jpg)
+![](images/Portada.jpg)
 
 Si ya sabes usar **GitHub** para hacer:
 
