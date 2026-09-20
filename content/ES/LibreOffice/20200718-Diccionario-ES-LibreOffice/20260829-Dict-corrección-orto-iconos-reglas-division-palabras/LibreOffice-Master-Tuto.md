@@ -1,5 +1,3 @@
-
-
 # Instalar diccionario de corrección ortográfica, sinónimos, temas de iconos, reglas de división de palabras, en español para LibreOffice para Linux 
 
 En este post está todo lo necesario para que LibreOffice funcione bien en Linux. Tal vez se pregunten por qué no viene instalado todo esto y ya?, pero es que ducede que no es así porque ocuparía mucho espacio en la ISO del Sistema Operativo y ellos no han hecho una herramienta que automáticamente revise según la región los paquetes necesarios para el idioma instalado. Hasta que lo hagan leer este tutorial
