@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPP3ZfGTUNX705CwUAJUNkbMkAwI9AtrAgvURLS4blqe24Noe-MMy-nBHZRx6QEn4ODJpjpn0UilRg8EeNo-VUbM-bgYWQiZeg-tTV9SYOZPDt-8fo57Tu_NBX0db7-JnRc2zrm8O_eyYfYg-Gl-o1l7UZIaZeu7FuW3ZBgoK59Qk4uv-F64XC4nDMKicW/s1536/Portada.jpg =700x)
-
 # Cómo cerrar la ventana de las herramientas de desarrollador en el Navegador Web Google Chrome, Chromium, Firefox y otros
+
+![](images/Portada.jpg)
 
 Estaba navegando en internet en Google Chrome en MX Linux 23, y algo toqué que no recuedo y se abrieron las herramientas de desarrollador (DevTools una ventana se desplegó a la derecha y no sabía cómo cerrarla)
 

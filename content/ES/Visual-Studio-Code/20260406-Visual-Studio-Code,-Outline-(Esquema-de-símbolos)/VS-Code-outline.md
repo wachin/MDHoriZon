@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnOLwgEa9nEQG-cBEBQGjpRxD-XUTwWM3YA6w3X_83Lq7Exl0R-6hDFq1H5AtxkZF89idHv2aLYZXoUg0cQBjb-potzpVXOG89lvH77y8bebR7W0gSROKSNujArrBT7RAJp94NRT3RJFyFiSBg73gMpYzIzSnjU4NTR6q51kE2rZ2K2InIom3E9znu1k/s1536/Portada.jpg)
-
 # Visual Studio Code “Outline” (Esquema de símbolos)
+
+![](images/images/Portada.jpg)
 
 Para listar métodos, funciones, clases, etc en [Visual Studio Code](https://code.visualstudio.com/) esto se llama:
 

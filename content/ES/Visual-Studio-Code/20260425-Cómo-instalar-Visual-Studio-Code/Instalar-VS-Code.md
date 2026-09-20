@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivoRHl-edVWuGGpLOdqrjJN3cIqqng537BSMBm39_fHKHwpjDYStIzkcqLk9Mcq5CWmNXR-c13mOHw7QwFXFJ5hmqe53DH1g7VUfvam4lqNNvBKKR43ycyA2GVBPOQ-8ZmIGQ5pvQTW7xmV5q_JwfDEEdJXLGzebiPKw2AR5yBc3CQhXPTeGkpthRY8Ls/s1536/Cómo%20instalar%20Visual%20Studio%20Code%20en%20Linux.jpg)
-
 # Cómo instalar Visual Studio Code en Linux (Debian, Ubuntu, MX Linux 23)
+
+![](images/Cómo-instalar-Visual-Studio-Code-en-Linux.jpg)
 
 Este tutorial te enseña cómo instalar Visual Studio Code en distribuciones basadas en Debian como:
 

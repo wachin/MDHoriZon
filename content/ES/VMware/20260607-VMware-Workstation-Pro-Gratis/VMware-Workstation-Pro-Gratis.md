@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjolzRB8GS_C9-ZNgttcPZ0HGWXJz6pJDbiGPXca0VFbeNHWVfS5ugFRmiq5VrslysSs41F_FVmOyIFuQev9qJxW12WDU2niWeM8VFN3-8-Z9wg04_jd5n4wa3z0CeCUNxB3lYI0HvmlAN2z-oNPiD76khCHf_Uhe0EScP2Y8BIw9i0MOz29CKTmRbR5jc/s16000-rw/Portada.jpg =640x)
-
 # VMware Workstation Pro gratis para Linux, Windows, desde access.broadcom.com
+
+![](images/Portada.jpg)
 
 Escuché en youtuve, en varias noticias, que vmware lo han hecho gratis para Linux, voy a instalarlo en Debian 12 (del cual está basado MX Linux 23, antiX 23 y otros)
 

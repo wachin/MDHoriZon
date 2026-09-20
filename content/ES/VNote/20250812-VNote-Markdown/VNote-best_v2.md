@@ -1,5 +1,6 @@
-
 # Cómo usar VNote el mejor editor de Markdown gratis, para mí, en Linux + klatexformula (fórmulas matemáticas y científicas) + Tutorial
+
+![](images/Portada.jpg)
 
 Para poderlo usar en Linux debes de usarlo como deb o como AppImage, vea los siguientes tutoriales:
 
@@ -334,7 +335,3 @@ También allí vemos que hay como exportar a LibreOffice (aunque LibreOffice tie
 ---
 
 Que Dios les bendiga
-
-
-## CONSULTAS:
-
