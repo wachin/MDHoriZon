@@ -1,6 +1,8 @@
 
 🐧 Instalar MX Linux 23 junto a Windows 10 (Dual Boot) UEFI | Guía completa paso a paso
 
+https://youtu.be/1bAonwzjo30
+
 Aprende a instalar MX Linux 23 sin borrar Windows 10 en equipos UEFI (GPT). Guía completa y real paso a paso en laptop HP Pavilion.
 
 En este video te muestro cómo instalar MX Linux 23 en dual boot con Windows 10 de forma segura, manteniendo ambos sistemas operativos en el mismo equipo.

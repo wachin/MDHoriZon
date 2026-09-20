@@ -1,15 +1,8 @@
 # MarkText editor de Markdown que en Linux va tan rápido como Obsidian (y que también vive en Android)
 
-Llevo años buscando el editor de Markdown definitivo para Linux. He probado de todo, y durante mucho tiempo
-VNote fue mi favorito: nativo, potente, con un ecosistema de notas muy completo. Pero me topé con un muro
-que no pude rodear: **cuando abro archivos grandes en varias pestañas, se pone lento**. Con dos pestañas
-aguanta; a partir de la tercera, la escritura deja de sentirse inmediata y el flujo se rompe.
+![](images/Designer.png)
 
-Buscando alternativa encontré **MarkText**, y la sorpresa fue grande: en mi equipo va **tan fluido como
-Obsidian**. No noto diferencia. Y lo mejor vino después: hay un **fork para Android** que hace unas semanas
-probé durante varias horas seguidas, y funciona tan bien que ya es mi editor en el teléfono.
-
-Si usas Linux y escribes en Markdown, esta entrada es para ti.
+Encontré **MarkText**, y la sorpresa fue grande: en mi equipo va **tan fluido como Obsidian**. No noto diferencia. Y lo mejor vino después: hay un **fork para Android** que hace unas semanas probé durante varias horas seguidas, y funciona tan bien que ya es mi editor en el teléfono.
 
 ---
 
@@ -23,7 +16,7 @@ Si usas Linux y escribes en Markdown, esta entrada es para ti.
 | **Popularidad** | Más de **61.000 estrellas** en GitHub                                   |
 | **Repositorio** | <https://github.com/marktext/marktext>                                  |
 
-### Lo que trae (y que a mí me convenció)
+### Lo que trae 
 
 - **CommonMark + GFM completos**: tablas, listas de tareas, tachado, autolinks.
 - **Vista previa en vivo**: no es un panel al lado; el documento _se ve formateado mientras escribes_, y la
@@ -37,45 +30,20 @@ Si usas Linux y escribes en Markdown, esta entrada es para ti.
 
 ---
 
-## Por qué me cambió el flujo de trabajo
-
-Mi caso de uso es exigente: **documentos largos, varios abiertos a la vez**. Es exactamente ahí donde otros
-editores se caen.
-
-Con MarkText, en mi máquina:
-
-- Abrir un archivo grande es instantáneo.
-- Puedo tener **varias pestañas abiertas** y cambiar entre ellas sin esperas.
-- Escribir no se degrada: el cursor no se atasca.
-
-Y lo digo con todas las letras: **la sensación es la misma que con Obsidian**. No he hecho un benchmark
-cronometrado, hablo de uso real, todos los días, con mis documentos. Si alguien quiere números, que los mida;
-yo te cuento lo que siento al escribir, que al final es lo que importa.
-
 ### Comparativa honesta
 
 Esto es **mi experiencia personal**, no una medición científica:
 
-| Criterio                                       | MarkText                            | Obsidian                                  | VNote                                                            |
-| ---------------------------------------------- | ----------------------------------- | ----------------------------------------- | ---------------------------------------------------------------- |
-| Fluidez con archivos grandes y varias pestañas | ✅ Excelente                         | ✅ Excelente                               | ⚠️ Se pone lento con siete pestañas abiertas con archivos grandes |
-| Licencia                                       | **MIT** (abierto)                   | Código cerrado (gratis para uso personal) | LGPL-3.0 (abierto)                                               |
-| Vista previa en vivo                           | ✅                                   | ✅                                         | ✅                                                                |
-| Aplicación para Android                        | ✅ (fork del mismo motor, ver abajo) | ✅ (app oficial)                           | ❌                                                                |
-| Nativo o web                                   | Electron                            | Electron                                  | **C++ nativo**                                                   |
-| Ideal para                                     | Escribir Markdown y publicarlo      | Notas enlazadas y bases de conocimiento   | Notas y libretas                                                 |
+| Criterio | MarkText | Obsidian | VNote |
+| --- | --- | --- | --- |
+| Fluidez con archivos grandes y varias pestañas | ✅ Excelente, con varias pestañas abiertas | ✅ Excelente, con varias pestañas abiertas | Un poco pesado con varias pestañas abiertas |
+| Licencia | **MIT** (abierto) | Código cerrado (gratis para uso personal) | LGPL-3.0 (abierto) |
+| Vista previa en vivo | ✅ | ✅ | ✅ |
+| Aplicación para Android | ✅ (fork del mismo motor, ver abajo) | ✅ (app oficial) | ❌ |
+| Nativo o web | Electron | Electron | **C++ nativo** |
+| Ideal para | Escribir Markdown y publicarlo | Notas enlazadas y bases de conocimiento | Notas y libretas |
 
 **Ojo con un prejuicio:** que VNote sea nativo (C++) y MarkText sea Electron no significa automáticamente que VNote sea más rápido. En _mi_ equipo pasó justo lo contrario. La arquitectura no es el rendimiento.
-
-### Sobre VNote, con respeto
-
-No quiero que esto suene a ataque. **VNote es un gran proyecto** (<https://github.com/vnotex/vnote>):
-nativo, con más de 12.000 estrellas, mantenido y con una comunidad seria. Si buscas un sistema de notas completo, tiene cosas que MarkText no tiene.
-
-Lo mío es un problema concreto: **documentos largos en varias pestañas**. No he investigado la causa técnica, y no voy a inventarla. Pero tampoco me lo estoy imaginando: hay **reportes públicos de problemas con documentos largos** en VNote, por ejemplo esta discusión:
-<https://github.com/vnotex/vnote/discussions/2208>.
-
-Si tu forma de trabajar son documentos cortos o de tamaño medio, VNote probablemente te va perfecto. Si son documentos largos y muchas pestañas, **y si no tienes un ordenador con muchos recursos pruébalo** con tus propios archivos antes de decidir.
 
 ---
 
@@ -188,14 +156,3 @@ Lo probé durante **varias horas seguidas** con documentos reales: abrir, editar
 
 ---
 
-## Conclusión
-
-Si escribes Markdown en Linux y has notado que tu editor se atraganta con documentos largos, pruébalo:
-
-- **Escritorio:** <https://github.com/marktext/marktext/releases>
-- **Android:** <https://github.com/Renakoni/marktext-android/releases>
-
-Es **MIT**, se instala en dos minutos y en mi equipo va **al mismo nivel de fluidez que Obsidian**. Y si algo falla, los repositorios están abiertos: se puede reportar y se puede contribuir.
-
-¿Alguien más ha comparado estos editores con documentos grandes? Cuéntame tu experiencia en los comentarios:
-me interesa saber si lo que me pasa con VNote le pasa a más gente, o si es algo de mi equipo.
