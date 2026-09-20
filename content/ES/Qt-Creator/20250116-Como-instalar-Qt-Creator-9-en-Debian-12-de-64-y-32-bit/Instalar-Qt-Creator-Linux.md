@@ -1,6 +1,6 @@
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKxqQCg35NY6_WNRZ-hnimIbnUuw1vfkhPaXFFkRmAwBCzuJoXda3m7X_NbqPFFWg0Qo_G0tsBQzqLqYQ0NrJamBEeTZgNQGZIfKiBUfTfdJ0iGw18CTdLx-TByYiv7-h0k3bVbA5Fnk_4y5soPcoyjiNmiYq9WQX5QLuDCO92CCa8QbFaod4xDn-3v7k/s1536/Portada.jpg =640x)
-
 # Como instalar Qt Creator 9 en Debian 12 de 64 y 32 bit
+
+![](images/Portada.jpg)
 
 Estaba instalando Qt Creator y me salió este mensaje:
 

@@ -1,5 +1,7 @@
 # Añadir el lanzador **Py-Loader** (Debian anteriores a 13)
 
+![](images/Portada.png)
+
 ## Añadir el lanzador Py-Loader para Debian 12 para abrir programas python *.py con clic derecho en los Administradores de archivos
 
 He encontrado en MX Linux y además en **Debian 13 (Trixie)**, un pequeño lanzador llamado **Py-Loader**, que permite ejecutar programas escritos en Python directamente desde el administrador de archivos.
