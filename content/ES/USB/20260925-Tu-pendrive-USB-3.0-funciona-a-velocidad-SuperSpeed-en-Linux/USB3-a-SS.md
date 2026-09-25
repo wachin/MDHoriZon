@@ -74,8 +74,9 @@ El comando `hdparm` evalúa el rendimiento del hardware a bajo nivel, por lo que
 
 ```bash
 sudo hdparm -tT /dev/sdb
-
 ```
+
+**Nota:** Aquí en este comando hay que poner la contraseña, porque sino se la ingresa no se puede hacer la prueba.
 
 Obtendrás una salida como esta:
 
