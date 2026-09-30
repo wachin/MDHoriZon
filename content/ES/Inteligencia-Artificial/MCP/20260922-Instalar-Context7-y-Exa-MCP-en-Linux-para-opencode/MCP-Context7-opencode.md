@@ -1,4 +1,4 @@
-# Cómo instalar Context7 MCP en Linux para usarlo con OpenCode
+# Cómo instalar Context7 y Exa MCP en Linux para usarlo con OpenCode
 
 
 
@@ -669,46 +669,194 @@ Pandas
 etc.
 ```
 
+**Nota:** OpenCode soporta MCP mediante `opencode mcp add`, incluyendo servidores HTTP remotos, y Context7 publica oficialmente el endpoint `https://mcp.context7.com/mcp` y documentación específica para OpenCode.
+
 ---
 
-## Conclusión
+## Instalar Exa MCP en OpenCode
 
-MCP puede parecer complicado al principio, pero el concepto fundamental es bastante sencillo:
+[Exa](https://exa.ai/) proporciona un servidor **Model Context Protocol (MCP)** que permite a agentes de inteligencia artificial realizar búsquedas en Internet, buscar código y realizar investigaciones utilizando información actualizada de la web.
 
-> **MCP permite conectar un agente de IA con herramientas externas de una manera estandarizada.**
+Exa ofrece un servidor MCP remoto y su documentación oficial incluye compatibilidad con **OpenCode**, por lo que podemos incorporarlo directamente mediante el comando `opencode mcp`.
 
-En este caso hemos conectado:
+### 1. Agregar Exa MCP
 
-```
-Linux
-  │
-  └── OpenCode
-        │
-        ├── herramientas propias
-        │     ├── Bash
-        │     ├── Git
-        │     ├── archivos
-        │     └── Ripgrep
-        │
-        └── MCP
-              │
-              └── Context7
-                    ├── resolve-library-id
-                    └── query-docs
+Con OpenCode instalado, abra una terminal y ejecute:
+
+```bash
+opencode mcp add exa --url https://mcp.exa.ai/mcp
 ```
 
-Y antes de confiar en él hicimos algo que recomiendo a cualquier usuario:
+OpenCode añadirá la configuración del servidor MCP a:
 
-**no confiar ciegamente en un MCP solamente porque sea popular.**
+```text
+~/.config/opencode/opencode.json
+```
 
-Comprobamos su procedencia, utilizamos el endpoint oficial, verificamos que OpenCode pudiera conectarse y, sobre todo, comprobamos **qué herramientas estaba exponiendo realmente**.
+El servidor remoto de Exa utiliza la siguiente dirección:
 
-En nuestro caso solamente aparecieron dos herramientas y ambas fueron identificadas como **`read-only`**.
+```text
+https://mcp.exa.ai/mcp
+```
 
-Eso no constituye una garantía absoluta de seguridad —ningún software externo puede ofrecerla—, pero sí proporciona una base mucho más razonable para decidir si queremos utilizarlo.
+Esta es la dirección MCP publicada oficialmente por Exa.
 
-Y después hicimos una prueba real con PyMuPDF: OpenCode utilizó `resolve-library-id`, encontró la documentación correspondiente y posteriormente utilizó `query-docs` para consultar la configuración de detección de tablas.
+### 2. Comprobar que Exa está conectado
 
-**Ese es el enfoque que recomiendo con cualquier MCP nuevo: primero comprobar qué es, de dónde viene y qué herramientas expone; después darle permisos mínimos; y solamente entonces utilizarlo en nuestros proyectos.**
+Ejecute:
 
-**Nota:** OpenCode soporta MCP mediante `opencode mcp add`, incluyendo servidores HTTP remotos, y Context7 publica oficialmente el endpoint `https://mcp.context7.com/mcp` y documentación específica para OpenCode.
+```bash
+opencode mcp list
+```
+
+Si todo está correcto, aparecerá algo similar a:
+
+```text
+MCP Servers
+
+● ✓ context7 connected
+     https://mcp.context7.com/mcp
+
+● ✓ exa connected
+     https://mcp.exa.ai/mcp
+```
+
+La línea:
+
+```text
+● ✓ exa connected
+```
+
+indica que OpenCode consiguió conectarse al servidor MCP de Exa.
+
+Si solamente se tiene instalado Exa, naturalmente aparecerá únicamente el servidor `exa`.
+
+### 3. ¿Es necesario crear una API key?
+
+Para esta configuración mediante el **servidor MCP remoto de Exa**, la página oficial de Exa indica:
+
+> No API key required.
+
+Por tanto, para utilizar esta configuración en OpenCode no es necesario crear manualmente una variable como:
+
+```bash
+EXA_API_KEY=...
+```
+
+ni colocar una clave en `.bashrc`.
+
+Esto es una de las ventajas de utilizar directamente el servidor MCP remoto de Exa.
+
+### 4. Probar Exa desde OpenCode
+
+Abra OpenCode:
+
+```bash
+opencode
+```
+
+Y solicite una búsqueda que requiera información actual de Internet. Por ejemplo:
+
+```text
+Busca en Internet información actual sobre KiCad y los proyectos
+open source que están utilizando inteligencia artificial para diseñar
+circuitos electrónicos y PCB.
+
+Utiliza Exa MCP para realizar la investigación.
+
+Incluye los enlaces a los repositorios de GitHub encontrados.
+```
+
+También se puede probar una búsqueda de código:
+
+```text
+Utiliza Exa para buscar en GitHub proyectos open source que utilicen
+KiCad mediante MCP para permitir que un agente de IA cree o modifique
+esquemáticos y PCB.
+```
+
+Exa está orientado precisamente a casos como búsqueda web, búsqueda de código y tareas de investigación para agentes de IA.
+
+### 5. Verificar que OpenCode realmente está utilizando Exa
+
+Una prueba especialmente útil consiste en pedir explícitamente a OpenCode que utilice Exa:
+
+```text
+Utiliza Exa MCP para investigar este tema.
+
+Busca información actual en Internet y consulta directamente los
+repositorios de GitHub relevantes.
+
+No te limites a tu conocimiento previo.
+```
+
+Después se puede solicitar:
+
+```text
+Ahora proporciona las fuentes que encontraste y explica qué
+información obtuviste de cada una.
+```
+
+Esto permite comprobar que el agente no está respondiendo únicamente con información incluida previamente en el modelo.
+
+### 6. ¿Qué aporta Exa a OpenCode?
+
+Sin Exa, OpenCode puede disponer de herramientas propias como `webfetch`, que permiten recuperar el contenido de una URL conocida.
+
+Con Exa MCP se añade una infraestructura especializada para que el agente pueda realizar tareas de investigación y búsqueda, incluyendo:
+
+* Búsqueda en Internet.
+* Búsqueda de código.
+* Investigación de proyectos.
+* Localización de documentación técnica.
+* Consulta de páginas web.
+* Búsqueda de información reciente.
+* Investigación de repositorios y tecnologías.
+
+La página oficial de Exa muestra además ejemplos como buscar código relacionado con una tecnología concreta, investigar empresas o consultar información reciente de Internet.
+
+### 7. El comando que hay que recordar
+
+Para instalar Exa MCP en OpenCode basta con recordar:
+
+```bash
+opencode mcp add exa --url https://mcp.exa.ai/mcp
+```
+
+Y para comprobar su estado:
+
+```bash
+opencode mcp list
+```
+
+Si aparece:
+
+```text
+● ✓ exa connected
+```
+
+Exa MCP está conectado a OpenCode.
+
+### 8. Eliminar Exa MCP
+
+Si posteriormente se desea eliminar la integración, se puede utilizar el administrador de servidores MCP de OpenCode:
+
+```bash
+opencode mcp
+```
+
+Desde allí se pueden administrar los servidores MCP configurados.
+
+### Resumen
+
+| Acción                                  | Comando                                             |
+| --------------------------------------- | --------------------------------------------------- |
+| Instalar Exa MCP                        | `opencode mcp add exa --url https://mcp.exa.ai/mcp` |
+| Comprobar servidores                    | `opencode mcp list`                                 |
+| Servidor Exa                            | `https://mcp.exa.ai/mcp`                            |
+| API key necesaria para esta instalación | No                                                  |
+| Función principal                       | Búsqueda e investigación web mediante MCP           |
+
+**Página oficial de Exa MCP:** https://exa.ai/mcp
+
+Exa describe su MCP como una integración para conectar agentes de IA con capacidades de búsqueda web, búsqueda de código e investigación, y actualmente incluye OpenCode entre las herramientas compatibles.
