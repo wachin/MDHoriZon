@@ -42,6 +42,21 @@ Para ejecutar OpenCode:
 opencode
 ```
 
+### Cómo actualizar
+
+Solo hay que poner el mismo comando 
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+y luego actualizar  actualiza la sesión de la terminal con:
+
+```bash
+source ~/.bashrc
+```
+
+
 ## Instalación alternativa mediante npm
 
 Si Node.js y npm ya están instalados, también puede utilizarse:
