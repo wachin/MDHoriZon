@@ -93,6 +93,18 @@ Si no aparece nada, es que no hay actualizaciones pendientes para `nodejs` en es
 
 ## Parte 2 — CodeBuddy CLI y sus modos de permisos
 
+### Comando de instalación
+
+El comando de instalación lo tomo de esta dirección:
+
+[https://www.workbuddy.ai/docs/cli/installation](https://www.workbuddy.ai/docs/cli/installation)
+
+y es:
+
+```bash
+npm install -g @tencent-ai/codebuddy-code
+```
+
 Una vez tienes Node.js al día, muchas herramientas de terminal funcionarán sin problemas. Una de ellas es **CodeBuddy CLI**, un agente de IA que puede leer archivos, editar código, ejecutar comandos y llevar a cabo tareas de desarrollo directamente desde la terminal.
 
 Por defecto, CodeBuddy es bastante cauteloso: antes de hacer cambios o ejecutar comandos que podrían tener efectos secundarios, te pide confirmación. Eso está bien para empezar, pero cuando llevas un rato trabajando puede resultar interrumpido. Para eso existen los **modos de permisos**.
@@ -138,6 +150,67 @@ Tienes dos formas:
 - **Requiere sentido común.** La documentación oficial recomienda usar este modo **solo en entornos aislados**: contenedores, máquinas virtuales o contenedores de desarrollo sin acceso a datos sensibles ni a la red de producción. No es lo mismo dejarlo corriendo en un contenedor desechable que en tu máquina principal con acceso a todo.
 
 Si lo que quieres es un punto intermedio —menos interrupciones pero con algún filtro de seguridad—, el modo **`auto`** puede ser una buena alternativa: envía las acciones que normalmente pedirían confirmación a un clasificador que decide si las permite o no, en lugar de omitirlas directamente. Pero si tu prioridad es “que no me pregunte y poder dedicarme a otra cosa”, `bypassPermissions` es el que mejor encaja.
+
+## Actualizar codebuddy
+
+## Cómo actualizar CodeBuddy en Linux
+
+Para actualizar CodeBuddy a su última versión, abre una terminal y ejecuta:
+
+```bash
+codebuddy update
+```
+
+CodeBuddy comprobará si existe una versión nueva y, si está disponible, realizará la actualización automáticamente.
+
+**Ejemplo:**
+
+```text
+→ Checking for updates (current: 2.181.0)
+! Update available: 2.181.0 → 2.184.0
+✓ Successfully updated to 2.184.0
+```
+
+Para comprobar la versión instalada, ejecuta:
+
+```bash
+codebuddy --version
+```
+
+### Solución a posibles errores durante la actualización
+
+En algunas ocasiones, la actualización puede fallar mostrando el error `ENOTEMPTY` de npm. Esto puede ocurrir cuando quedan carpetas temporales de una instalación anterior.
+
+Por ejemplo:
+
+```text
+npm error code ENOTEMPTY
+npm error syscall rename
+```
+
+Para solucionarlo, primero identifica el nombre de la carpeta temporal que aparece en el mensaje de error. Después, elimínala utilizando su ruta exacta.
+
+Por ejemplo:
+
+```bash
+rm -rf ~/.local/npm/lib/node_modules/@tencent-ai/.codebuddy-code-CVU3ZUh4
+```
+
+**Importante:** El nombre `CVU3ZUh4` es solamente un ejemplo. Debes utilizar el nombre de la carpeta temporal que aparece en tu propio mensaje de error.
+
+Finalmente, vuelve a ejecutar:
+
+```bash
+codebuddy update
+```
+
+Si todo funciona correctamente, aparecerá el mensaje:
+
+```text
+✓ Successfully updated to 2.184.0
+```
+
+Con esto tendrás CodeBuddy actualizado y listo para seguir trabajando.
 
 ---
 
