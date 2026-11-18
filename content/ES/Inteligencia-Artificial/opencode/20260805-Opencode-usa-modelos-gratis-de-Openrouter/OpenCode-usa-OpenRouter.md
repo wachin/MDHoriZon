@@ -896,3 +896,174 @@ Con esta configuración es posible comenzar a utilizar OpenCode como agente de p
 Sin embargo, los modelos gratuitos de OpenRouter tienen límites de uso que pueden agotarse rápidamente cuando OpenCode trabaja de forma agentiva. Una sola tarea compleja puede provocar numerosas llamadas al modelo y, si se alcanza la cuota durante su ejecución, el trabajo puede quedar interrumpido a mitad del proceso.
 
 Por ello, estas opciones gratuitas son especialmente interesantes para aprender, experimentar y realizar tareas pequeñas o moderadas. Para desarrollo intensivo de proyectos grandes conviene trabajar por etapas, utilizar Git, mantener puntos de recuperación y disponer de varios proveedores o alternativas para poder continuar cuando se agote una cuota.
+
+---
+
+# Cómo desinstalar OpenCode
+
+Esta sección explica cómo eliminar OpenCode por completo del sistema. El procedimiento depende del método con el que se instaló.
+
+---
+
+## Desinstalación en Linux (instalación vía `curl`)
+
+Si instalaste OpenCode con el instalador oficial:
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+el proceso de desinstalación tiene tres partes: el comando oficial, la eliminación manual del binario y, opcionalmente, la limpieza de los datos de configuración.
+
+### 1. Previsualizar qué se eliminará (opcional)
+
+Antes de borrar nada, puedes ejecutar una simulación para ver exactamente qué archivos y servicios se eliminarán:
+
+```bash
+opencode uninstall --dry-run
+```
+
+Este comando no modifica nada; solo muestra el resultado.
+
+### 2. Ejecutar la desinstalación oficial
+
+```bash
+opencode uninstall
+```
+
+El comando te pedirá confirmación. Durante el proceso:
+
+- Detiene los servicios en segundo plano y las terminales persistentes.
+- Elimina el caché.
+- Te indica el comando exacto para eliminar el binario manualmente.
+
+> **Importante:** Por defecto, este comando **conserva** tu configuración (`~/.config/opencode`) y tus datos de sesión (`~/.local/share/opencode`), incluidas las claves API. Si quieres conservarlos explícitamente, puedes usar las opciones `--keep-config` y `--keep-data`.
+
+### 3. Eliminar el binario manualmente
+
+Al finalizar, el comando mostrará una línea similar a esta (la ruta exacta depende de tu usuario):
+
+```
+To finish removing the binary, run:
+
+  rm '/home/tu-usuario/.opencode/bin/opencode'
+```
+
+Ejecuta ese comando para borrar el ejecutable:
+
+```bash
+rm '/home/tu-usuario/.opencode/bin/opencode'
+```
+
+### 4. Limpieza completa de residuos (opcional pero recomendado)
+
+Si deseas una desinstalación total, elimina manualmente los directorios restantes. **Esta acción borra permanentemente tu configuración, tus claves API y tus sesiones**, así que asegúrate de tener una copia de seguridad si la necesitas.
+
+```bash
+rm -rf ~/.opencode
+rm -rf ~/.config/opencode
+rm -rf ~/.local/share/opencode
+rm -rf ~/.local/state/opencode
+rm -rf ~/.cache/opencode
+```
+
+### 5. Verificar que OpenCode ya no está instalado
+
+```bash
+which opencode
+```
+
+Si no devuelve ninguna ruta, la desinstalación se completó correctamente. Si aún devuelve una ruta, es posible que exista otra instalación (por ejemplo, vía `npm`) que también deba eliminarse.
+
+---
+
+## Desinstalación en Linux (instalación vía `npm`)
+
+Si instalaste OpenCode con npm:
+
+```bash
+npm install -g opencode-ai
+```
+
+desinstálalo con:
+
+```bash
+npm uninstall -g opencode-ai
+```
+
+Después, elimina manualmente los directorios de configuración y datos como se indica en el paso 4 de la sección anterior:
+
+```bash
+rm -rf ~/.config/opencode
+rm -rf ~/.local/share/opencode
+rm -rf ~/.local/state/opencode
+rm -rf ~/.cache/opencode
+```
+
+---
+
+## Desinstalación en Android / Termux
+
+Si instalaste OpenCode en Termux mediante el paquete `.deb` del proyecto `opencode-termux`:
+
+```bash
+dpkg -i opencode_1.17.9_aarch64.deb
+```
+
+puedes desinstalarlo con:
+
+```bash
+dpkg -r opencode
+```
+
+O, si prefieres usar el gestor de paquetes de Termux:
+
+```bash
+apt remove opencode
+```
+
+Si además quieres eliminar la configuración y los datos de sesión almacenados, borra manualmente:
+
+```bash
+rm -rf ~/.config/opencode
+rm -rf ~/.local/share/opencode
+```
+
+> **Nota:** Consulta la página de releases de `opencode-termux` para confirmar el nombre exacto del paquete y cualquier instrucción de desinstalación específica de la versión que hayas instalado.
+
+---
+
+## Reinstalar después de desinstalar
+
+Una vez eliminado todo, puedes reinstalar OpenCode con el mismo método que usaste originalmente.
+
+Instalación vía `curl`:
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+Instalación vía `npm`:
+
+```bash
+npm install -g opencode-ai
+```
+
+Tras la instalación, verifica la versión:
+
+```bash
+opencode --version
+```
+
+---
+
+## Solución de problemas: OpenCode no se conecta a internet
+
+Si tras una instalación limpia OpenCode sigue sin conectarse, es probable que el problema no esté en la instalación, sino en la red. Las versiones más recientes de OpenCode utilizan un *post-quantum key share* en el handshake de TLS que algunos proveedores de internet y firewalls corporativos bloquean.
+
+Posibles soluciones:
+
+- **Usar una versión anterior conocida como funcional.** La versión **1.19.3** utiliza un handshake TLS clásico que no es filtrado por estas redes.
+- **Probar en otra red.** Compartir datos desde el móvil permite confirmar si el problema es de red.
+- **Revisar los logs.** Los registros se encuentran en `~/.local/share/opencode/log/opencode.log` (Linux/macOS) o en `%USERPROFILE%\.local\share\opencode\log` (Windows). Busca errores como `ECONNRESET` o timeouts.
+- **Configurar un proxy**, si estás en una red corporativa, mediante las variables de entorno `HTTPS_PROXY` y `HTTP_PROXY`.
