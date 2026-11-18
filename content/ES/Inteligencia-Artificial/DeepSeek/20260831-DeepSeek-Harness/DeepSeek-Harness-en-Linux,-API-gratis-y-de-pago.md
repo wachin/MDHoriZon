@@ -1,47 +1,33 @@
-# Cómo instalar DeepSeek Harness en Linux y configurar sus modelos (APIs gratis y de pago)
+# Manual: Instalar DeepSeek Harness en Linux (Debian/Ubuntu) y configurar modelos gratis y de pago
 
 ![](images/Designer.webp)
 
 > **Nota importante sobre el comando `dsh`**
 >
-> Si escribes `dsh --version` en la terminal y te aparece algo como *"Distributed Shell / Dancer's shell version 0.25.10"*, **no es DeepSeek Harness**. Existe un programa antiguo de Linux que también se llama `dsh` (de *Distributed Shell*) y que no tiene nada que ver. En Debian/Ubuntu, si haces `sudo apt install dsh`, instalarás ese otro programa antiguo, no el nuestro.
+> Si escribes `dsh --version` y aparece *"Distributed Shell / Dancer's shell"*, **no es DeepSeek Harness**. Existe un programa antiguo de Linux con ese nombre. En Debian/Ubuntu, `sudo apt install dsh` instala ese otro programa, no el nuestro.
 >
-> DeepSeek Harness (dsh) **no se instala con `apt`**. Se instala clonando su repositorio y ejecutándolo con `pnpm`. La forma correcta de comprobar la versión del nuestro es:
+> DeepSeek Harness (dsh) **no se instala con `apt`**. Se instala clonando su repositorio y ejecutándolo con `pnpm`. La forma correcta de comprobar la versión es:
 >
 > ```bash
 > pnpm run dsh --version
 > ```
 >
-> que mostrará algo como `0.1.5-rc.2`.
+> que mostrará algo como `0.2.2-rc.3`.
 
 ---
 
-## Qué es DeepSeek Harness (dsh) y para qué sirve
+## Qué es DeepSeek Harness y para qué sirve
 
-**DeepSeek Harness** es una aplicación de inteligencia artificial que actúa como **agente de programación**. La palabra *harness* en inglés significa "arnés" o "arnés de sujeción" — la idea es que es una estructura que **sujeta y conecta** varias piezas:
+**DeepSeek Harness** es una aplicación de IA que actúa como **agente de programación**. Se ejecuta en tu ordenador y abre una página web en el navegador. En esa página escribes lo que quieres hacer y la IA lo hace por ti, pidiéndote permiso antes de tocar archivos o ejecutar comandos.
 
-```
-   Los modelos de IA (DeepSeek, NVIDIA, TokenRouter, etc.)
-              ↓
-   DeepSeek Harness (los conecta y los controla)
-              ↓
-   Las herramientas (leer archivos, ejecutar comandos, etc.)
-              ↓
-   Tu ordenador (Linux)
-```
-
-**En palabras simples:** es un programa que se ejecuta en tu ordenador y te abre una página web en el navegador. En esa página escribes lo que quieres hacer (por ejemplo, "ordena mis fotos por fecha"), y la IA que tengas conectada lo hace por ti, pidiéndote permiso antes de tocar archivos o ejecutar comandos.
-
-Lo interesante es que **puedes conectar varios proveedores de IA al mismo tiempo** y cambiar de uno a otro desde la propia interfaz, sin reiniciar nada:
+Puedes conectar **varios proveedores de IA al mismo tiempo** y cambiar de uno a otro desde la interfaz sin reiniciar nada:
 
 ```
 DeepSeek Harness (dsh)
-├── DeepSeek (nativo, con API key de pago)
+├── DeepSeek (nativo, API de pago)
 │   └── deepseek-v4-flash / deepseek-v4-pro
-│
 ├── TokenRouter (gratis)
 │   └── z-ai/glm-5.3-free
-│
 └── NVIDIA (gratis)
     └── nvidia/nemotron-3-super-120b-a12b
 ```
@@ -50,35 +36,31 @@ DeepSeek Harness (dsh)
 
 ## Palabras complicadas explicadas
 
-Antes de empezar, vamos a explicar algunas palabras que van a aparecer y que quizá no conozcas:
-
-- **Repositorio (repo):** es una carpeta de proyecto que está guardada en internet (en GitHub) y que puedes copiar a tu ordenador.
-- **Clonar:** copiar un repositorio de internet a tu ordenador con el comando `git clone`.
-- **Terminal / consola:** la ventana negra donde escribes comandos.
-- **Comando:** una instrucción que escribes y pulsas Enter.
-- **Dependencias:** los programas auxiliares que necesita un proyecto para funcionar. Se descargan con `pnpm install`.
-- **Compilar / construir (build):** traducir el código fuente (que los humanos escriben) a algo que el ordenador pueda ejecutar. Se hace con `pnpm run build`.
-- **API:** la "puerta" por la que un programa se comunica con otro. Una **API key** es la llave de esa puerta, un código secreto que te identifica.
-- **Proveedor:** una empresa o servicio que te da acceso a modelos de IA (DeepSeek, NVIDIA, TokenRouter, OpenAI, etc.).
-- **Modelo:** el "cerebro" de IA concreto que usas. Cada proveedor tiene varios.
-- **Workspace (espacio de trabajo):** la carpeta de tu ordenador sobre la que el agente puede trabajar. Es como decirle "solo puedes tocar lo que está aquí dentro".
-- **Token (en la URL):** una contraseña temporal que se añade a la dirección web para que solo tú puedas entrar.
-- **Puerto:** un número que identifica a qué programa de tu ordenador quieres conectarte. El 3080 es el que usa dsh.
-- **Backup (respaldo):** una copia de seguridad. Si algo se rompe, puedes volver a la copia.
-- **`rc` (release candidate):** versión "candidata a definitiva". Está casi lista pero todavía puede cambiar.
-- **`alpha` / `beta`:** versiones muy tempranas de un programa. Pueden tener fallos.
-- **`~` (virgulilla):** significa "mi carpeta personal" (por ejemplo, `/home/wachin`). Así que `~/.dsh` es `/home/wachin/.dsh`.
-- **`.bashrc`:** un archivo oculto que se lee cada vez que abres la terminal. Sirve para configurar cosas permanentes, como las claves de API.
-- **Entorno / variable de entorno:** un valor que el sistema guarda y que los programas pueden leer. Por ejemplo, `DEEPSEEK_API_KEY`.
-- **YAML:** un formato de archivo de configuración, parecido a una lista ordenada. Fácil de leer a simple vista.
+- **Repositorio:** carpeta de proyecto guardada en GitHub que puedes copiar a tu ordenador.
+- **Clonar:** copiar un repositorio con `git clone`.
+- **Terminal:** la ventana donde escribes comandos.
+- **Dependencias:** programas auxiliares que el proyecto necesita. Se descargan con `pnpm install`.
+- **Compilar / build:** traducir el código fuente a algo que el ordenador ejecute. Se hace con `pnpm run build`.
+- **API:** puerta por la que un programa se comunica con otro. **API key** es la llave, un código secreto.
+- **Proveedor:** servicio que te da acceso a modelos de IA (DeepSeek, NVIDIA, TokenRouter).
+- **Modelo:** el "cerebro" de IA concreto que usas.
+- **Workspace:** la carpeta de tu ordenador sobre la que el agente puede trabajar.
+- **Token (en la URL):** contraseña temporal que se añade a la dirección web.
+- **Puerto:** número que identifica un programa de tu ordenador. dsh usa el `3080`.
+- **`~` (virgulilla):** "mi carpeta personal" (ej. `/home/wachin`). `~/.dsh` es `/home/wachin/.dsh`.
+- **`.bashrc`:** archivo oculto que se lee cada vez que abres la terminal. Sirve para configurar cosas permanentes.
+- **Variable de entorno:** valor que el sistema guarda y que los programas leen (ej. `DEEPSEEK_API_KEY`).
+- **YAML:** formato de archivo de configuración, fácil de leer.
 
 ---
 
-## 1. Requisitos (Node.js, pnpm, curl) 
+## 1. Requisitos
 
-Necesitamos:
+### Node.js 24.9 o superior (obligatorio)
 
-- **Node.js** (versión 22.19 o superior, o 24+). Si no lo tienes, instálalo desde el repositorio de NodeSource (instrucciones detalladas en [Cómo instalar node en Linux](https://facilitarelsoftwarelibre.blogspot.com/2026/08/como-instalar-nodejs-24-en-ubuntu-debian-etc.html)):
+> **Aviso:** desde finales de 2026, DeepSeek Harness exige **Node.js 24.9.0 o superior**. Con Node 22 falla la compilación con un error `SIGKILL`. Si ya tenías Node 22, hay que actualizar.
+
+Instala Node desde NodeSource:
 
 ```bash
 sudo apt update
@@ -87,28 +69,38 @@ curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-Comprueba la versión con:
+Comprueba la versión (**debe ser 24.9 o superior**):
 
 ```bash
 node --version
 ```
 
-> **Nota sobre permisos de npm:** si al instalar paquetes globales (`npm install -g ...`) aparece un error `EACCES: permission directed`, no modifiques los permisos de `/usr/lib`. En su lugar, configura las instalaciones globales en tu HOME:
+### npm (viene con Node)
+
+`npm` se instala automáticamente junto con Node.js. No hace falta instalarlo aparte. Compruébalo con:
 
 ```bash
-mkdir -p ~/.local/npm
-npm config set prefix ~/.local/npm
-echo 'export PATH="$HOME/.local/npm/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
+npm --version
 ```
 
-- **pnpm** (un gestor de dependencias). Si no lo tienes instálalo mediante npm:
+> **Nota sobre permisos de npm:** si al instalar paquetes globales (`npm install -g ...`) aparece un error `EACCES: permission directed`, no modifiques los permisos de `/usr/lib`. En su lugar, configura las instalaciones globales en tu HOME:
+>
+> ```bash
+> mkdir -p ~/.local/npm
+> npm config set prefix ~/.local/npm
+> echo 'export PATH="$HOME/.local/npm/bin:$PATH"' >> ~/.bashrc
+> source ~/.bashrc
+> ```
+
+### pnpm
+
+Es un gestor de dependencias. Si no lo tienes, instálalo mediante npm:
 
 ```bash
 sudo npm install -g pnpm
 ```
 
-- **git**, para clonar el repositorio:
+### git
 
 ```bash
 sudo apt install -y git
@@ -122,7 +114,7 @@ sudo apt install -y git
 
 ---
 
-## 2. Clonar e instalar DeepSeek Harness
+## 2. Clonar e instalar (una sola vez)
 
 ```bash
 git clone https://github.com/deepseek-ai/deepseek-harness.git
@@ -131,158 +123,127 @@ pnpm install
 pnpm run build
 ```
 
-`pnpm install` descarga todas las dependencias y `pnpm run build` compila el proyecto. Este paso tarda varios minutos la primera vez, pero **solo es necesario hacerlo una vez**.
+`pnpm install` descarga dependencias y `pnpm run build` compila. El primer build tarda entre 5 y 20 minutos según el ordenador.
 
-### Si actualizas el repositorio más adelante
+### ⚠️ Si tu ordenador tiene solo 8 GB de RAM
 
-Cuando pase el tiempo y quieras actualizar, **no basta con `pnpm install && pnpm run build`**. Hay que hacer tres pasos, y uno de ellos es imprescindible para que no falle:
+El build por defecto lanza **4 workers en paralelo** y puede llegar a consumir ~7,5 GB de RAM. Con 8 GB totales, el sistema operativo mata el proceso de compilación con un error `SIGKILL` en el paso `host aggregate check`.
 
-```bash
-cd ~/Dev3/deepseek-harness
-git pull                      # traer el código nuevo
-pnpm install --frozen-lockfile
-pnpm run clean                # ← ESTO ES LO QUE EVITA EL ERROR
-pnpm run build
-```
-
-**¿Por qué es necesario `pnpm run clean`?**
-
-Cuando compilas, se generan archivos de caché (`.tsbuildinfo` y carpetas `lib/`) que dicen "esto ya está compilado, no hace falta repetirlo". Al actualizar el código, esos archivos se quedan **desincronizados**: apuntan a versiones antiguas que ya no existen. El compilador entonces falla con un error tipo:
-
-```
-[MISSING_EXPORT] "DEFAULT_PREPARED_SESSION_CACHE_SIZE" is not exported by ...
-```
-
-Ese error significa: "el código nuevo espera una función que la parte compilada antigua no tiene". `pnpm run clean` borra esos archivos viejos y obliga a recompilar todo desde cero, de forma coherente.
-
-Si después del `clean` sigue fallando, haz una limpieza total:
+La solución es **compilar en serie** con `DSH_GATE_CONCURRENCY=1`, que reduce el consumo a ~6,3 GB:
 
 ```bash
-rm -rf node_modules pnpm-lock.yaml
-pnpm install
-pnpm run build
+DSH_GATE_CONCURRENCY=1 pnpm run build
 ```
+
+Si quieres que sea permanente (recomendado si tienes 8 GB o menos), añádelo a tu `~/.bashrc`:
+
+```bash
+echo 'export DSH_GATE_CONCURRENCY=1' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Con esa variable en `~/.bashrc`, ya puedes ejecutar `pnpm run build` normalmente y siempre compilará en serie.
+
+> **Nota:** en un equipo de 8 GB, el build en serie tarda **más o menos lo mismo o incluso menos** que el paralelo. Cuando falta RAM, el paralelismo solo provoca que el kernel pase el tiempo reclamando páginas, así que no se gana nada.
+
+### Si tienes 16 GB de RAM o más
+
+Puedes dejar el build por defecto (paralelo). Será más rápido y no fallará.
 
 ---
 
-## 3. Abrir DeepSeek Harness (las veces que queramos, también después de reiniciar el ordenador)
-
-Después de la instalación inicial, es necesario ubicarnos en el directorio donde clonamos el repositorio. Yo lo tengo en:
+## 3. Abrir DeepSeek Harness (cada vez)
 
 ```bash
 cd ~/Dev3/deepseek-harness
-```
-
-Luego, para lanzarlo:
-
-```bash
 pnpm dsh web
 ```
 
->**Posible problema con la terminal.-** Si acabas de compilar el proyecto (`pnpm run clean && pnpm run build`) en una terminal y luego ejecutas `pnpm dsh web` en esa misma terminal >pero no abre el navegador, **cierra esa terminal y abre otra nueva**. En la nueva terminal el comando funcionará correctamente.
->Esto ocurre porque la compilación puede alterar variables de entorno o el estado interno de la terminal. Al abrir una nueva, se recarga el `.bashrc` >limpio y todo funciona como es esperado.
-
-**Este es el comando que hay que recordar.**
-
-Al ejecutarlo, la terminal mostrará algo parecido a:
+Al ejecutarlo, la terminal mostrará:
 
 ```
 dsh web: http://127.0.0.1:3080/?token=lRn0K8364K86kkViiR4Sf_rP5OQp0NWNInNKxXx1Tnw
+dsh web: opening the default browser; pass --no-open to disable
 ```
 
 y el navegador se abrirá automáticamente en esa dirección.
 
 ### Detalles importantes
 
-- La URL lleva un **token** de acceso (esa cadena larga de letras y números). Es una contraseña temporal.
-- La primera vez se abre sola; si cierras la pestaña y quieres volver a entrar, copia la URL completa (con el token) desde la terminal.
-- El servidor corre en la terminal: para cerrarlo, pulsa `Ctrl + C` en ella.
-- **No hace falta volver a ejecutar `pnpm run build` después de reiniciar el ordenador.** Solo se necesita si actualizas el repositorio con `git pull`.
+- La URL lleva un **token de acceso** (la cadena larga). Es una contraseña temporal.
+- Si cierras la pestaña, copia la URL completa (con el token) desde la terminal para volver a entrar.
+- El servidor corre en la terminal: para cerrarlo, pulsa `Ctrl + C`.
+- **No hace falta volver a compilar después de reiniciar el ordenador.** Solo se compila al actualizar el repositorio.
+- Si no quieres que se abra el navegador (por ejemplo, en SSH): `pnpm dsh web --no-open`
 
-Si en algún momento cierras el servidor y quieres que no se abra el navegador (por ejemplo, en una sesión SSH), usa:
-
-```bash
-pnpm dsh web --no-open
-```
-
-### Comprobar la versión de dsh (la nuestra, no la de apt)
+### Comprobar la versión de dsh
 
 ```bash
 pnpm run dsh --version
 ```
 
-Esto mostrará algo como `0.1.5-rc.2`.
+Muestra algo como `0.2.2-rc.3`.
 
-> **No uses `dsh --version` a secas.** Si en algún momento instalaste el `dsh` de apt, ese comando te mostrará *"Distributed Shell / Dancer's shell"*, que no es nuestro programa. Para que el comando corto funcione como alias, puedes añadir esto al final de tu `~/.bashrc`:
+> **No uses `dsh --version` a secas.** Si tienes el `dsh` de apt instalado, ese comando muestra *"Distributed Shell"*, que no es nuestro programa. Para tener un atajo, añade al final de `~/.bashrc`:
 >
 > ```bash
 > alias dsh="pnpm --dir ~/Dev3/deepseek-harness run dsh"
 > ```
 >
-> Guardas, cierras la terminal, abres otra, y ya puedes escribir `dsh web` o `dsh --version` desde cualquier carpeta.
+> Guardas, abres nueva terminal, y ya puedes escribir `dsh web` desde cualquier carpeta.
 
 ---
 
-## 4. Primera vez: elegir el espacio de trabajo (workspace)
+## 4. Primera vez: elegir el workspace
 
-La primera vez que se abre la aplicación, hay que elegir el **workspace**, que es la carpeta del proyecto sobre la que el agente podrá trabajar.
+La primera vez que se abre la aplicación, hay que elegir el **workspace**: la carpeta del proyecto sobre la que el agente podrá trabajar.
 
-En la pantalla inicial:
+1. Pulsa **Choose workspace**.
+2. Navega hasta la carpeta de tu proyecto.
+3. Confirma.
 
-1. Pulsamos el botón **Choose workspace**.
-2. Navegamos hasta la carpeta de nuestro proyecto.
-3. Confirmamos.
-
-El agente solo podrá leer y modificar archivos dentro de esa carpeta. Es una medida de seguridad: si le pides algo, no podrá salirse de ahí.
+El agente solo podrá leer y modificar archivos dentro de esa carpeta. Es una medida de seguridad.
 
 ---
 
 ## 5. Configurar DeepSeek (proveedor nativo)
 
-DeepSeek es el proveedor nativo del harness y **no requiere ninguna configuración especial**: basta con que la variable de entorno `DEEPSEEK_API_KEY` exista en la terminal desde la que lanzas `dsh web`.
+DeepSeek no requiere configuración especial: basta con que la variable `DEEPSEEK_API_KEY` exista en la terminal desde la que lanzas `dsh web`.
 
-Si aún no la tienes, la creas en `~/.bashrc`:
+Añádela a `~/.bashrc`:
 
 ```bash
 export DEEPSEEK_API_KEY="sk-XXXXXXXXXXXXXXXXXXXX"
 ```
 
-(Este archivo está oculto en tu carpeta personal; en un administrador de archivos con **Ctrl + H** lo podrás ver. También puedes editarlo desde la terminal con `nano ~/.bashrc`.)
+Guardas, cierras terminal, abres otra.
 
-Guardas, cierras la terminal y abres otra.
+> **No publiques esta clave.** No la subas a GitHub, no la pongas en capturas ni la envíes a nadie. Si alguien la obtiene, puede gastar tu dinero.
 
-**No publiques esta clave.** No la subas a GitHub, no la publiques en capturas de pantalla y no la envíes a otras personas. Si alguien la obtiene, puede gastar tu dinero.
-
-Con eso, al abrir la interfaz web verás los modelos de DeepSeek disponibles en el selector:
+Al abrir la interfaz verás los modelos de DeepSeek en el selector:
 
 - `deepseek-v4-flash`
 - `deepseek-v4-pro`
 - `deepseek-v4-flash-vision-exp` (experimental, con visión)
 
-### Alternativa: guardar la clave desde la interfaz web
+### Alternativa: guardar la clave desde la interfaz
 
-También se puede hacer sin tocar `.bashrc`: abrimos **Settings → Models**, buscamos la tarjeta **DeepSeek**, pegamos la clave en el campo de API key y guardamos. La clave queda almacenada en `~/.dsh/.credentials.yaml` y la interfaz nunca vuelve a mostrarla (solo una versión censurada).
+También puedes hacerlo sin tocar `.bashrc`: **Settings → Models**, tarjeta **DeepSeek**, pega la clave y guarda. Queda almacenada en `~/.dsh/.credentials.yaml` (la interfaz solo muestra una versión censurada).
 
 ---
 
-## 6. Configurar TokenRouter (gratis, OpenAI-compatible)
-
-TokenRouter ofrece modelos gratuitos mediante una API compatible con OpenAI. Su tutorial completo está en:
-
-[AGENTS/20260828 Creando una API gratis en TR](../20260828%20Creando%20una%20API%20gratis%20en%20TR/API%20gratis%20en%20TokenRouter.md)
-
-Resumen de los datos:
+## 6. Configurar TokenRouter (gratis, compatible con OpenAI)
 
 ```
 Base URL: https://api.tokenrouter.com/v1
 Modelo:   z-ai/glm-5.3-free
 ```
 
-En la interfaz web:
+En la interfaz:
 
-1. Vamos a **Settings → Models**.
-2. Pulsamos **Add a custom provider**.
-3. Rellenamos:
+1. **Settings → Models**.
+2. **Add a custom provider**.
+3. Rellena:
 
 | Campo | Valor |
 |---|---|
@@ -290,32 +251,23 @@ En la interfaz web:
 | Display name | TokenRouter |
 | Base URL | `https://api.tokenrouter.com/v1` |
 | API protocol | OpenAI-compatible |
-| API key | tu clave `sk-...` de TokenRouter |
+| API key | tu clave `sk-...` |
 | Models | `z-ai/glm-5.3-free` |
 
-4. Pulsamos el botón **Fetch available models** si queremos que la propia interfaz consulte el endpoint y nos ofrezca la lista de modelos disponibles (TokenRouter soporta el endpoint `GET /models`, así que funciona).
-5. Guardamos.
+4. Opcional: pulsa **Fetch available models** para que la interfaz consulte la lista de modelos disponibles.
+5. Guarda.
 
 ---
 
-## 7. Configurar NVIDIA (gratis, OpenAI-compatible)
-
-NVIDIA Build ofrece también modelos gratuitos mediante una API compatible con OpenAI. Su tutorial completo está en:
-
-[AGENTS/20260828.2 Cómo usar la API gratuita de NVIDIA en Qwen Code CLI para Linux](../20260828.2%20Cómo%20usar%20la%20API%20gratuita%20de%20NVIDIA%20en%20Qwen%20Code%20CLI%20para%20Linux/Free%20NVIDIA%20API%20en%20qwen.md)
-
-Resumen de los datos:
+## 7. Configurar NVIDIA (gratis, compatible con OpenAI)
 
 ```
 Base URL: https://integrate.api.nvidia.com/v1
 Modelo:   nvidia/nemotron-3-super-120b-a12b
 ```
 
-En la interfaz web:
-
-1. Vamos a **Settings → Models**.
-2. Pulsamos **Add a custom provider**.
-3. Rellenamos:
+1. **Settings → Models → Add a custom provider**.
+2. Rellena:
 
 | Campo | Valor |
 |---|---|
@@ -323,27 +275,26 @@ En la interfaz web:
 | Display name | NVIDIA |
 | Base URL | `https://integrate.api.nvidia.com/v1` |
 | API protocol | OpenAI-compatible |
-| API key | tu clave `nvapi-...` de NVIDIA |
+| API key | tu clave `nvapi-...` |
 | Models | `nvidia/nemotron-3-super-120b-a12b` |
-4. Al igual que con TokenRouter, **Fetch available models** funciona aquí y devuelve una lista enorme de modelos (puedes buscar `deepseek`, `nemotron`, `qwen`, `glm`, etc.).
-5. Guardamos.
+
+3. **Fetch available models** funciona también aquí (devuelve una lista enorme: `deepseek`, `nemotron`, `qwen`, `glm`, etc.).
+4. Guarda.
 
 ---
 
 ## 8. Elegir modelo y empezar a usar el agente
 
-Una vez configurados los proveedores, todos los modelos aparecen en el **selector de modelos** de la interfaz web (normalmente abajo, cerca de donde se escribe el mensaje).
+Todos los modelos configurados aparecen en el **selector de modelos** de la interfaz (abajo, cerca de donde escribes).
 
-Seleccionamos el que queramos y ya podemos escribir la primera tarea. Por ejemplo, una prueba segura sin modificar nada:
+Selecciona uno y escribe tu primera tarea. Una prueba segura sin modificar nada:
 
 ```
 Lista los archivos del directorio actual y dime sus nombres.
 No modifiques, crees ni elimines ningún archivo.
 ```
 
-Si el agente pide permiso para ejecutar herramientas (leer archivos, ejecutar comandos), la interfaz mostrará un cuadro de aprobación donde eliges si permitirlo una vez, siempre en esta sesión, o denegarlo.
-
-El flujo completo queda:
+Si el agente pide permiso para ejecutar herramientas, la interfaz muestra un cuadro de aprobación: permitir una vez, siempre en esta sesión, o denegar.
 
 ```
 API (DeepSeek / TokenRouter / NVIDIA)
@@ -352,135 +303,96 @@ API (DeepSeek / TokenRouter / NVIDIA)
           ↓
    DeepSeek Harness (web)
           ↓
-   Herramientas (Shell, archivos, ...)
+   Herramientas (shell, archivos, ...)
           ↓
         Linux
 ```
 
 ---
 
-## 9. Cambiar de modelo o de proveedor
+## 9. Cambiar de modelo o proveedor
 
-No hay que reconfigurar nada. Simplemente:
+No hay que reconfigurar nada:
 
-1. Abrimos el selector de modelos en la interfaz.
-2. Elegimos otro modelo (aunque sea de otro proveedor distinto).
+1. Abre el selector de modelos.
+2. Elige otro (aunque sea de otro proveedor).
 
-Los cambios de proveedor aplican en la siguiente petición, sin reiniciar el servidor.
+Los cambios aplican en la siguiente petición, sin reiniciar el servidor.
 
-Si borras un proveedor que estaba siendo usado como modelo por defecto, el compositor mostrará **Select model** y bloqueará la entrada hasta que elijas otro.
+Si borras un proveedor que era el modelo por defecto, la interfaz mostrará **Select model** y bloqueará la entrada hasta que elijas otro.
 
 ---
 
-## 10. Dónde se guardan tus datos (y por qué hay que hacer backup)
+## 10. Dónde se guardan tus datos (y por qué hacer backup)
 
-DeepSeek Harness guarda su configuración en:
-
-```
-~/.dsh/
-```
-
-Eso es una carpeta oculta dentro de tu carpeta personal (`/home/wachin/.dsh`). Dentro hay tres cosas importantes:
+Todo está en `~/.dsh/` (carpeta oculta en tu HOME):
 
 | Archivo / carpeta | Contenido |
 |---|---|
-| `settings.yaml` | Preferencias (idioma, onboarding, compatibilidad de proveedores) |
+| `settings.yaml` | Preferencias (idioma, onboarding, compatibilidad) |
 | `.credentials.yaml` | Claves API guardadas desde la interfaz |
-| `sessions/` | Las sesiones de trabajo (todo el historial de conversaciones y acciones) |
+| `sessions/` | Historial completo de conversaciones y acciones |
 
-### Qué es cada cosa, explicado
+- **`settings.yaml`**: panel de preferencias. Si lo borras, dsh vuelve al estado inicial (no pierdes conversaciones).
+- **`.credentials.yaml`**: caja fuerte de claves en texto plano. **No lo compartas.**
+- **`sessions/`**: la carpeta más valiosa. Contiene todo tu historial. Se conserva entre reinicios.
 
-- **`settings.yaml`** es como el "panel de preferencias" de dsh. Aquí viven cosas como en qué idioma quieres la interfaz, si ya viste el asistente de bienvenida, y ajustes finos de compatibilidad con proveedores. Si lo borras, dsh vuelve a su estado inicial (no pierdes conversaciones, solo preferencias).
+### Por qué hacer backup antes de actualizar
 
-- **`.credentials.yaml`** es la "caja fuerte" donde se guardan las claves API que has escrito desde la interfaz web (**Settings → Models**). El punto delante del nombre significa que es un archivo oculto. Contiene tus claves en texto plano, así que **no lo compartas ni lo subas a ningún sitio**.
+El proyecto está en **developer preview** y su README avisa con mayúsculas:
 
-- **`sessions/`** es la carpeta más valiosa. Ahí dentro está **todo tu historial de trabajo**: cada conversación con el agente, cada comando que se ejecutó, cada archivo que se modificó, todo. Si pierdes esta carpeta, pierdes el historial de todas tus sesiones. Las sesiones se conservan entre reinicios: si apagas el ordenador y vuelves a lanzar `pnpm dsh web`, la conversación anterior seguirá allí (aparece en la lista de sesiones de la barra lateral).
+> *"THERE WILL BE COMPATIBILITY-BREAKING CHANGES."*
 
-### ¿Por qué hay que hacer un backup antes de actualizar?
+Las actualizaciones pueden cambiar el formato de las sesiones. Un archivo que la versión antigua escribía de una forma, la nueva puede esperar de otra. Si actualizas sin copia, puedes perder o corromper tus sesiones.
 
-Porque el proyecto DeepSeek Harness está en **fase de desarrollo temprano** (lo que ellos llaman *developer preview*), y su propio README avisa con mayúsculas:
-
-> *"DeepSeek Harness is currently in developer preview and is iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES**."*
-
-Eso significa, en palabras simples: **las actualizaciones pueden cambiar el formato en que se guardan las sesiones en el disco**. Un archivo que la versión antigua escribía de una manera, la versión nueva puede esperar que esté de otra. Si actualizas y el formato cambió, la versión nueva puede leer mal tus sesiones antiguas o incluso estropearlas.
-
-Por eso, antes de actualizar, hay que hacer una copia de seguridad de `~/.dsh`. Concretamente:
+Haz la copia **antes** de actualizar:
 
 ```bash
-cp -r ~/.dsh ~/.dsh-backup
+cp -r ~/.dsh ~/.dsh-backup-$(date +%Y%m%d)
 ```
 
-**Explicación del comando:**
+- `cp` = copiar
+- `-r` = recursivo (copia también lo de dentro)
+- `~/.dsh` = original
+- `~/.dsh-backup-AAAAAMMDD` = copia con fecha (así conservas varias si actualizas varias veces)
 
-- `cp` = copy (copiar)
-- `-r` = recursive (recursivo: copia también todo lo que hay dentro de la carpeta)
-- `~/.dsh` = la carpeta original
-- `~/.dsh-backup` = la carpeta nueva donde se guarda la copia
-
-Eso crea una copia completa en `/home/wachin/.dsh-backup`. Si algo sale mal después de actualizar, puedes volver atrás borrando la carpeta nueva y renombrando la copia:
+Si algo sale mal:
 
 ```bash
 rm -rf ~/.dsh
-mv ~/.dsh-backup ~/.dsh
+mv ~/.dsh-backup-YYYYMMDD ~/.dsh
 ```
-
-### Cuándo hacer el backup
-
-- **Antes** de hacer `git pull && pnpm run build`, no después. La versión nueva toca la carpeta de sesiones en cuanto la abre por primera vez. Una copia hecha *después* ya sería una copia del formato nuevo, que no te serviría para volver atrás.
-- Si vas a saltar entre versiones `rc` (release candidate), hazlo siempre. Son las que más cambios de formato traen.
 
 ---
 
-## 11. Solución de problemas
-
-### El comando `dsh --version` muestra "Distributed Shell"
-
-No es un error del tutorial: es que en tu sistema hay instalado el `dsh` de apt (otro programa distinto). Para usar el nuestro, dentro de la carpeta del repo:
+## 11. Actualizar en el futuro (flujo correcto)
 
 ```bash
-pnpm run dsh --version
-```
+# 1. Backup ANTES de nada
+cp -r ~/.dsh ~/.dsh-backup-$(date +%Y%m%d)
 
-Y si quieres un atajo permanente, añade el alias al `~/.bashrc` como se explicó en la sección 3.
-
-### El comando `pnpm dsh web` no hace nada o falla
-
-Comprueba que estás dentro de la carpeta del repositorio:
-
-```bash
+# 2. Actualizar el código
 cd ~/Dev3/deepseek-harness
-```
-
-Si actualizaste el repositorio (`git pull`), hay que recompilar:
-
-```bash
-pnpm run clean
-pnpm run build
-```
-
-### `pnpm dsh web` no abre el navegador tras actualizar (pero sí en otra terminal)
-
-Si acabas de compilar el proyecto (`pnpm run clean && pnpm run build`) en una terminal y luego ejecutas `pnpm dsh web` en esa misma terminal pero no abre el navegador, **cierra esa terminal y abre otra nueva**. En la nueva terminal el comando funcionará correctamente.
-
-Esto ocurre porque la compilación puede alterar variables de entorno o el estado interno de la terminal. Al abrir una nueva, se recarga el `.bashrc` limpio y todo funciona como es esperado.
-
-### Error `MISSING_EXPORT` al recompilar tras `git pull`
-
-Es el error más típico al actualizar. Aparece así:
-
-```
-[MISSING_EXPORT] "DEFAULT_PREPARED_SESSION_CACHE_SIZE" is not exported by ...
-```
-
-Significa que los archivos de compilación antiguos (caché `.tsbuildinfo` y carpetas `lib/`) están desincronizados con el código nuevo. La solución es limpiar y recompilar desde cero:
-
-```bash
-pnpm run clean
+git pull
 pnpm install --frozen-lockfile
-pnpm run build
+
+# 3. Limpiar y compilar
+pnpm run clean
+pnpm run build        # usará DSH_GATE_CONCURRENCY=1 si lo pusiste en ~/.bashrc
+
+# 4. Arrancar
+pnpm dsh web
 ```
 
-Si sigue fallando, limpieza total:
+**¿Por qué es necesario `pnpm run clean`?**
+
+Al compilar se generan archivos de caché (`.tsbuildinfo` y carpetas `lib/`) que dicen "esto ya está compilado". Al actualizar el código, esos archivos quedan **desincronizados** y el compilador falla con:
+
+```
+[MISSING_EXPORT] "..." is not exported by ...
+```
+
+`pnpm run clean` borra esos archivos viejos y obliga a recompilar todo desde cero. Si después del `clean` sigue fallando, haz limpieza total:
 
 ```bash
 rm -rf node_modules pnpm-lock.yaml
@@ -488,35 +400,70 @@ pnpm install
 pnpm run build
 ```
 
-### Aviso "Update available" de pnpm al actualizar
+### Aviso "Update available" de pnpm
 
-Al actualizar el repositorio (`git pull`) y ejecutar `pnpm install`, pnpm puede mostrar:
+Al ejecutar `pnpm install`, pnpm puede mostrar:
 
 ```
-Update available! 11.7.0 → 11.25.0.
+Update available! 11.28.5 → 12.21.0.
 ```
 
-**No es necesario actualizar pnpm.** El proyecto fija su versión en `package.json` (`"packageManager": "pnpm@11.7.0"`) y pnpm usa automáticamente esa versión dentro del repositorio, así que el aviso se puede ignorar. El comando que sugiere (`pnpm add -g pnpm`) además fallará si pnpm se instaló con npm, porque el directorio global de pnpm no está en el PATH. Si aun así quieres actualizar pnpm, hazlo por el mismo canal con el que lo instalaste:
+**No es necesario actualizar pnpm.** El proyecto fija su versión en `package.json` (`"packageManager": "pnpm@..."`) y pnpm usa automáticamente esa dentro del repositorio. El aviso se puede ignorar.
+
+---
+
+## 12. Solución de problemas
+
+### `SIGKILL` durante el build (equipos de 8 GB)
+
+El paso `host aggregate check` falla con `signal SIGKILL`. Es falta de RAM. Solución:
 
 ```bash
-npm install -g pnpm@latest
+pnpm run clean
+DSH_GATE_CONCURRENCY=1 pnpm run build
 ```
 
-### Error `MISSING_CREDENTIAL`
+Y añade `export DSH_GATE_CONCURRENCY=1` a `~/.bashrc` para que sea permanente.
 
-El proveedor está configurado pero no encuentra la clave. Guarda la clave desde **Settings → Models** o asegúrate de que la variable de entorno correspondiente existe en la terminal donde lanzaste `dsh web`.
+### `Unsupported engine: wanted: {"node":">=24.9.0"}` al instalar
 
-### Error `UNKNOWN_MODEL`
+Tienes una versión de Node demasiado antigua. Actualiza a Node 24 (sección 1) y vuelve a compilar.
 
-El modelo seleccionado ya no está en la configuración del proveedor. Selecciona otro o añádelo en **Settings → Models**.
+### `MISSING_EXPORT` al recompilar tras `git pull`
+
+Es el error típico al actualizar. Solución:
+
+```bash
+pnpm run clean
+pnpm install --frozen-lockfile
+pnpm run build
+```
+
+Si sigue fallando, limpieza total (`rm -rf node_modules pnpm-lock.yaml && pnpm install && pnpm run build`).
+
+### `pnpm dsh web` no abre el navegador tras compilar
+
+Si acabas de compilar (`pnpm run clean && pnpm run build`) y ejecutas `pnpm dsh web` en la misma terminal pero no abre el navegador, **cierra esa terminal y abre otra nueva**. La compilación puede alterar variables de entorno o el estado interno de la terminal.
+
+### El comando `dsh --version` muestra "Distributed Shell"
+
+No es un error: tienes el `dsh` de apt instalado. Usa `pnpm run dsh --version` dentro del repo, o configura el alias del apartado 3.
+
+### `MISSING_CREDENTIAL`
+
+El proveedor está configurado pero no encuentra la clave. Guárdala desde **Settings → Models** o exporta la variable de entorno en la terminal donde lanzas `dsh web`.
+
+### `UNKNOWN_MODEL`
+
+El modelo seleccionado ya no está en la configuración. Selecciona otro o añádelo en **Settings → Models**.
 
 ### "Fetch available models" devuelve 401
 
-La API key es incorrecta o ha caducado. Genera otra en la consola del proveedor (TokenRouter o NVIDIA, en los enlaces de arriba).
+La API key es incorrecta o ha caducado. Genera otra en la consola del proveedor.
 
-### El proveedor rechaza todas las peticiones aunque la clave y la URL son correctas
+### El proveedor rechaza todas las peticiones aunque clave y URL sean correctas
 
-Es un problema de compatibilidad de peticiones (no todos los gateways aceptan el formato exacto de OpenAI). En `$DSH_HOME/settings.yaml` (es decir, `~/.dsh/settings.yaml`) se puede ajustar la sección `llm-pi-ai` con:
+Es un problema de compatibilidad de peticiones. En `~/.dsh/settings.yaml` ajusta la sección `llm-pi-ai`:
 
 ```yaml
 llm-pi-ai:
@@ -527,20 +474,18 @@ llm-pi-ai:
         maxTokensField: max_tokens
 ```
 
-La lista completa de opciones de compatibilidad está en la [documentación oficial de dsh-llm-pi-ai](https://github.com/deepseek-ai/deepseek-harness/blob/main/packages/llm/llm-pi-ai/README.md).
+Lista completa de opciones: [dsh-llm-pi-ai README](https://github.com/deepseek-ai/deepseek-harness/blob/main/packages/llm/llm-pi-ai/README.md).
 
 ### Cerrar el servidor
 
-`Ctrl + C` en la terminal donde corre. El puerto por defecto es `3080`.
+`Ctrl + C` en la terminal donde corre. Puerto por defecto: `3080`.
 
 ---
 
-## 12. Resultado final
-
-Al terminar tendrás:
+## 13. Resultado final
 
 ```
-DeepSeek Harness 0.1.5-rc.2 (web local en http://127.0.0.1:3080)
+DeepSeek Harness 0.2.2-rc.3 (web local en http://127.0.0.1:3080)
 │
 ├── DeepSeek (nativo, ~/.bashrc o interfaz)
 │   └── deepseek-v4-flash, deepseek-v4-pro
@@ -552,47 +497,63 @@ DeepSeek Harness 0.1.5-rc.2 (web local en http://127.0.0.1:3080)
     └── nvidia/nemotron-3-super-120b-a12b
 ```
 
-Y el comando para abrirlo cada día, también después de reiniciar el ordenador:
+Comando para abrirlo cada día (también después de reiniciar el ordenador):
 
 ```bash
 cd ~/Dev3/deepseek-harness && pnpm dsh web
 ```
 
+---
+
 ## RESUMEN
 
-```
-1. git clone + pnpm install + pnpm run build   (una sola vez)
-        ↓
-2. pnpm dsh web                                (cada vez que queramos abrirlo)
-        ↓
-3. Elegir workspace la primera vez
-        ↓
-4. Settings → Models → tarjeta DeepSeek
-   (o DEEPSEEK_API_KEY en ~/.bashrc)
-        ↓
-5. Add a custom provider → TokenRouter / NVIDIA
-        ↓
-6. Seleccionar modelo y escribir la primera tarea
-        ↓
-7. Cambiar de modelo con el selector, sin reiniciar
-```
-
-### Para actualizar en el futuro
+### Instalación inicial (una sola vez)
 
 ```
-1. cp -r ~/.dsh ~/.dsh-backup     ← BACKUP PRIMERO (por si acaso)
+1. Node.js 24.9+ desde NodeSource
         ↓
-2. cd ~/Dev3/deepseek-harness
+2. npm (viene con Node) + pnpm (sudo npm install -g pnpm) + git
         ↓
-3. git pull
+3. git clone + pnpm install + pnpm run build
+   (en equipos de 8 GB: DSH_GATE_CONCURRENCY=1 pnpm run build)
         ↓
-4. pnpm install --frozen-lockfile
+4. Elegir workspace la primera vez
         ↓
-5. pnpm run clean                 ← evita el error MISSING_EXPORT
+5. Settings → Models → tarjeta DeepSeek (o DEEPSEEK_API_KEY en ~/.bashrc)
         ↓
-6. pnpm run build
+6. Add a custom provider → TokenRouter / NVIDIA
         ↓
-7. pnpm dsh web                   ← y a trabajar
+7. Seleccionar modelo y escribir la primera tarea
 ```
 
-De esta manera puedes ejecutar DeepSeek Harness en Linux con varios proveedores de modelos —los gratuitos de TokenRouter y NVIDIA junto a la API oficial de DeepSeek— y conservar todas tus sesiones de trabajo entre reinicios del ordenador, con la tranquilidad de tener un respaldo por si una actualización cambia el formato de los archivos.
+### Uso diario
+
+```
+cd ~/Dev3/deepseek-harness && pnpm dsh web
+```
+
+### Actualizar en el futuro
+
+```
+1. cp -r ~/.dsh ~/.dsh-backup-$(date +%Y%m%d)    ← BACKUP PRIMERO
+        ↓
+2. cd ~/Dev3/deepseek-harness && git pull
+        ↓
+3. pnpm install --frozen-lockfile
+        ↓
+4. pnpm run clean
+        ↓
+5. pnpm run build                                 ← usa DSH_GATE_CONCURRENCY=1 si está en .bashrc
+        ↓
+6. pnpm dsh web
+```
+
+### Equipos de 8 GB de RAM: la regla de oro
+
+Añade esto a `~/.bashrc` una sola vez y no vuelvas a tener problemas de `SIGKILL`:
+
+```bash
+export DSH_GATE_CONCURRENCY=1
+```
+
+Con eso, DeepSeek Harness se compila y ejecuta sin problemas en 8 GB, con varios proveedores (los gratuitos de TokenRouter y NVIDIA junto a la API oficial de DeepSeek) y conservando todas tus sesiones entre reinicios del ordenador.
